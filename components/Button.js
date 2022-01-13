@@ -1,4 +1,12 @@
-const Button = ({ value, color = '#8AC541', width, height, fontSize, ...rest }) => {
+export const Button = ({ value, color = '#8AC541', width, height, fontSize, ...rest }) => {
+  // Button recibe:
+  // value: texto a mostrar
+  // color: color de fuente y el borde
+  // width: ancho
+  // height: alto
+  // fontSize: tamanio letra
+  // ...rest: cualquier otra propiedad (Ej. onClick del <button></button> )
+
   return (
     <>
       <button {...rest}>
@@ -27,5 +35,3 @@ const Button = ({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
     </>
   )
 }
-
-export default Button

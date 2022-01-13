@@ -1,4 +1,9 @@
 export const Badge = ({ value, backgroundColor = '#fbfbfb', color = '#8ac541' }) => {
+  // Badge recibe:
+  // value: texto a mostrar
+  // backgroundColor: color de fondo
+  // color: color de la fuente
+
   return (
     <>
       <span>{value}</span>

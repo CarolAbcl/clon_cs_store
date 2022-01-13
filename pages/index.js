@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import AddButton from '../components/RoundButton'
+import RoundButtons from '../components/RoundButton'
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +18,10 @@ export default function Home() {
         <h1 className={styles.title}>
           Primera web ComeS
         </h1>
-
+        <div>
+          <RoundButtons text={'-'} backgroundColor={'var(--secondary)'} size={'30px'} id='disminuir' outline />
+          <RoundButtons text={'+'} backgroundColor={'var(--gray);'} size={'30px'} id='aumentar' />
+        </div>
       </main>
 
       <footer className={styles.footer}>

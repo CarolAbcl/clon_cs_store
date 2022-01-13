@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Input from '../components/Input'
 
 export default function Home() {
   return (
@@ -15,6 +16,9 @@ export default function Home() {
         <h1 className={styles.title}>
           Primera web ComeS
         </h1>
+        <Input type="number" text="Rut"></Input>
+        <Input text="Correo Electrónico"></Input>
+        <Input text="Nombre"></Input>
 
       </main>
 

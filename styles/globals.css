@@ -1,3 +1,14 @@
+:root {
+  --primary: #8ac541;
+  --secondary: #f69223;
+  --light: #fbfbfb;
+  --background: #eeeeee;
+  --dark: #353535;
+  --dark-green: #6a9c2c;
+  --gray: #abaab0;
+  --dark-gray: #737373;
+}
+
 html,
 body {
   padding: 0;

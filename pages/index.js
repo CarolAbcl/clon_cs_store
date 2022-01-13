@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import AddButton from '../components/RoundButton'
 import RoundButtons from '../components/RoundButton'
+import QtyAddBasket from '../components/QtyAddBasket'
 
 export default function Home() {
 
@@ -20,6 +20,7 @@ export default function Home() {
         </h1>
         <div>
           <RoundButtons text={'-'} backgroundColor={'var(--secondary)'} size={'30px'} id='disminuir' outline />
+          <QtyAddBasket value={0} fontSize={'12px'} />
           <RoundButtons text={'+'} backgroundColor={'var(--gray);'} size={'30px'} id='aumentar' />
         </div>
       </main>

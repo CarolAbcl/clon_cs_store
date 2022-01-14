@@ -11,9 +11,9 @@ function Badge({ value, backgroundColor = '#fbfbfb', color = '#8ac541' }) {
         span {
           background-color: ${backgroundColor};
           padding: 2px 15px;
-          color:  ${color};
+          color: ${color};
           border-radius: 50px;
-          border: 1px solid ${color}
+          border: 1px solid ${color};
         }
       `}</style>
     </>

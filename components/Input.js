@@ -14,7 +14,7 @@ export default function Input(props) {
 				{`
 					div{
 						position: relative;
-						width: 50%;
+						width: 10%;
 						padding: 24px 0 0;
 						margin-top: 12px;
 					}

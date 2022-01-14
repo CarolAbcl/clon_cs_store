@@ -1,4 +1,4 @@
-function QtyAddBasket(props) {
+function QtyAddCart(props) {
     const { fontSize, value  } = props;
      // QtyAddBasket recibe:
      // fontSize: tamaño fuente ; value: cantidad;
@@ -21,5 +21,5 @@ function QtyAddBasket(props) {
     )
   }
   
-  export default QtyAddBasket;
+  export default QtyAddCart;
   

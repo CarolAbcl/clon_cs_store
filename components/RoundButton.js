@@ -1,10 +1,10 @@
 function RoundButtons(props) {
-  const { backgroundColor, text, size  } = props;
+  const { backgroundColor, text, size, disabled } = props;
   // RoundButtons recibe:
-  // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño
+  // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño del botòn ; disabled : si el botòn se encuentra deshabilitado
   return (
     <>
-      <button className={props.outline && 'outline'} > {text} </button> 
+      <button className={disabled && 'disabled'} > {text} </button> 
       {/* En caso de que el componente esté outline esto se transfiere a la clase del botón */}
 
       <style jsx>{`
@@ -18,8 +18,8 @@ function RoundButtons(props) {
                 font-weight: 800;
                 cursor: pointer;
             }
-            .outline{
-                background-color: ${backgroundColor};
+            .disabled{
+                background-color: var(--gray);
             }
             button:hover {
             transition: all 0.2s;

@@ -32,4 +32,4 @@ function RoundButtons(props) {
   )
 }
 
-export default RoundButtons;
+export default RoundButtons

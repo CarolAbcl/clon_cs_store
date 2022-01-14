@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import RoundButtons from '../components/RoundButton'
 import QtyAddCart from '../components/QtyAddCart'
 import Input from '../components/Input'
 import Button from '../components/Button'
@@ -22,9 +21,7 @@ export default function Home() {
           Primera web ComeS
         </h1>
         <div>
-          <RoundButtons text={'-'} backgroundColor={'var(--secondary)'} size={'30px'} id='reduce' disabled/>
           <QtyAddCart value={0} fontSize={'12px'} />
-          <RoundButtons text={'+'} backgroundColor={'var(--secondary)'} size={'30px'} id='increase'/>
         </div>
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>

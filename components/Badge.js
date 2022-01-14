@@ -1,4 +1,4 @@
-export const Badge = ({ value, backgroundColor = '#fbfbfb', color = '#8ac541' }) => {
+function Badge({ value, backgroundColor = '#fbfbfb', color = '#8ac541' }) {
   // Badge recibe:
   // value: texto a mostrar
   // backgroundColor: color de fondo
@@ -19,3 +19,5 @@ export const Badge = ({ value, backgroundColor = '#fbfbfb', color = '#8ac541' })
     </>
   )
 }
+
+export default Badge

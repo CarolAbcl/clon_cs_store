@@ -3,6 +3,9 @@ import styles from '../styles/Home.module.css'
 import RoundButtons from '../components/RoundButton'
 import QtyAddCart from '../components/QtyAddCart'
 import Input from '../components/Input'
+import Button from '../components/Button'
+import ButtonSecondary from '../components/ButtonSecondary'
+import Badge from '../components/Badge'
 
 export default function Home() {
 
@@ -26,6 +29,10 @@ export default function Home() {
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
+
+        <Button value="Ingresa"/>
+        <ButtonSecondary value="Seguir comprando"/>
+        <Badge value="Ruculas"/>
 
       </main>
 

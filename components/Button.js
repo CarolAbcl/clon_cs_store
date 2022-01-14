@@ -1,4 +1,4 @@
-export const Button = ({ value, color = '#8AC541', width, height, fontSize, ...rest }) => {
+function Button ({ value, color = '#8AC541', width, height, fontSize, ...rest }){
   // Button recibe:
   // value: texto a mostrar
   // color: color de fuente y el borde
@@ -35,3 +35,5 @@ export const Button = ({ value, color = '#8AC541', width, height, fontSize, ...r
     </>
   )
 }
+
+export default Button

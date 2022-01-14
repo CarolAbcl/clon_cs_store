@@ -1,4 +1,4 @@
-export const ButtonSecondary = ({ value, backgroundColor = '#7B61FF', color = '#FBFBFB', fontSize = '12px', ...rest }) => {
+function ButtonSecondary({ value, backgroundColor = '#7B61FF', color = '#FBFBFB', fontSize = '12px', ...rest }){
   // ButtonSecondary recibe:
   // value: texto a mostrar
   // backgroundColor: color del fondo
@@ -27,3 +27,5 @@ export const ButtonSecondary = ({ value, backgroundColor = '#7B61FF', color = '#
     </>
   )
 }
+
+export default ButtonSecondary

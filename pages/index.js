@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import RoundButtons from '../components/RoundButton'
 import QtyAddCart from '../components/QtyAddCart'
+import Input from '../components/Input'
 
 export default function Home() {
 
@@ -23,6 +23,10 @@ export default function Home() {
           <QtyAddCart value={0} fontSize={'12px'} />
           <RoundButtons text={'+'} backgroundColor={'var(--secondary)'} size={'30px'} id='increase'/>
         </div>
+        <Input type="number" text="Rut"></Input>
+        <Input text="Correo Electrónico"></Input>
+        <Input text="Nombre"></Input>
+
       </main>
 
       <footer className={styles.footer}>

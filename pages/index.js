@@ -5,9 +5,9 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import ButtonSecondary from '../components/ButtonSecondary'
 import Badge from '../components/Badge'
+import SearchBar from '../components/searchBar'
 
 export default function Home() {
-
   return (
     <div className={styles.container}>
       <Head>
@@ -17,20 +17,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Primera web ComeS
-        </h1>
+        <h1 className={styles.title}>Primera web ComeS</h1>
         <div>
           <QtyAddCart value={0} fontSize={'12px'} />
         </div>
+        <SearchBar size="100%" />
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
 
-        <Button value="Ingresa"/>
-        <ButtonSecondary value="Seguir comprando"/>
-        <Badge value="Ruculas"/>
-
+        <Button value="Ingresa" />
+        <ButtonSecondary value="Seguir comprando" />
+        <Badge value="Ruculas" />
       </main>
 
       <footer className={styles.footer}>

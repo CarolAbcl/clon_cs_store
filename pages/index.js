@@ -10,7 +10,19 @@ import CartButton from '../components/CartButton'
 import BurgerButton from '../components/BurgerButton'
 import Check from '../components/Check'
 
-export default function Home() {
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+export const getServerSideProps = async () => {
+  const categories = await prisma.category.findMany()
+  return {
+    props: {
+      initialCategories: categories
+    }
+  }
+}
+
+export default function Home({ initialCategories }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,6 +37,7 @@ export default function Home() {
         <div>
           <QtyAddCart value={0} fontSize={'12px'} />
         </div>
+
         <SearchBar size="100%" />
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
@@ -36,6 +49,14 @@ export default function Home() {
         <CartButton />
         <BurgerButton />
         <Check />
+
+        <ul>
+          {
+            initialCategories.map(category => (
+              <li key={category.ID_category}>{category.category}</li>
+            ))
+          }
+        </ul>
       </main>
 
       <footer className={styles.footer}>

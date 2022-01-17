@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-function ProductStamp({ width }) {
+function ProductStamp({}) {
   // CardPrice recibe:
   // width: el ancho del contenedor del formato caja
   return (
@@ -16,7 +16,7 @@ function ProductStamp({ width }) {
             flex-direction: row;
             align-items: baseline;
             justify-content: center;
-            width: ${width}%;
+            width: auto;
           }
         `}
       </style>

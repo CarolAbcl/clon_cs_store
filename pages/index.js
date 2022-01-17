@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import QtyAddCart from '../components/QtyAddCart'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import ButtonSecondary from '../components/ButtonSecondary'
@@ -9,9 +8,7 @@ import SearchBar from '../components/searchBar'
 import CartButton from '../components/CartButton'
 import BurgerButton from '../components/BurgerButton'
 import Check from '../components/Check'
-import QtyBox from '../atoms/QtyBox'
-import CardPrice from '../atoms/CardPrice'
-import ProductStamp from '../atoms/ProductStamp'
+import ProductCard from '../components/ProductCard'
 
 export default function Home() {
   return (
@@ -25,16 +22,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Primera web ComeS</h1>
-        <div>
-          <QtyAddCart value={0} fontSize={'12px'} />
-        </div>
         <SearchBar size="100%" />
-        <Input type="number" text="Rut"></Input>
+        {/* <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
-        <Input text="Nombre"></Input>
-        <QtyBox width="20" />
-        <ProductStamp width="15" />
-        <CardPrice />
+        <Input text="Nombre"></Input> */}
+
+        <ProductCard />
 
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />

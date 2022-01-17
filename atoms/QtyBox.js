@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Icon from '@material-ui/core/Icon'
 
-function QtyBox({ width, qtyBox = 6 }) {
+function QtyBox({ qtyBox = 6 }) {
   // QtyBox recibe:
   // width: el ancho del contenedor del formato caja
   return (
     <>
       <div>
-        <Image src={'https://imgur.com/TduL90a.png'} width={50} height={50} alt="Caja"></Image>
+        <Image src={'https://imgur.com/TduL90a.png'} width={30} height={30} alt="Caja"></Image>
         <Icon style={{ fontSize: 1 + 'em' }}>close</Icon>
         <span>{qtyBox}</span>
       </div>
@@ -20,7 +20,7 @@ function QtyBox({ width, qtyBox = 6 }) {
             align-items: center;
             justify-content: center;
             padding: 0.5rem;
-            width: ${width}%;
+            width: auto;
           }
           span {
             font-size: 0.8rem;

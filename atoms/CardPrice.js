@@ -3,11 +3,26 @@ import Icon from '@material-ui/core/Icon'
 function CardPrice({ ProductPrice = '3.450' }) {
   // CardPrice recibe:
   // width: el ancho del contenedor del precio
+
+  const ProductDetails = () => {
+    const btnProductDetails = document.getElementById('productDetails')
+    if (btnProductDetails.style.display === 'block') {
+      btnProductDetails.style.display = 'none'
+    } else {
+      btnProductDetails.style.display = 'block'
+    }
+  }
+
   return (
     <>
       <div>
         <p> ${ProductPrice} </p>
-        <button type="button">
+        <input id="activar" name="activar" type="checkbox" />
+        <button
+          type="button"
+          onClick={(e) => {
+            ProductDetails()
+          }}>
           <Icon style={{ fontSize: 1.2 + 'em' }}>info</Icon>
         </button>
       </div>
@@ -30,8 +45,11 @@ function CardPrice({ ProductPrice = '3.450' }) {
             background: none;
             border: none;
             cursor: pointer;
-            width: 5%;
             color: var(--gray);
+            }
+          #activar{
+            display: none;
+          }
           }
         `}
       </style>

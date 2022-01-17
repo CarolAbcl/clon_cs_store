@@ -1,4 +1,4 @@
-import RoundButtons from './RoundButton'
+import RoundButtons from '../atoms/RoundButton'
 
 function QtyAddCart({ fontSize, value }) {
   // QtyAddBasket recibe:

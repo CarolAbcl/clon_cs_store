@@ -9,6 +9,9 @@ import SearchBar from '../components/searchBar'
 import CartButton from '../components/CartButton'
 import BurgerButton from '../components/BurgerButton'
 import Check from '../components/Check'
+import QtyBox from '../atoms/QtyBox'
+import CardPrice from '../atoms/CardPrice'
+import ProductStamp from '../atoms/ProductStamp'
 
 export default function Home() {
   return (
@@ -29,6 +32,9 @@ export default function Home() {
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
+        <QtyBox width="20" />
+        <ProductStamp width="15" />
+        <CardPrice />
 
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />

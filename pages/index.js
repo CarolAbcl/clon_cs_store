@@ -10,7 +10,6 @@ import CartButton from '../components/CartButton'
 import BurgerButton from '../components/BurgerButton'
 import Check from '../components/Check'
 
-
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -35,8 +34,8 @@ export default function Home() {
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />
         <CartButton />
-        <BurgerButton/>
-        <Check/>
+        <BurgerButton />
+        <Check />
       </main>
 
       <footer className={styles.footer}>

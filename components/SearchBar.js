@@ -1,4 +1,4 @@
-// import SearchIcon from '@mui/icons-material/Search'
+import Icon from '@material-ui/core/Icon'
 
 function SearchBar({ size }) {
   // SearchBar recibe:
@@ -7,7 +7,9 @@ function SearchBar({ size }) {
     <>
       <div>
         <input type="search" placeholder="" id="search" />
-        <button type="button">{/* <SearchIcon /> */}</button>
+        <button type="button">
+          <Icon>search</Icon>
+        </button>
       </div>
 
       <style jsx>
@@ -32,6 +34,7 @@ function SearchBar({ size }) {
             border: none;
             cursor: pointer;
             width: 15%;
+            color: var(--primary);
           }
           @media (min-width: 480px) {
             div {

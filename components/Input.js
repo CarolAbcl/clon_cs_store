@@ -5,10 +5,10 @@ function Input({ text = 'props not found', type = 'text' }) {
   return (
     <>
       <div>
-        <input type={type} id={text.replaceAll(' ', '')} placeholder={text} />
+        <input type={type} id={text} placeholder={text} />
         {/* ReplaceAll para eliminar los espacios de la propiedad text con el fin que queden
         como identificadores del input y se puedan enlazar con el label */}
-        <label htmlFor={text.replaceAll(' ', '')}>{text}</label>
+        <label htmlFor={text}>{text}</label>
       </div>
       <style jsx>
         {`

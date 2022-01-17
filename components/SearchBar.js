@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import SearchImg from '../assets/img/searchImg.svg'
+// import SearchIcon from '@mui/icons-material/Search'
 
 function SearchBar({ size }) {
   // SearchBar recibe:
@@ -8,9 +7,7 @@ function SearchBar({ size }) {
     <>
       <div>
         <input type="search" placeholder="" id="search" />
-        <button type="button">
-          <Image src={SearchImg} alt="Lupa" />
-        </button>
+        <button type="button">{/* <SearchIcon /> */}</button>
       </div>
 
       <style jsx>

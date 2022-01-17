@@ -1,12 +1,12 @@
 import Icon from '@material-ui/core/Icon'
 
-function CardPrice({ width }) {
+function CardPrice({ ProductPrice = '3.450' }) {
   // CardPrice recibe:
   // width: el ancho del contenedor del precio
   return (
     <>
-      <div width={width}>
-        <p>$3.450</p>
+      <div>
+        <p> ${ProductPrice} </p>
         <button type="button">
           <Icon style={{ fontSize: 1.2 + 'em' }}>info</Icon>
         </button>
@@ -19,6 +19,7 @@ function CardPrice({ width }) {
             flex-direction: row;
             align-items: baseline;
             justify-content: center;
+            width: auto;
           }
           p {
             font-size: 12px;

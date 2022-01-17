@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import RoundButtons from '../components/RoundButton'
 import QtyAddCart from '../components/QtyAddCart'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import ButtonSecondary from '../components/ButtonSecondary'
 import Badge from '../components/Badge'
+import SearchBar from '../components/searchBar'
 import CartButton from '../components/CartButton'
 import BurgerButton from '../components/BurgerButton'
 import Check from '../components/Check'
+
 
 export default function Home() {
   return (
@@ -23,10 +24,9 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>Primera web ComeS</h1>
         <div>
-          <RoundButtons text={'-'} backgroundColor={'var(--secondary)'} size={'30px'} id="reduce" disabled />
           <QtyAddCart value={0} fontSize={'12px'} />
-          <RoundButtons text={'+'} backgroundColor={'var(--secondary)'} size={'30px'} id="increase" />
         </div>
+        <SearchBar size="100%" />
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>

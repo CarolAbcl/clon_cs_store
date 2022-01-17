@@ -26,9 +26,9 @@ export default function Home() {
           <QtyAddCart value={0} fontSize={'12px'} />
           <RoundButtons text={'+'} backgroundColor={'var(--secondary)'} size={'30px'} id='increase'/>
         </div>
-        <Input type="number" text="Rut"></Input>
+        {/* <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
-        <Input text="Nombre"></Input>
+        <Input text="Nombre"></Input> */}
 
         <Button value="Ingresa"/>
         <ButtonSecondary value="Seguir comprando"/>

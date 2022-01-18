@@ -4,12 +4,18 @@ import ProductStamp from './atoms/ProductStamp'
 import QtyAddCart from './atoms/QtyAddCart'
 import Image from 'next/image'
 
-function ProductCard({ }) {
+function ProductCard({}) {
   return (
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
-          <Image src={'https://imgur.com/TduL90a'} width={40} height={40} alt=""></Image>
+          <div className="imgContainer">
+            <Image
+              src={'https://losangeles.comes.cl/wp-content/uploads/2019/07/MAji2DLC.jpg'}
+              width={40}
+              height={40}
+              alt=""></Image>
+          </div>
           <div className="ProductCardInfo">
             <h2>Nombre del producto</h2>
             <a href="#">Nombre del productor</a>
@@ -74,6 +80,10 @@ function ProductCard({ }) {
         }
         #productDetails {
           display: none;
+        }
+        .imgContainer {
+          margin: 0px 10px;
+          border-radius: 8px;
         }
       `}</style>
     </>

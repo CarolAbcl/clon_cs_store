@@ -72,20 +72,21 @@ model order_status {
 }
 
 model producer {
-  ID_producer    String      @id @default(cuid())
-  rut            String      @db.VarChar(10)
-  brand_name     String      @db.VarChar(80)
-  slogan         String?     @db.VarChar(80)
-  history        String?     @db.Text
-  account_type   String?     @db.VarChar(30)
-  account_number BigInt?
-  account_bank   String?     @db.VarChar(45)
-  account_holder String?     @db.VarChar(80)
-  account_rut    String?     @db.VarChar(10)
-  ID_user        String
-  user           user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
-  direction      direction[]
-  product        product[]
+  ID_producer           String      @id @default(cuid())
+  rut                   String      @db.VarChar(10)
+  brand_name            String      @db.VarChar(80)
+  slogan                String?     @db.VarChar(80)
+  history               String?     @db.Text
+  min_producer_purchase Int?
+  account_type          String?     @db.VarChar(30)
+  account_number        BigInt?
+  account_bank          String?     @db.VarChar(45)
+  account_holder        String?     @db.VarChar(80)
+  account_rut           String?     @db.VarChar(10)
+  ID_user               String
+  user                  user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
+  direction             direction[]
+  product               product[]
 
   @@index([ID_user], map: "FK_ID_user")
 }
@@ -93,13 +94,13 @@ model producer {
 model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
-  picture              String              @db.VarChar(100)
   wholesale_unit_price Int
   sale_format          Int?                @db.SmallInt
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
-  suggested_sale_price Int?                @db.SmallInt
-  min_purchase         Int                 @db.SmallInt
+  suggested_sale_price Int?
+  min_purchase         Int
+  min_qty_purchase     Int?                @db.SmallInt
   benefit              String?             @db.Text
   conservation         String?             @db.VarChar(100)
   stock_quantity       Int?                @db.SmallInt
@@ -115,9 +116,18 @@ model product {
   detail_order_note    detail_order_note[]
   product_category     product_category[]
 
+  image image[]
   @@index([ID_producer], map: "FK_ID_producer")
   @@index([ID_stock], map: "FK_ID_stock")
   @@index([ID_user], map: "FK_ID_user")
+}
+
+model image {
+  ID_image   String  @id @default(uuid())
+  url        String?
+  alt        String
+  ID_product String
+  product    product @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_image")
 }
 
 model product_category {

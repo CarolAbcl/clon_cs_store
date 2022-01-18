@@ -95,13 +95,13 @@ model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
   wholesale_unit_price Int
-  unit_cost            Int?                  
+  unit_cost            Int?
   sale_format          Int?                @db.SmallInt
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
   suggested_sale_price Int?
   min_purchase         Int
-  min_qty_purchase     Int?                @db.SmallInt
+  min_qty_purchase     Int?
   benefit              String?             @db.Text
   conservation         String?             @db.VarChar(100)
   stock_quantity       Int?                @db.SmallInt

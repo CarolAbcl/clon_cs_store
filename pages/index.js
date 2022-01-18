@@ -1,12 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import QtyAddCart from '../components/atoms/QtyAddCart'
 import Input from '../components/atoms/Input'
-import Button from '../components/atoms/Button'
-import ButtonSecondary from '../components/atoms/ButtonSecondary'
+import { Button, ButtonSecondary, CartButton } from '../components/atoms/buttons'
 import Badge from '../components/atoms/Badge'
 import SearchBar from '../components/atoms/SearchBar'
-import CartButton from '../components/atoms/CartButton'
 import Check from '../components/atoms/Check'
 import Menu from '../components/Menu'
 import ProductCard from '../components/ProductCard'
@@ -15,12 +12,12 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export const getServerSideProps = async () => {
-    const categories = await prisma.category.findMany()
-    return {
-      props: {
-        initialCategories: categories,
-      },
-    }
+  const categories = await prisma.category.findMany()
+  return {
+    props: {
+      initialCategories: categories,
+    },
+  }
 
 
 }

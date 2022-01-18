@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import BurgerButton from './atoms/BurgerButton'
+import { BurgerButton, CartButton } from './atoms/buttons'
 
 import logo from '../public/ComeS-02Sinbajada-01.svg'
-import CartButton from './atoms/CartButton'
 
 function Menu() {
   return (

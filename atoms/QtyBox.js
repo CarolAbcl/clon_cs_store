@@ -7,7 +7,7 @@ function QtyBox({ qtyBox = 6 }) {
   return (
     <>
       <div>
-        <Image src={'https://imgur.com/TduL90a.png'} width={30} height={30} alt="Caja"></Image>
+        <Image src={'https://imgur.com/TduL90a.png'} width={25} height={25} alt="Caja"></Image>
         <Icon style={{ fontSize: 1 + 'em' }}>close</Icon>
         <span>{qtyBox}</span>
       </div>

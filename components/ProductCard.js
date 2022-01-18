@@ -9,15 +9,15 @@ function ProductCard({}) {
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
-          <Image src={'https://imgur.com/TduL90a.png'} width={35} height={35} alt=""></Image>
+          <Image src={'https://imgur.com/TduL90a'} width={40} height={40} alt=""></Image>
           <div className="ProductCardInfo">
             <h2>Nombre del producto</h2>
             <a href="#">Nombre del productor</a>
-            <div>
+            <div className="containerStampBox">
               <ProductStamp width="15" />
               <QtyBox />
             </div>
-            <div>
+            <div className="containerStampBox">
               <CardPrice />
               <QtyAddCart value={0} fontSize={'12px'} />
             </div>
@@ -31,12 +31,14 @@ function ProductCard({}) {
         .ProductCard {
           display: flex;
           flex-direction: column;
+          flex-wrap: wrap;
           background-color: var(--light);
           box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
-          width: 25%;
+          width: auto;
           justify-content: center;
           align-items: stretch;
+          flex-shrink: 1;
         }
         .generalInfoProduct {
           display: flex;
@@ -45,12 +47,20 @@ function ProductCard({}) {
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
+          align-items: flex-start;
         }
         div {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+        }
+        .containerStampBox {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: stretch;
+          width: 90%;
         }
         h2 {
           font-family: Isidora;

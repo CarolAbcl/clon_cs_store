@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import QtyAddCart from '../components/QtyAddCart'
-import Input from '../components/Input'
-import Button from '../components/Button'
-import ButtonSecondary from '../components/ButtonSecondary'
-import Badge from '../components/Badge'
-import SearchBar from '../components/searchBar'
-import CartButton from '../components/CartButton'
-import BurgerButton from '../components/BurgerButton'
-import Check from '../components/Check'
+import QtyAddCart from '../components/atoms/QtyAddCart'
+import Input from '../components/atoms/Input'
+import Button from '../components/atoms/Button'
+import ButtonSecondary from '../components/atoms/ButtonSecondary'
+import Badge from '../components/atoms/Badge'
+import SearchBar from '../components/atoms/SearchBar'
+import CartButton from '../components/atoms/CartButton'
+import BurgerButton from '../components/atoms/BurgerButton'
+import Check from '../components/atoms/Check'
+import Menu from '../components/Menu'
 
 export default function Home() {
   return (
@@ -34,8 +35,8 @@ export default function Home() {
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />
         <CartButton />
-        <BurgerButton />
         <Check />
+        <Menu/>
       </main>
 
       <footer className={styles.footer}>

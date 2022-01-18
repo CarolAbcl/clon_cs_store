@@ -2,13 +2,14 @@ function Input({ text = 'props not found', type = 'text' }) {
   // El input recibe 2 props:
   // text = el texto que tendrá el label.
   // type = el tipo de input a utilizar (text por defecto)
+  const textWoSpaces = text.replace(/\s+/g, '')
   return (
     <>
       <div>
-        <input type={type} id={text.replaceAll(' ', '')} placeholder={text} />
+        <input type={type} id={textWoSpaces} placeholder={text} />
         {/* ReplaceAll para eliminar los espacios de la propiedad text con el fin que queden
         como identificadores del input y se puedan enlazar con el label */}
-        <label htmlFor={text.replaceAll(' ', '')}>{text}</label>
+        <label htmlFor={textWoSpaces}>{text}</label>
       </div>
       <style jsx>
         {`

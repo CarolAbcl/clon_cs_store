@@ -35,10 +35,13 @@ function Check({text="Sin texto"}) {
           width: 8px;
           height: 8px;
           border-radius: 2px;
+          transition: all .2s cubic-bezier(.5,-1,.5,1);
+          transform-origin: center;
         }
 
         :not(:checked) ~ label .check_inside {
-          display: none;
+          width: 0px;
+          height: 0px;
         }
 
         label:first-child{

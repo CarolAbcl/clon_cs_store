@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Input from '../components/Input'
-import Button from '../components/Button'
-import ButtonSecondary from '../components/ButtonSecondary'
-import Badge from '../components/Badge'
-import SearchBar from '../components/searchBar'
-import CartButton from '../components/CartButton'
-import BurgerButton from '../components/BurgerButton'
-import Check from '../components/Check'
-import ProductCard from '../components/ProductCard'
+import QtyAddCart from '../components/atoms/QtyAddCart'
+import Input from '../components/atoms/Input'
+import Button from '../components/atoms/Button'
+import ButtonSecondary from '../components/atoms/ButtonSecondary'
+import Badge from '../components/atoms/Badge'
+import SearchBar from '../components/atoms/SearchBar'
+import CartButton from '../components/atoms/CartButton'
+import Check from '../components/atoms/Check'
+import Menu from '../components/Menu'
+import ProductCard from './components/ProductCard'
 
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
@@ -41,9 +42,9 @@ export default function Home({ initialCategories }) {
         <h1 className={styles.title}>Primera web ComeS</h1>
 
         <SearchBar size="100%" />
-        {/* <Input type="number" text="Rut"></Input>
+        <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
-        <Input text="Nombre"></Input> */}
+        <Input text="Nombre"></Input>
 
         <ProductCard />
 
@@ -51,8 +52,8 @@ export default function Home({ initialCategories }) {
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />
         <CartButton />
-        <BurgerButton />
         <Check />
+        <Menu/>
 
         <ul>
           {initialCategories.map((category) => (

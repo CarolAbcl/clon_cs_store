@@ -1,6 +1,6 @@
-import QtyBox from '../atoms/QtyBox'
-import CardPrice from '../atoms/CardPrice'
-import ProductStamp from '../atoms/ProductStamp'
+import QtyBox from './atoms/QtyBox'
+import CardPrice from './atoms/CardPrice'
+import ProductStamp from './atoms/ProductStamp'
 import QtyAddCart from './QtyAddCart'
 import Image from 'next/image'
 

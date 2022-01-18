@@ -1,8 +1,8 @@
-function BurgerButton() {
+function BurgerButton({toggleMenu}) {
   return (
-    <>
+    <div>
       <input id="burger_menu" type="checkbox" />
-      <label htmlFor="burger_menu">
+      <label htmlFor="burger_menu" onClick={toggleMenu}>
         <div className="burger_container">
           <div className="burger_line"></div>
         </div>
@@ -31,7 +31,7 @@ function BurgerButton() {
             height: 6px;
             background-color: var(--primary);
             border-radius: 0.25rem;
-            transition: all 0.5s cubic-bezier(0.57, -0.97, 0.36, 1.59);
+            transition: all 0.5s cubic-bezier(0.5, -1, 0.5, 1);
           }
 
           .burger_line::after,
@@ -46,6 +46,10 @@ function BurgerButton() {
           .burger_line::before {
             width: 1.9rem;
             transform: translateY(12px);
+          }
+
+          :checked ~ label {
+            z-index: 99;
           }
 
           :checked ~ label .burger_line {
@@ -63,7 +67,7 @@ function BurgerButton() {
           }
         `}
       </style>
-    </>
+    </div>
   )
 }
 

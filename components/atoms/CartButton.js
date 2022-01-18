@@ -5,7 +5,7 @@ function CartButton({ qtty = 0 }) {
     <>
       <div>
         <a href="#">
-          <Icon>local_grocery_store</Icon>
+          <Icon fontSize="large">local_grocery_store</Icon>
           <span>{qtty}</span>
         </a>
       </div>

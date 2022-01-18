@@ -24,7 +24,7 @@ function SearchBar({ size }) {
           }
           input {
             border: none;
-            width: 85%;
+            flex-shrink: 1;
           }
           input:focus {
             outline: 0 none;
@@ -33,7 +33,7 @@ function SearchBar({ size }) {
             background: none;
             border: none;
             cursor: pointer;
-            width: 15%;
+            flex-shrink: 1;
             color: var(--primary);
           }
           @media (min-width: 480px) {
@@ -43,10 +43,10 @@ function SearchBar({ size }) {
               justify-content: flex-end;
             }
             input {
-              width: 95%;
+              flex-shrink: 1;
             }
             button {
-              width: 5%;
+              flex-shrink: 1;
             }
           }
         `}

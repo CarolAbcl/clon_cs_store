@@ -1,10 +1,10 @@
 import QtyBox from './atoms/QtyBox'
 import CardPrice from './atoms/CardPrice'
 import ProductStamp from './atoms/ProductStamp'
-import QtyAddCart from './QtyAddCart'
+import QtyAddCart from './atoms/QtyAddCart'
 import Image from 'next/image'
 
-function ProductCard({}) {
+function ProductCard({ }) {
   return (
     <>
       <div className="ProductCard">

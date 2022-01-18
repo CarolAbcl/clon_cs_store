@@ -9,18 +9,20 @@ import SearchBar from '../components/atoms/SearchBar'
 import CartButton from '../components/atoms/CartButton'
 import Check from '../components/atoms/Check'
 import Menu from '../components/Menu'
-import ProductCard from './components/ProductCard'
+import ProductCard from '../components/ProductCard'
 
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export const getServerSideProps = async () => {
-  const categories = await prisma.category.findMany()
-  return {
-    props: {
-      initialCategories: categories,
-    },
-  }
+    const categories = await prisma.category.findMany()
+    return {
+      props: {
+        initialCategories: categories,
+      },
+    }
+
+
 }
 
 export default function Home({ initialCategories }) {
@@ -53,7 +55,7 @@ export default function Home({ initialCategories }) {
         <Badge value="Ruculas" />
         <CartButton />
         <Check />
-        <Menu/>
+        <Menu />
 
         <ul>
           {initialCategories.map((category) => (

@@ -9,11 +9,11 @@ function Menu() {
   return (
     <>
       <div className="navbar">
-        <BurgerButton toggleMenu={toggleMenu} />
+        <BurgerButton />
         <div className="logo">
           <Image src={logo} layout="intrinsic" alt="" width={'200px'} height={'60px'} />
         </div>
-          <p>{state.show ? 'true' : 'false'}</p>
+
         <CartButton />
       </div>
       <div className="background">

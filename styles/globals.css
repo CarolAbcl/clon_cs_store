@@ -9,6 +9,14 @@
   --dark-gray: #737373;
 
 }
+@font-face {
+  font-family: Aller;
+  src: url('../fonts/Aller_0.ttf'),
+}
+@font-face {
+  font-family: Isidora;
+  src: url('../fonts/IsidoraSemiBold.ttf');
+}
 
 html,
 body {

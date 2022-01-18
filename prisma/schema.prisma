@@ -10,18 +10,18 @@ datasource db {
 // Modelo ⬇
 
 model category {
-  ID_category      Int                @id
+  ID_category      String             @id @default(cuid())
   category         String             @db.VarChar(30)
   product_category product_category[]
 }
 
 model detail_order_note {
-  ID_detail_order_note Int        @id
+  ID_detail_order_note String     @id @default(cuid())
   qty                  Int        @db.SmallInt
   unit_price           Int
   sub_total            Int
-  ID_order_note        Int
-  ID_product           Int
+  ID_order_note        String
+  ID_product           String
   order_note           order_note @relation(fields: [ID_order_note], references: [ID_order_note], onDelete: NoAction, onUpdate: NoAction, map: "FK_detail_order_note_order_note")
   product              product    @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_detail_order_note")
 
@@ -30,8 +30,8 @@ model detail_order_note {
 }
 
 model direction {
-  ID_direction Int      @id
-  ID_store     Int
+  ID_direction String   @id @default(cuid())
+  ID_store     String
   country      String   @db.VarChar(45)
   region       String   @db.VarChar(45)
   city         String   @db.VarChar(45)
@@ -39,7 +39,7 @@ model direction {
   street       String   @db.VarChar(45)
   number       String   @db.VarChar(45)
   reference    String?  @db.VarChar(45)
-  ID_producer  Int
+  ID_producer  String
   producer     producer @relation(fields: [ID_producer], references: [ID_producer], onDelete: NoAction, onUpdate: NoAction, map: "FK_producer_direction")
   store        store    @relation(fields: [ID_store], references: [ID_store], onDelete: NoAction, onUpdate: NoAction, map: "FK_store_direction")
 
@@ -48,15 +48,15 @@ model direction {
 }
 
 model order_note {
-  ID_order_note     Int                 @id
+  ID_order_note     String              @id @default(cuid())
   number            Int
   creation_date     DateTime            @db.DateTime(0)
   modification_date DateTime            @db.DateTime(0)
   neto              Int
   iva               Float
   total             Int
-  ID_store          Int
-  ID_order_status   Int
+  ID_store          String
+  ID_order_status   String
   order_status      order_status        @relation(fields: [ID_order_status], references: [ID_order_status], onDelete: NoAction, onUpdate: NoAction, map: "FK_order_status_order_note")
   store             store               @relation(fields: [ID_store], references: [ID_store], onDelete: NoAction, onUpdate: NoAction, map: "FK_store_order_note")
   detail_order_note detail_order_note[]
@@ -66,64 +66,75 @@ model order_note {
 }
 
 model order_status {
-  ID_order_status Int          @id
+  ID_order_status String       @id @default(cuid())
   status          String       @db.VarChar(45)
   order_note      order_note[]
 }
 
 model producer {
-  ID_producer    Int         @id
-  rut            String      @db.VarChar(10)
-  brand_name     String      @db.VarChar(80)
-  slogan         String?     @db.VarChar(80)
-  history        String?     @db.Text
-  account_type   String?     @db.VarChar(30)
-  account_number BigInt?
-  account_bank   String?     @db.VarChar(45)
-  account_holder String?     @db.VarChar(80)
-  account_rut    String?     @db.VarChar(10)
-  ID_user        Int
-  user           user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
-  direction      direction[]
-  product        product[]
+  ID_producer           String      @id @default(cuid())
+  rut                   String      @db.VarChar(10)
+  brand_name            String      @db.VarChar(80)
+  slogan                String?     @db.VarChar(80)
+  history               String?     @db.Text
+  min_producer_purchase Int?
+  account_type          String?     @db.VarChar(30)
+  account_number        BigInt?
+  account_bank          String?     @db.VarChar(45)
+  account_holder        String?     @db.VarChar(80)
+  account_rut           String?     @db.VarChar(10)
+  ID_user               String
+  user                  user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
+  direction             direction[]
+  product               product[]
 
   @@index([ID_user], map: "FK_ID_user")
 }
 
 model product {
-  ID_product           Int                 @id
+  ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
-  picture              String              @db.VarChar(100)
   wholesale_unit_price Int
   sale_format          Int?                @db.SmallInt
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
-  suggested_sale_price Int?                @db.SmallInt
-  min_purchase         Int                 @db.SmallInt
+  suggested_sale_price Int?
+  min_purchase         Int
+  min_qty_purchase     Int?                @db.SmallInt
   benefit              String?             @db.Text
   conservation         String?             @db.VarChar(100)
   stock_quantity       Int?                @db.SmallInt
   offer_price          Int?
   delivery_time        Int?                @db.TinyInt
   modification_date    DateTime?           @db.DateTime(0)
-  ID_user              Int
-  ID_producer          Int
-  ID_stock             Int
+  ID_user              String
+  ID_producer          String
+  ID_stock             String
   producer             producer            @relation(fields: [ID_producer], references: [ID_producer], onDelete: NoAction, onUpdate: NoAction, map: "FK_producer_product")
   stock                stock               @relation(fields: [ID_stock], references: [ID_stock], onDelete: NoAction, onUpdate: NoAction, map: "FK_stock_product")
   user                 user                @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_product")
   detail_order_note    detail_order_note[]
   product_category     product_category[]
 
+  image image[]
   @@index([ID_producer], map: "FK_ID_producer")
   @@index([ID_stock], map: "FK_ID_stock")
   @@index([ID_user], map: "FK_ID_user")
 }
 
+model image {
+  ID_image   String  @id @default(uuid())
+  url        String?
+  alt        String
+  isMain     Boolean @db.TinyInt
+  ID_product String
+  product    product @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_image")
+}
+
 model product_category {
-  ID_product_categoria Int      @id
-  ID_category          Int
-  ID_product           Int
+  ID_product_categoria String   @id @default(cuid())
+  ID_category          String
+  ID_product           String
   category             category @relation(fields: [ID_category], references: [ID_category], onDelete: NoAction, onUpdate: NoAction, map: "FK_category_product_category")
   product              product  @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_producer_product_category")
 
@@ -132,26 +143,26 @@ model product_category {
 }
 
 model role {
-  ID_role Int    @id
+  ID_role String @id @default(cuid())
   role    String @db.VarChar(45)
   user    user[]
 }
 
 model stock {
-  ID_stock Int       @id
+  ID_stock String    @id @default(cuid())
   status   String    @db.VarChar(45)
   product  product[]
 }
 
 model store {
-  ID_store      Int          @id
+  ID_store      String       @id @default(cuid())
   rut           String       @db.VarChar(10)
   name          String       @db.VarChar(45)
   bussines_name String       @db.VarChar(100)
   phone         String       @db.VarChar(20)
   email         String       @db.VarChar(60)
   contact_name  String?      @db.VarChar(45)
-  ID_user       Int
+  ID_user       String
   user          user         @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_store")
   direction     direction[]
   order_note    order_note[]
@@ -160,11 +171,11 @@ model store {
 }
 
 model user {
-  ID_user  Int        @id
+  ID_user  String     @id @default(cuid())
   email    String     @db.VarChar(60)
   password String     @db.VarChar(15)
   name     String     @db.VarChar(45)
-  ID_role  Int
+  ID_role  String
   hash     String?    @db.VarChar(250)
   salt     String?    @db.VarChar(250)
   role     role       @relation(fields: [ID_role], references: [ID_role], onDelete: NoAction, onUpdate: NoAction, map: "FK_role_user")

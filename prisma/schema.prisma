@@ -126,6 +126,7 @@ model image {
   ID_image   String  @id @default(uuid())
   url        String?
   alt        String
+  isMain     Boolean @db.TinyInt
   ID_product String
   product    product @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_image")
 }

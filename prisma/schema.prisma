@@ -95,6 +95,7 @@ model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
   wholesale_unit_price Int
+  unit_cost            Int?                  
   sale_format          Int?                @db.SmallInt
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
@@ -125,6 +126,7 @@ model product {
 model image {
   ID_image   String  @id @default(uuid())
   url        String?
+  name_image String  @db.VarChar(50)
   alt        String
   isMain     Boolean @db.TinyInt
   ID_product String

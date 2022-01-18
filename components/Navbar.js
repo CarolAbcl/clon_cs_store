@@ -4,7 +4,7 @@ import { BurgerButton, CartButton } from './atoms/buttons'
 
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 
-function Menu() {
+function Navbar() {
   return (
     <>
       <div className="navbar">
@@ -104,4 +104,4 @@ function Menu() {
   )
 }
 
-export default Menu
+export default Navbar

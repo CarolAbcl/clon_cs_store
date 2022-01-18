@@ -5,7 +5,7 @@ import { Button, ButtonSecondary, CartButton } from '../components/atoms/buttons
 import Badge from '../components/atoms/Badge'
 import SearchBar from '../components/atoms/SearchBar'
 import Check from '../components/atoms/Check'
-import Menu from '../components/Menu'
+import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 
 import { PrismaClient } from '@prisma/client'
@@ -18,8 +18,6 @@ export const getServerSideProps = async () => {
       initialCategories: categories,
     },
   }
-
-
 }
 
 export default function Home({ initialCategories }) {
@@ -52,7 +50,7 @@ export default function Home({ initialCategories }) {
         <Badge value="Ruculas" />
         <CartButton />
         <Check />
-        <Menu />
+        <Navbar />
 
         <ul>
           {initialCategories.map((category) => (

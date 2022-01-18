@@ -1,4 +1,4 @@
-import RoundButtons from './RoundButton'
+import { RoundButton } from './buttons'
 
 function QtyAddCart({ fontSize, value }) {
   // QtyAddBasket recibe:
@@ -6,9 +6,9 @@ function QtyAddCart({ fontSize, value }) {
   return (
     <>
       <div>
-        <RoundButtons text={'-'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="reduce" disabled />
+        <RoundButton text={'-'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="reduce" disabled />
         <input type="tel" id="quantity" defaultValue={value}></input>
-        <RoundButtons text={'+'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="increase" />
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="increase" />
       </div>
       <style jsx>
         {`

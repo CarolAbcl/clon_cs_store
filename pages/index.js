@@ -1,13 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Input from '../components/atoms/Input'
-import Button from '../components/atoms/Button'
-import ButtonSecondary from '../components/atoms/ButtonSecondary'
+import { Button, ButtonSecondary, CartButton } from '../components/atoms/buttons'
 import Badge from '../components/atoms/Badge'
 import SearchBar from '../components/atoms/SearchBar'
-import CartButton from '../components/atoms/CartButton'
 import Check from '../components/atoms/Check'
-import Menu from '../components/Menu'
+import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 
 import { PrismaClient } from '@prisma/client'
@@ -52,7 +50,7 @@ export default function Home({ initialCategories }) {
         <Badge value="Ruculas" />
         <CartButton />
         <Check />
-        <Menu />
+        <Navbar />
 
         <ul>
           {initialCategories.map((category) => (

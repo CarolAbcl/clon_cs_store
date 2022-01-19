@@ -1,9 +1,36 @@
 import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient({ log: ['query', 'info'] })
 
-const prisma = new PrismaClient()
+export default async function handlerProducts(req, res) {
+  try {
+    const products = await prisma.product.findMany({
+      include: {
+        image: {
+          select: {
+            ID_image: true,
+            file_image: true,
+            name_image: true,
+            alt: true,
+            isMain: true,
+          },
+          where: {
+            isMain: true,
+          },
+        },
+        producer: {
+          select: {
+            ID_producer: true,
+            brand_name: true,
+          },
+        },
+        stock: true,
+      },
+    })
 
-export default async function getProducts(req, res) {
+    // validar si no hay productos?
 
-  const products = await prisma.product.findMany()
-  res.status(200).json(products)
+    res.status(200).send({ data: products })
+  } catch (error) {
+    res.status(400).send({ error })
+  }
 }

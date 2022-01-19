@@ -9,21 +9,27 @@ import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import FilterGroup from '../components/FilterGroup'
 import Filter from '../components/Filter'
-
-import { PrismaClient } from '@prisma/client'
 import CardsGroup from '../components/CardsGroup'
-const prisma = new PrismaClient()
 
-export const getServerSideProps = async () => {
-  const categories = await prisma.category.findMany()
-  return {
-    props: {
-      initialCategories: categories,
-    },
-  }
+const fetchProducts = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/product/products`)
+  const { data } = await response.json()
+  return { products: data }
+}
+const fetchCategories = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+  const { data } = await response.json()
+  return { categories: data }
 }
 
-export default function Home({ initialCategories }) {
+export const getStaticProps = async () => {
+  const { products } = await fetchProducts()
+  const { categories } = await fetchCategories()
+
+  return { props: { products, categories } }
+}
+
+export default function Home({ products, categories }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -45,11 +51,21 @@ export default function Home({ initialCategories }) {
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
-        <CardsGroup>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </CardsGroup>
+        <div className="containerProductCard">
+          {
+            products.map(product => (
+              <ProductCard key={product.ID_product} />
+            ))
+          }
+
+          <ul>
+            {
+              categories.map(category => (
+                <li key={category.ID_category}>{category.category}</li>
+              ))
+            }
+          </ul>
+        </div>
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />
@@ -65,11 +81,6 @@ export default function Home({ initialCategories }) {
           </FilterGroup>
         </Filter>
 
-        <ul>
-          {initialCategories.map((category) => (
-            <li key={category.ID_category}>{category.category}</li>
-          ))}
-        </ul>
       </main>
 
       <footer className={styles.footer}>

@@ -18,8 +18,8 @@ function ProductCard() {
           <div className="imgContainer">
             <Image
               src={'https://losangeles.comes.cl/wp-content/uploads/2019/07/MAji2DLC.jpg'}
-              width={90}
-              height={100}
+              width={110}
+              height={150}
               alt="Imagen producto"></Image>
           </div>
           <div className="ProductCardInfo">

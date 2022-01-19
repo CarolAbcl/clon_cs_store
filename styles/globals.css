@@ -65,3 +65,7 @@ p{
   color: var(--secondary);
   font-weight: 500;
 }
+.imgContainer img{
+  border-radius: 8px;
+  object-fit: none;
+}

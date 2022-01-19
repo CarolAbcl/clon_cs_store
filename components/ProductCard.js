@@ -9,7 +9,8 @@ import { useState } from 'react'
 function ProductCard() {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-  console.log(show)
+  // Estado para aumentar y disminuir cantidad de producto
+  const [countProduct, setCountProduct] = useState(0)
 
   return (
     <>
@@ -33,7 +34,12 @@ function ProductCard() {
             </div>
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} />
-              <QtyAddCart value={0} fontSize={'12px'} />
+              <QtyAddCart
+                value={countProduct}
+                fontSize={'12px'}
+                countProduct={countProduct}
+                setCountProduct={setCountProduct}
+              />
             </div>
           </div>
         </div>

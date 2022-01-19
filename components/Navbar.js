@@ -82,6 +82,7 @@ function Navbar() {
           .navbar {
             height: 60px;
             width: 100%;
+            padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;

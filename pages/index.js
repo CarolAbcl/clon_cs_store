@@ -7,6 +7,8 @@ import SearchBar from '../components/atoms/SearchBar'
 import Check from '../components/atoms/Check'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
+import FilterGroup from '../components/FilterGroup'
+import Filter from '../components/Filter'
 
 import { PrismaClient } from '@prisma/client'
 import CardsGroup from '../components/CardsGroup'
@@ -54,6 +56,14 @@ export default function Home({ initialCategories }) {
         <CartButton />
         <Check />
         <Navbar />
+        <Filter>
+          <FilterGroup title="Categorias">
+            <Check text="Categoría 1" />
+            <Check text="Categoría 2" />
+            <Check text="Categoría 3" />
+            <Check text="Categoría 4" />
+          </FilterGroup>
+        </Filter>
 
         <ul>
           {initialCategories.map((category) => (

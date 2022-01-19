@@ -20,6 +20,7 @@ function DetailsProduct({ text, price, value, width, align }) {
         p {
           font-family: Aller;
           font-size: 12px;
+          margin: 0;
         }
         h4 {
           font-family: Isidora;

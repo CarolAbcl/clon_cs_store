@@ -74,17 +74,18 @@ function ProductCard() {
           align-items: stretch;
           flex-shrink: 1;
           height: 50%;
+          padding: 0rem 1rem;
         }
         .generalInfoProduct {
           display: flex;
           flex-direction: row;
-          justify-content: space-evenly;
         }
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           margin-left: 3%;
+          flex: 1;
         }
         div {
           display: flex;
@@ -97,7 +98,7 @@ function ProductCard() {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
-          width: 90%;
+          width: 100%;
         }
         #productDetails {
           display: none;
@@ -112,6 +113,8 @@ function ProductCard() {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          align-items: flex-start;
+          padding-bottom: 0.5rem;
         }
         hr {
           width: 100%;

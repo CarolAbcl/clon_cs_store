@@ -2,7 +2,7 @@ function Check({text="Sin texto"}) {
   return (
     <>
       <div>
-        <label>
+        <label className="check_container">
           {text}
           <input type="checkbox" id="check" />
           <label htmlFor="check">
@@ -13,8 +13,9 @@ function Check({text="Sin texto"}) {
         </label>
       </div>
       <style jsx>{`
-        div{
-          width: 500px;
+        .check_container{
+          width: 100%;
+          padding: .5rem 0;
         }
 
         input {

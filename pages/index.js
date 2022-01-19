@@ -7,20 +7,17 @@ import SearchBar from '../components/atoms/SearchBar'
 import Check from '../components/atoms/Check'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
+import useSWR from 'swr'
 
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
-export const getServerSideProps = async () => {
-  const categories = await prisma.category.findMany()
-  return {
-    props: {
-      initialCategories: categories,
-    },
-  }
-}
+export default function Home() {
+  const { data, error } = useSWR('/api/product/products', fetcher)
 
-export default function Home({ initialCategories }) {
+  console.log(data);
+  console.log(error);
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -43,9 +40,13 @@ export default function Home({ initialCategories }) {
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
         <div className="containerProductCard">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {
+            data.products.map(product => (
+              <ProductCard key={product.ID_product} productName={product.name} producerName={'falta'} />
+
+            ))
+          }
+
         </div>
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />
@@ -54,11 +55,6 @@ export default function Home({ initialCategories }) {
         <Check />
         <Navbar />
 
-        <ul>
-          {initialCategories.map((category) => (
-            <li key={category.ID_category}>{category.category}</li>
-          ))}
-        </ul>
       </main>
 
       <footer className={styles.footer}>

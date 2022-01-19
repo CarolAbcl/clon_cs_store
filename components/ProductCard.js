@@ -3,28 +3,47 @@ import CardPrice from './atoms/CardPrice'
 import ProductStamp from './atoms/ProductStamp'
 import QtyAddCart from './QtyAddCart'
 import Image from 'next/image'
+import DetailsProduct from './atoms/DetailsProduct'
 
-function ProductCard({ }) {
+function ProductCard({}) {
   return (
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
-          <Image src={'https://imgur.com/TduL90a'} width={40} height={40} alt=""></Image>
+          <div className="imgContainer">
+            <Image
+              src={'https://losangeles.comes.cl/wp-content/uploads/2019/07/MAji2DLC.jpg'}
+              width={90}
+              height={100}
+              alt="Imagen producto"></Image>
+          </div>
           <div className="ProductCardInfo">
             <h2>Nombre del producto</h2>
-            <a href="#">Nombre del productor</a>
-            <div className="containerStampBox">
+            <a className="links" href="#">
+              Nombre del productor
+            </a>
+            <div className="containerInfoProduct">
               <ProductStamp width="15" />
               <QtyBox />
             </div>
-            <div className="containerStampBox">
+            <div className="containerInfoProduct">
               <CardPrice />
               <QtyAddCart value={0} fontSize={'12px'} />
             </div>
           </div>
         </div>
-        <div>
-          <p id="productDetails">Hoooola!!!</p>
+        <div className="containerDetailsProduct" id="productDetails">
+          <hr></hr>
+          <DetailsProduct
+            text={'Precio por unidad al por mayor iva incluido'}
+            price={'3.450'}
+            align={'flex-start'}
+            width={50}
+          />
+          <DetailsProduct text={'Unidades por caja'} value={'6'} align={'flex-end'} width={50} />
+          <hr />
+          <DetailsProduct text={'Precio sugerido de venta'} price={'3.450'} align={'flex-start'} width={50} />
+          <DetailsProduct text={'Compra mínima iva incluido'} price={'3.450'} align={'flex-end'} width={50} />
         </div>
       </div>
       <style jsx>{`
@@ -35,19 +54,23 @@ function ProductCard({ }) {
           background-color: var(--light);
           box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
-          width: auto;
+          width: 100%;
+          margin: 1%;
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
+          height: 50%;
         }
         .generalInfoProduct {
           display: flex;
           flex-direction: row;
+          justify-content: space-evenly;
         }
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          margin-left: 3%;
         }
         div {
           display: flex;
@@ -55,25 +78,37 @@ function ProductCard({ }) {
           justify-content: space-between;
           align-items: center;
         }
-        .containerStampBox {
+        .containerInfoProduct {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
           width: 90%;
         }
-        h2 {
-          font-family: Isidora;
-          font-size: 16px;
-        }
-        a {
-          font-family: Aller;
-          color: var(--dark-green);
-          text-decoration-line: underline;
-          font-size: 12px;
-        }
         #productDetails {
           display: none;
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .imgContainer {
+          border-radius: 8px;
+          display: block;
+        }
+        .containerDetailsProduct {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+        hr {
+          width: 100%;
+          height: 1px;
+          color: var(--dark-gray);
+          opacity: 10%;
+        }
+        @media (min-width: 480px) {
+          .ProductCard {
+            width: 48%;
+          }
         }
       `}</style>
     </>

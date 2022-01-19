@@ -2,21 +2,22 @@ import Icon from '@material-ui/core/Icon'
 
 function CardPrice({ ProductPrice = '3.450' }) {
   // CardPrice recibe:
-  // width: el ancho del contenedor del precio
+  // ProductPrice que será el precio del producto
 
+  // Función que muestra y esconde la información mas detallada del producto
   const ProductDetails = () => {
     const btnProductDetails = document.getElementById('productDetails')
-    if (btnProductDetails.style.display === 'block') {
+    if (btnProductDetails.style.display === 'flex') {
       btnProductDetails.style.display = 'none'
     } else {
-      btnProductDetails.style.display = 'block'
+      btnProductDetails.style.display = 'flex'
     }
   }
 
   return (
     <>
       <div>
-        <p> ${ProductPrice} </p>
+        <p className="fontPrice"> ${ProductPrice} </p>
         <input id="activar" name="activar" type="checkbox" />
         <button
           type="button"
@@ -32,14 +33,9 @@ function CardPrice({ ProductPrice = '3.450' }) {
           div {
             display: flex;
             flex-direction: row;
-            align-items: baseline;
             justify-content: center;
             width: auto;
-          }
-          p {
-            font-size: 12px;
-            color: var(--secondary);
-            font-weight: 500;
+            align-items: center
           }
           button {
             background: none;

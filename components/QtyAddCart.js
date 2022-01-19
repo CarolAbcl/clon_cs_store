@@ -17,7 +17,7 @@ function QtyAddCart({ fontSize, value }) {
             border: none;
             text-align: center;
             outline: none;
-            width: 1.5rem;
+            width: 1.1rem;
             font-size: ${fontSize};
           }
           div {

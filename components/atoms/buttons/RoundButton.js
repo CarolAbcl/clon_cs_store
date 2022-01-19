@@ -16,6 +16,7 @@ function RoundButtons(props) {
             background-color: ${backgroundColor};
             color: var(--light);
             border: none;
+            font-size: 12px;
             font-weight: 800;
             cursor: pointer;
           }
@@ -26,6 +27,12 @@ function RoundButtons(props) {
             transition: all 0.2s;
             opacity: 0.9;
             cursor: pointer;
+          }
+          @media (min-width: 480px) {
+            button {
+              width: 1.3rem;
+              height: 1.3rem;
+            }
           }
         `}
       </style>

@@ -125,7 +125,7 @@ model product {
 
 model image {
   ID_image   String  @id @default(uuid())
-  file_image String?
+  file_image String? @db.VarChar(50)
   name_image String  @db.VarChar(50)
   alt        String
   isMain     Boolean @db.TinyInt

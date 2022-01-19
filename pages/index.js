@@ -11,6 +11,7 @@ import FilterGroup from '../components/FilterGroup'
 import Filter from '../components/Filter'
 
 import { PrismaClient } from '@prisma/client'
+import CardsGroup from '../components/CardsGroup'
 const prisma = new PrismaClient()
 
 export const getServerSideProps = async () => {
@@ -44,11 +45,11 @@ export default function Home({ initialCategories }) {
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
-        <div className="containerProductCard">
+        <CardsGroup>
           <ProductCard />
           <ProductCard />
           <ProductCard />
-        </div>
+        </CardsGroup>
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />

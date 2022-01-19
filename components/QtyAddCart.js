@@ -1,14 +1,27 @@
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ fontSize, value }) {
+function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
   // QtyAddBasket recibe:
-  // fontSize: tamaño fuente ; value: cantidad;
+  // fontSize: tamaño fuente ; counProduct: cantidad;
   return (
     <>
       <div>
-        <RoundButton text={'-'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="reduce" disabled />
-        <input type="tel" id="quantity" defaultValue={value}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} size={'1.5rem'} id="increase" />
+        <RoundButton
+          text={'-'}
+          backgroundColor={'var(--secondary)'}
+          size={'1.5rem'}
+          disabled
+          countProduct={countProduct}
+          setCountProduct={setCountProduct}
+        />
+        <input type="tel" id="quantity" defaultValue={countProduct}></input>
+        <RoundButton
+          text={'+'}
+          backgroundColor={'var(--secondary)'}
+          size={'1.5rem'}
+          countProduct={countProduct}
+          setCountProduct={setCountProduct}
+        />
       </div>
       <style jsx>
         {`

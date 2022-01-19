@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient({ log: ['query', 'info'] })
 
-export default async function handlerProduct(req, res) {
+export default async function handlerProducts(req, res) {
   try {
     const products = await prisma.product.findMany({
       include: {

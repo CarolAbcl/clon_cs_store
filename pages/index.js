@@ -8,13 +8,26 @@ import Check from '../components/atoms/Check'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 
-export const getStaticProps = async () => {
-  const response = await fetch(`http://localhost:3000/api/product/products`)
+const fetchProducts = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/product/products`)
   const { data } = await response.json()
-  return { props: { products: data } }
+  return { products: data }
 }
 
-export default function Home({ products }) {
+const fetchCategories = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+  const { data } = await response.json()
+  return { categories: data }
+}
+
+export const getStaticProps = async () => {
+  const { products } = await fetchProducts()
+  const { categories } = await fetchCategories()
+
+  return { props: { products, categories } }
+}
+
+export default function Home({ products, categories }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -42,6 +55,14 @@ export default function Home({ products }) {
               <ProductCard key={product.ID_product} />
             ))
           }
+
+          <ul>
+            {
+              categories.map(category => (
+                <li key={category.ID_category}>{category.category}</li>
+              ))
+            }
+          </ul>
         </div>
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />

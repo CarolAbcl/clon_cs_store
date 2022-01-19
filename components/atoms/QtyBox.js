@@ -3,11 +3,12 @@ import Icon from '@material-ui/core/Icon'
 
 function QtyBox({ qtyBox = 6 }) {
   // QtyBox recibe:
-  // width: el ancho del contenedor del formato caja
+  // qtyBox: la cantidad de productos por caja
+
   return (
     <>
       <div>
-        <Image src={'https://imgur.com/TduL90a.png'} width={25} height={25} alt="Caja"></Image>
+        <Image src={'https://imgur.com/TduL90a.png'} width={20} height={20} alt="Caja"></Image>
         <Icon style={{ fontSize: 1 + 'em' }}>close</Icon>
         <span>{qtyBox}</span>
       </div>

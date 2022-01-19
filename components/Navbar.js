@@ -64,16 +64,16 @@ function Navbar() {
             background-color: var(--light);
             box-shadow: 0 0px 12px #00000055;
             border-radius: 0 12px 12px 0;
-            margin: 0 -50%;
+            margin: 0 -80%;
             transition: all 0.3s;
             z-index: 20;
           }
           .background.show {
-            animation: showBackground .3s linear forwards;
+            animation: showBackground 0.3s linear forwards;
             display: block;
           }
           .background.hide {
-            animation: showBackground .3s reverse forwards;
+            animation: showBackground 0.3s reverse forwards;
             display: none;
           }
           .content.show {

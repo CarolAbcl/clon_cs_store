@@ -24,7 +24,7 @@ function SearchBar({ size }) {
           }
           input {
             border: none;
-            flex-shrink: 1;
+            flex: 1;
           }
           input:focus {
             outline: 0 none;

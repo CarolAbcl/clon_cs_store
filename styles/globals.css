@@ -11,7 +11,7 @@
 }
 @font-face {
   font-family: Aller;
-  src: url('../fonts/Aller_0.ttf');
+  src: url('../fonts/Aller_Rg_0.ttf');
 }
 @font-face {
   font-family: Isidora;
@@ -61,11 +61,11 @@ h4 {
   margin: 0% 0% 5% 0%;
 }
 .fontPrice {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--secondary);
-  font-weight: 500;
+  font-weight: 400;
 }
 .imgContainer img {
   border-radius: 8px;
-  object-fit: none;
+  object-fit: cover;
 }

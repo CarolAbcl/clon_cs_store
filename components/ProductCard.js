@@ -4,8 +4,13 @@ import ProductStamp from './atoms/ProductStamp'
 import QtyAddCart from './QtyAddCart'
 import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
+import { useState } from 'react'
 
-function ProductCard({}) {
+function ProductCard() {
+  // Estado que muestra y esconde la información mas detallada del producto
+  const [show, setShow] = useState(true)
+  console.log(show)
+
   return (
     <>
       <div className="ProductCard">
@@ -27,25 +32,28 @@ function ProductCard({}) {
               <QtyBox />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice />
+              <CardPrice show={show} setShow={setShow} />
               <QtyAddCart value={0} fontSize={'12px'} />
             </div>
           </div>
         </div>
-        <div className="containerDetailsProduct" id="productDetails">
-          <hr></hr>
-          <DetailsProduct
-            text={'Precio por unidad al por mayor iva incluido'}
-            price={'3.450'}
-            align={'flex-start'}
-            width={50}
-          />
-          <DetailsProduct text={'Unidades por caja'} value={'6'} align={'flex-end'} width={50} />
-          <hr />
-          <DetailsProduct text={'Precio sugerido de venta'} price={'3.450'} align={'flex-start'} width={50} />
-          <DetailsProduct text={'Compra mínima iva incluido'} price={'3.450'} align={'flex-end'} width={50} />
-        </div>
+        {show === false && (
+          <div className="containerDetailsProduct">
+            <hr></hr>
+            <DetailsProduct
+              text={'Precio por unidad al por mayor iva incluido'}
+              price={'3.450'}
+              align={'flex-start'}
+              width={50}
+            />
+            <DetailsProduct text={'Unidades por caja'} value={'6'} align={'flex-end'} width={50} />
+            <hr />
+            <DetailsProduct text={'Precio sugerido de venta'} price={'3.450'} align={'flex-start'} width={50} />
+            <DetailsProduct text={'Compra mínima iva incluido'} price={'3.450'} align={'flex-end'} width={50} />
+          </div>
+        )}
       </div>
+
       <style jsx>{`
         .ProductCard {
           display: flex;

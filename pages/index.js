@@ -36,23 +36,23 @@ export default function Home({ initialCategories }) {
       </Head>
 
       <main className={styles.main}>
-        {/* <h1 className={styles.title}>Primera web ComeS</h1> */}
+        <h1 className={styles.title}>Primera web ComeS</h1>
 
-        {/* <SearchBar size="100%" />
+        <SearchBar size="100%" />
         <Input type="number" text="Rut"></Input>
         <Input text="Correo Electrónico"></Input>
-        <Input text="Nombre"></Input> */}
+        <Input text="Nombre"></Input>
         <div className="containerProductCard">
           <ProductCard />
           <ProductCard />
           <ProductCard />
         </div>
-        {/* <Button value="Ingresa" />
+        <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />
         <Badge value="Ruculas" />
         <CartButton />
         <Check />
-        <Navbar /> */}
+        <Navbar />
 
         <ul>
           {initialCategories.map((category) => (

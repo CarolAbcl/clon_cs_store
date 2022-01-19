@@ -1,10 +1,14 @@
-function RoundButtons(props) {
-  const { backgroundColor, text, size, disabled } = props
+function RoundButtons({ countProduct, setCountProduct, backgroundColor, text, size }) {
   // RoundButtons recibe:
   // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño del botòn ; disabled : si el botòn se encuentra deshabilitado
   return (
     <>
-      <button className={disabled && 'disabled'}> {text} </button>
+      <button
+        disabled={text === '-' && countProduct <= 0}
+        onClick={text === '-' ? () => setCountProduct(countProduct - 1) : () => setCountProduct(countProduct + 1)}>
+        {' '}
+        {text}{' '}
+      </button>
       {/* En caso de que el componente esté outline esto se transfiere a la clase del botón */}
 
       <style jsx>
@@ -20,7 +24,7 @@ function RoundButtons(props) {
             font-weight: 800;
             cursor: pointer;
           }
-          .disabled {
+          button:disabled {
             background-color: var(--gray);
           }
           button:hover {

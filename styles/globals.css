@@ -35,10 +35,6 @@ a {
 * {
   box-sizing: border-box;
 }
-.containerProductCard{
-  display: flex;
-  flex-wrap: wrap;
-}
 h2 {
   font-family: Isidora;
   font-size: 16px;

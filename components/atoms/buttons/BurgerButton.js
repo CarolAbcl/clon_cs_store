@@ -1,8 +1,8 @@
 function BurgerButton({toggleMenu}) {
   return (
     <div>
-      <input id="burger_menu" type="checkbox" />
-      <label htmlFor="burger_menu" onClick={toggleMenu}>
+      <input id="burger_menu" type="checkbox" onChange={(e) => toggleMenu(e)}/>
+      <label htmlFor="burger_menu">
         <div className="burger_container">
           <div className="burger_line"></div>
         </div>
@@ -48,8 +48,8 @@ function BurgerButton({toggleMenu}) {
             transform: translateY(12px);
           }
 
-          :checked ~ label {
-            z-index: 99;
+          label .burger_container {
+            z-index: 30;
           }
 
           :checked ~ label .burger_line {

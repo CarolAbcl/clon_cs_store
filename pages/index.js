@@ -7,16 +7,11 @@ import SearchBar from '../components/atoms/SearchBar'
 import Check from '../components/atoms/Check'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
-import useSWR from 'swr'
+import useGetProducts from '../hooks/useGetProducts'
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
-  const { data, error } = useSWR('/api/product/products', fetcher)
-
-  console.log(data);
-  console.log(error);
-
+  const { data, isLoading } = useGetProducts()
 
   return (
     <div className={styles.container}>
@@ -41,6 +36,7 @@ export default function Home() {
         <Input text="Nombre"></Input>
         <div className="containerProductCard">
           {
+            !isLoading &&
             data.products.map(product => (
               <ProductCard key={product.ID_product} productName={product.name} producerName={'falta'} />
 

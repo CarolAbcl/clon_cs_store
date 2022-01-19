@@ -7,12 +7,14 @@ import SearchBar from '../components/atoms/SearchBar'
 import Check from '../components/atoms/Check'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
-import useGetProducts from '../hooks/useGetProducts'
 
+export const getStaticProps = async () => {
+  const response = await fetch(`http://localhost:3000/api/product/products`)
+  const { data } = await response.json()
+  return { props: { products: data } }
+}
 
-export default function Home() {
-  const { data, isLoading } = useGetProducts()
-
+export default function Home({ products }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -36,13 +38,10 @@ export default function Home() {
         <Input text="Nombre"></Input>
         <div className="containerProductCard">
           {
-            !isLoading &&
-            data.products.map(product => (
-              <ProductCard key={product.ID_product} productName={product.name} producerName={'falta'} />
-
+            products.map(product => (
+              <ProductCard key={product.ID_product} />
             ))
           }
-
         </div>
         <Button value="Ingresa" />
         <ButtonSecondary value="Seguir comprando" />

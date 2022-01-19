@@ -5,7 +5,7 @@ import QtyAddCart from './QtyAddCart'
 import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 
-function ProductCard({ productName, producerName }) {
+function ProductCard({ }) {
   return (
     <>
       <div className="ProductCard">
@@ -18,9 +18,9 @@ function ProductCard({ productName, producerName }) {
               alt="Imagen producto"></Image>
           </div>
           <div className="ProductCardInfo">
-            <h2>{productName}</h2>
+            <h2>Nombre del producto</h2>
             <a className="links" href="#">
-              {producerName}
+              Nombre del productor
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />

@@ -4,7 +4,25 @@ import CardsGroup from '../components/CardsGroup'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 
-function Catalogo() {
+const fetchProducts = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/product/products`)
+  const { data } = await response.json()
+  return { products: data }
+}
+const fetchCategories = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+  const { data } = await response.json()
+  return { categories: data }
+}
+
+export const getStaticProps = async () => {
+  const { products } = await fetchProducts()
+  const { categories } = await fetchCategories()
+
+  return { props: { products, categories } }
+}
+
+function Catalogo({ products, categories }) {
   return (
     <div>
       <Head>
@@ -23,7 +41,9 @@ function Catalogo() {
           </div>
           <hr />
           <CardsGroup>
-            <ProductCard />
+            {products.map((product) => (
+              <ProductCard key={product.ID_product} product={product} />
+            ))}
           </CardsGroup>
         </div>
       </main>

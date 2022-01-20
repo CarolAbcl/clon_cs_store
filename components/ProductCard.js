@@ -6,34 +6,50 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import { useState } from 'react'
 
-function ProductCard() {
+function ProductCard({ product }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   // Estado para aumentar y disminuir cantidad de producto
   const [countProduct, setCountProduct] = useState(0)
 
+  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
+  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
+  const saleFormat = product.sale_format
+  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
+  const minPurchase = product.min_purchase
+
   return (
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
+          {/*product.image.map((image) => (
+            <div className="imgContainer" key={product.ID_product}>
+              <Image
+                src={'https://comeschile.cl/uploads/products/' + image.file_image}
+                width={110}
+                height={150}
+                alt="Imagen producto"></Image>
+            </div>
+          ))*/}
           <div className="imgContainer">
             <Image
-              src={'https://losangeles.comes.cl/wp-content/uploads/2019/07/MAji2DLC.jpg'}
+              src={'https://comeschile.cl/uploads/products/' + product.image[0].file_image}
               width={110}
               height={150}
               alt="Imagen producto"></Image>
           </div>
+
           <div className="ProductCardInfo">
-            <h2>Nombre del producto</h2>
+            <h2>{product.name}</h2>
             <a className="links" href="#">
               Nombre del productor
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />
-              <QtyBox />
+              <QtyBox product={product} />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
               <QtyAddCart value={countProduct} countProduct={countProduct} setCountProduct={setCountProduct} />
             </div>
           </div>
@@ -43,14 +59,24 @@ function ProductCard() {
             <hr></hr>
             <DetailsProduct
               text={'Precio por unidad al por mayor iva incluido'}
-              price={'3.450'}
+              PriceProduct={PriceProduct}
               align={'flex-start'}
               width={50}
             />
-            <DetailsProduct text={'Unidades por caja'} value={'6'} align={'flex-end'} width={50} />
+            <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
             <hr />
-            <DetailsProduct text={'Precio sugerido de venta'} price={'3.450'} align={'flex-start'} width={50} />
-            <DetailsProduct text={'Compra mínima iva incluido'} price={'3.450'} align={'flex-end'} width={50} />
+            <DetailsProduct
+              text={'Precio sugerido de venta'}
+              suggestedSalePrice={suggestedSalePrice}
+              align={'flex-start'}
+              width={50}
+            />
+            <DetailsProduct
+              text={'Compra mínima iva incluido'}
+              minPurchase={minPurchase}
+              align={'flex-end'}
+              width={50}
+            />
           </div>
         )}
       </div>
@@ -79,7 +105,8 @@ function ProductCard() {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          margin-left: 3%;
+          margin-left: 0.5rem;
+          margin-bottom: 0.7rem;
           flex: 1;
         }
         div {

@@ -1,10 +1,13 @@
-function DetailsProduct({ text, price, value, width, align }) {
+function DetailsProduct({ text, PriceProduct, saleFormat, suggestedSalePrice, minPurchase, width, align }) {
   return (
     <>
       <div>
         <h5> {text} </h5>
         <h4>
-          {price && '$' + price} {value}
+          {PriceProduct && PriceProduct}
+          {saleFormat && saleFormat}
+          {suggestedSalePrice && suggestedSalePrice}
+          {minPurchase && minPurchase}
         </h4>
       </div>
 

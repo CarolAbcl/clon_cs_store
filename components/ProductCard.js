@@ -6,7 +6,43 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import { useState } from 'react'
 
-function ProductCard({ product }) {
+function ProductCard({
+  product = {
+    ID_product: '1',
+    name: 'Kombucha te blanco lavanda beterraga 330 cc',
+    wholesale_unit_price: 1488,
+    sale_format: 24,
+    description:
+      'El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.',
+    duration: 12,
+    suggested_sale_price: 1990,
+    min_purchase: 1,
+    benefit: 'Mejora la Flora intestinal',
+    conservation: 'lugar fresco y seco',
+    stock_quantity: 1,
+    offer_price: null,
+    delivery_time: 10,
+    modification_date: null,
+    image: [
+      {
+        ID_image: '1',
+        file_image: 'MKVioleta.jpg',
+        name_image: 'Kombucha Violeta',
+        alt: 'kombucha lavanda',
+        isMain: true,
+        ID_product: '1',
+      },
+    ],
+    producer: {
+      ID_producer: '1',
+      brand_name: 'Moksha Kombucha',
+    },
+    stock: {
+      ID_stock: '1',
+      status: 'En stock',
+    },
+  },
+}) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   // Estado para aumentar y disminuir cantidad de producto

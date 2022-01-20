@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Icon from '@material-ui/core/Icon'
 
-function QtyBox({ qtyBox = 6 }) {
+function QtyBox({ product }) {
   // QtyBox recibe:
   // qtyBox: la cantidad de productos por caja
 
@@ -10,7 +10,7 @@ function QtyBox({ qtyBox = 6 }) {
       <div>
         <Image src={'https://imgur.com/TduL90a.png'} width={20} height={20} alt="Caja"></Image>
         <Icon style={{ fontSize: 1 + 'em' }}>close</Icon>
-        <span>{qtyBox}</span>
+        <span>{product.sale_format}</span>
       </div>
 
       <style jsx>
@@ -21,10 +21,8 @@ function QtyBox({ qtyBox = 6 }) {
             align-items: center;
             justify-content: center;
             padding: 0.5rem;
+            margin: 1%;
             width: auto;
-          }
-          span {
-            font-size: 0.8rem;
           }
         `}
       </style>

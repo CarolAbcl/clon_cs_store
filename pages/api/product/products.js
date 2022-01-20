@@ -4,27 +4,34 @@ const prisma = new PrismaClient({ log: ['query', 'info'] })
 export default async function handlerProducts(req, res) {
   try {
     const products = await prisma.product.findMany({
-      include: {
+      select: {
+        ID_product: true,
+        name: true,
+        wholesale_unit_price: true,
+        sale_format: true,
+        description: true,
+        duration: true,
+        suggested_sale_price: true,
+        min_purchase: true,
+        benefit: true,
+        conservation: true,
+        stock_quantity: true,
+        offer_price: true,
+        delivery_time: true,
+        modification_date: true,
         image: {
-          select: {
-            ID_image: true,
-            file_image: true,
-            name_image: true,
-            alt: true,
-            isMain: true,
-          },
           where: {
-            isMain: true,
-          },
+            isMain: true
+          }
         },
         producer: {
           select: {
             ID_producer: true,
-            brand_name: true,
-          },
+            brand_name: true
+          }
         },
-        stock: true,
-      },
+        stock: true
+      }
     })
 
     // validar si no hay productos?

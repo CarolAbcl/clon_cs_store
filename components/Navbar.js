@@ -98,8 +98,6 @@ function Navbar() {
             display: inline-block;
             width: 100%;
             text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
             padding: 1rem 0;
             transition: all 0.3s;
           }

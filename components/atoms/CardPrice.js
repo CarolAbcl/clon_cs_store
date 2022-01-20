@@ -1,13 +1,24 @@
 import Icon from '@material-ui/core/Icon'
 
-function CardPrice({ ProductPrice = '3.450', show, setShow }) {
+function CardPrice({ show, setShow, PriceProduct }) {
   // CardPrice recibe:
   // ProductPrice que será el precio del producto ; show y SetShow para manejar la visualización de la información del producto
+
+  // function FormatNumber({ number }) {
+  //   return (
+  //     <span style={{ color: "red" }}>
+  //       {new Intl.NumberFormat("ES-MX", {
+  //         style: "currency",
+  //         currency: "MXN"
+  //       }).format(number)}
+  //     </span>
+  //   );
+  // }
 
   return (
     <>
       <div>
-        <p className="fontPrice"> ${ProductPrice} </p>
+        <h4>{PriceProduct} </h4>
         <button
           type="button"
           onClick={() => {

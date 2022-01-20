@@ -1,6 +1,6 @@
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
+function QtyAddCart({ countProduct, setCountProduct }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
   return (
@@ -9,7 +9,7 @@ function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
-          size={'1.5rem'}
+          size={'1.7rem'}
           disabled
           countProduct={countProduct}
           setCountProduct={setCountProduct}
@@ -18,7 +18,7 @@ function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
         <RoundButton
           text={'+'}
           backgroundColor={'var(--secondary)'}
-          size={'1.5rem'}
+          size={'1.7rem'}
           countProduct={countProduct}
           setCountProduct={setCountProduct}
         />
@@ -31,13 +31,13 @@ function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
             text-align: center;
             outline: none;
             width: 1.1rem;
-            font-size: ${fontSize};
           }
           div {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            margin: 1% 0%;
           }
         `}
       </style>

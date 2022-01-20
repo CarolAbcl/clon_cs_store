@@ -34,12 +34,7 @@ function ProductCard() {
             </div>
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} />
-              <QtyAddCart
-                value={countProduct}
-                fontSize={'12px'}
-                countProduct={countProduct}
-                setCountProduct={setCountProduct}
-              />
+              <QtyAddCart value={countProduct} countProduct={countProduct} setCountProduct={setCountProduct} />
             </div>
           </div>
         </div>

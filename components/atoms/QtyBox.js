@@ -21,10 +21,8 @@ function QtyBox({ qtyBox = 6 }) {
             align-items: center;
             justify-content: center;
             padding: 0.5rem;
+            margin: 1%;
             width: auto;
-          }
-          span {
-            font-size: 0.8rem;
           }
         `}
       </style>

@@ -7,7 +7,7 @@ function CardPrice({ ProductPrice = '3.450', show, setShow }) {
   return (
     <>
       <div>
-        <p className="fontPrice"> ${ProductPrice} </p>
+        <h4> ${ProductPrice} </h4>
         <button
           type="button"
           onClick={() => {

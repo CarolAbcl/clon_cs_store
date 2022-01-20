@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Input from '../components/atoms/Input'
@@ -30,6 +32,19 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ products, categories }) {
+  const [filters, setfilters] = useState([])
+
+  const addFilter = (filterName) => {
+    setfilters([...filters, filterName])
+  }
+
+  const removeFilter = (filterName) => {
+    const newFilters = filters.filter((filter) => filter !== filterName)
+    setfilters(newFilters)
+  }
+
+  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
+
   return (
     <div className={styles.container}>
       <Head>
@@ -52,18 +67,14 @@ export default function Home({ products, categories }) {
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
         <div className="containerProductCard">
-          {
-            products.map(product => (
-              <ProductCard key={product.ID_product} />
-            ))
-          }
+          {products.map((product) => (
+            <ProductCard key={product.ID_product} />
+          ))}
 
           <ul>
-            {
-              categories.map(category => (
-                <li key={category.ID_category}>{category.category}</li>
-              ))
-            }
+            {categories.map((category) => (
+              <li key={category.ID_category}>{category.category}</li>
+            ))}
           </ul>
         </div>
         <Button value="Ingresa" />
@@ -74,13 +85,11 @@ export default function Home({ products, categories }) {
         <Navbar />
         <Filter>
           <FilterGroup title="Categorias">
-            <Check text="Categoría 1" />
-            <Check text="Categoría 2" />
-            <Check text="Categoría 3" />
-            <Check text="Categoría 4" />
+            {categories.map((category) => (
+              <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+            ))}
           </FilterGroup>
         </Filter>
-
       </main>
 
       <footer className={styles.footer}>

@@ -7,12 +7,12 @@ function FilterGroup({ title, children }) {
         <div className="filters">{children}</div>
       </div>
       <style jsx>{`
-        .filter-group{
+        .filter-group {
           width: 100%;
-          padding: 0 .5rem;
+          padding: 0 0.5rem;
         }
         .filters {
-          padding-left: .5rem;
+          padding-left: 0.5rem;
         }
       `}</style>
     </>

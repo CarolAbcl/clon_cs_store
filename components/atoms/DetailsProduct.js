@@ -1,4 +1,4 @@
-function DetailsProduct({ text, PriceProduct, saleFormat, suggestedSalePrice, minPurchase, width, align }) {
+function DetailsProduct({ text='Hola', PriceProduct, saleFormat, suggestedSalePrice, minPurchase, width, align }) {
   return (
     <>
       <div>

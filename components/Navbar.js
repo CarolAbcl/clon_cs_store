@@ -12,7 +12,7 @@ function Navbar() {
       <div className="navbar">
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="" width={'120px'} height={'40px'} />
+          <Image src={logo} alt="" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>
@@ -42,8 +42,7 @@ function Navbar() {
       <style jsx>
         {`
           .logo {
-            position: relative;
-            display: flex;
+            width: 6rem;
           }
           .background {
             position: fixed;
@@ -133,6 +132,15 @@ function Navbar() {
             }
             to {
               background-color: transparent;
+            }
+          }
+          @media (min-width: 480px) {
+            .navbar {
+              margin: 1.5%;
+              padding-right: 4rem;
+            }
+            .logo {
+              width: 10rem;
             }
           }
         `}

@@ -1,6 +1,6 @@
 import Icon from '@material-ui/core/Icon'
 
-function SearchBar({ size }) {
+function SearchBar() {
   // SearchBar recibe:
   // size: tamaño del contenedor de la barra buscadora
   return (
@@ -20,7 +20,7 @@ function SearchBar({ size }) {
             display: flex;
             align-content: center;
             justify-content: space-between;
-            width: ${size};
+            width: 100%;
           }
           input {
             border: none;
@@ -41,6 +41,7 @@ function SearchBar({ size }) {
               border-radius: 10px 2px 2px 10px;
               flex-flow: row-reverse wrap-reverse;
               justify-content: flex-end;
+              width: 75%;
             }
             input {
               flex-shrink: 1;

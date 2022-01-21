@@ -67,10 +67,6 @@ export default function Home({ products, categories }) {
         <Input text="Correo Electrónico"></Input>
         <Input text="Nombre"></Input>
         <div className="containerProductCard">
-          {products.map((product) => (
-            <ProductCard key={product.ID_product} />
-          ))}
-
           <ul>
             {categories.map((category) => (
               <li key={category.ID_category}>{category.category}</li>

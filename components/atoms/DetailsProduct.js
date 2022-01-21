@@ -1,10 +1,13 @@
-function DetailsProduct({ text, price, value, width, align }) {
+function DetailsProduct({ text='Hola', PriceProduct, saleFormat, suggestedSalePrice, minPurchase, width, align }) {
   return (
     <>
       <div>
-        <p> {text} </p>
+        <h5> {text} </h5>
         <h4>
-          {price && '$' + price} {value}
+          {PriceProduct && PriceProduct}
+          {saleFormat && saleFormat}
+          {suggestedSalePrice && suggestedSalePrice}
+          {minPurchase && minPurchase}
         </h4>
       </div>
 
@@ -17,16 +20,8 @@ function DetailsProduct({ text, price, value, width, align }) {
           padding: 0rem 1rem;
           text-align: ${align === 'flex-end' && 'right'};
         }
-        p {
-          font-family: Aller;
-          font-size: 12px;
-          margin: 0;
-        }
-        h4 {
-          font-family: Isidora;
-          font-size: 18px;
-          color: var(--secondary);
-          font-weight: 500;
+        h5 {
+          margin: 5% 0%;
         }
       `}</style>
     </>

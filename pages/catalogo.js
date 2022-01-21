@@ -3,8 +3,29 @@ import SearchBar from '../components/atoms/SearchBar'
 import CardsGroup from '../components/CardsGroup'
 import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
+import Filter from '../components/Filter'
+import FilterGroup from '../components/FilterGroup'
+import Check from '../components/atoms/Check'
 
-function Catalogo() {
+const fetchProducts = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/product/products`)
+  const { data } = await response.json()
+  return { products: data }
+}
+const fetchCategories = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+  const { data } = await response.json()
+  return { categories: data }
+}
+
+export const getStaticProps = async () => {
+  const { products } = await fetchProducts()
+  const { categories } = await fetchCategories()
+
+  return { props: { products, categories } }
+}
+
+function Catalogo({ products, categories }) {
   return (
     <div>
       <Head>
@@ -17,29 +38,60 @@ function Catalogo() {
       <main>
         <Navbar />
         <div className="container">
-          <div className="header-catalogo">
-            <h2 className="primary">CATÁLOGO</h2>
-            <SearchBar size="100%" />
+          <Filter>
+            <FilterGroup title="Categorias">
+              {categories.map((category) => (
+                <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+              ))}
+            </FilterGroup>
+          </Filter>
+          <div className='catalogo-container'>
+            <div className="header-catalogo">
+              <h2 className="primary">CATÁLOGO</h2>
+              <Filter isMobile>
+                <FilterGroup title="Categorias">
+                  {categories.map((category) => (
+                    <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+                  ))}
+                </FilterGroup>
+              </Filter>
+              <SearchBar size="100%" />
+            </div>
+            <hr />
+            <CardsGroup>
+              {products.map((product) => (
+                <ProductCard key={product.ID_product} product={product} />
+              ))}
+            </CardsGroup>
           </div>
-          <hr />
-          <CardsGroup>
-            <ProductCard />
-          </CardsGroup>
         </div>
       </main>
       <style jsx>
         {`
+        .catalogo-container{
+          width: 100%;
+        }
           .header-catalogo {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
+            gap: .5rem;
+            flex-wrap: wrap;
           }
           .container {
             padding: 1rem;
+            display: flex;
+            gap: 2rem;
           }
 
           h2.primary {
             font-weight: normal;
+          }
+
+          hr{
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            border-color: var(--light-gray);
           }
         `}
       </style>

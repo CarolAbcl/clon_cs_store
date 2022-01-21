@@ -5,7 +5,7 @@ function CartButton({ qtty = 0 }) {
     <>
       <div>
         <a href="#">
-          <Icon fontSize="medium">local_grocery_store</Icon>
+          <Icon fontSize="inherit">local_grocery_store</Icon>
           <span>{qtty}</span>
         </a>
       </div>
@@ -13,12 +13,13 @@ function CartButton({ qtty = 0 }) {
         {`
           div {
             position: relative;
-            padding: 0.4rem;
+            padding: 0.5rem;
             z-index: 1;
             display: inline-block;
           }
           a {
-            padding: 0.6rem;
+            padding: 0.5rem;
+            font-size: 1.2rem;
             border-radius: 50%;
             background-color: var(--secondary);
             display: flex;

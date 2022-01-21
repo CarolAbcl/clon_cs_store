@@ -12,7 +12,7 @@ function Navbar() {
       <div className="navbar">
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="" width={'120px'} height={'40px'} />
+          <Image src={logo} alt="logo" width={'120px'} height={'40px'} />
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>

@@ -27,7 +27,12 @@ export const getStaticProps = async () => {
 }
 
 function Catalogo({ products, categories }) {
+  // Estado que va guardando los productos seleccionados
   const [cartItems, setCartItems] = useState([])
+
+  // variable que suma el total de productos seleccionados
+  const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
+
   // Funcion para agregar producto al carrito
   const addItem = (product) => {
     const exist = cartItems.find((item) => item.ID_product === product.ID_product)
@@ -60,7 +65,7 @@ function Catalogo({ products, categories }) {
         <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
       </Head>
       <main>
-        <Navbar />
+        <Navbar totalItems={totalItems} />
         <div className="container">
           <Filter>
             <FilterGroup title="Categorias">

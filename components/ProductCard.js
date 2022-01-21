@@ -9,8 +9,6 @@ import { useState } from 'react'
 function ProductCard({ product, addItem, removeItem, cartItems }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-  // Estado para aumentar y disminuir cantidad de producto
-  const [countProduct, setCountProduct] = useState(0)
 
   // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
@@ -50,15 +48,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
             </div>
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
-              <QtyAddCart
-                value={countProduct}
-                countProduct={countProduct}
-                setCountProduct={setCountProduct}
-                addItem={addItem}
-                removeItem={removeItem}
-                product={product}
-                cartItems={cartItems}
-              />
+              <QtyAddCart addItem={addItem} removeItem={removeItem} product={product} cartItems={cartItems} />
             </div>
           </div>
         </div>

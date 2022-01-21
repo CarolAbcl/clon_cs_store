@@ -135,6 +135,12 @@ function Navbar() {
               background-color: transparent;
             }
           }
+          @media (min-width: 480px) {
+            .navbar {
+              margin: 1.5%;
+              padding-right: 4rem;
+            }
+          }
         `}
       </style>
     </>

@@ -1,6 +1,6 @@
 import Icon from '@material-ui/core/Icon'
 
-function CartButton({ qtty = 0 }) {
+function CartButton({ qtty = 1 }) {
   return (
     <>
       <div>
@@ -36,6 +36,16 @@ function CartButton({ qtty = 0 }) {
             top: 0px;
             right: 0px;
             ${qtty == 0 && 'display: none'};
+          }
+          @media (min-width: 480px) {
+            a {
+              font-size: 1.4rem;
+              padding: 0.6rem;
+            }
+            span {
+              font-size: 1rem;
+              padding: 0.2rem 0.5rem;
+            }
           }
         `}
       </style>

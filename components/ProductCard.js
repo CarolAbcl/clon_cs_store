@@ -69,7 +69,7 @@ function ProductCard({
           ))*/}
           <div className="imgContainer">
             <Image
-              src={'https://comeschile.cl/uploads/products/' + product.image[0].file_image}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
               width={110}
               height={150}
               alt="Imagen producto"></Image>
@@ -180,9 +180,18 @@ function ProductCard({
           color: var(--dark-gray);
           opacity: 10%;
         }
+        h2 {
+          margin: 0.5rem 0;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+        }
         @media (min-width: 480px) {
           .ProductCard {
-            width: 48%;
+            flex:1;
+            min-width: 600px;
           }
         }
       `}</style>

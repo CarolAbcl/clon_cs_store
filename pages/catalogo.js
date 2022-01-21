@@ -45,7 +45,7 @@ function Catalogo({ products, categories }) {
               ))}
             </FilterGroup>
           </Filter>
-          <div className='catalogo-container'>
+          <div className="catalogo-container">
             <div className="header-catalogo">
               <h2 className="primary">CATÁLOGO</h2>
               <Filter isMobile>
@@ -55,7 +55,7 @@ function Catalogo({ products, categories }) {
                   ))}
                 </FilterGroup>
               </Filter>
-              <SearchBar size="100%" />
+              <SearchBar />
             </div>
             <hr />
             <CardsGroup>
@@ -68,14 +68,14 @@ function Catalogo({ products, categories }) {
       </main>
       <style jsx>
         {`
-        .catalogo-container{
-          width: 100%;
-        }
+          .catalogo-container {
+            width: 100%;
+          }
           .header-catalogo {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: .5rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
           }
           .container {
@@ -88,7 +88,7 @@ function Catalogo({ products, categories }) {
             font-weight: normal;
           }
 
-          hr{
+          hr {
             margin-top: 1.5rem;
             margin-bottom: 2rem;
             border-color: var(--light-gray);

@@ -70,3 +70,11 @@ h5{
   border-radius: 8px;
   object-fit: cover;
 }
+@media (min-width: 480px) {
+  h4 {
+    font-size: 1.4em;
+  }
+  h5{
+    font-size: 1rem;
+  }
+  }

@@ -43,6 +43,11 @@ function CardPrice({ show, setShow, PriceProduct }) {
             cursor: pointer;
             color: var(--gray);
           }
+          @media (min-width: 480px) {
+            div {
+              padding: 0 0.5rem;
+            }
+          }
         `}
       </style>
     </>

@@ -9,7 +9,6 @@ function QtyAddCart({ countProduct, setCountProduct }) {
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
-          size={'1.7rem'}
           disabled
           countProduct={countProduct}
           setCountProduct={setCountProduct}
@@ -18,7 +17,6 @@ function QtyAddCart({ countProduct, setCountProduct }) {
         <RoundButton
           text={'+'}
           backgroundColor={'var(--secondary)'}
-          size={'1.7rem'}
           countProduct={countProduct}
           setCountProduct={setCountProduct}
         />
@@ -38,6 +36,11 @@ function QtyAddCart({ countProduct, setCountProduct }) {
             align-items: center;
             justify-content: center;
             margin: 1% 0%;
+          }
+          @media (min-width: 480px) {
+            input {
+              width: 2rem;
+            }
           }
         `}
       </style>

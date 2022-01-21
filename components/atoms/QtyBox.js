@@ -7,22 +7,34 @@ function QtyBox({ product }) {
 
   return (
     <>
-      <div>
-        <Image src={'https://imgur.com/TduL90a.png'} width={20} height={20} alt="Caja"></Image>
+      <div className="containerQtyBox">
+        <div>
+          <Image
+            src={'https://imgur.com/TduL90a.png'}
+            width={20}
+            height={20}
+            layout="responsive"
+            alt="Caja"
+            sizes="50vw"></Image>
+        </div>
         <Icon style={{ fontSize: 1 + 'em' }}>close</Icon>
         <span>{product.sale_format}</span>
       </div>
 
       <style jsx>
         {`
-          div {
+          .containerQtyBox {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
             padding: 0.5rem;
             margin: 1%;
-            width: auto;
+            width: 50%;
+            justify-content: flex-end;
+          }
+          div {
+            width: 22%;
           }
         `}
       </style>

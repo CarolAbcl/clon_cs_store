@@ -182,7 +182,8 @@ function ProductCard({
         }
         @media (min-width: 480px) {
           .ProductCard {
-            width: 48%;
+            width: 45%;
+            padding: 1.5% 1rem;
           }
         }
       `}</style>

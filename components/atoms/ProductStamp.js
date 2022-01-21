@@ -4,17 +4,24 @@ function ProductStamp() {
   return (
     <>
       <div>
-        <Image src={'https://imgur.com/CWJMYZ4.png'} width={30} height={30} alt="Sello"></Image>
+        <Image
+          src={'https://imgur.com/CWJMYZ4.png'}
+          width={30}
+          height={30}
+          alt="Sello"
+          layout="responsive"
+          sizes="50vw"></Image>
       </div>
 
       <style jsx>
         {`
           div {
-            display: flex;
-            flex-direction: row;
-            align-items: baseline;
-            justify-content: center;
-            width: auto;
+            width: 2rem;
+          }
+          @media (min-width: 480px) {
+            div {
+              width: 3rem;
+            }
           }
         `}
       </style>

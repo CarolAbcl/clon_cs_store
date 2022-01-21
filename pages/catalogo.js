@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
+import { useState } from 'react'
 
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products`)
@@ -26,6 +27,29 @@ export const getStaticProps = async () => {
 }
 
 function Catalogo({ products, categories }) {
+  const [cartItems, setCartItems] = useState([])
+  // Funcion para agregar producto al carrito
+  const addItem = (product) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+    if (exist) {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty + 1 } : item))
+      )
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }])
+    }
+  }
+  //Funcion para eliminar productos del carrito
+  const removeItem = (product) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((item) => item.ID_product !== product.ID_product))
+    } else {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty - 1 } : item))
+      )
+    }
+  }
   return (
     <div>
       <Head>
@@ -60,7 +84,13 @@ function Catalogo({ products, categories }) {
             <hr />
             <CardsGroup>
               {products.map((product) => (
-                <ProductCard key={product.ID_product} product={product} />
+                <ProductCard
+                  key={product.ID_product}
+                  product={product}
+                  addItem={addItem}
+                  removeItem={removeItem}
+                  cartItems={cartItems}
+                />
               ))}
             </CardsGroup>
           </div>

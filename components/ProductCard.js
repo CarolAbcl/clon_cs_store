@@ -6,7 +6,7 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import { useState } from 'react'
 
-function ProductCard({product, categories}) {
+function ProductCard({ product, categories }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   // Estado para aumentar y disminuir cantidad de producto
@@ -94,8 +94,11 @@ function ProductCard({product, categories}) {
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
-          height: 50%;
           padding: 0rem 1rem;
+          height: 200px;
+        }
+        .ProductCard.tight {
+          height: 50%;
         }
         .generalInfoProduct {
           display: flex;
@@ -154,8 +157,8 @@ function ProductCard({product, categories}) {
         }
         @media (min-width: 480px) {
           .ProductCard {
-            flex:1;
-            min-width: 600px;
+            flex: 1;
+            min-width: 400px;
           }
         }
       `}</style>

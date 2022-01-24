@@ -33,6 +33,21 @@ function Catalogo({ products, categories }) {
   // variable que suma el total de productos seleccionados
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
 
+  // Estado que guarda los filtros seleccionados
+  const [filters, setfilters] = useState([])
+
+  // agrega elemento a los filtros
+  const addFilter = (filterName) => {
+    setfilters([...filters, filterName])
+  }
+  //remueve un elemento de filtros
+  const removeFilter = (filterName) => {
+    const newFilters = filters.filter((filter) => filter !== filterName)
+    setfilters(newFilters)
+  }
+  //maneja los filtros
+  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
+
   // Funcion para agregar producto al carrito
   const addItem = (product) => {
     const exist = cartItems.find((item) => item.ID_product === product.ID_product)
@@ -105,6 +120,7 @@ function Catalogo({ products, categories }) {
         {`
           .catalogo-container {
             width: 100%;
+            flex: 4;
           }
           .header-catalogo {
             display: flex;
@@ -114,9 +130,9 @@ function Catalogo({ products, categories }) {
             flex-wrap: wrap;
           }
           .container {
-            padding: 1rem;
+            padding: 1.5rem;
             display: flex;
-            gap: 2rem;
+            gap: 4rem;
           }
 
           h2.primary {
@@ -126,7 +142,14 @@ function Catalogo({ products, categories }) {
           hr {
             margin-top: 1.5rem;
             margin-bottom: 2rem;
-            border-color: var(--light-gray);
+            border: none;
+            border-bottom: 1px solid var(--light-gray);
+          }
+
+          @media (min-width: 800px) {
+            .container {
+              padding: 2rem 4rem;
+            }
           }
         `}
       </style>

@@ -5,7 +5,9 @@ function CartButton({ totalItems }) {
     <>
       <div>
         <a href="#">
-          <Icon fontSize="inherit">local_grocery_store</Icon>
+          <Icon data-test-id="icon-card" fontSize="medium">
+            local_grocery_store
+          </Icon>
           <span>{totalItems}</span>
         </a>
       </div>

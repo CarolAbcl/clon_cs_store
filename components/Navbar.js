@@ -94,8 +94,8 @@ function Navbar({ totalItems }) {
             list-style: none;
           }
 
-          li{
-            padding: 0 .5rem;
+          li {
+            padding: 0 0.5rem;
           }
           a {
             display: inline-block;
@@ -164,10 +164,10 @@ function Navbar({ totalItems }) {
               justify-content: space-evenly;
             }
 
-            a{
+            a {
               padding: 1rem;
             }
-            a:hover{
+            a:hover {
               padding: 1rem;
             }
           }

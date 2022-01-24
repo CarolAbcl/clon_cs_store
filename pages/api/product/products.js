@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient({ log: ['query', 'info'] })
+const prisma = new PrismaClient()
 
 export default async function handlerProducts(req, res) {
+  console.log(process.env.DATABASE_URL)
   try {
     const products = await prisma.product.findMany({
       select: {
@@ -21,17 +22,17 @@ export default async function handlerProducts(req, res) {
         modification_date: true,
         image: {
           where: {
-            isMain: true
-          }
+            isMain: true,
+          },
         },
         producer: {
           select: {
             ID_producer: true,
-            brand_name: true
-          }
+            brand_name: true,
+          },
         },
-        stock: true
-      }
+        stock: true,
+      },
     })
 
     // validar si no hay productos?

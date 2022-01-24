@@ -6,7 +6,6 @@ import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
-
 import { useState } from 'react'
 
 const fetchProducts = async () => {
@@ -28,19 +27,49 @@ export const getStaticProps = async () => {
 }
 
 function Catalogo({ products, categories }) {
+  // Estado que va guardando los productos seleccionados
+  const [cartItems, setCartItems] = useState([])
+
+  // variable que suma el total de productos seleccionados
+  const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
+
+  // Estado que guarda los filtros seleccionados
   const [filters, setfilters] = useState([])
 
+  // agrega elemento a los filtros
   const addFilter = (filterName) => {
     setfilters([...filters, filterName])
   }
-
+  //remueve un elemento de filtros
   const removeFilter = (filterName) => {
     const newFilters = filters.filter((filter) => filter !== filterName)
     setfilters(newFilters)
   }
-
+  //maneja los filtros
   const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
 
+  // Funcion para agregar producto al carrito
+  const addItem = (product) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+    if (exist) {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty + 1 } : item))
+      )
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }])
+    }
+  }
+  //Funcion para eliminar productos del carrito
+  const removeItem = (product) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((item) => item.ID_product !== product.ID_product))
+    } else {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty - 1 } : item))
+      )
+    }
+  }
   return (
     <div>
       <Head>
@@ -51,7 +80,7 @@ function Catalogo({ products, categories }) {
         <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
       </Head>
       <main>
-        <Navbar/>
+        <Navbar totalItems={totalItems} />
         <div className="container">
           <Filter>
             <FilterGroup title="Categorias">
@@ -75,7 +104,13 @@ function Catalogo({ products, categories }) {
             <hr />
             <CardsGroup>
               {products.map((product) => (
-                <ProductCard key={product.ID_product} product={product} handleCart={(e) => handleCart(e)} />
+                <ProductCard
+                  key={product.ID_product}
+                  product={product}
+                  addItem={addItem}
+                  removeItem={removeItem}
+                  cartItems={cartItems}
+                />
               ))}
             </CardsGroup>
           </div>

@@ -1,15 +1,11 @@
-function RoundButtons({ countProduct, setCountProduct, backgroundColor, text }) {
+function RoundButtons({ backgroundColor, text, onClick, qtyProduct }) {
   // RoundButtons recibe:
   // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño del botòn ; disabled : si el botòn se encuentra deshabilitado
   return (
     <>
-      <button
-        disabled={text === '-' && countProduct.qtty <= 0}
-        onClick={text === '-' ? () => setCountProduct(countProduct - 1) : () => setCountProduct(countProduct + 1)}>
-        {' '}
-        {text}{' '}
+      <button disabled={text === '-' && qtyProduct === 0} onClick={onClick}>
+        {text}
       </button>
-      {/* En caso de que el componente esté outline esto se transfiere a la clase del botón */}
 
       <style jsx>
         {`

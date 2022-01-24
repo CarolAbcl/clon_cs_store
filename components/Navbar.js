@@ -5,8 +5,7 @@ import { BurgerButton, CartButton } from './atoms/buttons'
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useState } from 'react'
 
-function Navbar() {
-
+function Navbar({ totalItems }) {
   const [show, setShow] = useState(false)
   return (
     <>
@@ -38,7 +37,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <CartButton qtty={0}/>
+        <CartButton totalItems={totalItems} />
       </div>
       <style jsx>
         {`

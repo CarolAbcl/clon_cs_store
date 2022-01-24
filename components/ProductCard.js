@@ -123,7 +123,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
           justify-content: space-between;
           align-items: stretch;
           flex-wrap: wrap;
-          gap:.5rem;
+          gap: 0.5rem;
           width: 100%;
         }
         #productDetails {
@@ -155,7 +155,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
-            min-width: 400px;
+            min-width: 350px;
           }
         }
 

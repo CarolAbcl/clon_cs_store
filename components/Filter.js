@@ -35,9 +35,7 @@ function Filter({ children, isMobile }) {
         }
         .filters-container {
           flex: 1;
-          ${isMobile ? 'display:none;' : ''}
-          position: sticky;
-          top: 20px;
+          ${isMobile ? 'display:none;' : 'position: sticky; top: 50px;'}
           height: fit-content;
         }
         h2 {

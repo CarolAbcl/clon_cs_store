@@ -18,20 +18,20 @@ function Navbar({ totalItems }) {
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Nosotros</a>
               </Link>
               <hr />
             </li>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Preguntas frecuentes</a>
               </Link>
               <hr />
             </li>
@@ -58,7 +58,7 @@ function Navbar({ totalItems }) {
             position: fixed;
             top: 0;
             left: 0;
-            width: 50%;
+            width: 60%;
             height: 100%;
             background-color: var(--light);
             box-shadow: 0 0px 12px #00000055;
@@ -92,6 +92,10 @@ function Navbar({ totalItems }) {
             padding-top: 80px;
             margin: 0;
             list-style: none;
+          }
+
+          li{
+            padding: 0 .5rem;
           }
           a {
             display: inline-block;

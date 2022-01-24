@@ -8,7 +8,7 @@ function CardsGroup({ children }) {
           display: flex;
           flex-wrap: wrap;
           gap: 1.5rem;
-          justify-content: space-between;
+          justify-content: center;
           align-items: flex-start;
           padding: 0% 2%;
         }

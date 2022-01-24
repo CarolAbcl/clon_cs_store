@@ -156,6 +156,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
           .ProductCard {
             flex: 1;
             min-width: 350px;
+            max-width: 400px;
           }
         }
 

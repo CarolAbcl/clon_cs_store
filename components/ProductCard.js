@@ -40,7 +40,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
           <div className="ProductCardInfo">
             <h2>{product.name}</h2>
             <a className="links" href="#">
-              Nombre del productor
+              {product.producer.brand_name}
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />
@@ -101,7 +101,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
           display: flex;
           flex-direction: row;
           gap: 0.5rem;
-          align-items: stretch;
+          align-items: center
           flex: 1;
         }
         .ProductCardInfo {

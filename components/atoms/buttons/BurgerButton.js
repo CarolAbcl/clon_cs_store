@@ -1,7 +1,7 @@
-function BurgerButton({toggleMenu}) {
+function BurgerButton({ toggleMenu }) {
   return (
-    <div>
-      <input id="burger_menu" type="checkbox" onChange={(e) => toggleMenu(e)}/>
+    <div className="burger_button">
+      <input id="burger_menu" type="checkbox" onChange={(e) => toggleMenu(e)} />
       <label htmlFor="burger_menu">
         <div className="burger_container">
           <div className="burger_line"></div>
@@ -64,6 +64,12 @@ function BurgerButton({toggleMenu}) {
           :checked ~ label .burger_line::before {
             transform: rotate(-45deg) translate(35px, 35px);
             width: 2.5rem;
+          }
+
+          @media (min-width: 800px){
+            .burger_button{
+              display: none;
+            }
           }
         `}
       </style>

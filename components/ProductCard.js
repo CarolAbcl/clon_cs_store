@@ -6,11 +6,9 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import { useState } from 'react'
 
-function ProductCard({product, categories}) {
+function ProductCard({ product, addItem, removeItem, cartItems }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-  // Estado para aumentar y disminuir cantidad de producto
-  const [countProduct, setCountProduct] = useState(0)
 
   // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
@@ -42,7 +40,7 @@ function ProductCard({product, categories}) {
           <div className="ProductCardInfo">
             <h2>{product.name}</h2>
             <a className="links" href="#">
-              Nombre del productor
+              {product.producer.brand_name}
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />
@@ -50,7 +48,7 @@ function ProductCard({product, categories}) {
             </div>
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
-              <QtyAddCart value={countProduct} countProduct={countProduct} setCountProduct={setCountProduct} />
+              <QtyAddCart addItem={addItem} removeItem={removeItem} product={product} cartItems={cartItems} />
             </div>
           </div>
         </div>
@@ -90,23 +88,27 @@ function ProductCard({product, categories}) {
           box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
           width: 100%;
-          margin: 1%;
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
+          padding: 1rem;
+          min-height: 15rem;
+        }
+        .ProductCard.tight {
           height: 50%;
-          padding: 0rem 1rem;
         }
         .generalInfoProduct {
           display: flex;
           flex-direction: row;
+          gap: 0.5rem;
+          align-items: center
+          flex: 1;
         }
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          margin-left: 0.5rem;
-          margin-bottom: 0.7rem;
+          gap: 0.5rem;
           flex: 1;
         }
         div {
@@ -120,6 +122,8 @@ function ProductCard({product, categories}) {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
+          flex-wrap: wrap;
+          gap: 0.5rem;
           width: 100%;
         }
         #productDetails {
@@ -146,16 +150,23 @@ function ProductCard({product, categories}) {
         }
         h2 {
           margin: 0.5rem 0;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          -webkit-line-clamp: 2;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
+          font-size: 1rem;
         }
         @media (min-width: 480px) {
           .ProductCard {
-            flex:1;
-            min-width: 600px;
+            flex: 1;
+            min-width: 350px;
+          }
+        }
+
+        @media (min-width: 1265px) {
+          h2 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            font-size: 1.25rem;
           }
         }
       `}</style>

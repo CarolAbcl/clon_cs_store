@@ -1,8 +1,10 @@
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ countProduct, setCountProduct }) {
+function QtyAddCart({ product, addItem, removeItem, cartItems }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
+  const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+  const qtyProduct = exist === undefined ? 0 : exist.qty
   return (
     <>
       <div>
@@ -10,16 +12,11 @@ function QtyAddCart({ countProduct, setCountProduct }) {
           text={'-'}
           backgroundColor={'var(--secondary)'}
           disabled
-          countProduct={countProduct}
-          setCountProduct={setCountProduct}
+          onClick={() => removeItem(product)}
+          qtyProduct={qtyProduct}
         />
-        <input type="tel" id="quantity" defaultValue={countProduct}></input>
-        <RoundButton
-          text={'+'}
-          backgroundColor={'var(--secondary)'}
-          countProduct={countProduct}
-          setCountProduct={setCountProduct}
-        />
+        <input type="tel" id="quantity" defaultValue={qtyProduct}></input>
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
       </div>
       <style jsx>
         {`

@@ -1,12 +1,12 @@
 import Icon from '@material-ui/core/Icon'
 
-function CartButton({ qtty = 0 }) {
+function CartButton({ totalItems }) {
   return (
     <>
       <div>
         <a href="#">
           <Icon fontSize="inherit">local_grocery_store</Icon>
-          <span>{qtty}</span>
+          <span>{totalItems}</span>
         </a>
       </div>
       <style jsx>
@@ -35,7 +35,17 @@ function CartButton({ qtty = 0 }) {
             position: absolute;
             top: 0px;
             right: 0px;
-            ${qtty == 0 && 'display: none'};
+            ${totalItems == 0 && 'display: none'};
+          }
+          @media (min-width: 480px) {
+            a {
+              font-size: 1.4rem;
+              padding: 0.6rem;
+            }
+            span {
+              font-size: 1rem;
+              padding: 0.2rem 0.5rem;
+            }
           }
         `}
       </style>

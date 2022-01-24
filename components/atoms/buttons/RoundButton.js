@@ -4,7 +4,7 @@ function RoundButtons({ countProduct, setCountProduct, backgroundColor, text }) 
   return (
     <>
       <button
-        disabled={text === '-' && countProduct <= 0}
+        disabled={text === '-' && countProduct.qtty <= 0}
         onClick={text === '-' ? () => setCountProduct(countProduct - 1) : () => setCountProduct(countProduct + 1)}>
         {' '}
         {text}{' '}

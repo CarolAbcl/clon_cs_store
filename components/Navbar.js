@@ -6,6 +6,7 @@ import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useState } from 'react'
 
 function Navbar() {
+
   const [show, setShow] = useState(false)
   return (
     <>
@@ -37,7 +38,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <CartButton />
+        <CartButton qtty={0}/>
       </div>
       <style jsx>
         {`
@@ -134,13 +135,37 @@ function Navbar() {
               background-color: transparent;
             }
           }
-          @media (min-width: 480px) {
+          @media (min-width: 600px) {
             .navbar {
-              margin: 1.5%;
-              padding-right: 4rem;
+              padding: 3rem 4rem;
             }
             .logo {
               width: 10rem;
+            }
+
+            .content {
+              position: static;
+              display: inline-block;
+              margin: 0;
+              background: transparent;
+              height: auto;
+              width: 100%;
+              box-shadow: none;
+            }
+
+            ul {
+              padding: 0;
+              margin: 0;
+              list-style: none;
+              display: flex;
+              justify-content: space-evenly;
+            }
+
+            a{
+              padding: 1rem;
+            }
+            a:hover{
+              padding: 1rem;
             }
           }
         `}

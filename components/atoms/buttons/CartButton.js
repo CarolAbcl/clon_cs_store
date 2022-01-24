@@ -1,6 +1,6 @@
 import Icon from '@material-ui/core/Icon'
 
-function CartButton({ qtty = 1 }) {
+function CartButton({ qtty = 0 }) {
   return (
     <>
       <div>

@@ -90,12 +90,11 @@ function ProductCard({ product, categories }) {
           box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
           width: 100%;
-          margin: 1%;
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
-          padding: 0rem 1rem;
-          height: 200px;
+          padding: 1rem;
+          min-height: 15rem;
         }
         .ProductCard.tight {
           height: 50%;
@@ -103,13 +102,15 @@ function ProductCard({ product, categories }) {
         .generalInfoProduct {
           display: flex;
           flex-direction: row;
+          gap: 0.5rem;
+          align-items: stretch;
+          flex: 1;
         }
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          margin-left: 0.5rem;
-          margin-bottom: 0.7rem;
+          gap: 0.5rem;
           flex: 1;
         }
         div {
@@ -123,6 +124,8 @@ function ProductCard({ product, categories }) {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
+          flex-wrap: wrap;
+          gap:.5rem;
           width: 100%;
         }
         #productDetails {
@@ -149,16 +152,23 @@ function ProductCard({ product, categories }) {
         }
         h2 {
           margin: 0.5rem 0;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          -webkit-line-clamp: 2;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
+          font-size: 1rem;
         }
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
             min-width: 400px;
+          }
+        }
+
+        @media (min-width: 1265px) {
+          h2 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            font-size: 1.25rem;
           }
         }
       `}</style>

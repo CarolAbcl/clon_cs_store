@@ -7,6 +7,8 @@ import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 
+import { useState } from 'react'
+
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products`)
   const { data } = await response.json()
@@ -26,6 +28,19 @@ export const getStaticProps = async () => {
 }
 
 function Catalogo({ products, categories }) {
+  const [filters, setfilters] = useState([])
+
+  const addFilter = (filterName) => {
+    setfilters([...filters, filterName])
+  }
+
+  const removeFilter = (filterName) => {
+    const newFilters = filters.filter((filter) => filter !== filterName)
+    setfilters(newFilters)
+  }
+
+  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
+
   return (
     <div>
       <Head>
@@ -36,7 +51,7 @@ function Catalogo({ products, categories }) {
         <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
       </Head>
       <main>
-        <Navbar />
+        <Navbar/>
         <div className="container">
           <Filter>
             <FilterGroup title="Categorias">
@@ -60,7 +75,7 @@ function Catalogo({ products, categories }) {
             <hr />
             <CardsGroup>
               {products.map((product) => (
-                <ProductCard key={product.ID_product} product={product} />
+                <ProductCard key={product.ID_product} product={product} handleCart={(e) => handleCart(e)} />
               ))}
             </CardsGroup>
           </div>
@@ -70,6 +85,7 @@ function Catalogo({ products, categories }) {
         {`
           .catalogo-container {
             width: 100%;
+            flex: 4;
           }
           .header-catalogo {
             display: flex;
@@ -79,9 +95,9 @@ function Catalogo({ products, categories }) {
             flex-wrap: wrap;
           }
           .container {
-            padding: 1rem;
+            padding: 1.5rem;
             display: flex;
-            gap: 2rem;
+            gap: 4rem;
           }
 
           h2.primary {
@@ -91,7 +107,14 @@ function Catalogo({ products, categories }) {
           hr {
             margin-top: 1.5rem;
             margin-bottom: 2rem;
-            border-color: var(--light-gray);
+            border: none;
+            border-bottom: 1px solid var(--light-gray);
+          }
+
+          @media (min-width: 800px) {
+            .container {
+              padding: 2rem 4rem;
+            }
           }
         `}
       </style>

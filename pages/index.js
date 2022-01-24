@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Input from '../components/atoms/Input'
@@ -32,18 +30,6 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ products, categories }) {
-  const [filters, setfilters] = useState([])
-
-  const addFilter = (filterName) => {
-    setfilters([...filters, filterName])
-  }
-
-  const removeFilter = (filterName) => {
-    const newFilters = filters.filter((filter) => filter !== filterName)
-    setfilters(newFilters)
-  }
-
-  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
 
   return (
     <div className={styles.container}>

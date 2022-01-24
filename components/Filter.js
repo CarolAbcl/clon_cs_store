@@ -8,17 +8,18 @@ function Filter({ children, isMobile }) {
   return (
     <>
       <div className={`filters-container`}>
-        <h3>Filtros</h3>
+        <h2 className="primary">FILTROS</h2>
         <div className="filter-button" onClick={() => setshow(true)}>
           <Icon>filter_alt</Icon>
           <span>Filtros</span>
         </div>
+        <hr />
         <div
-          className={`background ${show ? 'show' : ''} ${isMobile ? "mobile" : ''}`}
+          className={`background ${show ? 'show' : ''} ${isMobile ? 'mobile' : ''}`}
           onClick={() => {
             setshow(false)
           }}></div>
-        <div className={`filters ${show ? 'show' : ''} ${isMobile ? "mobile" : ''}`}>
+        <div className={`filters ${show ? 'show' : ''} ${isMobile ? 'mobile' : ''}`}>
           {children}
           <div className="action-buttons">
             <Button value="Aplicar" width="100%" onClick={() => setshow(false)}></Button>
@@ -33,11 +34,18 @@ function Filter({ children, isMobile }) {
           gap: 1rem;
         }
         .filters-container {
-          ${isMobile ? "display:none" : ''}
+          flex: 1;
+          ${isMobile ? 'display:none;' : ''}
         }
-        h3 {
-          color: var(--dark-green);
-          ${isMobile ? 'display:none' : 'display: inline'}
+        h2 {
+          font-weight: normal;
+          ${isMobile ? 'display:none;' : 'display: flex; height: 31px; align-items:center;'}
+        }
+        hr {
+          margin-top: 1.5rem;
+          margin-bottom: 2rem;
+          border: none;
+          border-bottom: 1px solid var(--light-gray);
         }
         .filters {
           display: flex;
@@ -86,11 +94,14 @@ function Filter({ children, isMobile }) {
           display: none;
         }
         @media (max-width: 800px) {
-
-          .filters-container{
-            ${isMobile ? 'display: block' : 'display: none'}
+          .filters-container {
+            ${isMobile ? 'display: block; flex: 0;' : 'display: none'}
           }
-          h3 {
+          h2 {
+            display: none;
+          }
+
+          hr {
             display: none;
           }
 

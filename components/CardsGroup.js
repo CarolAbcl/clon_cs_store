@@ -7,6 +7,10 @@ function CardsGroup({ children }) {
         div {
           display: flex;
           flex-wrap: wrap;
+          gap: 1.5rem;
+          justify-content: space-between;
+          align-items: flex-start;
+          padding: 0% 2%;
         }
       `}</style>
     </>

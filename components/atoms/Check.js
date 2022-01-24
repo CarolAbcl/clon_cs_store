@@ -1,11 +1,16 @@
-function Check({text="Sin texto"}) {
+function Check({ text = 'Sin texto', addFilter }) {
   return (
     <>
       <div>
         <label className="check_container">
           {text}
-          <input type="checkbox" id="check" />
-          <label htmlFor="check">
+          <input
+            type="checkbox"
+            id={text}
+            value={text}
+            onChange={(e) => addFilter({ checked: e.target.checked, text: text })}
+          />
+          <label htmlFor={text}>
             <div className="check">
               <div className="check_inside"></div>
             </div>
@@ -13,9 +18,9 @@ function Check({text="Sin texto"}) {
         </label>
       </div>
       <style jsx>{`
-        .check_container{
+        .check_container {
           width: 100%;
-          padding: .5rem 0;
+          padding: 1rem 0;
         }
 
         input {
@@ -36,7 +41,7 @@ function Check({text="Sin texto"}) {
           width: 8px;
           height: 8px;
           border-radius: 2px;
-          transition: all .2s cubic-bezier(.5,-1,.5,1);
+          transition: all 0.2s cubic-bezier(0.5, -1, 0.5, 1);
           transform-origin: center;
         }
 
@@ -45,11 +50,18 @@ function Check({text="Sin texto"}) {
           height: 0px;
         }
 
-        label:first-child{
+        label:first-child {
           display: flex;
           align-items: center;
           width: 100%;
           justify-content: space-between;
+        }
+
+        @media (min-width: 800px) {
+          .check_container {
+            width: 100%;
+            padding: 0.7rem 0;
+          }
         }
       `}</style>
     </>

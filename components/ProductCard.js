@@ -6,40 +6,49 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import { useState } from 'react'
 
-function ProductCard() {
+function ProductCard({ product, addItem, removeItem, cartItems }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-  // Estado para aumentar y disminuir cantidad de producto
-  const [countProduct, setCountProduct] = useState(0)
+
+  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
+  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
+  const saleFormat = product.sale_format
+  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
+  const minPurchase = product.min_purchase
 
   return (
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
+          {/*product.image.map((image) => (
+            <div className="imgContainer" key={product.ID_product}>
+              <Image
+                src={'https://comeschile.cl/uploads/products/' + image.file_image}
+                width={110}
+                height={150}
+                alt="Imagen producto"></Image>
+            </div>
+          ))*/}
           <div className="imgContainer">
             <Image
-              src={'https://losangeles.comes.cl/wp-content/uploads/2019/07/MAji2DLC.jpg'}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
               width={110}
               height={150}
               alt="Imagen producto"></Image>
           </div>
+
           <div className="ProductCardInfo">
-            <h2>Nombre del producto</h2>
+            <h2>{product.name}</h2>
             <a className="links" href="#">
-              Nombre del productor
+              {product.producer.brand_name}
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />
-              <QtyBox />
+              <QtyBox product={product} />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} />
-              <QtyAddCart
-                value={countProduct}
-                fontSize={'12px'}
-                countProduct={countProduct}
-                setCountProduct={setCountProduct}
-              />
+              <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
+              <QtyAddCart addItem={addItem} removeItem={removeItem} product={product} cartItems={cartItems} />
             </div>
           </div>
         </div>
@@ -48,14 +57,24 @@ function ProductCard() {
             <hr></hr>
             <DetailsProduct
               text={'Precio por unidad al por mayor iva incluido'}
-              price={'3.450'}
+              PriceProduct={PriceProduct}
               align={'flex-start'}
               width={50}
             />
-            <DetailsProduct text={'Unidades por caja'} value={'6'} align={'flex-end'} width={50} />
+            <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
             <hr />
-            <DetailsProduct text={'Precio sugerido de venta'} price={'3.450'} align={'flex-start'} width={50} />
-            <DetailsProduct text={'Compra mínima iva incluido'} price={'3.450'} align={'flex-end'} width={50} />
+            <DetailsProduct
+              text={'Precio sugerido de venta'}
+              suggestedSalePrice={suggestedSalePrice}
+              align={'flex-start'}
+              width={50}
+            />
+            <DetailsProduct
+              text={'Compra mínima iva incluido'}
+              minPurchase={minPurchase}
+              align={'flex-end'}
+              width={50}
+            />
           </div>
         )}
       </div>
@@ -69,22 +88,27 @@ function ProductCard() {
           box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
           border-radius: 8px;
           width: 100%;
-          margin: 1%;
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
+          padding: 1rem;
+          min-height: 15rem;
+        }
+        .ProductCard.tight {
           height: 50%;
-          padding: 0rem 1rem;
         }
         .generalInfoProduct {
           display: flex;
           flex-direction: row;
+          gap: 0.5rem;
+          align-items: center
+          flex: 1;
         }
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          margin-left: 3%;
+          gap: 0.5rem;
           flex: 1;
         }
         div {
@@ -98,6 +122,8 @@ function ProductCard() {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
+          flex-wrap: wrap;
+          gap: 0.5rem;
           width: 100%;
         }
         #productDetails {
@@ -122,9 +148,25 @@ function ProductCard() {
           color: var(--dark-gray);
           opacity: 10%;
         }
+        h2 {
+          margin: 0.5rem 0;
+          font-size: 1rem;
+        }
         @media (min-width: 480px) {
           .ProductCard {
-            width: 48%;
+            flex: 1;
+            min-width: 350px;
+          }
+        }
+
+        @media (min-width: 1265px) {
+          h2 {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            font-size: 1.25rem;
           }
         }
       `}</style>

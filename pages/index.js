@@ -1,15 +1,6 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Input from '../components/atoms/Input'
-import { Button, ButtonSecondary, CartButton } from '../components/atoms/buttons'
-import Badge from '../components/atoms/Badge'
-import SearchBar from '../components/atoms/SearchBar'
-import Check from '../components/atoms/Check'
-import Navbar from '../components/Navbar'
-import ProductCard from '../components/ProductCard'
-import FilterGroup from '../components/FilterGroup'
-import Filter from '../components/Filter'
-import CardsGroup from '../components/CardsGroup'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products`)
@@ -31,7 +22,7 @@ export const getStaticProps = async () => {
 
 export default function Home({ products, categories }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Tiendas - ComeS</title>
         {/* largo ideal description para SEO 142 caracteres con espacio" */}
@@ -44,48 +35,28 @@ export default function Home({ products, categories }) {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Primera web ComeS</h1>
-
-        <SearchBar size="100%" />
-        <Input type="number" text="Rut"></Input>
-        <Input text="Correo Electrónico"></Input>
-        <Input text="Nombre"></Input>
-        <div className="containerProductCard">
-          {
-            products.map(product => (
-              <ProductCard key={product.ID_product} />
-            ))
-          }
-
-          <ul>
-            {
-              categories.map(category => (
-                <li key={category.ID_category}>{category.category}</li>
-              ))
-            }
-          </ul>
-        </div>
-        <Button value="Ingresa" />
-        <ButtonSecondary value="Seguir comprando" />
-        <Badge value="Ruculas" />
-        <CartButton />
-        <Check />
-        <Navbar />
-        <Filter>
-          <FilterGroup title="Categorias">
-            <Check text="Categoría 1" />
-            <Check text="Categoría 2" />
-            <Check text="Categoría 3" />
-            <Check text="Categoría 4" />
-          </FilterGroup>
-        </Filter>
-
+      <main>
+        <Link href="/catalogo">
+          <a>
+            <Image src="/ComesLogo.svg" alt="" width="500px" height="200px" layout="intrinsic" />
+            <h2>Click para entrar en el catálogo de productos</h2>
+          </a>
+        </Link>
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <p>ComeS 2022</p>
       </footer>
+      <style jsx>
+        {`
+          main {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        `}
+      </style>
     </div>
   )
 }

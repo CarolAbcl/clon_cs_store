@@ -1,27 +1,22 @@
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
+function QtyAddCart({ product, addItem, removeItem, cartItems }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
+  const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+  const qtyProduct = exist === undefined ? 0 : exist.qty
   return (
     <>
       <div>
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
-          size={'1.5rem'}
           disabled
-          countProduct={countProduct}
-          setCountProduct={setCountProduct}
+          onClick={() => removeItem(product)}
+          qtyProduct={qtyProduct}
         />
-        <input type="tel" id="quantity" defaultValue={countProduct}></input>
-        <RoundButton
-          text={'+'}
-          backgroundColor={'var(--secondary)'}
-          size={'1.5rem'}
-          countProduct={countProduct}
-          setCountProduct={setCountProduct}
-        />
+        <input type="tel" id="quantity" defaultValue={qtyProduct}></input>
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
       </div>
       <style jsx>
         {`
@@ -31,13 +26,18 @@ function QtyAddCart({ fontSize, countProduct, setCountProduct }) {
             text-align: center;
             outline: none;
             width: 1.1rem;
-            font-size: ${fontSize};
           }
           div {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            margin: 1% 0%;
+          }
+          @media (min-width: 480px) {
+            input {
+              width: 2rem;
+            }
           }
         `}
       </style>

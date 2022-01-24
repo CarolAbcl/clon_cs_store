@@ -18,13 +18,13 @@ function Input({ text = 'props not found', type = 'text' }) {
           div {
             position: relative;
             width: 100%;
-            padding: 24px 0 0;
-            margin-top: 12px;
+            padding: 1.5rem 0 0;
+            margin-top: 0.75rem;
           }
 
           input {
             width: 100%;
-            height: 40px;
+            height: 2,5rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
             border: 1px solid var(--gray);
@@ -51,15 +51,15 @@ function Input({ text = 'props not found', type = 'text' }) {
 
           input:placeholder-shown ~ label {
             font-size: 1.2rem;
-            left: 12px;
-            top: 28px;
+            left: .75rem;
+            top: 1.9rem;
             cursor: text;
           }
 
           input:focus ~ label {
             font-size: 1rem;
             left: 0;
-            top: 0px;
+            top: 0;
           }
 
           input:focus:placeholder-shown {

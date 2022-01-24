@@ -5,45 +5,44 @@ import { BurgerButton, CartButton } from './atoms/buttons'
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useState } from 'react'
 
-function Navbar() {
+function Navbar({ totalItems }) {
   const [show, setShow] = useState(false)
   return (
     <>
       <div className="navbar">
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="logo" width={'120px'} height={'40px'} />
+          <Image src={logo} alt="" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Nosotros</a>
               </Link>
               <hr />
             </li>
             <li>
-              <Link href="/">
-                <a>Catálogo</a>
+              <Link href="/catalogo">
+                <a>Preguntas frecuentes</a>
               </Link>
               <hr />
             </li>
           </ul>
         </div>
-        <CartButton />
+        <CartButton totalItems={totalItems} />
       </div>
       <style jsx>
         {`
           .logo {
-            position: relative;
-            display: flex;
+            width: 6rem;
           }
           .background {
             position: fixed;
@@ -59,7 +58,7 @@ function Navbar() {
             position: fixed;
             top: 0;
             left: 0;
-            width: 50%;
+            width: 60%;
             height: 100%;
             background-color: var(--light);
             box-shadow: 0 0px 12px #00000055;
@@ -94,12 +93,14 @@ function Navbar() {
             margin: 0;
             list-style: none;
           }
+
+          li {
+            padding: 0 0.5rem;
+          }
           a {
             display: inline-block;
             width: 100%;
             text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
             padding: 1rem 0;
             transition: all 0.3s;
           }
@@ -135,6 +136,39 @@ function Navbar() {
             }
             to {
               background-color: transparent;
+            }
+          }
+          @media (min-width: 600px) {
+            .navbar {
+              padding: 3rem 4rem;
+            }
+            .logo {
+              width: 10rem;
+            }
+
+            .content {
+              position: static;
+              display: inline-block;
+              margin: 0;
+              background: transparent;
+              height: auto;
+              width: 100%;
+              box-shadow: none;
+            }
+
+            ul {
+              padding: 0;
+              margin: 0;
+              list-style: none;
+              display: flex;
+              justify-content: space-evenly;
+            }
+
+            a {
+              padding: 1rem;
+            }
+            a:hover {
+              padding: 1rem;
             }
           }
         `}

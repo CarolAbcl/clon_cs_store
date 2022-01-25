@@ -59,6 +59,21 @@ function Catalogo({ products, categories }) {
       setCartItems([...cartItems, { ...product, qty: 1 }])
     }
   }
+  console.log(cartItems)
+  // Funcion para modificar la cantidad del carrito a través del imput
+  const addItemInput = (product, e) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+    console.log(e)
+    if (e.length == '') {
+      setCartItems(cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: 0 } : item)))
+    } else if (exist) {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: parseInt(e) } : item))
+      )
+    } else {
+      setCartItems([...cartItems, { ...product, qty: parseInt(e) }])
+    }
+  }
   //Funcion para eliminar productos del carrito
   const removeItem = (product) => {
     const exist = cartItems.find((item) => item.ID_product === product.ID_product)
@@ -110,6 +125,7 @@ function Catalogo({ products, categories }) {
                   addItem={addItem}
                   removeItem={removeItem}
                   cartItems={cartItems}
+                  addItemInput={addItemInput}
                 />
               ))}
             </CardsGroup>

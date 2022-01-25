@@ -1,10 +1,16 @@
+import { useState, useEffect } from 'react'
 import { RoundButton } from './atoms/buttons'
 
 function QtyAddCart({ product, addItem, removeItem, cartItems }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
+  const [qtyProduct, setQtyProduct] = useState(0)
   const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-  const qtyProduct = exist === undefined ? 0 : exist.qty
+
+  const productQty = !exist ? 0 : exist.qty
+  useEffect(() => {
+    setQtyProduct(!exist ? 0 : exist.qty)
+  }, [productQty])
   return (
     <>
       <div>

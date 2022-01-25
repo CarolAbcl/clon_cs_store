@@ -14,7 +14,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const minPurchase = product.min_purchase
+  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
 
   return (
     <>
@@ -47,7 +47,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
               <QtyBox product={product} />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={minPurchase} />
               <QtyAddCart addItem={addItem} removeItem={removeItem} product={product} cartItems={cartItems} />
             </div>
           </div>
@@ -156,6 +156,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
           .ProductCard {
             flex: 1;
             min-width: 350px;
+            max-width: 400px;
           }
         }
 

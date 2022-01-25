@@ -1,29 +1,57 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient({ log: ['query', 'info'] })
+import nc from 'next-connect'
+import prisma from '../../../prisma/client'
 
-export default function handlerProductById(req, res) {
-  const { method } = req
+// Manipulador de productos por id
+// Mismo manejador para metodos GET, PUT y DELETE
+const handlerProductById = nc()
+  .get(async (req, res) => {
+    const { id } = req.query
 
-  try {
-    if (method === 'GET') {
-      const product = prisma.product.findUnique({
+    try {
+      const product = await prisma.product.findUnique({
+        select: {
+          ID_product: true,
+          name: true,
+          wholesale_unit_price: true,
+          sale_format: true,
+          description: true,
+          duration: true,
+          suggested_sale_price: true,
+          min_purchase: true,
+          benefit: true,
+          conservation: true,
+          stock_quantity: true,
+          offer_price: true,
+          delivery_time: true,
+          modification_date: true,
+          image: {
+            where: {
+              isMain: true,
+            },
+          },
+          producer: {
+            select: {
+              ID_producer: true,
+              brand_name: true,
+            },
+          },
+          stock: true,
+        },
         where: {
-          ID_product: '' //id producto
-        }
+          ID_product: id,
+        },
       })
-      res.status(200).send({ data: {} })
+
+      if (!product) {
+        res.status(204).send({ data: {}, message: 'No hay productos con el id seleccionado' })
+      }
+
+      res.status(200).send({ data: { product } })
+    } catch (error) {
+      res.status(400).send({ error })
     }
+  })
+  .put(async (req, res) => {})
+  .delete(async (req, res) => {})
 
-    if (method === 'PUT') {
-      //TODO: actualizar por ID
-    }
-
-    if (method === 'DELETE') {
-      //TODO: eliminar por ID
-    }
-
-  } catch (error) {
-    res.status(400).send({ error })
-  }
-}
-
+export default handlerProductById

@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../../../prisma/client'
 
 export default async function handlerProducts(req, res) {
-  console.log(process.env.DATABASE_URL)
   try {
     const products = await prisma.product.findMany({
       select: {
@@ -35,7 +33,9 @@ export default async function handlerProducts(req, res) {
       },
     })
 
-    // validar si no hay productos?
+    if (!products) {
+      res.status(204).send({ data: {}, message: 'No se han encontrado productos' })
+    }
 
     res.status(200).send({ data: products })
   } catch (error) {

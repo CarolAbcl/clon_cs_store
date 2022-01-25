@@ -14,7 +14,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const minPurchase = product.min_purchase
+  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
 
   return (
     <>

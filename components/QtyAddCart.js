@@ -11,6 +11,7 @@ function QtyAddCart({ product, addItem, removeItem, cartItems }) {
   useEffect(() => {
     setQtyProduct(!exist ? 0 : exist.qty)
   }, [productQty])
+
   return (
     <>
       <div>

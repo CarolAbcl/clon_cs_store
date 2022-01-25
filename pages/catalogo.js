@@ -118,6 +118,12 @@ function Catalogo({ products, categories }) {
       </main>
       <style jsx>
         {`
+          .container {
+            padding: 1.5rem;
+            display: flex;
+            gap: 4rem;
+          }
+
           .catalogo-container {
             width: 100%;
             flex: 4;
@@ -128,11 +134,6 @@ function Catalogo({ products, categories }) {
             justify-content: space-between;
             gap: 0.5rem;
             flex-wrap: wrap;
-          }
-          .container {
-            padding: 1.5rem;
-            display: flex;
-            gap: 4rem;
           }
 
           h2.primary {
@@ -148,7 +149,7 @@ function Catalogo({ products, categories }) {
 
           @media (min-width: 800px) {
             .container {
-              padding: 2rem 4rem;
+              padding: 2rem 4rem 4rem 4rem;
             }
           }
         `}

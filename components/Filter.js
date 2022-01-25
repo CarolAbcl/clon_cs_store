@@ -35,7 +35,7 @@ function Filter({ children, isMobile }) {
         }
         .filters-container {
           flex: 1;
-          ${isMobile ? 'display:none;' : 'position: sticky; top: 50px;'}
+          ${isMobile ? 'display:none;' : 'position: sticky; top: 125px;'}
           height: fit-content;
         }
         h2 {
@@ -71,7 +71,7 @@ function Filter({ children, isMobile }) {
           background-color: var(--light);
           padding: 1rem 1.5rem;
           border-radius: 0.5rem;
-          z-index: 30;
+          z-index: 2;
         }
 
         .filters.show {
@@ -85,7 +85,7 @@ function Filter({ children, isMobile }) {
           background: #00000077;
           top: 0;
           left: 0;
-          z-index: 30;
+          z-index: 2;
         }
 
         .background.show {
@@ -134,7 +134,7 @@ function Filter({ children, isMobile }) {
             background-color: var(--light);
             padding: 1rem 1.5rem;
             border-radius: 0.5rem;
-            z-index: 30;
+            z-index: 2;
             scrollbar-color: var(--primary) transparent;
             scrollbar-width: thin;
           }
@@ -157,7 +157,7 @@ function Filter({ children, isMobile }) {
             background: #00000077;
             top: 0;
             left: 0;
-            z-index: 30;
+            z-index: 2;
           }
         }
       `}</style>

@@ -3,13 +3,25 @@ import Link from 'next/link'
 import { BurgerButton, CartButton } from './atoms/buttons'
 
 import logo from '../public/ComeS-02Sinbajada-01.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+const SCROLL_BREAK = 4
 
 function Navbar({ totalItems }) {
   const [show, setShow] = useState(false)
+  const [navbar, setNavbar] = useState(false)
+
+  useEffect(() => {
+    const changePosition = () => {
+      const { scrollY } = window
+      scrollY >= SCROLL_BREAK ? setNavbar(true) : setNavbar(false)
+    }
+
+    window.addEventListener('scroll', changePosition)
+  }, [navbar])
   return (
     <>
-      <div className="navbar">
+      <div className={navbar ? 'navbar fixed-active' : 'navbar'}>
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
           <Image src={logo} alt="" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
@@ -85,8 +97,15 @@ function Navbar({ totalItems }) {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            align-items: center;
           }
+
+          .fixed-active {
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
+            z-index: 1;
+          }
+
           ul {
             padding: 0;
             padding-top: 80px;
@@ -140,8 +159,17 @@ function Navbar({ totalItems }) {
           }
           @media (min-width: 600px) {
             .navbar {
-              padding: 3rem 4rem;
+              padding: 2rem 4rem;
             }
+
+            .fixed-active {
+              padding: 2rem 4rem !important;
+              position: fixed;
+              background-color: #fff;
+              box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
+              z-index: 1;
+            }
+
             .logo {
               width: 10rem;
             }

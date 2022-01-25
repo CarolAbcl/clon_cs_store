@@ -47,7 +47,7 @@ function ProductCard({ product, addItem, removeItem, cartItems }) {
               <QtyBox product={product} />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={PriceProduct} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={minPurchase} />
               <QtyAddCart addItem={addItem} removeItem={removeItem} product={product} cartItems={cartItems} />
             </div>
           </div>

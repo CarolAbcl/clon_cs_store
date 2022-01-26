@@ -16,7 +16,6 @@ function CartButton({ totalItems }) {
           div {
             position: relative;
             padding: 0.5rem;
-            z-index: 1;
             display: inline-block;
           }
           a {

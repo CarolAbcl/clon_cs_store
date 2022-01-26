@@ -83,7 +83,7 @@ function Navbar({ totalItems }) {
             border-radius: 0 12px 12px 0;
             margin: 0 -80%;
             transition: all 0.3s;
-            z-index: 20;
+            z-index: 10;
           }
           .background.show {
             animation: showBackground 0.3s linear forwards;
@@ -122,7 +122,7 @@ function Navbar({ totalItems }) {
             position: fixed;
             background-color: #fff;
             box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
-            z-index: 1;
+            z-index: 10;
           }
 
           ul {
@@ -213,7 +213,7 @@ function Navbar({ totalItems }) {
               height: 70px;
               background-color: #fff;
               box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
-              z-index: 1;
+              z-index: 10;
             }
 
             .logo {

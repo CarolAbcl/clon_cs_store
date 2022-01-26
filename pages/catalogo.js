@@ -80,7 +80,6 @@ function Catalogo({ products, categories }) {
         <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
       </Head>
       <main>
-        <Navbar totalItems={totalItems} />
         <div className="container">
           <Filter>
             <FilterGroup title="Categorias">

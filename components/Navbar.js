@@ -1,27 +1,30 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { BurgerButton, CartButton } from './atoms/buttons'
-
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useEffect, useState } from 'react'
+import { Icon } from '@material-ui/core'
 
 const SCROLL_BREAK = 4
 
 function Navbar({ totalItems }) {
   const [show, setShow] = useState(false)
-  const [navbar, setNavbar] = useState(false)
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false)
 
   useEffect(() => {
     const changePosition = () => {
       const { scrollY } = window
-      scrollY >= SCROLL_BREAK ? setNavbar(true) : setNavbar(false)
+      scrollY >= SCROLL_BREAK ? setIsNavbarFixed(true) : setIsNavbarFixed(false)
     }
 
     window.addEventListener('scroll', changePosition)
-  }, [navbar])
+  }, [isNavbarFixed])
+
+  const handlerSlideUp = () => window.scrollTo(0, 0)
+
   return (
     <>
-      <div className={navbar ? 'navbar fixed-active' : 'navbar'}>
+      <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
           <Image src={logo} alt="" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
@@ -50,6 +53,9 @@ function Navbar({ totalItems }) {
           </ul>
         </div>
         <CartButton totalItems={totalItems} />
+        <span className="go-up" onClick={handlerSlideUp}>
+          <Icon>keyboard_arrow_up</Icon>
+        </span>
       </div>
       <style jsx>
         {`
@@ -97,6 +103,19 @@ function Navbar({ totalItems }) {
             display: flex;
             align-items: center;
             justify-content: space-between;
+          }
+
+          .go-up {
+            display: ${isNavbarFixed ? 'block' : 'none'};
+            padding: 10px;
+            background: #7b61ff;
+            color: #fff;
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 82%;
+            border-radius: 10px;
+            animation: showGoUp 0.3s linear forwards;
           }
 
           .fixed-active {
@@ -157,14 +176,41 @@ function Navbar({ totalItems }) {
               background-color: transparent;
             }
           }
+
+          @keyframes showGoUp {
+            from {
+              display: none;
+              background-color: transparent;
+            }
+            to {
+              display: block;
+              background-color: #7b61ff;
+            }
+          }
+
           @media (min-width: 600px) {
             .navbar {
-              padding: 2rem 4rem;
+              padding: 1rem 4rem;
+              display: flex;
+              align-items: flex-start;
+              height: 100px;
+            }
+
+            .go-up {
+              display: ${isNavbarFixed ? 'block' : 'none'};
+              padding: 1rem;
+              color: #fff;
+              cursor: pointer;
+              position: fixed;
+              bottom: 20px;
+              right: 15px;
+              animation: showGoUp 0.3s linear forwards;
             }
 
             .fixed-active {
-              padding: 2rem 4rem !important;
+              padding: 0.5rem 4rem;
               position: fixed;
+              height: 70px;
               background-color: #fff;
               box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
               z-index: 1;
@@ -176,12 +222,12 @@ function Navbar({ totalItems }) {
 
             .content {
               position: static;
-              display: inline-block;
+              display: flex;
               margin: 0;
               background: transparent;
-              height: auto;
               width: 100%;
               box-shadow: none;
+              justify-content: space-around;
             }
 
             ul {
@@ -190,6 +236,7 @@ function Navbar({ totalItems }) {
               list-style: none;
               display: flex;
               justify-content: space-evenly;
+              width: 100%;
             }
 
             a {

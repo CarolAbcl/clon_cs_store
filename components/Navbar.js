@@ -11,12 +11,12 @@ function Navbar({ totalItems }) {
   const [show, setShow] = useState(false)
   const [isNavbarFixed, setIsNavbarFixed] = useState(false)
 
+  const changePosition = () => {
+    const { scrollY } = window
+    scrollY >= SCROLL_BREAK ? setIsNavbarFixed(true) : setIsNavbarFixed(false)
+  }
   useEffect(() => {
-    const changePosition = () => {
-      const { scrollY } = window
-      scrollY >= SCROLL_BREAK ? setIsNavbarFixed(true) : setIsNavbarFixed(false)
-    }
-
+    changePosition()
     window.addEventListener('scroll', changePosition)
   }, [isNavbarFixed])
 
@@ -27,7 +27,7 @@ function Navbar({ totalItems }) {
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
+          <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>

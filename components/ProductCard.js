@@ -21,15 +21,6 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput, ad
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
-          {/*product.image.map((image) => (
-            <div className="imgContainer" key={product.ID_product}>
-              <Image
-                src={'https://comeschile.cl/uploads/products/' + image.file_image}
-                width={110}
-                height={150}
-                alt="Imagen producto"></Image>
-            </div>
-          ))*/}
           <div className="imgContainer">
             <Link href={`/product/${product.ID_product}`}>
               <a>

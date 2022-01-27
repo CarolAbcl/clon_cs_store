@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import SearchBar from '../components/atoms/SearchBar'
 import CardsGroup from '../components/CardsGroup'
-import Navbar from '../components/Navbar'
 import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'

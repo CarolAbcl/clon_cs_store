@@ -39,7 +39,7 @@ export default async function handlerProducts(req, res) {
     const productCount = await prisma.product.count()
 
     if (!products) {
-      res.status(204).json({ data: {}, message: 'No se han encontrado productos' })
+      res.status(204).json()
     }
 
     res.status(200).json({ data: products, productCount })

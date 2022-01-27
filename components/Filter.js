@@ -35,7 +35,7 @@ function Filter({ children, isMobile }) {
         }
         .filters-container {
           flex: 1;
-          ${isMobile ? 'display:none;' : 'position: sticky; top: 50px;'}
+          ${isMobile ? 'display:none;' : 'position: sticky; top: 125px;'}
           height: fit-content;
         }
         h2 {
@@ -85,7 +85,7 @@ function Filter({ children, isMobile }) {
           background: #00000077;
           top: 0;
           left: 0;
-          z-index: 30;
+          z-index: 20;
         }
 
         .background.show {

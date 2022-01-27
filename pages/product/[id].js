@@ -5,8 +5,31 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import { useRouter } from 'next/router'
+import fs from 'fs'
+import path from 'path'
 
-function ProductInfo() {
+const Post = () => {
+  const router = useRouter()
+  const { id } = router.query
+  return id
+}
+
+const fetchProducts = async () => {
+  const response = await fetch(`${process.env.API_URL}/api/product/products`)
+  const { data } = await response.json()
+  return { products: data }
+}
+
+// export const getStaticProps = async () => {
+//   const { products } = await fetchProducts()
+
+//   return { props: { products } }
+// }
+
+function ProductInfo({ products }) {
+  console.log(fetchProducts())
+  console.log(Post())
   return (
     <>
       <div className="container">
@@ -35,13 +58,13 @@ function ProductInfo() {
             </div>
             <hr />
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio unidad al por mayor</p>
                 <p className="secondary impact">$3.450</p>
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className='mobile'/>
+                  Compra mínima <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
@@ -49,7 +72,7 @@ function ProductInfo() {
               </div>
             </div>
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio sugerido de venta</p>
                 <p className="secondary low-impact">$4.500</p>
               </div>
@@ -198,10 +221,10 @@ function ProductInfo() {
             margin: 0;
           }
 
-          .price-element{
+          .price-element {
             display: flex;
             flex-direction: column;
-            gap: .5rem;
+            gap: 0.5rem;
             align-self: flex-start;
           }
 

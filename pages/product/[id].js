@@ -31,7 +31,7 @@ export const getStaticProps = async (context) => {
 }
 
 function ProductInfo({ product }) {
-  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
+  // formato en cantidades y precios
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)

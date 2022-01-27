@@ -165,7 +165,7 @@ function Catalogo({ products, categories }) {
 
           @media (min-width: 800px) {
             .container {
-              padding: 2rem 4rem 4rem 4rem;
+              padding: 2rem 4rem 13rem 4rem;
             }
           }
         `}

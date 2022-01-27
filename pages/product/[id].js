@@ -75,8 +75,8 @@ function ProductInfo() {
               <p className="add-cart mobile">Agregar al carrito:</p>
               <QtyAddProduct
                 product={{}}
-                addItem={() => console.log('hola')}
-                removeItem={() => console.log('eliminado')}
+                addItem={() => console.log('hola') /* Provisorio hasta decidir el manejo de estados */}
+                removeItem={() => console.log('eliminado') /* Provisorio hasta decidir el manejo de estados */}
                 cartItems={[]}
               />
               <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />

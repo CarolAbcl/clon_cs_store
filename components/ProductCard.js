@@ -100,7 +100,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           flex-direction: column;
           flex-wrap: wrap;
           background-color: var(--light);
-          box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
+          box-shadow: 2px 6px 11px -7px rgb(0 0 0 / 15%);
           border-radius: 8px;
           width: 100%;
           justify-content: center;

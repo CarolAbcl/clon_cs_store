@@ -59,6 +59,21 @@ function Catalogo({ products, categories }) {
       setCartItems([...cartItems, { ...product, qty: 1 }])
     }
   }
+
+  // Funcion para modificar la cantidad del carrito a través del imput
+  const addItemInput = (product, e) => {
+    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+
+    if (e.length == '') {
+      setCartItems(cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: 0 } : item)))
+    } else if (exist) {
+      setCartItems(
+        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: parseInt(e) } : item))
+      )
+    } else {
+      setCartItems([...cartItems, { ...product, qty: parseInt(e) }])
+    }
+  }
   //Funcion para eliminar productos del carrito
   const removeItem = (product) => {
     const exist = cartItems.find((item) => item.ID_product === product.ID_product)
@@ -109,6 +124,7 @@ function Catalogo({ products, categories }) {
                   addItem={addItem}
                   removeItem={removeItem}
                   cartItems={cartItems}
+                  addItemInput={addItemInput}
                 />
               ))}
             </CardsGroup>
@@ -117,6 +133,12 @@ function Catalogo({ products, categories }) {
       </main>
       <style jsx>
         {`
+          .container {
+            padding: 1.5rem;
+            display: flex;
+            gap: 4rem;
+          }
+
           .catalogo-container {
             width: 100%;
             flex: 4;
@@ -127,11 +149,6 @@ function Catalogo({ products, categories }) {
             justify-content: space-between;
             gap: 0.5rem;
             flex-wrap: wrap;
-          }
-          .container {
-            padding: 1.5rem;
-            display: flex;
-            gap: 4rem;
           }
 
           h2.primary {
@@ -147,7 +164,7 @@ function Catalogo({ products, categories }) {
 
           @media (min-width: 800px) {
             .container {
-              padding: 2rem 4rem;
+              padding: 2rem 4rem 13rem 4rem;
             }
           }
         `}

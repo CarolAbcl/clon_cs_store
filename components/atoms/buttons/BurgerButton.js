@@ -66,8 +66,8 @@ function BurgerButton({ toggleMenu }) {
             width: 2.5rem;
           }
 
-          @media (min-width: 800px){
-            .burger_button{
+          @media (min-width: 800px) {
+            .burger_button {
               display: none;
             }
           }

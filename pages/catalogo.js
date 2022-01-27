@@ -7,6 +7,8 @@ import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 import { useState } from 'react'
+import { useStateValue } from '../StateProvider'
+import { actionTypes } from '../reducer'
 
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products`)
@@ -29,6 +31,13 @@ export const getStaticProps = async () => {
 function Catalogo({ products, categories }) {
   // Estado que va guardando los productos seleccionados
   const [cartItems, setCartItems] = useState([])
+  const [{ basket }, dispatch] = useStateValue()
+  const addItem2 = (product) => {
+    dispatch({
+      type: actionTypes.ADD_TO_BASKET,
+      item: { product },
+    })
+  }
 
   // variable que suma el total de productos seleccionados
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
@@ -125,6 +134,7 @@ function Catalogo({ products, categories }) {
                   removeItem={removeItem}
                   cartItems={cartItems}
                   addItemInput={addItemInput}
+                  addItem2={addItem2}
                 />
               ))}
             </CardsGroup>

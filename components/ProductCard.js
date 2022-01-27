@@ -7,7 +7,7 @@ import DetailsProduct from './atoms/DetailsProduct'
 import Link from 'next/link'
 import { useState } from 'react'
 
-function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) {
+function ProductCard({ product, addItem, removeItem, cartItems, addItemInput, addItem2 }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
 
@@ -63,6 +63,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
                 product={product}
                 cartItems={cartItems}
                 addItemInput={addItemInput}
+                addItem2={addItem2}
               />
             </div>
           </div>

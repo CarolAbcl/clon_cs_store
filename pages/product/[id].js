@@ -5,8 +5,21 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import { actionTypes } from '../../reducer'
+import { useStateValue } from '../../StateProvider'
 
 function ProductInfo() {
+  const [{ basket }, dispatch] = useStateValue()
+  const addItem2 = () => {
+    dispatch({
+      type: actionTypes.ADD_TO_BASKET,
+      item: {
+        id: 20,
+        name: 'name2',
+        product: 'product2',
+      },
+    })
+  }
   return (
     <>
       <div className="container">
@@ -23,6 +36,7 @@ function ProductInfo() {
           </div>
           <div className="short-info">
             <div>
+              <button onClick={() => addItem2()}> AQUIIIIIIIIII</button>
               <h1>
                 Titulo del producto más largo que de costumbre para probar un caso extremadamente extremo de 300gr o
                 300cc
@@ -35,13 +49,13 @@ function ProductInfo() {
             </div>
             <hr />
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio unidad al por mayor</p>
                 <p className="secondary impact">$3.450</p>
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className='mobile'/>
+                  Compra mínima <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
@@ -49,7 +63,7 @@ function ProductInfo() {
               </div>
             </div>
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio sugerido de venta</p>
                 <p className="secondary low-impact">$4.500</p>
               </div>
@@ -198,10 +212,10 @@ function ProductInfo() {
             margin: 0;
           }
 
-          .price-element{
+          .price-element {
             display: flex;
             flex-direction: column;
-            gap: .5rem;
+            gap: 0.5rem;
             align-self: flex-start;
           }
 

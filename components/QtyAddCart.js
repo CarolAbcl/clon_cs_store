@@ -9,7 +9,7 @@ function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput }) {
 
   const productQty = !exist ? 0 : exist.qty
   useEffect(() => {
-    setQtyProduct(!exist ? 0 : exist.qty)
+    setQtyProduct(productQty)
   }, [productQty])
 
   return (

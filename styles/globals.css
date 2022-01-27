@@ -18,6 +18,10 @@
   src: url('../fonts/IsidoraSemiBold.ttf');
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -33,30 +37,37 @@ a {
 * {
   box-sizing: border-box;
 }
-h1, h2, h3,
-h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: Isidora;
 }
-p, input, span, a{ 
+p,
+input,
+span,
+a {
   font-size: 1rem;
-} 
+}
 h2 {
   font-size: 1.25rem;
   margin: 0;
-} 
+}
 
 h4 {
-  font-size: 1.150em;
+  font-size: 1.15em;
   color: var(--secondary);
   font-weight: 500;
   margin: 0;
 }
-h5{
+h5 {
   font-family: Aller;
-  font-size: 0,8125rem;
+  font-size: 0.8125rem;
   font-weight: normal;
 }
-.primary{
+.primary {
   color: var(--primary);
 }
 
@@ -74,7 +85,7 @@ h5{
   h4 {
     font-size: 1.4em;
   }
-  h5{
+  h5 {
     font-size: 1rem;
   }
-  }
+}

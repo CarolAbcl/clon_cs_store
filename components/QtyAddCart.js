@@ -1,6 +1,7 @@
 import { useStateValue } from '../StateProvider'
-import { RoundButton } from './atoms/buttons'
 import { actionTypes } from '../reducer'
+
+import { RoundButton } from './atoms/buttons'
 
 function QtyAddCart({ product }) {
   // QtyAddBasket recibe:

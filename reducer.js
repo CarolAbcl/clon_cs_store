@@ -32,12 +32,10 @@ const reducer = (state, action) => {
       }
     case 'ADD_TO_CART_INPUT':
       let existProduct = state.cart.find((product) => product.ID_product === action.product.ID_product)
-      return action.e.length == ''
+      return action.e == '' || action.e == 0
         ? {
             ...state,
-            cart: state.cart.map((item) =>
-              item.ID_product === action.product.ID_product ? { ...item, qty: 0 } : item
-            ),
+            cart: state.cart.filter((item) => item.ID_product !== action.product.ID_product),
           }
         : existProduct
         ? {

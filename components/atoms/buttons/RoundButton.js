@@ -1,9 +1,9 @@
-function RoundButtons({ backgroundColor, text, onClick, qtyProduct }) {
+function RoundButtons({ backgroundColor, text, onClick, productQty }) {
   // RoundButtons recibe:
   // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño del botòn ; disabled : si el botòn se encuentra deshabilitado
   return (
     <>
-      <button disabled={text === '-' && qtyProduct === 0} onClick={onClick}>
+      <button disabled={text === '-' && productQty === 0} onClick={onClick}>
         {text}
       </button>
 

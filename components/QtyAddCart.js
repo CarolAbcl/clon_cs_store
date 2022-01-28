@@ -1,19 +1,13 @@
-import { useState, useEffect } from 'react'
 import { useStateValue } from '../StateProvider'
 import { RoundButton } from './atoms/buttons'
 
 function QtyAddCart({ product, addItem, removeItem, addItemInput }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
-  const [qtyProduct, setQtyProduct] = useState(3)
-  const [{ cart }, dispatch] = useStateValue()
-
-  // const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-
-  // const productQty = !cart.product.qty ? 0 : cart.product.qty
-  //  useEffect(() => {
-  // setQtyProduct(0)
-  //  }, setQtyProduct(!cart.product.qty ? 0 : cart.product.qty) )
+  const [{ cart }] = useStateValue()
+  // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
+  const exist = cart.find((item) => item.ID_product === product.ID_product)
+  const productQty = !exist ? 0 : exist.qty
 
   return (
     <>
@@ -23,12 +17,12 @@ function QtyAddCart({ product, addItem, removeItem, addItemInput }) {
           backgroundColor={'var(--secondary)'}
           disabled
           onClick={() => removeItem(product)}
-          qtyProduct={qtyProduct}
+          productQty={productQty}
         />
         <input
           type="tel"
           id="quantity"
-          //value={qtyProduct}
+          value={productQty}
           onChange={(e) => addItemInput(product, e.target.value)}></input>
         <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
       </div>

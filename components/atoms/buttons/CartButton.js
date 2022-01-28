@@ -2,7 +2,9 @@ import Icon from '@material-ui/core/Icon'
 import { useStateValue } from '../../../StateProvider'
 
 function CartButton() {
-  const [{ cart }, dispatch] = useStateValue()
+  const [{ cart }] = useStateValue()
+  // constante que suma el total de productos seleccionados
+  const totalItems = cart.reduce((a, c) => a + c.qty, 0)
   return (
     <>
       <div>
@@ -10,7 +12,7 @@ function CartButton() {
           <Icon data-test-id="icon-card" fontSize="medium">
             local_grocery_store
           </Icon>
-          <span data-test-id="total-items-card">{cart?.length}</span>
+          <span data-test-id="total-items-card">{totalItems}</span>
         </a>
       </div>
       <style jsx>
@@ -38,7 +40,7 @@ function CartButton() {
             position: absolute;
             top: 0px;
             right: 0px;
-            ${cart?.length == 0 && 'display: none'};
+            ${totalItems == 0 && 'display: none'};
           }
           @media (min-width: 480px) {
             a {

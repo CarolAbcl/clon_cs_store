@@ -5,12 +5,13 @@ import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
-import { useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useEffect, useState } from 'react'
 
 const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products`)
-  const { data } = await response.json()
-  return { products: data }
+  const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
+  const { data, productCount } = await response.json()
+  return { products: data, productCount }
 }
 const fetchCategories = async () => {
   const response = await fetch(`${process.env.API_URL}/api/category/categories`)
@@ -18,19 +19,25 @@ const fetchCategories = async () => {
   return { categories: data }
 }
 
-export const getStaticProps = async () => {
-  const { products } = await fetchProducts()
+export const getServerSideProps = async () => {
+  const { products, productCount } = await fetchProducts()
   const { categories } = await fetchCategories()
 
-  return { props: { products, categories } }
+  return { props: { products, productCount, categories } }
 }
 
-function Catalogo({ products, categories }) {
+function Catalogo({ products, productCount, categories }) {
   // Estado que va guardando los productos seleccionados
   const [cartItems, setCartItems] = useState([])
 
+  // Productos buscados
+  const [productsFetch, setProductsFetch] = useState(products)
+
+  // Determina si quedan o no mas productos
+  const [hasMore, setHasMore] = useState(false)
+
   // variable que suma el total de productos seleccionados
-  const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
+  //const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
 
   // Estado que guarda los filtros seleccionados
   const [filters, setfilters] = useState([])
@@ -84,6 +91,21 @@ function Catalogo({ products, categories }) {
       )
     }
   }
+
+  // Carga mas productos
+  const getMoreProducts = async () => {
+    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=9`)
+    const { data } = await response.json()
+
+    setProductsFetch((productsFetch) => [...productsFetch, ...data])
+  }
+
+  useEffect(() => {
+    // productoCount = cantidad de productos en bd
+    // productsFetch.length = cantidad de productos en el primer render
+    setHasMore(productCount > productsFetch.length ? true : false)
+  }, [productsFetch, productCount])
+
   return (
     <div>
       <Head>
@@ -115,18 +137,25 @@ function Catalogo({ products, categories }) {
               <SearchBar />
             </div>
             <hr />
-            <CardsGroup>
-              {products.map((product) => (
-                <ProductCard
-                  key={product.ID_product}
-                  product={product}
-                  addItem={addItem}
-                  removeItem={removeItem}
-                  cartItems={cartItems}
-                  addItemInput={addItemInput}
-                />
-              ))}
-            </CardsGroup>
+            <InfiniteScroll
+              dataLength={productsFetch.length}
+              next={getMoreProducts}
+              hasMore={hasMore}
+              loader={<p>Cargando...</p>}
+              scrollThreshold={1}>
+              <CardsGroup>
+                {productsFetch.map((product) => (
+                  <ProductCard
+                    key={product.ID_product}
+                    product={product}
+                    addItem={addItem}
+                    removeItem={removeItem}
+                    cartItems={cartItems}
+                    addItemInput={addItemInput}
+                  />
+                ))}
+              </CardsGroup>
+            </InfiniteScroll>
           </div>
         </div>
       </main>

@@ -1,8 +1,11 @@
 import prisma from '../../../prisma/client'
 
 export default async function handlerProducts(req, res) {
+  const { take, skip } = req.query
   try {
     const products = await prisma.product.findMany({
+      skip: !parseInt(skip) ? 0 : parseInt(skip),
+      take: !parseInt(take) ? 9 : parseInt(take),
       select: {
         ID_product: true,
         name: true,
@@ -33,12 +36,14 @@ export default async function handlerProducts(req, res) {
       },
     })
 
+    const productCount = await prisma.product.count()
+
     if (!products) {
-      res.status(204).send({ data: {}, message: 'No se han encontrado productos' })
+      res.status(204).json()
     }
 
-    res.status(200).send({ data: products })
+    res.status(200).json({ data: products, productCount })
   } catch (error) {
-    res.status(400).send({ error })
+    res.status(400).json({ error })
   }
 }

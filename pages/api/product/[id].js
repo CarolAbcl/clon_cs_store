@@ -25,8 +25,11 @@ const handlerProductById = nc()
           delivery_time: true,
           modification_date: true,
           image: {
-            where: {
-              isMain: true,
+            select: {
+              ID_image: true,
+              file_image: true,
+              name_image: true,
+              alt: true,
             },
           },
           producer: {

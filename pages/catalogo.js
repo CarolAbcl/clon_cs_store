@@ -142,12 +142,7 @@ function Catalogo({ products, productCount, categories }) {
               next={getMoreProducts}
               hasMore={hasMore}
               loader={<p>Cargando...</p>}
-              scrollThreshold={1}
-              endMessage={
-                <p style={{ textAlign: 'center' }}>
-                  <b>Estos son todos los productos!</b>
-                </p>
-              }>
+              scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (
                   <ProductCard

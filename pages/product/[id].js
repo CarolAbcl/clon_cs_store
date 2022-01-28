@@ -35,13 +35,13 @@ function ProductInfo() {
             </div>
             <hr />
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio unidad al por mayor</p>
                 <p className="secondary impact">$3.450</p>
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className='mobile'/>
+                  Compra mínima <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
@@ -49,7 +49,7 @@ function ProductInfo() {
               </div>
             </div>
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio sugerido de venta</p>
                 <p className="secondary low-impact">$4.500</p>
               </div>
@@ -165,6 +165,7 @@ function ProductInfo() {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            padding-bottom: 4rem;
           }
 
           .product-summary {
@@ -198,10 +199,10 @@ function ProductInfo() {
             margin: 0;
           }
 
-          .price-element{
+          .price-element {
             display: flex;
             flex-direction: column;
-            gap: .5rem;
+            gap: 0.5rem;
             align-self: flex-start;
           }
 

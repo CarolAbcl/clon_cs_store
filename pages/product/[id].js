@@ -6,14 +6,44 @@ import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
 
-function ProductInfo() {
+export const getStaticPaths = async () => {
+  const res = await fetch(`${process.env.API_URL}/api/product/products`)
+  const { data } = await res.json()
+  const paths = data.map((product) => {
+    return {
+      params: { id: product.ID_product.toString() },
+    }
+  })
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = async (context) => {
+  const id = context.params.id
+  const res = await fetch(`${process.env.API_URL}/api/product/${id}`)
+  const { data } = await res.json()
+
+  return {
+    props: { product: data['product'] ?? null },
+  }
+}
+
+function ProductInfo({ product }) {
+  // formato en cantidades y precios
+  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
+  const saleFormat = product.sale_format
+  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
+  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
+
   return (
     <>
       <div className="container">
         <div className="product-summary">
           <div className="img">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/MKVioleta.jpg`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
               alt=""
               layout="fill"
               objectFit="cover"
@@ -23,51 +53,48 @@ function ProductInfo() {
           </div>
           <div className="short-info">
             <div>
-              <h1>
-                Titulo del producto más largo que de costumbre para probar un caso extremadamente extremo de 300gr o
-                300cc
-              </h1>
+              <h1>{product.name}</h1>
               <div>
                 <Link href="#">
-                  <a className="links">Granja las Lagunas</a>
+                  <a className="links">{product.producer.brand_name}</a>
                 </Link>
               </div>
             </div>
             <hr />
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio unidad al por mayor</p>
-                <p className="secondary impact">$3.450</p>
+                <p className="secondary impact">{PriceProduct}</p>
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className='mobile'/>
+                  Compra mínima <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
-                <p className="secondary impact">$20.700</p>
+                <p className="secondary impact">{minPurchase}</p>
               </div>
             </div>
             <div className="element-block">
-              <div className='price-element'>
+              <div className="price-element">
                 <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">$4.500</p>
+                <p className="secondary low-impact">{suggestedSalePrice} </p>
               </div>
             </div>
             <div className="element-block">
               <div>
                 <p>
-                  Duración: <span className="primary">1 año</span>
+                  Duración: <span className="primary"> {product.duration} meses</span>
                 </p>
               </div>
               <div className="right row">
                 <p>Formato:</p>
-                <QtyBox product={{ sale_format: 6 }} padding="0"></QtyBox>
+                <QtyBox product={{ sale_format: saleFormat }} padding="0"></QtyBox>
               </div>
             </div>
             <div className="element-block">
               <p>
-                Tiempo estimado de entrega: <span className="primary">3 días</span>
+                Tiempo estimado de entrega: <span className="primary"> {product.delivery_time} días</span>
               </p>
             </div>
             <hr />
@@ -101,33 +128,15 @@ function ProductInfo() {
               <h2>Descripción</h2>
             </summary>
             <div className="details-content">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio magnam corrupti dolores possimus sequi,
-                eaque tempora, dolorum quo eveniet repellat accusantium id dicta labore amet, omnis laborum voluptate
-                error cupiditate.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore non molestiae enim veniam a dolorum id
-                cum similique perspiciatis harum voluptate qui iure tenetur, saepe, quisquam consequatur at, adipisci
-                natus.
-              </p>
+              <p>{product.description}</p>
             </div>
           </details>
           <details>
             <summary>
-              <h2>Usos</h2>
+              <h2>Beneficios</h2>
             </summary>
             <div className="details-content">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio magnam corrupti dolores possimus sequi,
-                eaque tempora, dolorum quo eveniet repellat accusantium id dicta labore amet, omnis laborum voluptate
-                error cupiditate.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore non molestiae enim veniam a dolorum id
-                cum similique perspiciatis harum voluptate qui iure tenetur, saepe, quisquam consequatur at, adipisci
-                natus.
-              </p>
+              <p>{product.benefit}</p>
             </div>
           </details>
           <details>
@@ -135,16 +144,7 @@ function ProductInfo() {
               <h2>Mantenimiento</h2>
             </summary>
             <div className="details-content">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio magnam corrupti dolores possimus sequi,
-                eaque tempora, dolorum quo eveniet repellat accusantium id dicta labore amet, omnis laborum voluptate
-                error cupiditate.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore non molestiae enim veniam a dolorum id
-                cum similique perspiciatis harum voluptate qui iure tenetur, saepe, quisquam consequatur at, adipisci
-                natus.
-              </p>
+              <p>{product.conservation}</p>
             </div>
           </details>
         </div>
@@ -198,10 +198,10 @@ function ProductInfo() {
             margin: 0;
           }
 
-          .price-element{
+          .price-element {
             display: flex;
             flex-direction: column;
-            gap: .5rem;
+            gap: 0.5rem;
             align-self: flex-start;
           }
 

@@ -4,7 +4,7 @@ import { BurgerButton, CartButton } from './atoms/buttons'
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useEffect, useState } from 'react'
 import { Icon } from '@material-ui/core'
-import { useStateValue } from '../StateProvider'
+import { useSelector } from 'react-redux'
 
 const SCROLL_BREAK = 4
 
@@ -23,7 +23,8 @@ function Navbar() {
 
   const handlerSlideUp = () => window.scrollTo(0, 0)
   // Se llama al state cart para sumar la cantidad de productos seleccionados
-  const [{ cart }] = useStateValue()
+  const state = useSelector((state) => state)
+  const { cart } = state.cart
   const totalItems = cart.reduce((a, c) => a + c.qty, 0)
   return (
     <>

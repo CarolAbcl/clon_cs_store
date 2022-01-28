@@ -1,38 +1,16 @@
-import { useStateValue } from '../StateProvider'
-import { actionTypes } from '../reducer'
-
 import { RoundButton } from './atoms/buttons'
+import { useSelector, useDispatch } from 'react-redux'
+import { addItem, addItemInput, removeItem } from '../actions/cartAction'
 
 function QtyAddCart({ product }) {
+  const state = useSelector((state) => state)
+  const dispatch = useDispatch()
   // QtyAddBasket recibe:
   // product = data del producto seleccionado
-  const [{ cart }, dispatch] = useStateValue()
+  const { cart } = state.cart
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty
-
-  // Funcion para agregar producto al carrito
-  const addItem = (product) => {
-    dispatch({
-      type: actionTypes.ADD_TO_CART,
-      product,
-    })
-  }
-  // Funcion para modificar la cantidad del carrito a través del imput
-  const addItemInput = (product, e) => {
-    dispatch({
-      type: actionTypes.ADD_TO_CART_INPUT,
-      product,
-      e,
-    })
-  }
-  //Funcion para eliminar productos del carrito
-  const removeItem = (product) => {
-    dispatch({
-      type: actionTypes.REMOVE_ITEM,
-      product,
-    })
-  }
   return (
     <>
       <div>
@@ -40,15 +18,15 @@ function QtyAddCart({ product }) {
           text={'-'}
           backgroundColor={'var(--secondary)'}
           disabled
-          onClick={() => removeItem(product)}
+          onClick={() => dispatch(removeItem(product))}
           productQty={productQty}
         />
         <input
           type="tel"
           id="quantity"
           value={productQty}
-          onChange={(e) => addItemInput(product, e.target.value)}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
+          onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => dispatch(addItem(product))} />
       </div>
       <style jsx>
         {`

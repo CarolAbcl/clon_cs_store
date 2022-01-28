@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Icon from '@material-ui/core/Icon'
 
-function QtyBox({ product }) {
+function QtyBox({ product, padding=0.5 }) {
   // QtyBox recibe:
   // qtyBox: la cantidad de productos por caja
 
   return (
     <>
       <div className="containerQtyBox">
-        <div>
+        <div className='img-container'>
           <Image
             src={'https://imgur.com/TduL90a.png'}
             width={20}
@@ -28,14 +28,14 @@ function QtyBox({ product }) {
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem;
-            margin: 1%;
-            width: 50%;
+            padding: ${padding}rem;
             justify-content: flex-end;
           }
-          div {
-            width: 22%;
+          .img-container {
+            width: 1.25rem;
+            height: 1.25rem;
           }
+
         `}
       </style>
     </>

@@ -4,6 +4,7 @@ import ProductStamp from './atoms/ProductStamp'
 import QtyAddCart from './QtyAddCart'
 import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
+import Link from 'next/link'
 import { useState } from 'react'
 
 function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) {
@@ -30,15 +31,23 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
             </div>
           ))*/}
           <div className="imgContainer">
-            <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
-              width={110}
-              height={150}
-              alt="Imagen producto"></Image>
+            <Link href={`/product/${product.ID_product}`}>
+              <a>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+                  width={110}
+                  height={150}
+                  alt="Imagen producto"></Image>
+              </a>
+            </Link>
           </div>
 
           <div className="ProductCardInfo">
-            <h2>{product.name}</h2>
+            <Link href={`/product/${product.ID_product}`}>
+              <a>
+                <h2>{product.name}</h2>
+              </a>
+            </Link>
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
@@ -91,7 +100,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           flex-direction: column;
           flex-wrap: wrap;
           background-color: var(--light);
-          box-shadow: 5px 3px 16px -6px rgba(0, 0, 0, 0.15);
+          box-shadow: 2px 6px 11px -7px rgb(0 0 0 / 15%);
           border-radius: 8px;
           width: 100%;
           justify-content: center;

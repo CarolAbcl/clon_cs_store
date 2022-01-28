@@ -8,7 +8,7 @@ function CartButton({ totalItems }) {
           <Icon data-test-id="icon-card" fontSize="medium">
             local_grocery_store
           </Icon>
-          <span>{totalItems}</span>
+          <span data-test-id="total-items-card">{totalItems}</span>
         </a>
       </div>
       <style jsx>
@@ -16,7 +16,6 @@ function CartButton({ totalItems }) {
           div {
             position: relative;
             padding: 0.5rem;
-            z-index: 1;
             display: inline-block;
           }
           a {

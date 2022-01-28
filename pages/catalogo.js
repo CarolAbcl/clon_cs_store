@@ -5,41 +5,21 @@ import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { setfilter, removefilter, resetfilters } from '../store/actions/filtersAction'
+import { useDispatch } from 'react-redux'
 
-const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products`)
-  const { data } = await response.json()
-  return { products: data }
-}
-const fetchCategories = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
-  const { data } = await response.json()
-  return { categories: data }
-}
+function Catalogo() {
+  const dispatch = useDispatch()
 
-export const getStaticProps = async () => {
-  const { products } = await fetchProducts()
-  const { categories } = await fetchCategories()
+  const products = useSelector((state) => state.products)
+  const categories = useSelector((state) => state.categories)
+  const activeFilters = useSelector((state) => state.filters)
 
-  return { props: { products, categories } }
-}
-
-function Catalogo({ products, categories }) {
-  // Estado que guarda los filtros seleccionados
-  const [filters, setfilters] = useState([])
-
-  // agrega elemento a los filtros
-  const addFilter = (filterName) => {
-    setfilters([...filters, filterName])
-  }
-  //remueve un elemento de filtros
-  const removeFilter = (filterName) => {
-    const newFilters = filters.filter((filter) => filter !== filterName)
-    setfilters(newFilters)
-  }
   //maneja los filtros
-  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
+  const handleFilter = (checked, filterName) =>
+    checked ? dispatch(setfilter(filterName)) : dispatch(removefilter(filterName))
 
   return (
     <div>
@@ -55,7 +35,12 @@ function Catalogo({ products, categories }) {
           <Filter>
             <FilterGroup title="Categorias">
               {categories.map((category) => (
-                <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+                <Check
+                  key={category.ID_category}
+                  text={category.category}
+                  onChange={({ target: { checked } }) => handleFilter(checked, category.category)}
+                  checked={activeFilters.some((e) => e === category.category)}
+                />
               ))}
             </FilterGroup>
           </Filter>
@@ -65,7 +50,12 @@ function Catalogo({ products, categories }) {
               <Filter isMobile>
                 <FilterGroup title="Categorias">
                   {categories.map((category) => (
-                    <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+                    <Check
+                      key={category.ID_category}
+                      text={category.category}
+                      onChange={({ target: { checked } }) => handleFilter(checked, category.category)}
+                      checked={activeFilters.some((e) => e === category.category)}
+                    />
                   ))}
                 </FilterGroup>
               </Filter>

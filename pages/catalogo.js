@@ -29,17 +29,8 @@ export const getStaticProps = async () => {
 
 function Catalogo({ products, categories }) {
   // Estado que va guardando los productos seleccionados
-  const [cartItems, setCartItems] = useState([])
-  const [{ basket }, dispatch] = useStateValue()
-  const addItem2 = (product) => {
-    dispatch({
-      type: actionTypes.ADD_TO_BASKET,
-      item: { product },
-    })
-  }
-
-  // variable que suma el total de productos seleccionados
-  const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
+  const [{ cart }, dispatch] = useStateValue()
+  console.log({ cart })
 
   // Estado que guarda los filtros seleccionados
   const [filters, setfilters] = useState([])
@@ -58,40 +49,25 @@ function Catalogo({ products, categories }) {
 
   // Funcion para agregar producto al carrito
   const addItem = (product) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-    if (exist) {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty + 1 } : item))
-      )
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }])
-    }
+    dispatch({
+      type: actionTypes.ADD_TO_CART,
+      product,
+    })
   }
-
   // Funcion para modificar la cantidad del carrito a través del imput
   const addItemInput = (product, e) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-
-    if (e.length == '') {
-      setCartItems(cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: 0 } : item)))
-    } else if (exist) {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: parseInt(e) } : item))
-      )
-    } else {
-      setCartItems([...cartItems, { ...product, qty: parseInt(e) }])
-    }
+    dispatch({
+      type: actionTypes.ADD_TO_CART_INPUT,
+      product,
+      e,
+    })
   }
   //Funcion para eliminar productos del carrito
   const removeItem = (product) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((item) => item.ID_product !== product.ID_product))
-    } else {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty - 1 } : item))
-      )
-    }
+    dispatch({
+      type: actionTypes.REMOVE_ITEM,
+      product,
+    })
   }
   return (
     <div>
@@ -131,9 +107,7 @@ function Catalogo({ products, categories }) {
                   product={product}
                   addItem={addItem}
                   removeItem={removeItem}
-                  cartItems={cartItems}
                   addItemInput={addItemInput}
-                  addItem2={addItem2}
                 />
               ))}
             </CardsGroup>

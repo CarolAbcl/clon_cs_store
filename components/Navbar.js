@@ -4,10 +4,11 @@ import { BurgerButton, CartButton } from './atoms/buttons'
 import logo from '../public/ComeS-02Sinbajada-01.svg'
 import { useEffect, useState } from 'react'
 import { Icon } from '@material-ui/core'
+import { useStateValue } from '../StateProvider'
 
 const SCROLL_BREAK = 4
 
-function Navbar({ totalItems }) {
+function Navbar() {
   const [show, setShow] = useState(false)
   const [isNavbarFixed, setIsNavbarFixed] = useState(false)
 
@@ -52,7 +53,7 @@ function Navbar({ totalItems }) {
             </li>
           </ul>
         </div>
-        <CartButton totalItems={totalItems} />
+        <CartButton />
         <span className="go-up" onClick={handlerSlideUp}>
           <Icon>keyboard_arrow_up</Icon>
         </span>

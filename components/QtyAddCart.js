@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
+import { useStateValue } from '../StateProvider'
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput, addItem2 }) {
+function QtyAddCart({ product, addItem, removeItem, addItemInput }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
-  const [qtyProduct, setQtyProduct] = useState(0)
-  const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+  const [qtyProduct, setQtyProduct] = useState(3)
+  const [{ cart }, dispatch] = useStateValue()
 
-  const productQty = !exist ? 0 : exist.qty
-  useEffect(() => {
-    setQtyProduct(productQty)
-  }, [productQty])
+  // const exist = cartItems.find((item) => item.ID_product === product.ID_product)
+
+  // const productQty = !cart.product.qty ? 0 : cart.product.qty
+  //  useEffect(() => {
+  // setQtyProduct(0)
+  //  }, setQtyProduct(!cart.product.qty ? 0 : cart.product.qty) )
 
   return (
     <>
@@ -25,9 +28,9 @@ function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput, add
         <input
           type="tel"
           id="quantity"
-          value={qtyProduct}
+          //value={qtyProduct}
           onChange={(e) => addItemInput(product, e.target.value)}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem2(product)} />
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
       </div>
       <style jsx>
         {`

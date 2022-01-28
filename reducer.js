@@ -1,19 +1,52 @@
 export const initialState = {
-  basket: [],
+  cart: [],
+  totalQtyCart: 0,
+  totalQtyProduct: 0,
 }
 
 export const actionTypes = {
-  ADD_TO_BASKET: 'ADD_TO_BASKET',
+  ADD_TO_CART: 'ADD_TO_CART',
+  REMOVE_ITEM: 'REMOVE_ITEM',
+  ADD_TO_CART_INPUT: 'ADD_TO_CART_INPUT',
 }
 
 const reducer = (state, action) => {
-  console.log(action)
   switch (action.type) {
-    case 'ADD_TO_BASKET':
+    case 'ADD_TO_CART':
+      let exist = state.cart.find((product) => product.ID_product === action.product.ID_product)
+      return exist
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.ID_product === action.product.ID_product ? { ...item, qty: item.qty + 1 } : item
+            ),
+          }
+        : { ...state, cart: [...state.cart, { ...action.product, qty: 1 }] }
+    case 'REMOVE_ITEM':
+      let removeOne = state.cart.map((item) =>
+        item.ID_product === action.product.ID_product ? { ...item, qty: item.qty - 1 } : item
+      )
       return {
         ...state,
-        basket: [...state.basket, action.item],
+        cart: removeOne.filter((item) => item.qty > 0),
       }
+    case 'ADD_TO_CART_INPUT':
+      let existProduct = state.cart.find((product) => product.ID_product === action.product.ID_product)
+      return action.e.length == ''
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.ID_product === action.product.ID_product ? { ...item, qty: 0 } : item
+            ),
+          }
+        : existProduct
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.ID_product === action.product.ID_product ? { ...item, qty: parseInt(action.e) } : item
+            ),
+          }
+        : { ...state, cart: [...state.cart, { ...action.product, qty: parseInt(action.e) }] }
     default:
       return state
   }

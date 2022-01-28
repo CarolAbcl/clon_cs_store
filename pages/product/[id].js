@@ -331,6 +331,7 @@ function ProductInfo({ product }) {
           @media (min-width: 600px) {
             .container {
               width: 70%;
+              padding-bottom: 4rem;
             }
 
             .product-summary {

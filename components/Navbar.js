@@ -22,7 +22,9 @@ function Navbar() {
   }, [isNavbarFixed])
 
   const handlerSlideUp = () => window.scrollTo(0, 0)
-
+  // Se llama al state cart para sumar la cantidad de productos seleccionados
+  const [{ cart }] = useStateValue()
+  const totalItems = cart.reduce((a, c) => a + c.qty, 0)
   return (
     <>
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
@@ -53,7 +55,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <CartButton />
+        <CartButton totalItems={totalItems} />
         <span className="go-up" onClick={handlerSlideUp}>
           <Icon>keyboard_arrow_up</Icon>
         </span>

@@ -6,8 +6,6 @@ import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 import { useState } from 'react'
-import { useStateValue } from '../StateProvider'
-import { actionTypes } from '../reducer'
 
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products`)
@@ -28,10 +26,6 @@ export const getStaticProps = async () => {
 }
 
 function Catalogo({ products, categories }) {
-  // Estado que va guardando los productos seleccionados
-  const [{ cart }, dispatch] = useStateValue()
-  console.log({ cart })
-
   // Estado que guarda los filtros seleccionados
   const [filters, setfilters] = useState([])
 
@@ -47,28 +41,6 @@ function Catalogo({ products, categories }) {
   //maneja los filtros
   const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
 
-  // Funcion para agregar producto al carrito
-  const addItem = (product) => {
-    dispatch({
-      type: actionTypes.ADD_TO_CART,
-      product,
-    })
-  }
-  // Funcion para modificar la cantidad del carrito a través del imput
-  const addItemInput = (product, e) => {
-    dispatch({
-      type: actionTypes.ADD_TO_CART_INPUT,
-      product,
-      e,
-    })
-  }
-  //Funcion para eliminar productos del carrito
-  const removeItem = (product) => {
-    dispatch({
-      type: actionTypes.REMOVE_ITEM,
-      product,
-    })
-  }
   return (
     <div>
       <Head>
@@ -102,13 +74,7 @@ function Catalogo({ products, categories }) {
             <hr />
             <CardsGroup>
               {products.map((product) => (
-                <ProductCard
-                  key={product.ID_product}
-                  product={product}
-                  addItem={addItem}
-                  removeItem={removeItem}
-                  addItemInput={addItemInput}
-                />
+                <ProductCard key={product.ID_product} product={product} />
               ))}
             </CardsGroup>
           </div>

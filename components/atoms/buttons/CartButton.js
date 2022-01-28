@@ -1,10 +1,6 @@
 import Icon from '@material-ui/core/Icon'
-import { useStateValue } from '../../../StateProvider'
 
-function CartButton() {
-  const [{ cart }] = useStateValue()
-  // constante que suma el total de productos seleccionados
-  const totalItems = cart.reduce((a, c) => a + c.qty, 0)
+function CartButton({ totalItems }) {
   return (
     <>
       <div>

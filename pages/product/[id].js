@@ -5,8 +5,6 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
-import { actionTypes } from '../../reducer'
-import { useStateValue } from '../../StateProvider'
 
 export const getStaticPaths = async () => {
   const res = await fetch(`${process.env.API_URL}/api/product/products`)
@@ -33,8 +31,6 @@ export const getStaticProps = async (context) => {
 }
 
 function ProductInfo({ product }) {
-  const [{ basket }, dispatch] = useStateValue()
-
   // formato en cantidades y precios
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
@@ -104,12 +100,7 @@ function ProductInfo({ product }) {
             <hr />
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
-              <QtyAddProduct
-                product={{}}
-                addItem={() => console.log('hola')}
-                removeItem={() => console.log('eliminado')}
-                cartItems={[]}
-              />
+              <QtyAddProduct product={product} />
               <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
               <Icon className="desktop gray">share</Icon>
             </div>

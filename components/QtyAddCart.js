@@ -1,14 +1,37 @@
 import { useStateValue } from '../StateProvider'
 import { RoundButton } from './atoms/buttons'
+import { actionTypes } from '../reducer'
 
-function QtyAddCart({ product, addItem, removeItem, addItemInput }) {
+function QtyAddCart({ product }) {
   // QtyAddBasket recibe:
-  // fontSize: tamaño fuente ; counProduct: cantidad;
-  const [{ cart }] = useStateValue()
+  // product = data del producto seleccionado
+  const [{ cart }, dispatch] = useStateValue()
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty
 
+  // Funcion para agregar producto al carrito
+  const addItem = (product) => {
+    dispatch({
+      type: actionTypes.ADD_TO_CART,
+      product,
+    })
+  }
+  // Funcion para modificar la cantidad del carrito a través del imput
+  const addItemInput = (product, e) => {
+    dispatch({
+      type: actionTypes.ADD_TO_CART_INPUT,
+      product,
+      e,
+    })
+  }
+  //Funcion para eliminar productos del carrito
+  const removeItem = (product) => {
+    dispatch({
+      type: actionTypes.REMOVE_ITEM,
+      product,
+    })
+  }
   return (
     <>
       <div>

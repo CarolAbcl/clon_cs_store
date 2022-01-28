@@ -19,6 +19,7 @@ function ProductInfo() {
               objectFit="cover"
               objectPosition={'center'}
               className="bradius-1"
+              priority
             />
           </div>
           <div className="short-info">

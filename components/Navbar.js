@@ -123,6 +123,7 @@ function Navbar({ totalItems }) {
             background-color: #fff;
             box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
             z-index: 10;
+            top: 0;
           }
 
           ul {
@@ -188,7 +189,7 @@ function Navbar({ totalItems }) {
             }
           }
 
-          @media (min-width: 600px) {
+          @media (min-width: 800px) {
             .navbar {
               padding: 1rem 4rem;
               display: flex;
@@ -207,6 +208,14 @@ function Navbar({ totalItems }) {
               animation: showGoUp 0.3s linear forwards;
             }
 
+            .background{
+              display: none;
+            }
+
+            .background.show{
+              display: none
+            }
+
             .fixed-active {
               padding: 0.5rem 4rem;
               position: fixed;
@@ -214,6 +223,7 @@ function Navbar({ totalItems }) {
               background-color: #fff;
               box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
               z-index: 10;
+              top: 0;
             }
 
             .logo {

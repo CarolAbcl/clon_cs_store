@@ -10,7 +10,7 @@ function CardsGroup({ children }) {
           gap: 1.5rem;
           justify-content: center;
           align-items: flex-start;
-          padding: 0% 2%;
+          padding: 1% 2% 2% 2%;
         }
       `}</style>
     </>

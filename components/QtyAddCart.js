@@ -1,6 +1,6 @@
 import { RoundButton } from './atoms/buttons'
-import { useSelector, useDispatch } from 'react-redux'
-import { addItem, addItemInput, removeItem } from '../actions/cartAction'
+import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 function QtyAddCart({ product }) {
   const state = useSelector((state) => state)
@@ -8,6 +8,7 @@ function QtyAddCart({ product }) {
   // QtyAddBasket recibe:
   // product = data del producto seleccionado
   const { cart } = state.cart
+  console.log(cart)
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty

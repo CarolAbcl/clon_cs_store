@@ -8,11 +8,11 @@ export const filtersReducer = (state = initialState, action) => {
       return [...state, action.payload]
 
     case types.REMOVE_FILTER:
-      return state.filter(filter => filter !== action.payload)
-    
+      return state.filter((filter) => filter !== action.payload)
+
     case types.RESET_FILTERS:
       return []
-      
+
     default:
       return state
   }

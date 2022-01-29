@@ -5,6 +5,6 @@ export const fetchproducts = () => async (dispatch) => {
   const resJson = await res.json()
   dispatch({
     type: types.GET_PRODUCTS,
-    payload: resJson.data
+    payload: resJson.data,
   })
 }

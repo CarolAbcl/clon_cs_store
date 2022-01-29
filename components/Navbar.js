@@ -212,12 +212,12 @@ function Navbar() {
               animation: showGoUp 0.3s linear forwards;
             }
 
-            .background{
+            .background {
               display: none;
             }
 
-            .background.show{
-              display: none
+            .background.show {
+              display: none;
             }
 
             .fixed-active {

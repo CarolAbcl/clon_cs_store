@@ -8,7 +8,6 @@ function QtyAddCart({ product }) {
   // QtyAddBasket recibe:
   // product = data del producto seleccionado
   const { cart } = state.cart
-  console.log(cart)
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty

@@ -27,8 +27,14 @@ const handlerProductById = nc()
           image: {
             select: {
               ID_image: true,
+<<<<<<< HEAD
               file_image: true,
               name_image: true,
+=======
+              name_image: true,
+              file_image: true,
+              isMain: true,
+>>>>>>> 5eee6c03ca82a3370e310da6fa6ed0395eed0af8
               alt: true,
             },
           },

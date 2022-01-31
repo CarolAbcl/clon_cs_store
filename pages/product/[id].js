@@ -11,7 +11,7 @@ export const getStaticPaths = async () => {
   const { data } = await res.json()
   const paths = data.map((product) => {
     return {
-      params: { id: product.slug.toString() },
+      params: { id: product.slug },
     }
   })
   return {
@@ -25,7 +25,6 @@ export const getStaticProps = async (context) => {
   const products = await productFetch.json()
   const param = context.params.id
   const [{ID_product}] = products.data.filter((product) => product.slug == param)
-  console.log(ID_product)
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 

@@ -12,6 +12,7 @@ const handlerProductById = nc()
         select: {
           ID_product: true,
           name: true,
+          slug: true,
           wholesale_unit_price: true,
           sale_format: true,
           description: true,

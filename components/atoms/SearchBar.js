@@ -1,11 +1,11 @@
 import Icon from '@material-ui/core/Icon'
 
-function SearchBar() {
+function SearchBar(props) {
   // SearchBar recibe:
   // size: tamaño del contenedor de la barra buscadora
   return (
     <>
-      <div>
+      <div className={props.className}>
         <input type="search" placeholder="" id="search" />
         <button type="button">
           <Icon>search</Icon>

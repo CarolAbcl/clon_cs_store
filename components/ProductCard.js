@@ -44,7 +44,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
             </a>
             <div className="containerInfoProduct">
               <ProductStamp width="15" />
-              <QtyBox product={product} />
+              <QtyBox product={product}/>
             </div>
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} PriceProduct={minPurchase} />
@@ -54,6 +54,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
                 product={product}
                 cartItems={cartItems}
                 addItemInput={addItemInput}
+                className="hidden"
               />
             </div>
           </div>

@@ -1,9 +1,9 @@
 import Icon from '@material-ui/core/Icon'
 
-function CartButton({ totalItems }) {
+function CartButton({ totalItems, ...rest }) {
   return (
     <>
-      <div>
+      <div className={rest.className}>
         <a href="#">
           <Icon data-test-id="icon-card" fontSize="medium">
             local_grocery_store

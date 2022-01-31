@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { RoundButton } from './atoms/buttons'
 
-function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput }) {
+function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput, ...rest }) {
   // QtyAddBasket recibe:
   // fontSize: tamaño fuente ; counProduct: cantidad;
   const [qtyProduct, setQtyProduct] = useState(0)
@@ -14,7 +14,7 @@ function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput }) {
 
   return (
     <>
-      <div>
+      <div className={rest.className}>
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}

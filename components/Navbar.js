@@ -52,7 +52,7 @@ function Navbar({ totalItems }) {
             </li>
           </ul>
         </div>
-        <CartButton totalItems={totalItems} />
+        <CartButton totalItems={totalItems} className="hidden" />
         <span className="go-up" onClick={handlerSlideUp}>
           <Icon>keyboard_arrow_up</Icon>
         </span>

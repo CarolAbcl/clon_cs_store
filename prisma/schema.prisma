@@ -70,9 +70,9 @@ model order_status {
 }
 
 model type_sale {
-  ID_type_sale      String    @id @default(cuid())
-  type              String    @db.VarChar(30) @default("unidad")
-  producer          producer[] 
+  ID_type_sale String     @id @default(cuid())
+  type         String     @default("unidad") @db.VarChar(30)
+  producer     producer[]
 }
 
 model producer {
@@ -82,7 +82,7 @@ model producer {
   slogan                String?     @db.VarChar(80)
   history               String?     @db.Text
   min_producer_purchase Int?
-  ID_type_sale          String      
+  ID_type_sale          String
   business_name         String?     @db.VarChar(80)
   contact_name          String?     @db.VarChar(80)
   phone_producer        Int?
@@ -97,17 +97,19 @@ model producer {
   isActive              Boolean     @default(true)
   reg_date_producer     DateTime    @default(now())
   update_date_producer  DateTime    @default(now())
-  user                  user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
   type_sale             type_sale   @relation(fields: [ID_type_sale], references: [ID_type_sale], onDelete: NoAction, onUpdate: NoAction, map: "FK_type_sale_producer")
+  user                  user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
   direction             direction[]
 
+  product product[]
   @@index([ID_user], map: "FK_ID_user")
+  @@index([ID_type_sale], map: "FK_type_sale_producer")
 }
 
 model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
-  slug                 String?             @db.VarChar(100) 
+  slug                 String?             @db.VarChar(100)
   wholesale_unit_price Int
   unit_cost            Int?
   sale_format          Int?                @db.SmallInt
@@ -129,6 +131,10 @@ model product {
   detail_order_note    detail_order_note[]
   image                image[]
   product_category     product_category[]
+
+  producer producer @relation(fields: [ID_producer], references: [ID_producer], onDelete: NoAction, onUpdate: NoAction, map: "FK_producer_product")
+  user     user     @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_product")
+  stock    stock    @relation(fields: [ID_stock], references: [ID_stock], onDelete: NoAction, onUpdate: NoAction, map: "FK_stock_product")
 
   @@index([ID_producer], map: "FK_ID_producer")
   @@index([ID_stock], map: "FK_ID_stock")
@@ -165,8 +171,9 @@ model role {
 }
 
 model stock {
-  ID_stock String @id @default(cuid())
-  status   String @db.VarChar(45)
+  ID_stock String    @id @default(cuid())
+  status   String    @db.VarChar(45)
+  product  product[]
 }
 
 model store {
@@ -198,5 +205,6 @@ model user {
   producer producer[]
   store    store[]
 
+  product product[]
   @@index([ID_role], map: "FK_ID_role")
 }

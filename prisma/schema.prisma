@@ -7,8 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Modelo ⬇
-
 model category {
   ID_category      String             @id @default(cuid())
   category         String             @db.VarChar(30)
@@ -71,6 +69,12 @@ model order_status {
   order_note      order_note[]
 }
 
+model type_sale {
+  ID_type_sale      String    @id @default(cuid())
+  type              String    @db.VarChar(30) @default("unidad")
+  producer          producer[] 
+}
+
 model producer {
   ID_producer           String      @id @default(cuid())
   rut                   String      @db.VarChar(10)
@@ -78,16 +82,24 @@ model producer {
   slogan                String?     @db.VarChar(80)
   history               String?     @db.Text
   min_producer_purchase Int?
-  isActive              Boolean     @default(true) @db.TinyInt
+  ID_type_sale          String      
+  business_name         String?     @db.VarChar(80)
+  contact_name          String?     @db.VarChar(80)
+  phone_producer        Int?
+  email_producer        String?     @db.VarChar(80)
   account_type          String?     @db.VarChar(30)
   account_number        BigInt?
   account_bank          String?     @db.VarChar(45)
   account_holder        String?     @db.VarChar(80)
   account_rut           String?     @db.VarChar(10)
+  contract_start        DateTime?
   ID_user               String
+  isActive              Boolean     @default(true)
+  reg_date_producer     DateTime    @default(now())
+  update_date_producer  DateTime    @default(now())
   user                  user        @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_producer")
+  type_sale             type_sale   @relation(fields: [ID_type_sale], references: [ID_type_sale], onDelete: NoAction, onUpdate: NoAction, map: "FK_type_sale_producer")
   direction             direction[]
-  product               product[]
 
   @@index([ID_user], map: "FK_ID_user")
 }
@@ -95,6 +107,7 @@ model producer {
 model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
+  slug                 String?             @db.VarChar(100) 
   wholesale_unit_price Int
   unit_cost            Int?
   sale_format          Int?                @db.SmallInt
@@ -109,17 +122,14 @@ model product {
   offer_price          Int?
   delivery_time        Int?                @db.TinyInt
   modification_date    DateTime?           @db.DateTime(0)
-  isActive             Boolean             @default(true) @db.TinyInt
+  isActive             Boolean
   ID_user              String
   ID_producer          String
   ID_stock             String
-  producer             producer            @relation(fields: [ID_producer], references: [ID_producer], onDelete: NoAction, onUpdate: NoAction, map: "FK_producer_product")
-  stock                stock               @relation(fields: [ID_stock], references: [ID_stock], onDelete: NoAction, onUpdate: NoAction, map: "FK_stock_product")
-  user                 user                @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_product")
   detail_order_note    detail_order_note[]
+  image                image[]
   product_category     product_category[]
 
-  image image[]
   @@index([ID_producer], map: "FK_ID_producer")
   @@index([ID_stock], map: "FK_ID_stock")
   @@index([ID_user], map: "FK_ID_user")
@@ -130,9 +140,11 @@ model image {
   file_image String? @db.VarChar(50)
   name_image String  @db.VarChar(50)
   alt        String
-  isMain     Boolean @db.TinyInt
+  isMain     Boolean
   ID_product String
   product    product @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_image")
+
+  @@index([ID_product], map: "FK_product_image")
 }
 
 model product_category {
@@ -153,9 +165,8 @@ model role {
 }
 
 model stock {
-  ID_stock String    @id @default(cuid())
-  status   String    @db.VarChar(45)
-  product  product[]
+  ID_stock String @id @default(cuid())
+  status   String @db.VarChar(45)
 }
 
 model store {
@@ -166,7 +177,7 @@ model store {
   phone         String       @db.VarChar(20)
   email         String       @db.VarChar(60)
   contact_name  String?      @db.VarChar(45)
-  isActive      Boolean      @default(true) @db.TinyInt
+  isActive      Boolean
   ID_user       String
   user          user         @relation(fields: [ID_user], references: [ID_user], onDelete: NoAction, onUpdate: NoAction, map: "FK_user_store")
   direction     direction[]
@@ -185,7 +196,6 @@ model user {
   salt     String?    @db.VarChar(250)
   role     role       @relation(fields: [ID_role], references: [ID_role], onDelete: NoAction, onUpdate: NoAction, map: "FK_role_user")
   producer producer[]
-  product  product[]
   store    store[]
 
   @@index([ID_role], map: "FK_ID_role")

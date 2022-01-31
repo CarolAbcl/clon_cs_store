@@ -18,7 +18,7 @@ describe('test filters on mobile viewport', () => {
   it('click to all filters', () => {
     cy.viewport('iphone-6')
     cy.wait(1000)
-    cy.get('.header-catalogo .filter-button').click({ multiple: true })
+    cy.get('.header-catalogo .filter-button').click({ multiple: true, force: true })
     cy.get('.filters.mobile .filters label').each((e) => {
       e.click()
     })

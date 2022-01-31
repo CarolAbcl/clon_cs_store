@@ -11,6 +11,7 @@ export default async function handlerProducts(req, res) {
         name: true,
         wholesale_unit_price: true,
         sale_format: true,
+        slug: true,
         description: true,
         duration: true,
         suggested_sale_price: true,

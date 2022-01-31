@@ -22,7 +22,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
       <div className="ProductCard">
         <div className="generalInfoProduct">
           <div className="imgContainer">
-            <Link href={`/product/${product.ID_product}`}>
+            <Link href={`/product/${product.slug}`}>
               <a>
                 <Image
                   src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
@@ -34,7 +34,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           </div>
 
           <div className="ProductCardInfo">
-            <Link href={`/product/${product.ID_product}`}>
+            <Link href={`/product/${product.slug}`}>
               <a>
                 <h2>{product.name}</h2>
               </a>

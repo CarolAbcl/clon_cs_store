@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:cy": "dotenv -e .env.test next | cypress open"
+    "test:cy": "dotenv -e .env.test next | cypress open",
+    "pm:dev": "dotenv -e .env.development prisma migrate dev --name"
   },
   "dependencies": {
     "@material-ui/core": "4.12.3",

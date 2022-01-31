@@ -12,7 +12,7 @@ describe('API GET products', () => {
       })
   })
 
-  it('deberia retornar status 200 y productos  ', () => {
+  it('deberia retornar status 200 y productos ', () => {
     cy.get('@products').should((response) => {
       const { body, status } = response
       expect(body.data.length).to.be.greaterThan(0)
@@ -39,11 +39,20 @@ describe('API GET product by id', () => {
       })
   })
 
-  it('deberia retornar status 200 y el producto segun id', async () => {
+  it('deberia retornar status 200 y el producto segun id', () => {
     cy.get('@products').should((response) => {
       const { body, status } = response
       expect(body).to.deep.equal(prodFx)
       expect(status).to.eq(200)
+    })
+  })
+
+  it('deberia retornar status 204 si no hay productos', () => {
+    cy.request('GET', 'http://localhost:3000/api/product/1231231').as('products')
+    cy.get('@products').should((response) => {
+      const { status, statusText } = response
+      expect(status).to.eq(204)
+      expect(statusText).to.eq('No Content')
     })
   })
 })

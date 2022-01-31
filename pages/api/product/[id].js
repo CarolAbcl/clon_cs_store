@@ -12,6 +12,7 @@ const handlerProductById = nc()
         select: {
           ID_product: true,
           name: true,
+          slug: true,
           wholesale_unit_price: true,
           sale_format: true,
           description: true,
@@ -25,8 +26,12 @@ const handlerProductById = nc()
           delivery_time: true,
           modification_date: true,
           image: {
-            where: {
+            select: {
+              ID_image: true,
+              name_image: true,
+              file_image: true,
               isMain: true,
+              alt: true,
             },
           },
           producer: {
@@ -42,9 +47,7 @@ const handlerProductById = nc()
         },
       })
 
-      if (!product) {
-        res.status(204).send({ data: {}, message: 'No hay productos con el id seleccionado' })
-      }
+      if (!product) res.status(204).send()
 
       res.status(200).send({ data: { product } })
     } catch (error) {

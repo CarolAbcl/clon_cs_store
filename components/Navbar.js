@@ -123,6 +123,7 @@ function Navbar({ totalItems }) {
             background-color: #fff;
             box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
             z-index: 10;
+            top: 0;
           }
 
           ul {

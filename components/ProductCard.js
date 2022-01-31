@@ -25,7 +25,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
             <Link href={`/product/${product.slug}`}>
               <a>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'}`}
                   width={110}
                   height={150}
                   alt="Imagen producto"></Image>

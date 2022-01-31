@@ -7,11 +7,11 @@ import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/product/products`)
+  const res = await fetch(`${process.env.API_URL}/api/product/products?take=100`)
   const { data } = await res.json()
   const paths = data.map((product) => {
     return {
-      params: { id: product.slug.toString() },
+      params: { id: product.slug },
     }
   })
   return {
@@ -21,11 +21,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`)
+  const productFetch = await fetch(`${process.env.API_URL}/api/product/products?take=100`)
   const products = await productFetch.json()
   const param = context.params.id
   const [{ID_product}] = products.data.filter((product) => product.slug == param)
-  console.log(ID_product)
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
@@ -47,7 +46,7 @@ function ProductInfo({ product }) {
         <div className="product-summary">
           <div className="img">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'}`}
               alt=""
               layout="fill"
               objectFit="cover"

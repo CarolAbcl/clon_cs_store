@@ -15,7 +15,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
+  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
 
   return (
     <>
@@ -47,7 +47,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
               <QtyBox product={product}/>
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={minPurchase} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} />
               <QtyAddCart
                 addItem={addItem}
                 removeItem={removeItem}
@@ -77,8 +77,8 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
               width={50}
             />
             <DetailsProduct
-              text={'Precio por caja iva incluido'}
-              minPurchase={minPurchase}
+              text={'Compra mínima iva incluido'}
+              minPurchase={price_package}
               align={'flex-end'}
               width={50}
             />

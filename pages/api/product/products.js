@@ -16,7 +16,7 @@ export default async function handlerProducts(req, res) {
         description: true,
         duration: true,
         suggested_sale_price: true,
-        min_purchase: true,
+        price_package: true,
         benefit: true,
         conservation: true,
         stock_quantity: true,
@@ -32,6 +32,13 @@ export default async function handlerProducts(req, res) {
           select: {
             ID_producer: true,
             brand_name: true,
+            min_producer_purchase: true,
+            type_sale: {
+              select: {
+                ID_type_sale: true,
+                type: true,
+              },
+            },
           },
         },
         stock: true,

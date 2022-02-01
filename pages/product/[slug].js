@@ -7,11 +7,11 @@ import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/product/products?take=100`)
+  const res = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
   const { data } = await res.json()
   const paths = data.map((product) => {
     return {
-      params: { id: product.slug },
+      params: { slug: product.slug },
     }
   })
   return {
@@ -21,10 +21,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const productFetch = await fetch(`${process.env.API_URL}/api/product/products?take=100`)
+  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
   const products = await productFetch.json()
-  const param = context.params.id
-  const [{ID_product}] = products.data.filter((product) => product.slug == param)
+  const slug = context.params.slug
+  const [{ID_product}] = products.data.filter((product) => product.slug == slug) // toma el producto que haga match con el slug y saca el ID
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
@@ -71,7 +71,7 @@ function ProductInfo({ product }) {
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className="mobile" />
+                  Precio por caja <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
@@ -136,15 +136,15 @@ function ProductInfo({ product }) {
           </details>
           <details>
             <summary>
-              <h2>Beneficios</h2>
-            </summary>
+              <h2>Usos y Beneficios</h2>
+            </summary> {/* ocultar cuando no haya información */}
             <div className="details-content">
               <p>{product.benefit}</p>
             </div>
           </details>
           <details>
             <summary>
-              <h2>Mantenimiento</h2>
+              <h2>Modo de conservación</h2>
             </summary>
             <div className="details-content">
               <p>{product.conservation}</p>

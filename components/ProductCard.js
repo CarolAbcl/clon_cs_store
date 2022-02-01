@@ -77,7 +77,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
               width={50}
             />
             <DetailsProduct
-              text={'Compra mínima iva incluido'}
+              text={'Precio por caja iva incluido'}
               minPurchase={minPurchase}
               align={'flex-end'}
               width={50}

@@ -3,7 +3,7 @@ import Image from 'next/image'
 function ProductStamp() {
   return (
     <>
-      <div>
+      <div className="hidden">
         <Image
           src={'https://imgur.com/CWJMYZ4.png'}
           width={30}

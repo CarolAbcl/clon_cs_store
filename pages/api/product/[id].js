@@ -18,7 +18,7 @@ const handlerProductById = nc()
           description: true,
           duration: true,
           suggested_sale_price: true,
-          min_purchase: true,
+          price_package: true,
           benefit: true,
           conservation: true,
           stock_quantity: true,

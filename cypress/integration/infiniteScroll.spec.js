@@ -16,11 +16,11 @@ describe('Prueba scroll infinito', () => {
 
   it('debera renderizar 9 productos mas al desplazarse hacia abajo y mensaje "cargando..."', () => {
     cy.scrollTo('bottom')
-    cy.wait(500)
     cy.contains('Cargando...').then((element) => {
       const { innerText } = element[0]
       expect(innerText).to.eq('Cargando...')
     })
+    cy.wait(3000)
     cy.get('.generalInfoProduct')
       .each((value, index, collection) => {
         if (index === 0) {
@@ -28,7 +28,7 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
-        expect(collection.length).to.eq(18)
+        expect(collection.length).to.eq(10)
       })
   })
 })

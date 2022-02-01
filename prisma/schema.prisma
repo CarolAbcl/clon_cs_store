@@ -116,8 +116,7 @@ model product {
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
   suggested_sale_price Int?
-  min_purchase         Int
-  min_qty_purchase     Int?
+  price_package        Int?
   benefit              String?             @db.Text
   conservation         String?             @db.VarChar(100)
   stock_quantity       Int?                @db.SmallInt

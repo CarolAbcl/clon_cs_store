@@ -54,7 +54,6 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
                 product={product}
                 cartItems={cartItems}
                 addItemInput={addItemInput}
-                className="hidden"
               />
             </div>
           </div>

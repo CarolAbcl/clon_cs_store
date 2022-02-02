@@ -101,7 +101,7 @@ function ProductInfo({ product }) {
               </p>
             </div>
             <hr />
-            <div className="element-block hidden">
+            <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
               <QtyAddProduct
                 product={{}}
@@ -112,8 +112,8 @@ function ProductInfo({ product }) {
               <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
               <Icon className="desktop gray">share</Icon>
             </div>
-            <hr className="desktop hidden" />
-            <div className="element-block hidden">
+            <hr className="desktop" />
+            <div className="element-block">
               <div className="categories">
                 <p>Categorías: </p>
                 <Badge value="Limonada" />
@@ -151,7 +151,7 @@ function ProductInfo({ product }) {
             </div>
           </details>
         </div>
-        <div className="categories mobile hidden">
+        <div className="categories mobile">
           <p>Categorías: </p>
           <Badge value="Limonada" />
           <Badge value="Bebestibles" />

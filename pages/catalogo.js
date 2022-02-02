@@ -117,7 +117,7 @@ function Catalogo({ products, productCount, categories }) {
       </Head>
       <main>
         <div className="container">
-          <Filter className="hidden">
+          <Filter>
             <FilterGroup title="Categorias">
               {categories.map((category) => (
                 <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
@@ -127,14 +127,14 @@ function Catalogo({ products, productCount, categories }) {
           <div className="catalogo-container">
             <div className="header-catalogo">
               <h2 className="primary">CATÁLOGO</h2>
-              <Filter isMobile className="hidden">
+              <Filter isMobile>
                 <FilterGroup title="Categorias">
                   {categories.map((category) => (
                     <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
                   ))}
                 </FilterGroup>
               </Filter>
-              <SearchBar className="hidden"/>
+              <SearchBar />
             </div>
             <hr />
             <InfiniteScroll

@@ -185,6 +185,7 @@ function ProductCard({ product, inCart }) {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 0.5rem;
         }
         .containerSubtotal p, .containerSubtotal a{
           margin: 0;
@@ -192,6 +193,10 @@ function ProductCard({ product, inCart }) {
 
         .containerSubtotal div:last-child{
           text-align: right;
+          flex:1;
+        }
+        .containerSubtotal div:first-child{
+          flex:2;
         }
         hr {
           width: 100%;
@@ -225,7 +230,7 @@ function ProductCard({ product, inCart }) {
             font-size: 1.25rem;
           }
           .ProductCard {
-            padding: ${inCart ? '1rem' :'0rem 1rem'};
+            padding: ${inCart ? '1rem' : '0rem 1rem'};
             min-height: ${inCart ? '14rem' : '15rem'};
           }
           .ProductCardInfo {

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
+import Link from 'next/link'
 
 function Carrito() {
   const cart = useSelector((state) => state.cart)
@@ -45,7 +46,18 @@ function Carrito() {
             </div>
           </div>
         ) : (
-          <h1>No hay elementos en el carrito</h1>
+          <div className="center">
+            <Icon style={{ color: 'var(--light-gray', fontSize: '80px', marginTop: '3rem' }}>shopping_cart</Icon>
+            <h2>
+              No has agregado productos al carrito. Ingresa al{' '}
+              <Link href="/catalogo">
+                <a className="primary" style={{ fontSize: 'inherit' }}>
+                  catálogo
+                </a>
+              </Link>{' '}
+              para agregar.
+            </h2>
+          </div>
         )}
       </div>
       <style jsx>

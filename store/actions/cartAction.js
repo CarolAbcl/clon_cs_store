@@ -8,7 +8,7 @@ export const addItem = (product) => (dispatch) => {
 }
 export const removeItem = (product) => (dispatch) => {
   dispatch({
-    type: types.REMOVE_ITEM,
+    type: types.REMOVE_ITEM_CART,
     payload: product,
   })
 }
@@ -17,5 +17,11 @@ export const addItemInput = (product, e) => (dispatch) => {
     type: types.ADD_TO_CART_INPUT,
     payload: product,
     input: e,
+  })
+}
+export const deleteItemCart = (product) => (dispatch) => {
+  dispatch({
+    type: types.DELETE_ITEM_CART,
+    payload: product,
   })
 }

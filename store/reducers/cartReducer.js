@@ -10,7 +10,7 @@ export const cartReducer = (state = initialState, action) => {
         ? state.map((item) => (item.ID_product === action.payload.ID_product ? { ...item, qty: item.qty + 1 } : item))
         : [...state, { ...action.payload, qty: 1 }]
 
-    case types.REMOVE_ITEM:
+    case types.REMOVE_ITEM_CART:
       let removeOne = state.map((item) =>
         item.ID_product === action.payload.ID_product ? { ...item, qty: item.qty - 1 } : item
       )
@@ -25,7 +25,8 @@ export const cartReducer = (state = initialState, action) => {
             item.ID_product === action.payload.ID_product ? { ...item, qty: parseInt(action.input) } : item
           )
         : [...state, { ...action.payload, qty: parseInt(action.input) }]
-
+    case types.DELETE_ITEM_CART:
+      return state.filter((item) => item.ID_product !== action.payload.ID_product)
     default:
       return state
   }

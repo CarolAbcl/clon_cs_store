@@ -7,11 +7,13 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteItemCart } from '../store/actions/cartAction'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-
+  const dispatch = useDispatch()
   // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
@@ -28,7 +30,9 @@ function ProductCard({ product, inCart }) {
               color: 'var(--gray)',
               width: '100%',
               textAlign: 'right',
-            }}>
+              cursor: 'pointer',
+            }}
+            onClick={() => dispatch(deleteItemCart(product))}>
             delete
           </Icon>
         )}

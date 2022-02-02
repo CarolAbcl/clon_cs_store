@@ -5,13 +5,13 @@ import { resetfilters } from '../store/actions/filtersAction'
 import { useDispatch } from 'react-redux'
 
 
-function Filter({ children, isMobile }) {
+function Filter({ children, isMobile, ...rest }) {
   const [show, setshow] = useState(false)
   const dispatch = useDispatch()
   // Para mostrar y ocultar en versión mobile
   return (
     <>
-      <div className={`filters-container`}>
+      <div className={`filters-container ${rest.className}`}>
         <h2 className="primary">FILTROS</h2>
         <div className="filter-button" onClick={() => setshow(true)}>
           <Icon>filter_alt</Icon>

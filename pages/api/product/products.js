@@ -4,7 +4,6 @@ export default async function handlerProducts(req, res) {
   const { take, skip } = req.query
   try {
     const productCount = await prisma.product.count()
-
     const products = await prisma.product.findMany({
       skip: !parseInt(skip) ? 0 : parseInt(skip),
       take: !parseInt(take) ? productCount : parseInt(take),

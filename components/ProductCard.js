@@ -1,3 +1,4 @@
+import Icon from '@material-ui/core/Icon'
 import QtyBox from './atoms/QtyBox'
 import CardPrice from './atoms/CardPrice'
 import ProductStamp from './atoms/ProductStamp'
@@ -7,7 +8,7 @@ import DetailsProduct from './atoms/DetailsProduct'
 import Link from 'next/link'
 import { useState } from 'react'
 
-function ProductCard({ product }) {
+function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
 
@@ -16,16 +17,29 @@ function ProductCard({ product }) {
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
   const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
+  const subTotal_price = inCart ? '$' + new Intl.NumberFormat('de-DE').format(product.qty * product.price_package) : 0
 
   return (
     <>
       <div className="ProductCard">
+        {inCart && (
+          <Icon
+            style={{
+              color: 'var(--gray)',
+              width: '100%',
+              textAlign: 'right',
+            }}>
+            delete
+          </Icon>
+        )}
         <div className="generalInfoProduct">
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
               <a>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
+                    product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
+                  }`}
                   width={110}
                   height={150}
                   alt="Imagen producto"></Image>
@@ -34,25 +48,44 @@ function ProductCard({ product }) {
           </div>
 
           <div className="ProductCardInfo">
-            <Link href={`/product/${product.slug}`}>
-              <a>
-                <h2>{product.name}</h2>
-              </a>
-            </Link>
+            <div className="ProductName">
+              <Link href={`/product/${product.slug}`}>
+                <a>
+                  <h2>{product.name}</h2>
+                </a>
+              </Link>
+            </div>
+
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
+            {!inCart && (
+              <div className="containerInfoProduct">
+                <ProductStamp width="15" />
+                <QtyBox product={product} />
+              </div>
+            )}
             <div className="containerInfoProduct">
-              <ProductStamp width="15" />
-              <QtyBox product={product} />
-            </div>
-            <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} inCart={inCart} />
               <QtyAddCart product={product} />
             </div>
           </div>
         </div>
-        {show === false && (
+        {inCart && (
+          <div className="containerSubtotal">
+            <div>
+              <a className="links secondary" href="#">
+                Agregar nota al pedido
+              </a>
+            </div>
+            <div>
+              <p className="subtotal">
+                Subtotal: <span className="secondary subtotal">{subTotal_price}</span>
+              </p>
+            </div>
+          </div>
+        )}
+        {!show && (
           <div className="containerDetailsProduct">
             <hr></hr>
             <DetailsProduct
@@ -92,7 +125,8 @@ function ProductCard({ product }) {
           align-items: stretch;
           flex-shrink: 1;
           padding: 1rem;
-          min-height: 15rem;
+          min-height: ${inCart ? '14rem' : '15rem'};
+          position: relative;
         }
         .ProductCard.tight {
           height: 50%;
@@ -104,6 +138,7 @@ function ProductCard({ product }) {
           align-items: center
           flex: 1;
         }
+
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
@@ -142,6 +177,22 @@ function ProductCard({ product }) {
           align-items: flex-start;
           padding-bottom: 0.5rem;
         }
+
+        .containerSubtotal{
+          padding-top: 1rem;
+          border-top: 1px solid var(--light-gray);
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .containerSubtotal p, .containerSubtotal a{
+          margin: 0;
+        }
+
+        .containerSubtotal div:last-child{
+          text-align: right;
+        }
         hr {
           width: 100%;
           height: 1px;
@@ -151,6 +202,10 @@ function ProductCard({ product }) {
         h2 {
           margin: 0.5rem 0;
           font-size: 1rem;
+        }
+
+        .subtotal{
+          font-size: 18px;
         }
         @media (min-width: 480px) {
           .ProductCard {
@@ -170,11 +225,11 @@ function ProductCard({ product }) {
             font-size: 1.25rem;
           }
           .ProductCard {
-            padding: 0rem 1rem;
-            min-height: 15rem;
+            padding: ${inCart ? '1rem' :'0rem 1rem'};
+            min-height: ${inCart ? '14rem' : '15rem'};
           }
           .ProductCardInfo {
-            min-height: 14rem;
+            min-height: ${inCart ? '9rem' : '14rem'};
           }
           .containerDetailsProduct {
             padding: 1.5rem 0rem 0.5rem 0rem;

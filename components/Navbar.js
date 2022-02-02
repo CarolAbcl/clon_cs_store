@@ -36,20 +36,14 @@ function Navbar() {
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
-              <Link href="/catalogo">
+              <Link href="/">
                 <a>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
               <Link href="/catalogo">
-                <a>Nosotros</a>
-              </Link>
-              <hr />
-            </li>
-            <li>
-              <Link href="/catalogo">
-                <a>Preguntas frecuentes</a>
+                <a>Catálogo</a>
               </Link>
               <hr />
             </li>
@@ -248,7 +242,7 @@ function Navbar() {
               margin: 0;
               list-style: none;
               display: flex;
-              justify-content: space-evenly;
+              justify-content: flex-end;
               width: 100%;
             }
 

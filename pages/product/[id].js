@@ -11,7 +11,7 @@ export const getStaticPaths = async () => {
   const { data } = await res.json()
   const paths = data.map((product) => {
     return {
-      params: { id: product.ID_product.toString() },
+      params: { id: product.slug },
     }
   })
   return {
@@ -21,8 +21,11 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const id = context.params.id
-  const res = await fetch(`${process.env.API_URL}/api/product/${id}`)
+  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`)
+  const products = await productFetch.json()
+  const param = context.params.id
+  const [{ID_product}] = products.data.filter((product) => product.slug == param)
+  const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
   return {
@@ -161,6 +164,7 @@ function ProductInfo({ product }) {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            padding-bottom: 4rem;
           }
 
           .product-summary {
@@ -326,6 +330,7 @@ function ProductInfo({ product }) {
           @media (min-width: 600px) {
             .container {
               width: 70%;
+              padding-bottom: 4rem;
             }
 
             .product-summary {

@@ -15,14 +15,14 @@ function ProductCard({ product }) {
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
+  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
 
   return (
     <>
       <div className="ProductCard">
         <div className="generalInfoProduct">
           <div className="imgContainer">
-            <Link href={`/product/${product.ID_product}`}>
+            <Link href={`/product/${product.slug}`}>
               <a>
                 <Image
                   src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
@@ -34,7 +34,7 @@ function ProductCard({ product }) {
           </div>
 
           <div className="ProductCardInfo">
-            <Link href={`/product/${product.ID_product}`}>
+            <Link href={`/product/${product.slug}`}>
               <a>
                 <h2>{product.name}</h2>
               </a>
@@ -47,7 +47,7 @@ function ProductCard({ product }) {
               <QtyBox product={product} />
             </div>
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={minPurchase} />
+              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} />
               <QtyAddCart product={product} />
             </div>
           </div>
@@ -71,7 +71,7 @@ function ProductCard({ product }) {
             />
             <DetailsProduct
               text={'Compra mínima iva incluido'}
-              minPurchase={minPurchase}
+              minPurchase={price_package}
               align={'flex-end'}
               width={50}
             />
@@ -85,7 +85,7 @@ function ProductCard({ product }) {
           flex-direction: column;
           flex-wrap: wrap;
           background-color: var(--light);
-          box-shadow: 2px 6px 11px -7px rgb(0 0 0 / 15%);
+          box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 0.5);
           border-radius: 8px;
           width: 100%;
           justify-content: center;
@@ -168,6 +168,16 @@ function ProductCard({ product }) {
             display: -webkit-box;
             -webkit-box-orient: vertical;
             font-size: 1.25rem;
+          }
+          .ProductCard {
+            padding: 0rem 1rem;
+            min-height: 15rem;
+          }
+          .ProductCardInfo {
+            min-height: 14rem;
+          }
+          .containerDetailsProduct {
+            padding: 1.5rem 0rem 0.5rem 0rem;
           }
         }
       `}</style>

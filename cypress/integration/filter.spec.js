@@ -15,9 +15,11 @@ describe('Prueba de filtros', function () {
 describe('test filters on mobile viewport', () => {
   it('check all filters', () => {
     cy.viewport('iphone-6')
-    cy.wait(2000)
+    cy.wait(1000)
     cy.get('.header-catalogo .filter-button').click({ multiple: true, force: true })
-    cy.get('.check_container input').check({ force: true })
+    cy.get('.filters.mobile .filters label').each((e) => {
+      e.click()
+    })
     cy.get('.filters.mobile .filters label input').should('be.checked')
   })
   it('uncheck all filters', () => {

@@ -12,12 +12,13 @@ const handlerProductById = nc()
         select: {
           ID_product: true,
           name: true,
+          slug: true,
           wholesale_unit_price: true,
           sale_format: true,
           description: true,
           duration: true,
           suggested_sale_price: true,
-          min_purchase: true,
+          price_package: true,
           benefit: true,
           conservation: true,
           stock_quantity: true,
@@ -25,14 +26,25 @@ const handlerProductById = nc()
           delivery_time: true,
           modification_date: true,
           image: {
-            where: {
+            select: {
+              ID_image: true,
+              name_image: true,
+              file_image: true,
               isMain: true,
+              alt: true,
             },
           },
           producer: {
             select: {
               ID_producer: true,
               brand_name: true,
+              min_producer_purchase: true,
+              type_sale: {
+                select: {
+                  ID_type_sale: true,
+                  type: true,
+                },
+              },
             },
           },
           stock: true,
@@ -42,9 +54,7 @@ const handlerProductById = nc()
         },
       })
 
-      if (!product) {
-        res.status(204).send({ data: {}, message: 'No hay productos con el id seleccionado' })
-      }
+      if (!product) res.status(204).send()
 
       res.status(200).send({ data: { product } })
     } catch (error) {

@@ -23,7 +23,7 @@ function Navbar() {
 
   const handlerSlideUp = () => window.scrollTo(0, 0)
   // Se llama al state cart para sumar la cantidad de productos seleccionados
-  const { cart } = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart)
   const totalItems = cart.reduce((a, c) => a + c.qty, 0)
   return (
     <>

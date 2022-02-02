@@ -24,7 +24,7 @@ export const getStaticProps = async (context) => {
   const productFetch = await fetch(`${process.env.API_URL}/api/product/products`)
   const products = await productFetch.json()
   const param = context.params.id
-  const [{ID_product}] = products.data.filter((product) => product.slug == param)
+  const [{ ID_product }] = products.data.filter((product) => product.slug == param)
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
@@ -38,7 +38,7 @@ function ProductInfo({ product }) {
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
   const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const minPurchase = '$' + new Intl.NumberFormat('de-DE').format(product.min_purchase)
+  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
 
   return (
     <>
@@ -76,7 +76,7 @@ function ProductInfo({ product }) {
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
-                <p className="secondary impact">{minPurchase}</p>
+                <p className="secondary impact">{price_package}</p>
               </div>
             </div>
             <div className="element-block">

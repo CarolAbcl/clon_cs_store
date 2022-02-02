@@ -1,15 +1,18 @@
 import Icon from '@material-ui/core/Icon'
+import Link from 'next/link'
 
 function CartButton({ totalItems, ...rest }) {
   return (
     <>
       <div className={rest.className}>
-        <a href="#">
-          <Icon data-test-id="icon-card" fontSize="medium">
-            local_grocery_store
-          </Icon>
-          <span data-test-id="total-items-card">{totalItems}</span>
-        </a>
+        <Link href="/carrito">
+          <a>
+            <Icon data-test-id="icon-card" fontSize="medium">
+              local_grocery_store
+            </Icon>
+            <span data-test-id="total-items-card">{totalItems}</span>
+          </a>
+        </Link>
       </div>
       <style jsx>
         {`

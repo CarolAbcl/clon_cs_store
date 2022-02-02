@@ -114,7 +114,7 @@ function Catalogo({ products, productCount, categories }) {
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (
-                  <ProductCard key={product.ID_product} product={product} />
+                  <ProductCard key={product.ID_product} product={product}/>
                 ))}
               </CardsGroup>
             </InfiniteScroll>

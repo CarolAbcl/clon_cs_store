@@ -67,13 +67,7 @@ h5 {
   font-size: 0.8125rem;
   font-weight: normal;
 }
-.primary {
-  color: var(--primary);
-}
 
-.gray{
-  color: var(--gray);
-}
 
 .links {
   font-family: Aller;
@@ -81,6 +75,7 @@ h5 {
   text-decoration-line: underline;
   margin: 0% 0% 5% 0%;
 }
+
 .imgContainer img {
   border-radius: 8px;
   object-fit: cover;
@@ -97,6 +92,19 @@ h5 {
 .hidden {
   display: none!important;
 }
+
+.primary {
+  color: var(--primary);
+}
+
+.gray{
+  color: var(--gray);
+}
+
+.secondary{
+  color: var(--secondary);
+}
+
 
 @media (min-width: 480px) {
   h4 {

@@ -1,4 +1,4 @@
-function Check({ text = 'Sin texto', addFilter }) {
+function Check({ text = 'Sin texto', ...rest }) {
   return (
     <>
       <div>
@@ -8,7 +8,7 @@ function Check({ text = 'Sin texto', addFilter }) {
             type="checkbox"
             id={text}
             value={text}
-            onChange={(e) => addFilter({ checked: e.target.checked, text: text })}
+            {...rest}
           />
           <label htmlFor={text}>
             <div className="check">

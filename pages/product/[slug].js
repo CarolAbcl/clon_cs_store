@@ -52,6 +52,7 @@ function ProductInfo({ product }) {
               objectFit="cover"
               objectPosition={'center'}
               className="bradius-1"
+              priority
             />
           </div>
           <div className="short-info">
@@ -103,12 +104,7 @@ function ProductInfo({ product }) {
             <hr />
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
-              <QtyAddProduct
-                product={{}}
-                addItem={() => console.log('hola') /* Provisorio hasta decidir el manejo de estados */}
-                removeItem={() => console.log('eliminado') /* Provisorio hasta decidir el manejo de estados */}
-                cartItems={[]}
-              />
+              <QtyAddProduct product={product} />
               <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
               <Icon className="desktop gray">share</Icon>
             </div>
@@ -376,5 +372,4 @@ function ProductInfo({ product }) {
     </>
   )
 }
-
 export default ProductInfo

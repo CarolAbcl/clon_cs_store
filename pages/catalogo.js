@@ -5,6 +5,9 @@ import ProductCard from '../components/ProductCard'
 import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
+import { useSelector } from 'react-redux'
+import { setfilter, removefilter, resetfilters } from '../store/actions/filtersAction'
+import { useDispatch } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
 
@@ -19,7 +22,7 @@ const fetchCategories = async () => {
   return { categories: data }
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const { products, productCount } = await fetchProducts()
   const { categories } = await fetchCategories()
 
@@ -27,20 +30,13 @@ export const getServerSideProps = async () => {
 }
 
 function Catalogo({ products, productCount, categories }) {
-  // Estado que va guardando los productos seleccionados
-  const [cartItems, setCartItems] = useState([])
-
+  const dispatch = useDispatch()
+  const activeFilters = useSelector((state) => state.filters)
   // Productos buscados
   const [productsFetch, setProductsFetch] = useState(products)
 
   // Determina si quedan o no mas productos
   const [hasMore, setHasMore] = useState(false)
-
-  // variable que suma el total de productos seleccionados
-  //const totalItems = cartItems.reduce((a, c) => a + c.qty, 0)
-
-  // Estado que guarda los filtros seleccionados
-  const [filters, setfilters] = useState([])
 
   // agrega elemento a los filtros
   const addFilter = (filterName) => {
@@ -52,45 +48,8 @@ function Catalogo({ products, productCount, categories }) {
     setfilters(newFilters)
   }
   //maneja los filtros
-  const handleFilter = ({ checked, text }) => (checked ? addFilter(text) : removeFilter(text))
-
-  // Funcion para agregar producto al carrito
-  const addItem = (product) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-    if (exist) {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty + 1 } : item))
-      )
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }])
-    }
-  }
-
-  // Funcion para modificar la cantidad del carrito a través del imput
-  const addItemInput = (product, e) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-
-    if (e.length == '') {
-      setCartItems(cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: 0 } : item)))
-    } else if (exist) {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: parseInt(e) } : item))
-      )
-    } else {
-      setCartItems([...cartItems, { ...product, qty: parseInt(e) }])
-    }
-  }
-  //Funcion para eliminar productos del carrito
-  const removeItem = (product) => {
-    const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((item) => item.ID_product !== product.ID_product))
-    } else {
-      setCartItems(
-        cartItems.map((item) => (item.ID_product === product.ID_product ? { ...exist, qty: exist.qty - 1 } : item))
-      )
-    }
-  }
+  const handleFilter = (checked, filterName) =>
+    checked ? dispatch(setfilter(filterName)) : dispatch(removefilter(filterName))
 
   // Carga mas productos
   const getMoreProducts = async () => {
@@ -120,7 +79,12 @@ function Catalogo({ products, productCount, categories }) {
           <Filter>
             <FilterGroup title="Categorias">
               {categories.map((category) => (
-                <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+                <Check
+                  key={category.ID_category}
+                  text={category.category}
+                  onChange={({ target: { checked } }) => handleFilter(checked, category.category)}
+                  checked={activeFilters.some((e) => e === category.category)}
+                />
               ))}
             </FilterGroup>
           </Filter>
@@ -130,7 +94,12 @@ function Catalogo({ products, productCount, categories }) {
               <Filter isMobile>
                 <FilterGroup title="Categorias">
                   {categories.map((category) => (
-                    <Check key={category.ID_category} text={category.category} addFilter={(e) => handleFilter(e)} />
+                    <Check
+                      key={category.ID_category}
+                      text={category.category}
+                      onChange={({ target: { checked } }) => handleFilter(checked, category.category)}
+                      checked={activeFilters.some((e) => e === category.category)}
+                    />
                   ))}
                 </FilterGroup>
               </Filter>
@@ -145,14 +114,7 @@ function Catalogo({ products, productCount, categories }) {
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (
-                  <ProductCard
-                    key={product.ID_product}
-                    product={product}
-                    addItem={addItem}
-                    removeItem={removeItem}
-                    cartItems={cartItems}
-                    addItemInput={addItemInput}
-                  />
+                  <ProductCard key={product.ID_product} product={product} />
                 ))}
               </CardsGroup>
             </InfiniteScroll>
@@ -200,5 +162,4 @@ function Catalogo({ products, productCount, categories }) {
     </div>
   )
 }
-
 export default Catalogo

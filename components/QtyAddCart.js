@@ -1,33 +1,29 @@
-import { useState, useEffect } from 'react'
 import { RoundButton } from './atoms/buttons'
+import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
+import { useDispatch, useSelector } from 'react-redux'
 
-function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput, ...rest }) {
-  // QtyAddBasket recibe:
-  // fontSize: tamaño fuente ; counProduct: cantidad;
-  const [qtyProduct, setQtyProduct] = useState(0)
-  const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-
+function QtyAddCart({ product }) {
+  const { cart } = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
+  // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
+  const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty
-  useEffect(() => {
-    setQtyProduct(productQty)
-  }, [productQty])
-
   return (
     <>
-      <div className={rest.className}>
+      <div>
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
           disabled
-          onClick={() => removeItem(product)}
-          qtyProduct={qtyProduct}
+          onClick={() => dispatch(removeItem(product))}
+          productQty={productQty}
         />
         <input
           type="tel"
           id="quantity"
-          value={qtyProduct}
-          onChange={(e) => addItemInput(product, e.target.value)}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
+          value={productQty}
+          onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => dispatch(addItem(product))} />
       </div>
       <style jsx>
         {`

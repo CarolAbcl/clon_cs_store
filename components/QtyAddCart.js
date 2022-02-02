@@ -3,11 +3,8 @@ import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 function QtyAddCart({ product }) {
-  const state = useSelector((state) => state)
+  const { cart } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-  // QtyAddBasket recibe:
-  // product = data del producto seleccionado
-  const { cart } = state.cart
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty

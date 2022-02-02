@@ -29,7 +29,9 @@ function Carrito() {
                 Total: <span className="font125 secondary">{total}</span>
               </p>
             </div>
-            <ButtonSecondary value="Seguir comprando" fontSize="1rem" />
+            <Link href="/catalogo" passHref>
+              <ButtonSecondary value="Seguir comprando" fontSize="1rem" />
+            </Link>
             <div className="actionButton">
               <Button value="cancelar" color="var(--secondary)" />
               <Button value="confirmar" color="var(--primary)" />

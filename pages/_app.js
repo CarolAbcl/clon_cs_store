@@ -4,18 +4,8 @@ import Layout from '../components/Layout'
 import { Provider } from 'react-redux'
 import { createWrapper } from 'next-redux-wrapper'
 import store from '../store/store'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { fetchproducts } from '../store/actions/productsAction'
-import { fetchcategories } from '../store/actions/categoriesAction'
 
 function MyApp({ Component, pageProps }) {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchcategories())
-    dispatch(fetchproducts())
-  }, [])
-
   return (
     <>
       <Head>

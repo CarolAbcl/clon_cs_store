@@ -136,7 +136,7 @@ function ProductCard({ product, inCart }) {
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
-          padding: 1rem 0.5rem;
+          padding: 1rem;
           min-height: ${inCart ? '14rem' : '15rem'};
           position: relative;
         }

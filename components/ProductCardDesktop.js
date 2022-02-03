@@ -34,6 +34,11 @@ function ProductCardDesktop({ product, inCart }) {
                 <h2>{product.name}</h2>
               </a>
             </Link>
+            <div className="producerName">
+              <a className="links" href="#">
+                {product.producer.brand_name}
+              </a>
+            </div>
           </div>
           <div className="QtyAddCart">
             <QtyAddCart product={product} />
@@ -109,6 +114,12 @@ function ProductCardDesktop({ product, inCart }) {
 
         h2 {
           font-size: 1rem;
+        }
+        .producerName {
+          margin-top: 0.375rem;
+        }
+        .producerName a {
+          font-size: 0.875rem;
         }
       `}</style>
     </>

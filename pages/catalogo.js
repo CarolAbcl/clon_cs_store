@@ -29,7 +29,9 @@ import { getCategories } from './api/category/categories'
 // }
 
 export const getServerSideProps = async () => {
-  const { products, productCount } = await getProducts()
+  const skip = 0
+  const take = 9
+  const { products, productCount } = await getProducts(take, skip)
   const { categories } = await getCategories()
   return { props: { products, productCount, categories } }
 }

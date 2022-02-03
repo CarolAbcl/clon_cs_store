@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
 
 function ProductCardDesktop({ product, inCart }) {
+  const dispatch = useDispatch()
+
   const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
   const subTotal_price = inCart ? '$' + new Intl.NumberFormat('de-DE').format(product.qty * product.price_package) : 0
   return (

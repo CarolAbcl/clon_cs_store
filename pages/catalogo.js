@@ -7,22 +7,30 @@ import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
+import { getProducts } from './api/product/products'
+import { getCategories } from './api/category/categories'
 
-const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
-  const { data, productCount } = await response.json()
-  return { products: data, productCount }
-}
-const fetchCategories = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
-  const { data } = await response.json()
-  return { categories: data }
-}
+// const fetchProducts = async () => {
+//   const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
+//   const { data, productCount } = await response.json()
+//   return { products: data, productCount }
+// }
+// const fetchCategories = async () => {
+//   const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+//   const { data } = await response.json()
+//   return { categories: data }
+// }
+
+// export const getServerSideProps = async () => {
+//   const { products, productCount } = await fetchProducts()
+//   const { categories } = await fetchCategories()
+
+//   return { props: { products, productCount, categories } }
+// }
 
 export const getServerSideProps = async () => {
-  const { products, productCount } = await fetchProducts()
-  const { categories } = await fetchCategories()
-
+  const { products, productCount } = await getProducts()
+  const { categories } = await getCategories()
   return { props: { products, productCount, categories } }
 }
 
@@ -134,7 +142,7 @@ function Catalogo({ products, productCount, categories }) {
                   ))}
                 </FilterGroup>
               </Filter>
-              <SearchBar className="hidden"/>
+              <SearchBar className="hidden" />
             </div>
             <hr />
             <InfiniteScroll

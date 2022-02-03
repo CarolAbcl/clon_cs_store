@@ -5,31 +5,31 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import { getProducts } from '../api/product/products'
+import { getProductById } from '../api/product/[id]'
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
-  const { data } = await res.json()
-  const paths = data.map((product) => {
+  const { products } = await getProducts()
+
+  const paths = products.map((product) => {
     return {
       params: { slug: product.slug },
     }
   })
+
   return {
     paths,
     fallback: false,
   }
 }
 
-export const getStaticProps = async (context) => {
-  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
-  const products = await productFetch.json()
-  const slug = context.params.slug
-  const [{ID_product}] = products.data.filter((product) => product.slug == slug) // toma el producto que haga match con el slug y saca el ID
-  const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
-  const { data } = await res.json()
-
+export const getStaticProps = async ({ params }) => {
+  const { products } = await getProducts()
+  const { slug } = params
+  const { ID_product } = products.filter((product) => product.slug == slug)[0]
+  const { product } = await getProductById(ID_product)
   return {
-    props: { product: data['product'] ?? null },
+    props: { product },
   }
 }
 
@@ -46,7 +46,9 @@ function ProductInfo({ product }) {
         <div className="product-summary">
           <div className="img">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
+                product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
+              }`}
               alt=""
               layout="fill"
               objectFit="cover"
@@ -137,7 +139,8 @@ function ProductInfo({ product }) {
           <details>
             <summary>
               <h2>Usos y Beneficios</h2>
-            </summary> {/* ocultar cuando no haya información */}
+            </summary>{' '}
+            {/* ocultar cuando no haya información */}
             <div className="details-content">
               <p>{product.benefit}</p>
             </div>

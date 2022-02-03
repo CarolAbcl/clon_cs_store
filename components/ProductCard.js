@@ -95,23 +95,32 @@ function ProductCard({ product, inCart }) {
           </div>
         )}
         {!show && (
-          <div className="containerDetailsProduct">
-            <hr></hr>
-            <DetailsProduct
-              text={'Precio por unidad al por mayor iva incluido'}
-              PriceProduct={PriceProduct}
-              align={'flex-start'}
-              width={50}
-            />
-            <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
-            <hr />
-            <DetailsProduct
-              text={'Precio sugerido de venta'}
-              suggestedSalePrice={suggestedSalePrice}
-              align={'flex-start'}
-              width={50}
-            />
-          </div>
+          <>
+            <div className="containerDetailsProduct">
+              <hr></hr>
+              <DetailsProduct
+                text={'Precio por unidad al por mayor iva incluido'}
+                PriceProduct={PriceProduct}
+                align={'flex-start'}
+                width={50}
+              />
+              <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
+              <hr />
+              <DetailsProduct
+                text={'Precio sugerido de venta'}
+                suggestedSalePrice={suggestedSalePrice}
+                align={'flex-start'}
+                width={50}
+              />
+            </div>
+            <div className="infoMinPurshase">
+              <a className="links" href="#">
+                <div className="TextinfoMinPurshase">
+                  El pedido mínimo para este productor es de $60.000 en productos. Haz click para ver más del productor.
+                </div>
+              </a>
+            </div>
+          </>
         )}
       </div>
 
@@ -216,21 +225,27 @@ function ProductCard({ product, inCart }) {
           font-size: 18px;
         }
          .textMinPurshase{ 
-
           font-size: 0.875rem; 
-
           width: 100%; 
-
         } 
-
         .minPurshase{ 
-
           display: flex; 
-
           flex-direction: column; 
-
           align-items: flex-start 
-
+        } 
+         .infoMinPurshase{ 
+          padding: 1rem 0rem; 
+        } 
+        .TextinfoMinPurshase{ 
+          background-color: var(--secondary); 
+          color: white; 
+          padding: 0.5rem; 
+          left: 0; 
+          bottom: 0; 
+          position: absolute; 
+          border-radius: 0px 0px 8px 8px;
+          text-align: justify; 
+          font-size: 0.875rem; 
         } 
         @media (min-width: 480px) {
           .ProductCard {

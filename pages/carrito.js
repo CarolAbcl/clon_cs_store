@@ -9,7 +9,17 @@ import ProductCardDesktop from '../components/ProductCardDesktop'
 
 function Carrito() {
   const cart = useSelector((state) => state.cart)
-  const total = '$' + new Intl.NumberFormat('de-DE').format(cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0))
+  // monto total de carrito sin formato
+  const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
+  // monto total neto de carrito sin formato
+  const totalNeto = (totalCart / 1.19).toFixed(0)
+  // monto total iva de carrito sin formato
+  const totalTax = (totalNeto * 0.19).toFixed(0)
+  // funcion que le da formato a los montos
+  const formatAmount = (amount) => {
+    const format = '$' + new Intl.NumberFormat('de-DE').format(amount)
+    return format
+  }
   return (
     <>
       <div className="container">
@@ -36,7 +46,13 @@ function Carrito() {
               <div className="containerTotalMobile">
                 <div className="total">
                   <p className="font125">
-                    Total: <span className="font125 secondary">{total}</span>
+                    Neto: <span className="font125 ">{formatAmount(totalNeto)}</span>
+                  </p>
+                  <p className="font125">
+                    IVA: <span className="font125 ">{formatAmount(totalTax)}</span>
+                  </p>
+                  <p className="font125 amountTotal">
+                    Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
                   </p>
                 </div>
                 <Link href="/catalogo" passHref>
@@ -60,7 +76,13 @@ function Carrito() {
               <div className="containerTotalDesktop">
                 <div className="total">
                   <p className="font125">
-                    Total: <span className="font125 secondary">{total}</span>
+                    Neto: <span className="font125">{formatAmount(totalNeto)}</span>
+                  </p>
+                  <p className="font125">
+                    IVA: <span className="font125">{formatAmount(totalTax)}</span>
+                  </p>
+                  <p className="font125 amountTotal">
+                    Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
                   </p>
                 </div>
                 <Link href="/catalogo" passHref>
@@ -123,14 +145,18 @@ function Carrito() {
             text-align: right;
             padding: 0.75rem 1rem;
             margin: 0.5rem 0;
-            border-bottom: 1px solid var(--light-gray);
-            border-top: 1px solid var(--light-gray);
             width: 100%;
-            margin-bottom: 1.5rem;
           }
           .font125 {
             font-size: 1.25rem !important;
             margin: 0;
+            display: flex;
+            justify-content: space-between;
+          }
+          .amountTotal {
+            border-top: 1px solid var(--light-gray);
+            padding: 0.5rem 0;
+            margin: 1rem 0;
           }
           .containerCardMobile {
             display: flex;

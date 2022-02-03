@@ -16,6 +16,7 @@ function ButtonSecondary({ value, backgroundColor = '#7B61FF', color = '#FBFBFB'
           font-size: ${fontSize};
           border: none;
           padding: 10px 50px;
+          width: 100%;
         }
 
         button:hover {

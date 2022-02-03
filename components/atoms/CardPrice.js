@@ -1,6 +1,6 @@
 import Icon from '@material-ui/core/Icon'
 
-function CardPrice({ show, setShow, PriceProduct, inCart }) {
+function CardPrice({ show, setShow, PriceProduct, inCart, sizeFont }) {
   // CardPrice recibe:
   // ProductPrice que será el precio del producto ; show y SetShow para manejar la visualización de la información del producto
 
@@ -17,24 +17,25 @@ function CardPrice({ show, setShow, PriceProduct, inCart }) {
 
   return (
     <>
-      <div className='container'>
+      <div className="container">
         {inCart && <p>Precio por caja</p>}
-        <div className='flex'>
+        <div className="flex">
           <h4>{PriceProduct} </h4>
-          {!inCart && <button
-            type="button"
-            onClick={() => {
-              setShow(!show)
-            }}>
-            <Icon style={{ fontSize: 1.2 + 'em' }}>info</Icon>
-          </button>}
+          {!inCart && (
+            <button
+              type="button"
+              onClick={() => {
+                setShow(!show)
+              }}>
+              <Icon style={{ fontSize: 1.2 + 'em' }}>info</Icon>
+            </button>
+          )}
         </div>
       </div>
 
       <style jsx>
         {`
-
-          .container{
+          .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -54,12 +55,22 @@ function CardPrice({ show, setShow, PriceProduct, inCart }) {
             color: var(--gray);
           }
 
-          p{
+          p {
             margin: 0;
+            font-size: ${sizeFont};
+          }
+          h4 {
+            font-size: ${sizeFont};
           }
           @media (min-width: 480px) {
             div {
               padding: 0 0.5rem;
+            }
+            .container {
+              align-items: ${inCart ? 'center' : 'flex-start'};
+            }
+            p {
+              text-align: ${inCart ? 'center' : 'left'};
             }
           }
         `}

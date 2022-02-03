@@ -7,11 +7,13 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteItemCart } from '../store/actions/cartAction'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
-
+  const dispatch = useDispatch()
   // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
@@ -28,7 +30,9 @@ function ProductCard({ product, inCart }) {
               color: 'var(--gray)',
               width: '100%',
               textAlign: 'right',
-            }}>
+              cursor: 'pointer',
+            }}
+            onClick={() => dispatch(deleteItemCart(product))}>
             delete
           </Icon>
         )}
@@ -59,6 +63,11 @@ function ProductCard({ product, inCart }) {
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
+            <div className="minPurshase">
+              <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
+
+              <span className="secondary"> $60.000 </span>
+            </div>
             {!inCart && (
               <div className="containerInfoProduct">
                 <ProductStamp width="15" />
@@ -86,29 +95,32 @@ function ProductCard({ product, inCart }) {
           </div>
         )}
         {!show && (
-          <div className="containerDetailsProduct">
-            <hr></hr>
-            <DetailsProduct
-              text={'Precio por unidad al por mayor iva incluido'}
-              PriceProduct={PriceProduct}
-              align={'flex-start'}
-              width={50}
-            />
-            <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
-            <hr />
-            <DetailsProduct
-              text={'Precio sugerido de venta'}
-              suggestedSalePrice={suggestedSalePrice}
-              align={'flex-start'}
-              width={50}
-            />
-            <DetailsProduct
-              text={'Compra mínima iva incluido'}
-              minPurchase={price_package}
-              align={'flex-end'}
-              width={50}
-            />
-          </div>
+          <>
+            <div className="containerDetailsProduct">
+              <hr></hr>
+              <DetailsProduct
+                text={'Precio por unidad al por mayor iva incluido'}
+                PriceProduct={PriceProduct}
+                align={'flex-start'}
+                width={50}
+              />
+              <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
+              <hr />
+              <DetailsProduct
+                text={'Precio sugerido de venta'}
+                suggestedSalePrice={suggestedSalePrice}
+                align={'flex-start'}
+                width={50}
+              />
+            </div>
+            <div className="infoMinPurshase">
+              <a className="links" href="#">
+                <div className="TextinfoMinPurshase">
+                  El pedido mínimo para este productor es de $60.000 en productos. Haz click para ver más del productor.
+                </div>
+              </a>
+            </div>
+          </>
         )}
       </div>
 
@@ -185,6 +197,7 @@ function ProductCard({ product, inCart }) {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 0.5rem;
         }
         .containerSubtotal p, .containerSubtotal a{
           margin: 0;
@@ -192,6 +205,10 @@ function ProductCard({ product, inCart }) {
 
         .containerSubtotal div:last-child{
           text-align: right;
+          flex:1;
+        }
+        .containerSubtotal div:first-child{
+          flex:2;
         }
         hr {
           width: 100%;
@@ -207,6 +224,29 @@ function ProductCard({ product, inCart }) {
         .subtotal{
           font-size: 18px;
         }
+         .textMinPurshase{ 
+          font-size: 0.875rem; 
+          width: 100%; 
+        } 
+        .minPurshase{ 
+          display: flex; 
+          flex-direction: column; 
+          align-items: flex-start 
+        } 
+         .infoMinPurshase{ 
+          padding: 1rem 0rem; 
+        } 
+        .TextinfoMinPurshase{ 
+          background-color: var(--secondary); 
+          color: white; 
+          padding: 0.5rem; 
+          left: 0; 
+          bottom: 0; 
+          position: absolute; 
+          border-radius: 0px 0px 8px 8px;
+          text-align: justify; 
+          font-size: 0.875rem; 
+        } 
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
@@ -225,14 +265,23 @@ function ProductCard({ product, inCart }) {
             font-size: 1.25rem;
           }
           .ProductCard {
-            padding: ${inCart ? '1rem' :'0rem 1rem'};
-            min-height: ${inCart ? '14rem' : '15rem'};
+            padding: ${inCart ? '1rem' : '0.5rem 1rem'};
+            min-height: ${inCart ? '14rem' : 'auto'};
           }
           .ProductCardInfo {
             min-height: ${inCart ? '9rem' : '14rem'};
           }
           .containerDetailsProduct {
             padding: 1.5rem 0rem 0.5rem 0rem;
+          }
+          .minPurshase{
+            flex-direction: row;
+          }
+          .infoMinPurshase{
+            padding: 1.5rem 0rem; 
+          }
+          .TextinfoMinPurshase{
+            padding:  0.75rem 1.375rem; 
           }
         }
       `}</style>

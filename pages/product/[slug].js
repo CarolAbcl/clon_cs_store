@@ -24,7 +24,7 @@ export const getStaticProps = async (context) => {
   const productFetch = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
   const products = await productFetch.json()
   const slug = context.params.slug
-  const [{ID_product}] = products.data.filter((product) => product.slug == slug) // toma el producto que haga match con el slug y saca el ID
+  const [{ ID_product }] = products.data.filter((product) => product.slug == slug) // toma el producto que haga match con el slug y saca el ID
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
@@ -46,7 +46,9 @@ function ProductInfo({ product }) {
         <div className="product-summary">
           <div className="img">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
+                product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
+              }`}
               alt=""
               layout="fill"
               objectFit="cover"
@@ -105,7 +107,6 @@ function ProductInfo({ product }) {
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
               <QtyAddProduct product={product} />
-              <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
               <Icon className="desktop gray">share</Icon>
             </div>
             <hr className="desktop" />
@@ -133,7 +134,8 @@ function ProductInfo({ product }) {
           <details>
             <summary>
               <h2>Usos y Beneficios</h2>
-            </summary> {/* ocultar cuando no haya información */}
+            </summary>{' '}
+            {/* ocultar cuando no haya información */}
             <div className="details-content">
               <p>{product.benefit}</p>
             </div>

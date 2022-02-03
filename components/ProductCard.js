@@ -265,14 +265,23 @@ function ProductCard({ product, inCart }) {
             font-size: 1.25rem;
           }
           .ProductCard {
-            padding: ${inCart ? '1rem' : '0rem 1rem'};
-            min-height: ${inCart ? '14rem' : '15rem'};
+            padding: ${inCart ? '1rem' : '0.5rem 1rem'};
+            min-height: ${inCart ? '14rem' : 'auto'};
           }
           .ProductCardInfo {
             min-height: ${inCart ? '9rem' : '14rem'};
           }
           .containerDetailsProduct {
             padding: 1.5rem 0rem 0.5rem 0rem;
+          }
+          .minPurshase{
+            flex-direction: row;
+          }
+          .infoMinPurshase{
+            padding: 1.5rem 0rem; 
+          }
+          .TextinfoMinPurshase{
+            padding:  0.75rem 1.375rem; 
           }
         }
       `}</style>

@@ -1,5 +1,6 @@
 import { RoundButton } from './atoms/buttons'
 import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
+import { executeAlert } from '../store/actions/alertsAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 function QtyAddCart({ product }) {
@@ -8,6 +9,20 @@ function QtyAddCart({ product }) {
   // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
   const exist = cart.find((item) => item.ID_product === product.ID_product)
   const productQty = !exist ? 0 : exist.qty
+  const addToCart = (product) => {
+    dispatch(addItem(product))
+    !exist &&
+      dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
+  }
+  const removeToCart = (product) => {
+    dispatch(removeItem(product))
+    console.log(exist)
+    exist.qty == 1 &&
+      dispatch(
+        executeAlert({ message: 'producto eliminado del carrito', type: 'removed', product: product.ID_product })
+      )
+  }
+
   return (
     <>
       <div>
@@ -15,7 +30,7 @@ function QtyAddCart({ product }) {
           text={'-'}
           backgroundColor={'var(--secondary)'}
           disabled
-          onClick={() => dispatch(removeItem(product))}
+          onClick={() => removeToCart(product)}
           productQty={productQty}
         />
         <input
@@ -23,7 +38,7 @@ function QtyAddCart({ product }) {
           id="quantity"
           value={productQty}
           onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => dispatch(addItem(product))} />
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addToCart(product)} />
       </div>
       <style jsx>
         {`

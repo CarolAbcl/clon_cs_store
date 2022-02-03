@@ -63,6 +63,11 @@ function ProductCard({ product, inCart }) {
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
+            <div className="minPurshase">
+              <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
+
+              <span className="secondary"> $60.000 </span>
+            </div>
             {!inCart && (
               <div className="containerInfoProduct">
                 <ProductStamp width="15" />
@@ -122,7 +127,7 @@ function ProductCard({ product, inCart }) {
           justify-content: center;
           align-items: stretch;
           flex-shrink: 1;
-          padding: 1rem;
+          padding: 1rem 0.5rem;
           min-height: ${inCart ? '14rem' : '15rem'};
           position: relative;
         }
@@ -210,6 +215,23 @@ function ProductCard({ product, inCart }) {
         .subtotal{
           font-size: 18px;
         }
+         .textMinPurshase{ 
+
+          font-size: 0.875rem; 
+
+          width: 100%; 
+
+        } 
+
+        .minPurshase{ 
+
+          display: flex; 
+
+          flex-direction: column; 
+
+          align-items: flex-start 
+
+        } 
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;

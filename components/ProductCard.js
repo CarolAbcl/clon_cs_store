@@ -106,12 +106,6 @@ function ProductCard({ product, inCart }) {
               align={'flex-start'}
               width={50}
             />
-            <DetailsProduct
-              text={'Compra mínima iva incluido'}
-              minPurchase={price_package}
-              align={'flex-end'}
-              width={50}
-            />
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ module.exports = {
   },
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
-    NEXT_PUBLIC_IMAGES_PATH: process.env.MY_ENV_VAR,
+    NEXT_PUBLIC_IMAGES_PATH: process.env.NEXT_PUBLIC_IMAGES_PATH,
     API_URL: process.env.API_URL,
   },
 }

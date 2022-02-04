@@ -11,8 +11,8 @@ export const loadState = () => {
 }
 export const saveState = (state) => {
   try {
-    let savedData = JSON.stringify(state)
-    localStorage.setItem('state', savedData)
+    let saveData = JSON.stringify(state)
+    localStorage.setItem('state', saveData)
   } catch (error) {
     // Acá podemos capturar o crear cualquier log que deseemos en caso de que falle el salvado en el storage.
   }

@@ -14,6 +14,12 @@ function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
+
+  const {
+    min_producer_purchase,
+    type_sale: { type },
+  } = product.producer
+
   // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
   const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
   const saleFormat = product.sale_format
@@ -64,9 +70,9 @@ function ProductCard({ product, inCart }) {
               {product.producer.brand_name}
             </a>
             <div className="minPurshase">
-              <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
-
-              <span className="secondary"> $60.000 </span>
+              <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
+              <span className="secondary">{ `${min_producer_purchase} ${type}` }</span>
+              </p>
             </div>
             {!inCart && (
               <div className="containerInfoProduct">
@@ -116,7 +122,8 @@ function ProductCard({ product, inCart }) {
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de $60.000 en productos. Haz click para ver más del productor.
+                  El pedido mínimo para este productor es de {min_producer_purchase} {type}. <br />
+                  Haz click para ver más del productor.
                 </div>
               </a>
             </div>
@@ -226,7 +233,8 @@ function ProductCard({ product, inCart }) {
         }
          .textMinPurshase{ 
           font-size: 0.875rem; 
-          width: 100%; 
+          width: 100%;
+          margin: 0;
         } 
         .minPurshase{ 
           display: flex; 
@@ -237,14 +245,15 @@ function ProductCard({ product, inCart }) {
           padding: 1rem 0rem; 
         } 
         .TextinfoMinPurshase{ 
-          background-color: var(--secondary); 
+          background-color: var(--secondary);
+          width: 100%;
           color: white; 
           padding: 0.5rem; 
           left: 0; 
           bottom: 0; 
           position: absolute; 
           border-radius: 0px 0px 8px 8px;
-          text-align: justify; 
+          text-align: center; 
           font-size: 0.875rem; 
         } 
         @media (min-width: 480px) {

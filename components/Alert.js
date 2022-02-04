@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 function Alert() {
-  const [state, setstate] = useState('')
+  const [state, setstate] = useState(null)
   const { message, type, product } = useSelector((state) => state.alert)
 
   useEffect(() => {
     if (type)
     setstate('show')
     const time = setTimeout(() => {
-      setstate('')
+      setstate(null)
     }, 2000)
     return () => clearTimeout(time)
   }, [type, product])
@@ -44,8 +44,8 @@ function Alert() {
 
         .show {
           opacity: 1;
-          top: 1rem;
-          z-index: 40;
+          top: 2rem;
+          z-index: 30;
         }
 
         .added {

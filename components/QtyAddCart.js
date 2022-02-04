@@ -19,7 +19,7 @@ function QtyAddCart({ product }) {
     console.log(exist)
     exist.qty == 1 &&
       dispatch(
-        executeAlert({ message: 'producto eliminado del carrito', type: 'removed', product: product.ID_product })
+        executeAlert({ message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product })
       )
   }
 

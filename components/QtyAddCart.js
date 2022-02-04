@@ -6,13 +6,15 @@ import { useEffect, useState } from 'react'
 function QtyAddCart({ product }) {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-  // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
+  // Estado que guarda la cantidad por producto
   const [qtyProduct, setQtyProduct] = useState(0)
+  //variable que busca si en el carrito está el producto
   const exist = cart.find((item) => item.ID_product === product.ID_product)
-
+  // si el producto no existe en el carrito entonces será 0 y si existe devuelve la cantidad
   const productQty = !exist ? 0 : exist.qty
+  // cada vez que un producto cambie su cantidad, se guardará en el estado
   useEffect(() => {
-    setQtyProduct(!exist ? 0 : exist.qty)
+    setQtyProduct(productQty)
   }, [exist, productQty])
 
   return (

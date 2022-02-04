@@ -65,7 +65,6 @@ function ProductCard({ product, inCart }) {
             </a>
             <div className="minPurshase">
               <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
-
               <span className="secondary"> $60.000 </span>
             </div>
             {!inCart && (
@@ -169,7 +168,6 @@ function ProductCard({ product, inCart }) {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
-          flex-wrap: wrap;
           gap: 0.5rem;
           width: 100%;
         }
@@ -269,7 +267,7 @@ function ProductCard({ product, inCart }) {
           }
           .ProductCard {
             padding: ${inCart ? '1rem' : '0.5rem 1rem'};
-            min-height: ${inCart ? '14rem' : 'auto'};
+            min-height: ${inCart ? '14rem' : '16rem'};
           }
           .ProductCardInfo {
             min-height: ${inCart ? '9rem' : '14rem'};

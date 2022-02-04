@@ -5,12 +5,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './reducers'
 
-const initialState = loadState()
+const initialState = loadState() // El estado inicial será lo obtenido del localStorage
+
 const middleware = [thunk]
 
 const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
 
+// Si el estado cambia capturamos ese cambio y lo guardamos
 store.subscribe(function () {
   saveState(store.getState())
 })
+
 export default store

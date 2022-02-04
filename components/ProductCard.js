@@ -54,7 +54,7 @@ function ProductCard({ product, inCart }) {
           <div className="ProductCardInfo">
             <div className="ProductName">
               <Link href={`/product/${product.slug}`}>
-                <a>
+                <a style={{ textAlign: 'left' }}>
                   <h2>{product.name}</h2>
                 </a>
               </Link>
@@ -256,6 +256,9 @@ function ProductCard({ product, inCart }) {
         }
 
         @media (min-width: 1265px) {
+          .ProductCard{
+            ${inCart && 'display:none'}
+          }
           h2 {
             text-overflow: ellipsis;
             overflow: hidden;

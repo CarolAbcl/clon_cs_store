@@ -25,6 +25,11 @@ function Navbar() {
   // Se llama al state cart para sumar la cantidad de productos seleccionados
   const cart = useSelector((state) => state.cart)
   const totalItems = cart.reduce((a, c) => a + c.qty, 0)
+  const [qtyTotal, setQtyTotal] = useState(0)
+  useEffect(() => {
+    setQtyTotal(totalItems)
+  }, [totalItems])
+
   return (
     <>
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
@@ -49,7 +54,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
-        <CartButton totalItems={totalItems} />
+        <CartButton totalItems={qtyTotal} />
         <span className="go-up" onClick={handlerSlideUp}>
           <Icon>keyboard_arrow_up</Icon>
         </span>

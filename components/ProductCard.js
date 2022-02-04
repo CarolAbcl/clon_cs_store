@@ -60,10 +60,12 @@ function ProductCard({ product, inCart }) {
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
-            <div className="minPurshase">
-              <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
-              <span className="secondary"> $60.000 </span>
-            </div>
+            {!inCart && (
+              <div className="minPurshase">
+                <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
+                <span className="secondary"> $60.000 </span>
+              </div>
+            )}
             {!inCart && (
               <div className="containerInfoProduct">
                 <ProductStamp width="15" />

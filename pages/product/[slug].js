@@ -5,6 +5,7 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import priceFormat from '../../helpers/priceFormat'
 
 export const getStaticPaths = async () => {
   const res = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
@@ -34,12 +35,6 @@ export const getStaticProps = async (context) => {
 }
 
 function ProductInfo({ product }) {
-  // formato en cantidades y precios
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-
   return (
     <>
       <div className="container">
@@ -70,7 +65,7 @@ function ProductInfo({ product }) {
             <div className="element-block">
               <div className="price-element">
                 <p>Precio unidad al por mayor</p>
-                <p className="secondary impact">{PriceProduct}</p>
+                <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
               <div className="price-element right">
                 <p>
@@ -78,13 +73,13 @@ function ProductInfo({ product }) {
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
-                <p className="secondary impact">{price_package}</p>
+                <p className="secondary impact">{priceFormat(product.price_package)}</p>
               </div>
             </div>
             <div className="element-block">
               <div className="price-element">
                 <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">{suggestedSalePrice} </p>
+                <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
               </div>
             </div>
             <div className="element-block">
@@ -95,7 +90,7 @@ function ProductInfo({ product }) {
               </div>
               <div className="right row">
                 <p>Formato:</p>
-                <QtyBox product={{ sale_format: saleFormat }} padding="0"></QtyBox>
+                <QtyBox product={product} padding="0"></QtyBox>
               </div>
             </div>
             <div className="element-block">

@@ -5,12 +5,13 @@ import CardPrice from './atoms/CardPrice'
 import QtyAddCart from './QtyAddCart'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
+import priceFormat from '../helpers/priceFormat'
 
 function ProductCardDesktop({ product, inCart }) {
   const dispatch = useDispatch()
 
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-  const subTotal_price = inCart ? '$' + new Intl.NumberFormat('de-DE').format(product.qty * product.price_package) : 0
+  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+
   return (
     <>
       <div className="ProductCardDesktop">
@@ -44,11 +45,11 @@ function ProductCardDesktop({ product, inCart }) {
             <QtyAddCart product={product} />
           </div>
           <div className="CardPrice">
-            <CardPrice PriceProduct={price_package} inCart={inCart} sizeFont={'1rem'} />
+            <CardPrice product={product} inCart={inCart} sizeFont={'1rem'} />
           </div>
           <div>
             <p className="subtotal">
-              Subtotal <span className="secondary subtotal">{subTotal_price}</span>
+              Subtotal <span className="secondary subtotal">{subTotal_price} </span>
             </p>
           </div>
         </div>

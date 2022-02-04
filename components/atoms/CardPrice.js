@@ -1,6 +1,7 @@
 import Icon from '@material-ui/core/Icon'
+import priceFormat from '../../helpers/priceFormat'
 
-function CardPrice({ show, setShow, PriceProduct, inCart, sizeFont }) {
+function CardPrice({ show, setShow, product, inCart, sizeFont }) {
   // CardPrice recibe:
   // ProductPrice que será el precio del producto ; show y SetShow para manejar la visualización de la información del producto
 
@@ -20,7 +21,7 @@ function CardPrice({ show, setShow, PriceProduct, inCart, sizeFont }) {
       <div className="container">
         {inCart && <p>Precio por caja</p>}
         <div className="flex">
-          <h4>{PriceProduct} </h4>
+          <h4>{priceFormat(product.price_package)} </h4>
           {!inCart && (
             <button
               type="button"

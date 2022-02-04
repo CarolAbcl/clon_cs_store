@@ -9,17 +9,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
+import priceFormat from '../helpers/priceFormat'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
-  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-  const subTotal_price = inCart ? '$' + new Intl.NumberFormat('de-DE').format(product.qty * product.price_package) : 0
+
+  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
 
   return (
     <>
@@ -74,7 +71,7 @@ function ProductCard({ product, inCart }) {
               </div>
             )}
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} inCart={inCart} />
+              <CardPrice show={show} setShow={setShow} product={product} inCart={inCart} />
               <QtyAddCart product={product} />
             </div>
           </div>
@@ -99,18 +96,13 @@ function ProductCard({ product, inCart }) {
               <hr></hr>
               <DetailsProduct
                 text={'Precio por unidad al por mayor iva incluido'}
-                PriceProduct={PriceProduct}
+                product={product}
                 align={'flex-start'}
                 width={50}
               />
-              <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
+              <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
               <hr />
-              <DetailsProduct
-                text={'Precio sugerido de venta'}
-                suggestedSalePrice={suggestedSalePrice}
-                align={'flex-start'}
-                width={50}
-              />
+              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
             </div>
             <div className="infoMinPurshase">
               <a className="links" href="#">

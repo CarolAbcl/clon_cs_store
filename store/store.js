@@ -1,4 +1,4 @@
-import { loadState, saveState } from '../SaveLocalStorage'
+import { loadState, saveState } from '../helpers/SaveLocalStorage'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'

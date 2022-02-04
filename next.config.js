@@ -8,4 +8,10 @@ module.exports = {
     NEXT_PUBLIC_IMAGES_PATH: process.env.NEXT_PUBLIC_IMAGES_PATH,
     API_URL: process.env.API_URL,
   },
+  webpack: (config, { defaultLoaders, isServer }) => {
+    if (isServer) {
+      config.externals.push('_http_common')
+    }
+    return config
+  },
 }

@@ -1,15 +1,18 @@
 import Icon from '@material-ui/core/Icon'
+import Link from 'next/link'
 
-function CartButton({ totalItems }) {
+function CartButton({ qtyTotal, ...rest }) {
   return (
     <>
-      <div>
-        <a href="#">
-          <Icon data-test-id="icon-card" fontSize="medium">
-            local_grocery_store
-          </Icon>
-          <span data-test-id="total-items-card">{totalItems}</span>
-        </a>
+      <div className={rest.className}>
+        <Link href="/carrito">
+          <a>
+            <Icon data-test-id="icon-card" fontSize="medium">
+              local_grocery_store
+            </Icon>
+            <span data-test-id="total-items-card">{qtyTotal}</span>
+          </a>
+        </Link>
       </div>
       <style jsx>
         {`
@@ -36,7 +39,7 @@ function CartButton({ totalItems }) {
             position: absolute;
             top: 0px;
             right: 0px;
-            ${totalItems == 0 && 'display: none'};
+            ${qtyTotal == 0 && 'display: none'};
           }
           @media (min-width: 480px) {
             a {

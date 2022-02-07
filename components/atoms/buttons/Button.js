@@ -20,6 +20,7 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           padding: 0.5rem 1rem;
           width: ${width || 'auto'};
           height: ${height || 'auto'};
+          flex: 1;
         }
 
         button:hover {

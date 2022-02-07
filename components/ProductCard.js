@@ -1,3 +1,4 @@
+import Icon from '@material-ui/core/Icon'
 import QtyBox from './atoms/QtyBox'
 import CardPrice from './atoms/CardPrice'
 import ProductStamp from './atoms/ProductStamp'
@@ -6,26 +7,40 @@ import Image from 'next/image'
 import DetailsProduct from './atoms/DetailsProduct'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteItemCart } from '../store/actions/cartAction'
+import priceFormat from '../helpers/priceFormat'
 
-function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) {
+function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
+  const dispatch = useDispatch()
 
-  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
+  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
 
   return (
     <>
       <div className="ProductCard">
+        {inCart && (
+          <Icon
+            style={{
+              color: 'var(--gray)',
+              width: '100%',
+              textAlign: 'right',
+              cursor: 'pointer',
+            }}
+            onClick={() => dispatch(deleteItemCart(product))}>
+            delete
+          </Icon>
+        )}
         <div className="generalInfoProduct">
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
               <a>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
+                    product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
+                  }`}
                   width={110}
                   height={150}
                   alt="Imagen producto"></Image>
@@ -34,54 +49,71 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           </div>
 
           <div className="ProductCardInfo">
-            <Link href={`/product/${product.slug}`}>
-              <a>
-                <h2>{product.name}</h2>
-              </a>
-            </Link>
+            <div className="ProductName">
+              <Link href={`/product/${product.slug}`}>
+                <a style={{ textAlign: 'left' }}>
+                  <h2>{product.name}</h2>
+                </a>
+              </Link>
+            </div>
+
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
+            {!inCart && (
+              <div className="minPurshase">
+                <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
+                <span className="secondary"> $60.000 </span>
+              </div>
+            )}
+            {!inCart && (
+              <div className="containerInfoProduct">
+                <ProductStamp width="15" />
+                <QtyBox product={product} />
+              </div>
+            )}
             <div className="containerInfoProduct">
-              <ProductStamp width="15" />
-              <QtyBox product={product} />
-            </div>
-            <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} />
-              <QtyAddCart
-                addItem={addItem}
-                removeItem={removeItem}
-                product={product}
-                cartItems={cartItems}
-                addItemInput={addItemInput}
-              />
+              <CardPrice show={show} setShow={setShow} product={product} inCart={inCart} />
+              <QtyAddCart product={product} />
             </div>
           </div>
         </div>
-        {show === false && (
-          <div className="containerDetailsProduct">
-            <hr></hr>
-            <DetailsProduct
-              text={'Precio por unidad al por mayor iva incluido'}
-              PriceProduct={PriceProduct}
-              align={'flex-start'}
-              width={50}
-            />
-            <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
-            <hr />
-            <DetailsProduct
-              text={'Precio sugerido de venta'}
-              suggestedSalePrice={suggestedSalePrice}
-              align={'flex-start'}
-              width={50}
-            />
-            <DetailsProduct
-              text={'Compra mínima iva incluido'}
-              minPurchase={price_package}
-              align={'flex-end'}
-              width={50}
-            />
+        {inCart && (
+          <div className="containerSubtotal">
+            <div>
+              <a className="links secondary" href="#">
+                Agregar nota al pedido
+              </a>
+            </div>
+            <div>
+              <p className="subtotal">
+                Subtotal: <span className="secondary subtotal">{subTotal_price}</span>
+              </p>
+            </div>
           </div>
+        )}
+        {!show && (
+          <>
+            <div className="containerDetailsProduct">
+              <hr></hr>
+              <DetailsProduct
+                text={'Precio por unidad al por mayor iva incluido'}
+                product={product}
+                align={'flex-start'}
+                width={50}
+              />
+              <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
+              <hr />
+              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+            </div>
+            <div className="infoMinPurshase">
+              <a className="links" href="#">
+                <div className="TextinfoMinPurshase">
+                  El pedido mínimo para este productor es de $60.000 en productos. Haz click para ver más del productor.
+                </div>
+              </a>
+            </div>
+          </>
         )}
       </div>
 
@@ -98,7 +130,8 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           align-items: stretch;
           flex-shrink: 1;
           padding: 1rem;
-          min-height: 15rem;
+          min-height: ${inCart ? '14rem' : '15rem'};
+          position: relative;
         }
         .ProductCard.tight {
           height: 50%;
@@ -110,6 +143,7 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           align-items: center
           flex: 1;
         }
+
         .ProductCardInfo {
           display: flex;
           flex-direction: column;
@@ -128,7 +162,6 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
-          flex-wrap: wrap;
           gap: 0.5rem;
           width: 100%;
         }
@@ -148,6 +181,27 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           align-items: flex-start;
           padding-bottom: 0.5rem;
         }
+
+        .containerSubtotal{
+          padding-top: 1rem;
+          border-top: 1px solid var(--light-gray);
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .containerSubtotal p, .containerSubtotal a{
+          margin: 0;
+        }
+
+        .containerSubtotal div:last-child{
+          text-align: right;
+          flex:1;
+        }
+        .containerSubtotal div:first-child{
+          flex:2;
+        }
         hr {
           width: 100%;
           height: 1px;
@@ -158,6 +212,33 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
           margin: 0.5rem 0;
           font-size: 1rem;
         }
+
+        .subtotal{
+          font-size: 18px;
+        }
+         .textMinPurshase{ 
+          font-size: 0.875rem; 
+          width: 100%; 
+        } 
+        .minPurshase{ 
+          display: flex; 
+          flex-direction: column; 
+          align-items: flex-start 
+        } 
+         .infoMinPurshase{ 
+          padding: 1rem 0rem; 
+        } 
+        .TextinfoMinPurshase{ 
+          background-color: var(--secondary); 
+          color: white; 
+          padding: 0.5rem; 
+          left: 0; 
+          bottom: 0; 
+          position: absolute; 
+          border-radius: 0px 0px 8px 8px;
+          text-align: justify; 
+          font-size: 0.875rem; 
+        } 
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
@@ -167,6 +248,9 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
         }
 
         @media (min-width: 1265px) {
+          .ProductCard{
+            ${inCart && 'display:none'}
+          }
           h2 {
             text-overflow: ellipsis;
             overflow: hidden;
@@ -176,14 +260,23 @@ function ProductCard({ product, addItem, removeItem, cartItems, addItemInput }) 
             font-size: 1.25rem;
           }
           .ProductCard {
-            padding: 0rem 1rem;
-            min-height: 15rem;
+            padding: ${inCart ? '1rem' : '0.5rem 1rem'};
+            min-height: ${inCart ? '14rem' : '16rem'};
           }
           .ProductCardInfo {
-            min-height: 14rem;
+            min-height: ${inCart ? '9rem' : '14rem'};
           }
           .containerDetailsProduct {
             padding: 1.5rem 0rem 0.5rem 0rem;
+          }
+          .minPurshase{
+            flex-direction: row;
+          }
+          .infoMinPurshase{
+            padding: 1.5rem 0rem; 
+          }
+          .TextinfoMinPurshase{
+            padding:  0.75rem 1.375rem; 
           }
         }
       `}</style>

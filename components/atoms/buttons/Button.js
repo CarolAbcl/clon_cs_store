@@ -30,6 +30,13 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           cursor: pointer;
           transition: all 0.2s;
         }
+
+        button:disabled{
+          background-color: var(--gray);
+          color: white;
+          border-color: white;
+          cursor: not-allowed;
+        }
       `}</style>
     </>
   )

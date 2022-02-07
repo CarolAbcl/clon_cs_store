@@ -1,23 +1,31 @@
 import SearchBar from '../components/atoms/SearchBar'
 import ProductCard from '../components/ProductCard'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
+import purchaseFormat from '../helpers/purchaseFormat'
 
 function Carrito() {
   const router = useRouter()
-  const cart = useSelector((state) => state.cart)
+  const { cart, producers } = useSelector((state) => state)
   // monto total de carrito sin formato
   const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
   // monto total neto de carrito sin formato
   const totalNeto = (totalCart / 1.19).toFixed(0)
   // monto total iva de carrito sin formato
   const totalTax = (totalNeto * 0.19).toFixed(0)
+
+  const [cartLength, setcartLength] = useState(0)
+
+  useEffect(() => {
+    setcartLength(cart.length)
+  }, [cartLength])
 
   return (
     <>
@@ -30,18 +38,42 @@ function Carrito() {
         <div className="containerCart">
           {cart.length !== 0 ? (
             <>
-              <div className="containerCardMobile">
-                <CardsGroup inCart>
-                  {cart.map((product) => (
-                    <ProductCard key={product.ID_product} product={product} inCart />
-                  ))}
-                </CardsGroup>
-              </div>
-              <div className="containerCardDesktop">
-                {cart.map((product) => (
-                  <ProductCardDesktop key={product.ID_product} product={product} inCart />
-                ))}
-              </div>
+              {producers.map((producer) => (
+                <div key={producer.producerInfo.ID_product}>
+                  <div className="containerCardMobile">
+                    <div className="producerInfo">
+                      <h3>{producer.producerInfo.brand_name}</h3>
+                      <p>Cantidad minima productor: 6</p>
+                      <p>Productos para cumplir el minimo: 2</p>
+                    </div>
+                    <CardsGroup inCart>
+                      {producer.products.map((product) => (
+                        <ProductCard key={product.ID_product} product={product} inCart />
+                      ))}
+                    </CardsGroup>
+                  </div>
+                  <div className="containerCardDesktop">
+                    <div className="producerInfo">
+                      <h3>{producer.producerInfo.brand_name}</h3>
+                      {producer.remaining !== 0 && (
+                        <div className="remainingProducts">
+                          <p>
+                            Te faltan {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                            cumplir con el pedido mínimo del productor
+                          </p>
+                          <Link href="/catalogo">
+                            <a className="links">Completar</a>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                    {producer.products.map((product) => (
+                      <ProductCardDesktop key={product.ID_product} product={product} inCart />
+                    ))}
+                  </div>
+                </div>
+              ))}
+
               <div className="containerTotalMobile">
                 <div className="total">
                   <p className="font125">
@@ -87,7 +119,7 @@ function Carrito() {
 
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" />
+                  <Button value="confirmar" color="var(--primary)" disabled={producers.some(producer => producer.complete == false)}/>
                 </div>
                 <div className="actionButton share">
                   <div className="center">
@@ -132,6 +164,10 @@ function Carrito() {
           h2 {
             font-weight: normal;
           }
+
+          h3 {
+            margin: 0;
+          }
           hr {
             margin-top: 1.5rem;
             margin-bottom: 2rem;
@@ -162,6 +198,7 @@ function Carrito() {
           }
           .containerCardDesktop {
             display: none;
+            margin-bottom: 0.5em;
           }
           .actionButton {
             display: flex;
@@ -184,14 +221,33 @@ function Carrito() {
           .containerTotalDesktop {
             display: none;
           }
-          .alertContainer {
-            margin-top: 1.5rem;
+          .remainingProducts {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background-color: rgb(255, 255, 227);
+            border-radius: 2rem;
+            margin-top: 0.5rem;
+            overflow: hidden;
           }
+          .remainingProducts p,
+          .remainingProducts .links {
+            margin: 0;
+            padding: 0.5rem 1.5rem;
+          }
+
+          .remainingProducts .links {
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            outline: none;
+          }
+
           @media (min-width: 800px) {
             .containerCart {
               display: flex;
-              flex-direction: row;
-              justify-content: center;
+              flex-direction: column;
+              justify-content: flex-start;
             }
             .containerCardMobile {
               display: none;

@@ -1,8 +1,8 @@
 import * as types from '../types'
 
-export const addProducer = ({producer}) => (dispatch) => {
+export const addProducer = (payload) => (dispatch) => {
   dispatch({
     type: types.ADD_PRODUCER,
-    payload: producer,
+    payload: payload,
   })
 }

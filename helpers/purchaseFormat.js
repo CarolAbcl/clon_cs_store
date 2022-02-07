@@ -1,4 +1,4 @@
-export default function purshaseFormat(qty, type){
+export default function purchaseFormat(qty, type){
   if(type !== 'monto'){
     return qty == 1 ? `${qty} ${type.slice(0,-1)}` : `${qty} ${type}`
   } else {

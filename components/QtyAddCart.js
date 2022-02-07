@@ -1,9 +1,9 @@
 import { RoundButton } from './atoms/buttons'
 import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
 import { executeAlert } from '../store/actions/alertsAction'
-import { addProducer } from '../store/actions/producerAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { addProducer } from '../store/actions/producerAction'
 
 function QtyAddCart({ product }) {
   const cart = useSelector((state) => state.cart)
@@ -15,9 +15,7 @@ function QtyAddCart({ product }) {
   // si el producto no existe en el carrito entonces será 0 y si existe devuelve la cantidad
   const productQty = !exist ? 0 : exist.qty
   const addToCart = (product) => {
-    dispatch(addItem(product))
-    !exist && 
-    dispatch(addProducer(product))
+    dispatch(addItem(product))    
     !exist && 
     dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
   }
@@ -31,6 +29,7 @@ function QtyAddCart({ product }) {
   // cada vez que un producto cambie su cantidad, se guardará en el estado
   useEffect(() => {
     setQtyProduct(productQty)
+    dispatch(addProducer({product, cart}))
   }, [exist, productQty])
 
   return (

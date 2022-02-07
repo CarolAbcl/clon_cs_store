@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
 import priceFormat from '../helpers/priceFormat'
+import purchaseFormat from '../helpers/purchaseFormat'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
@@ -17,6 +18,11 @@ function ProductCard({ product, inCart }) {
   const dispatch = useDispatch()
 
   const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+
+  const {
+    min_producer_purchase,
+    type_sale: { type },
+  } = product.producer
 
   return (
     <>
@@ -62,7 +68,7 @@ function ProductCard({ product, inCart }) {
             </a>
             <div className="minPurshase">
               <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
-              <span className="secondary">{priceFormat(min_producer_purchase, type)}</span>
+              <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
               </p>
             </div>
             {!inCart && (
@@ -108,7 +114,7 @@ function ProductCard({ product, inCart }) {
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purshaseFormat(min_producer_purchase, type)}. <br />
+                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}. <br />
                   Haz click para ver más del productor.
                 </div>
               </a>

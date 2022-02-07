@@ -3,24 +3,24 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 
 function Alert() {
-  const [state, setstate] = useState(null)
+  const [state, setstate] = useState({message: '', type:null, product: {}, show:false})
   const { message, type, product } = useSelector((state) => state.alert)
 
   useEffect(() => {
     //type es added o remove para no ejecutar en el estado inicial
     if (type)
-    setstate('show')
+    setstate({message, type, product, show:'show'})
     const time = setTimeout(() => {
-      setstate(null)
+      setstate({...state, show:'hide'})
     }, 2000)
     return () => clearTimeout(time)
   }, [type, product])
 
   return (
     <>
-      <div className={`alert ${type} ${state}`}>
-        <Icon>{type == 'added' ? 'done' : 'priority_high'}</Icon>
-        <p className="message">{message}</p>
+      <div className={`alert ${state.type} ${state.show}`}>
+        <Icon>{state.type === 'added' ? 'done' : 'priority_high'}</Icon>
+        <p className="message">{state.message}</p>
       </div>
 
       <style jsx>{`

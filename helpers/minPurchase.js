@@ -1,4 +1,4 @@
-export const minPurshase = (producers, cart) => {
+export const minPurchase = (producers, cart) => {
   const minPurchase = producers.map((el) => {
     const products = cart.filter(product => product.producer.ID_producer === el.ID_producer)
     const totalForProducer = products.reduce((acu, cur) => acu + cur.qty, 0)
@@ -8,6 +8,5 @@ export const minPurshase = (producers, cart) => {
     const remaining = (minRequired - totalForProducer) >= 0 ? minRequired - totalForProducer : 0
     return {producer, complete, remaining}
   })
-
-  console.log(minPurchase)
+  return minPurchase
 }

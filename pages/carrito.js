@@ -7,6 +7,7 @@ import { Icon } from '@material-ui/core'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import ProductCardDesktop from '../components/ProductCardDesktop'
+import priceFormat from '../helpers/priceFormat'
 
 function Carrito() {
   const router = useRouter()
@@ -17,11 +18,6 @@ function Carrito() {
   const totalNeto = (totalCart / 1.19).toFixed(0)
   // monto total iva de carrito sin formato
   const totalTax = (totalNeto * 0.19).toFixed(0)
-  // funcion que le da formato a los montos
-  const formatAmount = (amount) => {
-    const format = '$' + new Intl.NumberFormat('de-DE').format(amount)
-    return format
-  }
 
   return (
     <>
@@ -49,13 +45,13 @@ function Carrito() {
               <div className="containerTotalMobile">
                 <div className="total">
                   <p className="font125">
-                    Neto: <span className="font125 ">{formatAmount(totalNeto)}</span>
+                    Neto: <span className="font125 ">{priceFormat(totalNeto)}</span>
                   </p>
                   <p className="font125">
-                    IVA: <span className="font125 ">{formatAmount(totalTax)}</span>
+                    IVA: <span className="font125 ">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
-                    Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
+                    Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
 
@@ -78,13 +74,13 @@ function Carrito() {
               <div className="containerTotalDesktop">
                 <div className="total">
                   <p className="font125">
-                    Neto: <span className="font125">{formatAmount(totalNeto)}</span>
+                    Neto: <span className="font125">{priceFormat(totalNeto)}</span>
                   </p>
                   <p className="font125">
-                    IVA: <span className="font125">{formatAmount(totalTax)}</span>
+                    IVA: <span className="font125">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
-                    Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
+                    Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />

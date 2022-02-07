@@ -9,24 +9,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
-import purshaseFormat from '../helpers/purchaseFormat'
+import priceFormat from '../helpers/priceFormat'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
 
-  const {
-    min_producer_purchase,
-    type_sale: { type },
-  } = product.producer
-
-  // información enviada a DetailsProduct (componente tarjeta que se despliega al cliquear el icono de información)
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-  const subTotal_price = inCart ? '$' + new Intl.NumberFormat('de-DE').format(product.qty * product.price_package) : 0
+  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
 
   return (
     <>
@@ -61,7 +51,7 @@ function ProductCard({ product, inCart }) {
           <div className="ProductCardInfo">
             <div className="ProductName">
               <Link href={`/product/${product.slug}`}>
-                <a>
+                <a style={{ textAlign: 'left' }}>
                   <h2>{product.name}</h2>
                 </a>
               </Link>
@@ -72,7 +62,7 @@ function ProductCard({ product, inCart }) {
             </a>
             <div className="minPurshase">
               <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
-              <span className="secondary">{purshaseFormat(min_producer_purchase, type)}</span>
+              <span className="secondary">{priceFormat(min_producer_purchase, type)}</span>
               </p>
             </div>
             {!inCart && (
@@ -82,7 +72,7 @@ function ProductCard({ product, inCart }) {
               </div>
             )}
             <div className="containerInfoProduct">
-              <CardPrice show={show} setShow={setShow} PriceProduct={price_package} inCart={inCart} />
+              <CardPrice show={show} setShow={setShow} product={product} inCart={inCart} />
               <QtyAddCart product={product} />
             </div>
           </div>
@@ -107,18 +97,13 @@ function ProductCard({ product, inCart }) {
               <hr></hr>
               <DetailsProduct
                 text={'Precio por unidad al por mayor iva incluido'}
-                PriceProduct={PriceProduct}
+                product={product}
                 align={'flex-start'}
                 width={50}
               />
-              <DetailsProduct text={'Unidades por caja'} saleFormat={saleFormat} align={'flex-end'} width={50} />
+              <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
               <hr />
-              <DetailsProduct
-                text={'Precio sugerido de venta'}
-                suggestedSalePrice={suggestedSalePrice}
-                align={'flex-start'}
-                width={50}
-              />
+              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
             </div>
             <div className="infoMinPurshase">
               <a className="links" href="#">
@@ -177,7 +162,6 @@ function ProductCard({ product, inCart }) {
           flex-direction: row;
           justify-content: space-between;
           align-items: stretch;
-          flex-wrap: wrap;
           gap: 0.5rem;
           width: 100%;
         }
@@ -266,6 +250,9 @@ function ProductCard({ product, inCart }) {
         }
 
         @media (min-width: 1265px) {
+          .ProductCard{
+            ${inCart && 'display:none'}
+          }
           h2 {
             text-overflow: ellipsis;
             overflow: hidden;
@@ -276,7 +263,7 @@ function ProductCard({ product, inCart }) {
           }
           .ProductCard {
             padding: ${inCart ? '1rem' : '0.5rem 1rem'};
-            min-height: ${inCart ? '14rem' : 'auto'};
+            min-height: ${inCart ? '14rem' : '16rem'};
           }
           .ProductCardInfo {
             min-height: ${inCart ? '9rem' : '14rem'};

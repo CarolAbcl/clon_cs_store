@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env.development next dev",
-    "build": "next build",
+    "build": "next build ",
     "start": "next start",
     "lint": "next lint",
     "test:cy": "dotenv -e .env.test next | cypress open",

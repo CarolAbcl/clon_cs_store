@@ -2,25 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products`)
-  const { data } = await response.json()
-  return { products: data }
-}
-const fetchCategories = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
-  const { data } = await response.json()
-  return { categories: data }
-}
-
-export const getStaticProps = async () => {
-  const { products } = await fetchProducts()
-  const { categories } = await fetchCategories()
-
-  return { props: { products, categories } }
-}
-
-export default function Home({ products, categories }) {
+export default function Home() {
   return (
     <div>
       <Head>

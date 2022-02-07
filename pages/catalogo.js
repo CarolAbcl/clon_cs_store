@@ -7,22 +7,32 @@ import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
+import { getProducts } from './api/product/products'
+import { getCategories } from './api/category/categories'
 
-const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
-  const { data, productCount } = await response.json()
-  return { products: data, productCount }
-}
-const fetchCategories = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
-  const { data } = await response.json()
-  return { categories: data }
-}
+// const fetchProducts = async () => {
+//   const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
+//   const { data, productCount } = await response.json()
+//   return { products: data, productCount }
+// }
+// const fetchCategories = async () => {
+//   const response = await fetch(`${process.env.API_URL}/api/category/categories`)
+//   const { data } = await response.json()
+//   return { categories: data }
+// }
+
+// export const getServerSideProps = async () => {
+//   const { products, productCount } = await fetchProducts()
+//   const { categories } = await fetchCategories()
+
+//   return { props: { products, productCount, categories } }
+// }
 
 export const getServerSideProps = async () => {
-  const { products, productCount } = await fetchProducts()
-  const { categories } = await fetchCategories()
-
+  const skip = 0
+  const take = 9
+  const { products, productCount } = await getProducts(take, skip)
+  const { categories } = await getCategories()
   return { props: { products, productCount, categories } }
 }
 
@@ -134,7 +144,7 @@ function Catalogo({ products, productCount, categories }) {
                   ))}
                 </FilterGroup>
               </Filter>
-              <SearchBar className="hidden"/>
+              <SearchBar className="hidden" />
             </div>
             <hr />
             <InfiniteScroll
@@ -166,7 +176,6 @@ function Catalogo({ products, productCount, categories }) {
             display: flex;
             gap: 4rem;
           }
-
           .catalogo-container {
             width: 100%;
             flex: 4;
@@ -178,18 +187,15 @@ function Catalogo({ products, productCount, categories }) {
             gap: 0.5rem;
             flex-wrap: wrap;
           }
-
           h2.primary {
             font-weight: normal;
           }
-
           hr {
             margin-top: 1.5rem;
             margin-bottom: 2rem;
             border: none;
             border-bottom: 1px solid var(--light-gray);
           }
-
           @media (min-width: 800px) {
             .container {
               padding: 2rem 4rem 13rem 4rem;

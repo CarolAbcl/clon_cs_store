@@ -1,13 +1,22 @@
 import { RoundButton } from './atoms/buttons'
 import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 function QtyAddCart({ product }) {
-  const { cart } = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-  // Si el producto existe en el carrito obtenemos la cantidad, si no devuelve 0
+  // Estado que guarda la cantidad por producto
+  const [qtyProduct, setQtyProduct] = useState(0)
+  //variable que busca si en el carrito está el producto
   const exist = cart.find((item) => item.ID_product === product.ID_product)
+  // si el producto no existe en el carrito entonces será 0 y si existe devuelve la cantidad
   const productQty = !exist ? 0 : exist.qty
+  // cada vez que un producto cambie su cantidad, se guardará en el estado
+  useEffect(() => {
+    setQtyProduct(productQty)
+  }, [exist, productQty])
+
   return (
     <>
       <div>
@@ -16,12 +25,12 @@ function QtyAddCart({ product }) {
           backgroundColor={'var(--secondary)'}
           disabled
           onClick={() => dispatch(removeItem(product))}
-          productQty={productQty}
+          productQty={qtyProduct}
         />
         <input
           type="tel"
           id="quantity"
-          value={productQty}
+          value={qtyProduct}
           onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
         <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => dispatch(addItem(product))} />
       </div>

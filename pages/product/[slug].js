@@ -5,13 +5,14 @@ import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import priceFormat from '../../helpers/priceFormat'
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${process.env.API_URL}/api/product/products`)
+  const res = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
   const { data } = await res.json()
   const paths = data.map((product) => {
     return {
-      params: { id: product.slug },
+      params: { slug: product.slug },
     }
   })
   return {
@@ -21,10 +22,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async (context) => {
-  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`)
+  const productFetch = await fetch(`${process.env.API_URL}/api/product/products`) // desde la api toma los productos
   const products = await productFetch.json()
-  const param = context.params.id
-  const [{ ID_product }] = products.data.filter((product) => product.slug == param)
+  const slug = context.params.slug
+  const [{ ID_product }] = products.data.filter((product) => product.slug == slug) // toma el producto que haga match con el slug y saca el ID
   const res = await fetch(`${process.env.API_URL}/api/product/${ID_product}`)
   const { data } = await res.json()
 
@@ -34,19 +35,15 @@ export const getStaticProps = async (context) => {
 }
 
 function ProductInfo({ product }) {
-  // formato en cantidades y precios
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-
   return (
     <>
       <div className="container">
         <div className="product-summary">
           <div className="img">
             <Image
-              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${product.image[0].file_image}`}
+              src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
+                product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
+              }`}
               alt=""
               layout="fill"
               objectFit="cover"
@@ -68,21 +65,21 @@ function ProductInfo({ product }) {
             <div className="element-block">
               <div className="price-element">
                 <p>Precio unidad al por mayor</p>
-                <p className="secondary impact">{PriceProduct}</p>
+                <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
               <div className="price-element right">
                 <p>
-                  Compra mínima <br className="mobile" />
+                  Precio por caja <br className="mobile" />
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
-                <p className="secondary impact">{price_package}</p>
+                <p className="secondary impact">{priceFormat(product.price_package)}</p>
               </div>
             </div>
             <div className="element-block">
               <div className="price-element">
                 <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">{suggestedSalePrice} </p>
+                <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
               </div>
             </div>
             <div className="element-block">
@@ -93,7 +90,7 @@ function ProductInfo({ product }) {
               </div>
               <div className="right row">
                 <p>Formato:</p>
-                <QtyBox product={{ sale_format: saleFormat }} padding="0"></QtyBox>
+                <QtyBox product={product} padding="0"></QtyBox>
               </div>
             </div>
             <div className="element-block">
@@ -105,7 +102,6 @@ function ProductInfo({ product }) {
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
               <QtyAddProduct product={product} />
-              <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
               <Icon className="desktop gray">share</Icon>
             </div>
             <hr className="desktop" />
@@ -132,15 +128,16 @@ function ProductInfo({ product }) {
           </details>
           <details>
             <summary>
-              <h2>Beneficios</h2>
-            </summary>
+              <h2>Usos y Beneficios</h2>
+            </summary>{' '}
+            {/* ocultar cuando no haya información */}
             <div className="details-content">
               <p>{product.benefit}</p>
             </div>
           </details>
           <details>
             <summary>
-              <h2>Mantenimiento</h2>
+              <h2>Modo de conservación</h2>
             </summary>
             <div className="details-content">
               <p>{product.conservation}</p>

@@ -22,9 +22,17 @@ function Navbar() {
   }, [isNavbarFixed])
 
   const handlerSlideUp = () => window.scrollTo(0, 0)
-  // Se llama al state cart para sumar la cantidad de productos seleccionados
-  const { cart } = useSelector((state) => state.cart)
+  // Se llama al state cart de redux
+  const cart = useSelector((state) => state.cart)
+  // se crea un estado para ir guardando la cantidad total de productos en el carrito
+  const [qtyTotal, setQtyTotal] = useState(0)
+  // variable que ejecuta la suma de las cantidades de cada producto en el carrito
   const totalItems = cart.reduce((a, c) => a + c.qty, 0)
+  // cada vez que la cantidad en el carrito cambie, será capturado por el estado QtyTotal
+  useEffect(() => {
+    setQtyTotal(totalItems)
+  }, [totalItems])
+
   return (
     <>
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
@@ -36,26 +44,20 @@ function Navbar() {
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
-              <Link href="/catalogo">
+              <Link href="/">
                 <a>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
               <Link href="/catalogo">
-                <a>Nosotros</a>
-              </Link>
-              <hr />
-            </li>
-            <li>
-              <Link href="/catalogo">
-                <a>Preguntas frecuentes</a>
+                <a>Catálogo</a>
               </Link>
               <hr />
             </li>
           </ul>
         </div>
-        <CartButton totalItems={totalItems} />
+        <CartButton qtyTotal={qtyTotal} />
         <span className="go-up" onClick={handlerSlideUp}>
           <Icon>keyboard_arrow_up</Icon>
         </span>
@@ -248,7 +250,7 @@ function Navbar() {
               margin: 0;
               list-style: none;
               display: flex;
-              justify-content: space-evenly;
+              justify-content: flex-end;
               width: 100%;
             }
 

@@ -1,4 +1,4 @@
-function CardsGroup({ children }) {
+function CardsGroup({ children, inCart }) {
   // recibe los componentes hijos ProductCard
   return (
     <>
@@ -11,6 +11,8 @@ function CardsGroup({ children }) {
           justify-content: center;
           align-items: flex-start;
           padding: 1% 2% 2% 2%;
+
+          ${inCart && 'flex-direction: column; width: 100%;'}
         }
       `}</style>
     </>

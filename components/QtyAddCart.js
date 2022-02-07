@@ -1,6 +1,7 @@
 import { RoundButton } from './atoms/buttons'
 import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
 import { executeAlert } from '../store/actions/alertsAction'
+import { addProducer } from '../store/actions/producerAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 function QtyAddCart({ product }) {
@@ -11,12 +12,13 @@ function QtyAddCart({ product }) {
   const productQty = !exist ? 0 : exist.qty
   const addToCart = (product) => {
     dispatch(addItem(product))
-    !exist &&
-      dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
+    !exist && 
+    dispatch(addProducer(product))
+    !exist && 
+    dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
   }
   const removeToCart = (product) => {
     dispatch(removeItem(product))
-    console.log(exist)
     exist.qty == 1 &&
       dispatch(
         executeAlert({ message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product })

@@ -5,9 +5,11 @@ import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import ProductCardDesktop from '../components/ProductCardDesktop'
 
 function Carrito() {
+  const router = useRouter()
   const cart = useSelector((state) => state.cart)
   // monto total de carrito sin formato
   const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
@@ -20,6 +22,7 @@ function Carrito() {
     const format = '$' + new Intl.NumberFormat('de-DE').format(amount)
     return format
   }
+
   return (
     <>
       <div className="container">
@@ -55,9 +58,8 @@ function Carrito() {
                     Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
                   </p>
                 </div>
-                <Link href="/catalogo" passHref>
-                  <ButtonSecondary value="Seguir comprando" fontSize="1rem" />
-                </Link>
+
+                <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
                   <Button value="confirmar" color="var(--primary)" />
@@ -85,9 +87,8 @@ function Carrito() {
                     Total: <span className="font125 secondary">{formatAmount(totalCart)}</span>
                   </p>
                 </div>
-                <Link href="/catalogo" passHref>
-                  <ButtonSecondary value="Seguir comprando" fontSize="1rem" />
-                </Link>
+                <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
+
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
                   <Button value="confirmar" color="var(--primary)" />
@@ -186,6 +187,9 @@ function Carrito() {
           }
           .containerTotalDesktop {
             display: none;
+          }
+          .alertContainer {
+            margin-top: 1.5rem;
           }
           @media (min-width: 800px) {
             .containerCart {

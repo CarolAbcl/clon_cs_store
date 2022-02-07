@@ -7,6 +7,7 @@ function Alert() {
   const { message, type, product } = useSelector((state) => state.alert)
 
   useEffect(() => {
+    //type es added o remove para no ejecutar en el estado inicial
     if (type)
     setstate('show')
     const time = setTimeout(() => {

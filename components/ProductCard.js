@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
+import purshaseFormat from '../helpers/purchaseFormat'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
@@ -71,7 +72,7 @@ function ProductCard({ product, inCart }) {
             </a>
             <div className="minPurshase">
               <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
-              <span className="secondary">{ `${min_producer_purchase} ${type}` }</span>
+              <span className="secondary">{purshaseFormat(min_producer_purchase, type)}</span>
               </p>
             </div>
             {!inCart && (
@@ -122,7 +123,7 @@ function ProductCard({ product, inCart }) {
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {min_producer_purchase} {type}. <br />
+                  El pedido mínimo para este productor es de {purshaseFormat(min_producer_purchase, type)}. <br />
                   Haz click para ver más del productor.
                 </div>
               </a>

@@ -300,6 +300,26 @@ function Carrito() {
               position: fixed;
               right: 1rem;
             }
+            .remainingProducts {
+              display: flex;
+              gap: 0.5rem;
+              align-items: center;
+              background-color: rgb(255, 255, 227);
+              border-radius: 2rem;
+              margin-top: 0.5rem;
+              overflow: hidden;
+            }
+            .remainingProducts p,
+            .remainingProducts .links {
+              margin: 0;
+              padding: 0.5rem 1.5rem;
+            }
+            .remainingProducts .links {
+              background-color: var(--secondary);
+              color: white;
+              text-decoration: none;
+              outline: none;
+            }
           }
         `}
       </style>

@@ -43,8 +43,17 @@ function Carrito() {
                   <div className="containerCardMobile">
                     <div className="producerInfo">
                       <h3>{producer.producerInfo.brand_name}</h3>
-                      <p>Cantidad minima productor: 6</p>
-                      <p>Productos para cumplir el minimo: 2</p>
+                      {producer.remaining !== 0 && (
+                        <div className="remainingProducts">
+                          <p>
+                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                            cumplir con el pedido mínimo del productor
+                          </p>
+                          <Link href="/catalogo">
+                            <a className="links">Completar</a>
+                          </Link>
+                        </div>
+                      )}
                     </div>
                     <CardsGroup inCart>
                       {producer.products.map((product) => (
@@ -58,7 +67,7 @@ function Carrito() {
                       {producer.remaining !== 0 && (
                         <div className="remainingProducts">
                           <p>
-                            Te faltan {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                             cumplir con el pedido mínimo del productor
                           </p>
                           <Link href="/catalogo">
@@ -90,7 +99,11 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" />
+                  <Button
+                    value="confirmar"
+                    color="var(--primary)"
+                    disabled={producers.some((producer) => producer.complete == false)}
+                  />
                 </div>
                 <div className="actionButton share">
                   <div className="center">
@@ -119,7 +132,11 @@ function Carrito() {
 
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" disabled={producers.some(producer => producer.complete == false)}/>
+                  <Button
+                    value="confirmar"
+                    color="var(--primary)"
+                    disabled={producers.some((producer) => producer.complete == false)}
+                  />
                 </div>
                 <div className="actionButton share">
                   <div className="center">
@@ -166,7 +183,8 @@ function Carrito() {
           }
 
           h3 {
-            margin: 0;
+            margin: 1.5rem;
+            text-align: left;
           }
           hr {
             margin-top: 1.5rem;
@@ -194,7 +212,7 @@ function Carrito() {
           .containerCardMobile {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
           }
           .containerCardDesktop {
             display: none;
@@ -227,13 +245,15 @@ function Carrito() {
             align-items: center;
             background-color: rgb(255, 255, 227);
             border-radius: 2rem;
-            margin-top: 0.5rem;
+            margin: 1rem 0rem;
             overflow: hidden;
           }
+
           .remainingProducts p,
           .remainingProducts .links {
             margin: 0;
             padding: 0.5rem 1.5rem;
+            text-align: center;
           }
 
           .remainingProducts .links {
@@ -241,6 +261,7 @@ function Carrito() {
             color: white;
             text-decoration: none;
             outline: none;
+            margin: 0rem 1rem;
           }
 
           @media (min-width: 800px) {

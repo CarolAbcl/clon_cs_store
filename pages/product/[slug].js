@@ -89,7 +89,7 @@ function ProductInfo({ product }) {
                 </p>
               </div>
               <div className="right row">
-                <p>Formato:</p>
+                <p style={{ paddingRight: '1rem' }}>Formato:</p>
                 <QtyBox product={product} padding="0"></QtyBox>
               </div>
             </div>

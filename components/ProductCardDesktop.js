@@ -86,7 +86,7 @@ function ProductCardDesktop({ product, inCart }) {
           min-height: '15rem';
           position: relative;
           justify-content: space-between;
-          width: 67%;
+          width: 65%;
         }
         .containerInfoProduct {
           display: flex;
@@ -103,6 +103,7 @@ function ProductCardDesktop({ product, inCart }) {
         }
         .ProductName {
           width: 18rem;
+          text-align: left;
         }
         .subtotal {
           display: flex;

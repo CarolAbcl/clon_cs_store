@@ -320,11 +320,11 @@ function Carrito() {
               background-color: var(--light);
               box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 0.5);
               border-radius: 8px;
-              width: 30%;
+              width: 32%;
               height: fit-content;
               padding: 2rem;
               position: fixed;
-              right: 1rem;
+              right: 0.825rem;
             }
             .remainingProducts {
               display: flex;

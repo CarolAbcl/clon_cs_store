@@ -93,6 +93,13 @@ function Carrito() {
                     IVA: <span className="font125 ">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
+                    SubTotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                  </p>
+                  <p className="font125">
+                    Despacho: <span className="font125">{priceFormat(0)}</span>
+                  </p>
+                  <p className="textSmall"> - Despacho gratis en Región del Ñuble y Bio-Bio</p>
+                  <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
@@ -128,6 +135,13 @@ function Carrito() {
                   <p className="font125">
                     IVA: <span className="font125">{priceFormat(totalTax)}</span>
                   </p>
+                  <p className="font125 amountTotal">
+                    SubTotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                  </p>
+                  <p className="font125">
+                    Despacho: <span className="font125">{priceFormat(0)}</span>
+                  </p>
+                  <p className="textSmall"> - Despacho gratis en Región del Ñuble y Bio-Bio</p>
                   <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
@@ -207,14 +221,14 @@ function Carrito() {
           }
           .font125 {
             font-size: 1.25rem !important;
-            margin: 0;
+            margin: 0.2rem;
             display: flex;
             justify-content: space-between;
           }
           .amountTotal {
             border-top: 1px solid var(--light-gray);
             padding: 0.5rem 0;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
           }
           .containerCardMobile {
             display: flex;
@@ -269,6 +283,11 @@ function Carrito() {
             text-decoration: none;
             outline: none;
             margin: 0rem 1rem;
+          }
+          .textSmall {
+            margin: 0%;
+            font-size: 0.825rem;
+            text-align: left;
           }
 
           @media (min-width: 800px) {
@@ -326,6 +345,10 @@ function Carrito() {
               color: white;
               text-decoration: none;
               outline: none;
+            }
+            .textSmall {
+              text-align: left;
+              margin: 0;
             }
           }
         `}

@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
 import priceFormat from '../helpers/priceFormat'
+import purchaseFormat from '../helpers/purchaseFormat'
 
 function ProductCard({ product, inCart }) {
   // Estado que muestra y esconde la información mas detallada del producto
@@ -17,6 +18,11 @@ function ProductCard({ product, inCart }) {
   const dispatch = useDispatch()
 
   const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+
+  const {
+    min_producer_purchase,
+    type_sale: { type },
+  } = product.producer
 
   return (
     <>
@@ -60,12 +66,11 @@ function ProductCard({ product, inCart }) {
             <a className="links" href="#">
               {product.producer.brand_name}
             </a>
-            {!inCart && (
-              <div className="minPurshase">
-                <div className="textMinPurshase">Pedido mín. de productor: &nbsp;</div>
-                <span className="secondary"> $60.000 </span>
-              </div>
-            )}
+            <div className="minPurshase">
+              <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
+              <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
+              </p>
+            </div>
             {!inCart && (
               <div className="containerInfoProduct">
                 <ProductStamp width="15" />
@@ -109,7 +114,8 @@ function ProductCard({ product, inCart }) {
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de $60.000 en productos. Haz click para ver más del productor.
+                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}. <br />
+                  Haz click para ver más del productor.
                 </div>
               </a>
             </div>
@@ -218,7 +224,8 @@ function ProductCard({ product, inCart }) {
         }
          .textMinPurshase{ 
           font-size: 0.875rem; 
-          width: 100%; 
+          width: 100%;
+          margin: 0;
         } 
         .minPurshase{ 
           display: flex; 
@@ -229,14 +236,15 @@ function ProductCard({ product, inCart }) {
           padding: 1rem 0rem; 
         } 
         .TextinfoMinPurshase{ 
-          background-color: var(--secondary); 
+          background-color: var(--secondary);
+          width: 100%;
           color: white; 
           padding: 0.5rem; 
           left: 0; 
           bottom: 0; 
           position: absolute; 
           border-radius: 0px 0px 8px 8px;
-          text-align: justify; 
+          text-align: center; 
           font-size: 0.875rem; 
         } 
         @media (min-width: 480px) {

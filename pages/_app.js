@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import { Provider } from 'react-redux'
 import { createWrapper } from 'next-redux-wrapper'
 import store from '../store/store'
+import Alert from '../components/Alert'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </Provider>
+      <Alert/>
     </>
   )
 }

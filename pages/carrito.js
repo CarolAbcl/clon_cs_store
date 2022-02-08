@@ -93,7 +93,7 @@ function Carrito() {
                     IVA: <span className="font125 ">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
-                    SubTotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                    Subtotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                   <p className="font125">
                     Despacho: <span className="font125">{priceFormat(0)}</span>
@@ -136,7 +136,7 @@ function Carrito() {
                     IVA: <span className="font125">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
-                    SubTotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                    Subtotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                   <p className="font125">
                     Despacho: <span className="font125">{priceFormat(0)}</span>

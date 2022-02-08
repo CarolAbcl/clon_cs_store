@@ -5,11 +5,16 @@ import CardPrice from './atoms/CardPrice'
 import QtyAddCart from './QtyAddCart'
 import { useDispatch } from 'react-redux'
 import { deleteItemCart } from '../store/actions/cartAction'
+import { executeAlert } from '../store/actions/alertsAction'
 import priceFormat from '../helpers/priceFormat'
 
 function ProductCardDesktop({ product, inCart }) {
   const dispatch = useDispatch()
 
+  const removeItemCart = (product) => {
+    dispatch(deleteItemCart(product))
+    dispatch(executeAlert({ message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product }))
+  }
   const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
 
   return (
@@ -61,7 +66,7 @@ function ProductCardDesktop({ product, inCart }) {
               textAlign: 'right',
               cursor: 'pointer',
             }}
-            onClick={() => dispatch(deleteItemCart(product))}>
+            onClick={() => removeItemCart(product)}>
             delete
           </Icon>
         </div>

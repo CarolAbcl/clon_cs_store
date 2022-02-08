@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
+import { sendOrder } from '../helpers/sendOrder'
 
 function Carrito() {
   const router = useRouter()
@@ -103,6 +104,9 @@ function Carrito() {
                     value="confirmar"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
+                    onClick={() => {
+                      window.open(sendOrder(producers))
+                    }}
                   />
                 </div>
                 <div className="actionButton share">
@@ -136,6 +140,9 @@ function Carrito() {
                     value="confirmar"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
+                    onClick={() => {
+                      window.open(sendOrder(producers))
+                    }}
                   />
                 </div>
                 <div className="actionButton share">

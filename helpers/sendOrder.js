@@ -1,6 +1,6 @@
 import priceFormat from './priceFormat'
 
-export const sendOrder = (producers) => {
+export const sendOrder = (producers, clientName = 'default') => {
   //guadará el monto total del pedido
   let msgetotalAmount = ''
   //guarda el total por productor
@@ -35,7 +35,7 @@ export const sendOrder = (producers) => {
   const phone = '569'
   const urlDesktop = 'https://api.whatsapp.com/send?phone='
   const urlMobile = 'whatsapp://'
-  const msjsaludo = 'Hola ComeS, adjunto mi pedido:'
+  const msjsaludo = 'Hola ComeS, soy la tienda%20' + clientName + ',%20%20 adjunto mi pedido:'
 
   const pdf = <div id="pdfDiv"> HOLA!!!</div>
 

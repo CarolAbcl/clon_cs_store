@@ -90,7 +90,7 @@ h5 {
 }
 
 .hidden {
-  display: none!important;
+  visibility: hidden !important;
 }
 
 .primary {

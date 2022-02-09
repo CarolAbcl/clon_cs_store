@@ -54,7 +54,7 @@ function ProductInfo({ product }) {
               <h1>{product.name}</h1>
               <div>
                 <Link href="#">
-                  <a className="links">{product.producer.brand_name}</a>
+                  <p className="links">{product.producer.brand_name}</p>
                 </Link>
               </div>
             </div>
@@ -102,7 +102,7 @@ function ProductInfo({ product }) {
             </div>
             <hr className="desktop" />
             <div className="element-block">
-              <div className="categories">
+              <div className="categories hidden">
                 <p>Categorías: </p>
                 <Badge value="Limonada" />
                 <Badge value="Bebestibles" />
@@ -146,7 +146,7 @@ function ProductInfo({ product }) {
             </details>
           )}
         </div>
-        <div className="categories mobile">
+        <div className="categories mobile hidden">
           <p>Categorías: </p>
           <Badge value="Limonada" />
           <Badge value="Bebestibles" />

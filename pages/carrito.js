@@ -34,7 +34,7 @@ function Carrito() {
       <div className="container">
         <div className="header">
           <h2 className="primary">CARRITO</h2>
-          <SearchBar />
+          <SearchBar className="hidden" />
         </div>
         <hr />
         <div className="containerCart">
@@ -107,9 +107,9 @@ function Carrito() {
 
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" />
+                  <Button className="hidden" value="cancelar" color="var(--secondary)" />
                   <Button
-                    value="confirmar"
+                    value="Enviar pedido a ComeS"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {
@@ -117,7 +117,7 @@ function Carrito() {
                     }}
                   />
                 </div>
-                <div className="actionButton share">
+                <div className="actionButton share hidden">
                   <div className="center">
                     <Icon style={{ color: '#7B61FF', fontSize: '2.5rem' }}>share</Icon>
                     <p>Compartir mi carrito</p>
@@ -150,9 +150,9 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
 
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" />
+                  <Button className="hidden" value="cancelar" color="var(--secondary)" />
                   <Button
-                    value="confirmar"
+                    value="Enviar pedido a ComeS"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {
@@ -160,7 +160,7 @@ function Carrito() {
                     }}
                   />
                 </div>
-                <div className="actionButton share">
+                <div className="actionButton share hidden">
                   <div className="center">
                     <Icon style={{ color: '#7B61FF', fontSize: '2.5rem' }}>share</Icon>
                     <p>Compartir mi carrito</p>
@@ -181,7 +181,7 @@ function Carrito() {
                   <a className="primary" style={{ fontSize: 'inherit' }}>
                     catálogo
                   </a>
-                </Link>{' '}
+                </Link>
                 para agregar.
               </h2>
             </div>

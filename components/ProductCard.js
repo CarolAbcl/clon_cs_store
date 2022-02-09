@@ -63,12 +63,13 @@ function ProductCard({ product, inCart }) {
               </Link>
             </div>
 
-            <a className="links" href="#">
+            <p className="links" href="#">
               {product.producer.brand_name}
-            </a>
+            </p>
             <div className="minPurshase">
-              <p className="textMinPurshase">Pedido mín. del productor: &nbsp;
-              <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
+              <p className="textMinPurshase">
+                Pedido mín. del productor: &nbsp;
+                <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
               </p>
             </div>
             {!inCart && (
@@ -85,7 +86,7 @@ function ProductCard({ product, inCart }) {
         </div>
         {inCart && (
           <div className="containerSubtotal">
-            <div>
+            <div className="hidden">
               <a className="links secondary" href="#">
                 Agregar nota al pedido
               </a>
@@ -112,12 +113,11 @@ function ProductCard({ product, inCart }) {
               <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
             </div>
             <div className="infoMinPurshase">
-              <a className="links" href="#">
+              <p className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}. <br />
-                  Haz click para ver más del productor.
+                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}.
                 </div>
-              </a>
+              </p>
             </div>
           </>
         )}
@@ -247,6 +247,7 @@ function ProductCard({ product, inCart }) {
           text-align: center; 
           font-size: 0.875rem; 
         } 
+        
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;

@@ -69,7 +69,7 @@ function Catalogo({ products, productCount, categories }) {
       </Head>
       <main>
         <div className="container">
-          <Filter>
+          <Filter className="hidden">
             <FilterGroup title="Categorias">
               {categories.map((category) => (
                 <Check
@@ -84,7 +84,7 @@ function Catalogo({ products, productCount, categories }) {
           <div className="catalogo-container">
             <div className="header-catalogo">
               <h2 className="primary">CATÁLOGO</h2>
-              <Filter isMobile>
+              <Filter className="hidden" isMobile>
                 <FilterGroup title="Categorias">
                   {categories.map((category) => (
                     <Check
@@ -96,7 +96,7 @@ function Catalogo({ products, productCount, categories }) {
                   ))}
                 </FilterGroup>
               </Filter>
-              <SearchBar />
+              <SearchBar className="hidden" />
             </div>
             <hr />
             <InfiniteScroll

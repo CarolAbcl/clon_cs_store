@@ -30,8 +30,7 @@ function QtyBox({ product, padding = 0.5 }) {
             justify-content: center;
             padding: ${padding}rem;
             justify-content: flex-end;
-            gap: .25rem;
-            flex: 1;
+            gap: 0.25rem;
           }
           .img-container {
             width: 1.25rem;

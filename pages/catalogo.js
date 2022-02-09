@@ -10,6 +10,7 @@ import { setfilter, removefilter, resetfilters } from '../store/actions/filtersA
 import { useDispatch } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
+import Loader from '../components/Loader'
 
 const fetchProducts = async () => {
   const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
@@ -25,7 +26,6 @@ const fetchCategories = async () => {
 export const getStaticProps = async () => {
   const { products, productCount } = await fetchProducts()
   const { categories } = await fetchCategories()
-
   return { props: { products, productCount, categories } }
 }
 
@@ -110,7 +110,7 @@ function Catalogo({ products, productCount, categories }) {
               dataLength={productsFetch.length}
               next={getMoreProducts}
               hasMore={hasMore}
-              loader={<p>Cargando...</p>}
+              loader={<Loader/>}
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (

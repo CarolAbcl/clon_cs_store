@@ -3,7 +3,6 @@ import Link from 'next/link'
 import QtyBox from '../../components/atoms/QtyBox'
 import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
-import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
 import priceFormat from '../../helpers/priceFormat'
 
@@ -17,7 +16,7 @@ export const getStaticPaths = async () => {
   })
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -118,31 +117,37 @@ function ProductInfo({ product }) {
           </div>
         </div>
         <div className="product-description">
-          <details open>
-            <summary>
-              <h2>Descripción</h2>
-            </summary>
-            <div className="details-content">
-              <p>{product.description}</p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <h2>Usos y Beneficios</h2>
-            </summary>{' '}
-            {/* ocultar cuando no haya información */}
-            <div className="details-content">
-              <p>{product.benefit}</p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <h2>Modo de conservación</h2>
-            </summary>
-            <div className="details-content">
-              <p>{product.conservation}</p>
-            </div>
-          </details>
+          {product.description && (
+            <details open>
+              <summary>
+                <h2>Descripción</h2>
+              </summary>
+              <div className="details-content">
+                <p>{product.description}</p>
+              </div>
+            </details>
+          )}
+          {product.benefit && (
+            <details>
+              <summary>
+                <h2>Usos y Beneficios</h2>
+              </summary>{' '}
+              {/* ocultar cuando no haya información */}
+              <div className="details-content">
+                <p>{product.benefit}</p>
+              </div>
+            </details>
+          )}
+          {product.conservation && (
+            <details>
+              <summary>
+                <h2>Modo de conservación</h2>
+              </summary>
+              <div className="details-content">
+                <p>{product.conservation}</p>
+              </div>
+            </details>
+          )}
         </div>
         <div className="categories mobile">
           <p>Categorías: </p>

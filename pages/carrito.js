@@ -1,6 +1,6 @@
 import SearchBar from '../components/atoms/SearchBar'
 import ProductCard from '../components/ProductCard'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
@@ -11,8 +11,10 @@ import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 
+
 function Carrito() {
   const router = useRouter()
+
   const { cart, producers } = useSelector((state) => state)
   // monto total de carrito sin formato
   const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
@@ -118,8 +120,12 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
 
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" disabled={producers.some(producer => producer.complete == false)}/>
+                  <Button value="cancelar" color="var(--secondary)"/>
+                  <Button
+                    value="confirmar"
+                    color="var(--primary)"
+                    disabled={producers.some((producer) => producer.complete == false)}
+                  />
                 </div>
                 <div className="actionButton share">
                   <div className="center">

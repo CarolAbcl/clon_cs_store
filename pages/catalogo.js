@@ -12,10 +12,11 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
 import { getProducts } from './api/product/products'
 import { getCategories } from './api/category/categories'
+import Loader from '../components/Loader'
 
 export const getStaticProps = async () => {
   const skip = 0
-  const take = 9
+  const take = 12
   const { products, productCount } = await getProducts(take, skip)
   const { categories } = await getCategories()
   return { props: { products, productCount, categories } }
@@ -45,7 +46,7 @@ function Catalogo({ products, productCount, categories }) {
 
   // Carga mas productos
   const getMoreProducts = async () => {
-    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=9`)
+    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=12`)
     const { data } = await response.json()
 
     setProductsFetch((productsFetch) => [...productsFetch, ...data])
@@ -146,7 +147,11 @@ function Catalogo({ products, productCount, categories }) {
 
           @media (min-width: 800px) {
             .container {
-              padding: 2rem 4rem 13rem 4rem;
+              padding: 2rem 4rem;
+            }
+
+            .catalogo-container {
+              margin-bottom: 13rem;
             }
           }
         `}

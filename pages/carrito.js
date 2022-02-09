@@ -98,7 +98,7 @@ function Carrito() {
                   <p className="font125">
                     Despacho: <span className="font125">{priceFormat(0)}</span>
                   </p>
-                  <p className="textSmall"> - Despacho gratis en Región del Ñuble y Bio-Bio</p>
+                  <p className="textSmall"> - Despacho gratis en Regiones del Biobio y Ñuble</p>
                   <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
@@ -141,7 +141,7 @@ function Carrito() {
                   <p className="font125">
                     Despacho: <span className="font125">{priceFormat(0)}</span>
                   </p>
-                  <p className="textSmall"> - Despacho gratis en Región del Ñuble y Bio-Bio</p>
+                  <p className="textSmall"> - Despacho gratis en Regiones del Biobio y Ñuble</p>
                   <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>

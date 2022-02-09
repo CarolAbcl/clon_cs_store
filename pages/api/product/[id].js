@@ -57,7 +57,7 @@ const handlerProductById = nc()
   .get(async (req, res) => {
     const { id } = req.query
     try {
-      const product = await getProductById(id)
+      const { product } = await getProductById(id)
 
       if (!product) res.status(204).send()
 

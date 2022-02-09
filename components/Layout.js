@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 function Layout({children}) {
   return(
     <>
-    <Navbar totalItems={0}/>
+    <Navbar/>
     {children}
     </>
   )

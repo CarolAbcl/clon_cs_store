@@ -25,6 +25,7 @@ function SearchBar(props) {
           input {
             border: none;
             flex: 1;
+            width: 100%;
           }
           input:focus {
             outline: 0 none;

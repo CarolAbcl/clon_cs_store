@@ -1,6 +1,10 @@
 import Head from 'next/head'
 import '../styles/globals.css'
 import Layout from '../components/Layout'
+import { Provider } from 'react-redux'
+import { createWrapper } from 'next-redux-wrapper'
+import store from '../store/store'
+import Alert from '../components/Alert'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,11 +13,17 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+      <Alert/>
     </>
   )
 }
 
-export default MyApp
+const makestore = () => store
+const wrapper = createWrapper(makestore)
+
+export default wrapper.withRedux(MyApp)

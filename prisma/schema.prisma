@@ -20,6 +20,7 @@ model detail_order_note {
   sub_total            Int
   ID_order_note        String
   ID_product           String
+  comment_by_product   String?    @db.Text
   order_note           order_note @relation(fields: [ID_order_note], references: [ID_order_note], onDelete: NoAction, onUpdate: NoAction, map: "FK_detail_order_note_order_note")
   product              product    @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_detail_order_note")
 
@@ -53,6 +54,7 @@ model order_note {
   neto              Int
   iva               Float
   total             Int
+  comment_by_order  String?             @db.Text
   ID_store          String
   ID_order_status   String
   order_status      order_status        @relation(fields: [ID_order_status], references: [ID_order_status], onDelete: NoAction, onUpdate: NoAction, map: "FK_order_status_order_note")
@@ -109,10 +111,12 @@ model producer {
 model product {
   ID_product           String              @id @default(cuid())
   name                 String              @db.VarChar(100)
+  sku                  String?             @db.VarChar(50)
   slug                 String?             @db.VarChar(100)
   wholesale_unit_price Int
   unit_cost            Int?
   sale_format          Int?                @db.SmallInt
+  weight               Int?                @db.SmallInt
   description          String?             @db.Text
   duration             Int?                @db.SmallInt
   suggested_sale_price Int?

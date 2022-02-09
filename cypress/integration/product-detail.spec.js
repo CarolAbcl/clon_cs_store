@@ -8,9 +8,10 @@ describe('Prueba de página descripción de producto', function () {
   //   cy.get('.ProductCardInfo').each((element, index) => {
   //     if (index === 0) {
   //       const h2 = element[0].children[0].children[0]
-  //       const priceElement = element[0].children[3].children[0].children[0]
+  //       const priceElement = element[0].children[4].children[0].children[0].children[0]
   //       const productName = h2.innerText
   //       const price = priceElement.innerText
+  //       console.log(price, productName)
   //       h2.click()
   //       cy.wait(6000)
   //       cy.contains(productName).should('exist')

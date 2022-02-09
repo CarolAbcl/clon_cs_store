@@ -20,6 +20,7 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           padding: 0.5rem 1rem;
           width: ${width || 'auto'};
           height: ${height || 'auto'};
+          flex: 1;
         }
 
         button:hover {
@@ -28,6 +29,13 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           color: #fff;
           cursor: pointer;
           transition: all 0.2s;
+        }
+
+        button:disabled{
+          background-color: var(--gray);
+          color: white;
+          border-color: white;
+          cursor: not-allowed;
         }
       `}</style>
     </>

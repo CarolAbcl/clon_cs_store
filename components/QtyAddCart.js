@@ -1,33 +1,53 @@
-import { useState, useEffect } from 'react'
 import { RoundButton } from './atoms/buttons'
+import { addItem, addItemInput, removeItem } from '../store/actions/cartAction'
+import { executeAlert } from '../store/actions/alertsAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { addProducer } from '../store/actions/producerAction'
 
-function QtyAddCart({ product, addItem, removeItem, cartItems, addItemInput, ...rest }) {
-  // QtyAddBasket recibe:
-  // fontSize: tamaño fuente ; counProduct: cantidad;
+function QtyAddCart({ product }) {
+  const cart = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
+  // Estado que guarda la cantidad por producto
   const [qtyProduct, setQtyProduct] = useState(0)
-  const exist = cartItems.find((item) => item.ID_product === product.ID_product)
-
+  //variable que busca si en el carrito está el producto
+  const exist = cart.find((item) => item.ID_product === product.ID_product)
+  // si el producto no existe en el carrito entonces será 0 y si existe devuelve la cantidad
   const productQty = !exist ? 0 : exist.qty
+  const addToCart = (product) => {
+    dispatch(addItem(product))    
+    !exist && 
+    dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
+  }
+  const removeToCart = (product) => {
+    dispatch(removeItem(product))
+    exist.qty == 1 &&
+      dispatch(
+        executeAlert({ message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product })
+      )
+  }
+  // cada vez que un producto cambie su cantidad, se guardará en el estado
   useEffect(() => {
     setQtyProduct(productQty)
-  }, [productQty])
+    dispatch(addProducer({product, cart}))
+  }, [exist, productQty])
 
   return (
     <>
-      <div className={rest.className}>
+      <div>
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
           disabled
-          onClick={() => removeItem(product)}
-          qtyProduct={qtyProduct}
+          onClick={() => removeToCart(product)}
+          productQty={qtyProduct}
         />
         <input
           type="tel"
           id="quantity"
           value={qtyProduct}
-          onChange={(e) => addItemInput(product, e.target.value)}></input>
-        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addItem(product)} />
+          onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
+        <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addToCart(product)} />
       </div>
       <style jsx>
         {`

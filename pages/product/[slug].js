@@ -3,14 +3,15 @@ import Link from 'next/link'
 import QtyBox from '../../components/atoms/QtyBox'
 import QtyAddProduct from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
-import { ButtonSecondary } from '../../components/atoms/buttons'
 import Icon from '@material-ui/core/Icon'
+import priceFormat from '../../helpers/priceFormat'
 import { getProducts } from '../api/product/products'
 import { getProductById } from '../api/product/[id]'
+import { useRouter } from 'next/router'
+import Loader from '../../components/Loader'
 
 export const getStaticPaths = async () => {
   const { products } = await getProducts()
-
   const paths = products.map((product) => {
     return {
       params: { slug: product.slug },
@@ -19,7 +20,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -30,17 +31,15 @@ export const getStaticProps = async ({ params }) => {
   const { product } = await getProductById(ID_product)
   return {
     props: { product },
+    revalidate: 1,
   }
 }
 
 function ProductInfo({ product }) {
-  // formato en cantidades y precios
-  const PriceProduct = '$' + new Intl.NumberFormat('de-DE').format(product.wholesale_unit_price)
-  const saleFormat = product.sale_format
-  const suggestedSalePrice = '$' + new Intl.NumberFormat('de-DE').format(product.suggested_sale_price)
-  const price_package = '$' + new Intl.NumberFormat('de-DE').format(product.price_package)
-
-  return (
+  const router = useRouter()
+  return router.isFallback ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
         <div className="product-summary">
@@ -54,22 +53,23 @@ function ProductInfo({ product }) {
               objectFit="cover"
               objectPosition={'center'}
               className="bradius-1"
+              priority
             />
           </div>
           <div className="short-info">
             <div>
               <h1>{product.name}</h1>
               <div>
-                <Link href="#">
-                  <a className="links">{product.producer.brand_name}</a>
-                </Link>
+                {/* <Link href="#"> */}
+                <p className="links">{product.producer.brand_name}</p>
+                {/* </Link> */}
               </div>
             </div>
             <hr />
             <div className="element-block">
               <div className="price-element">
                 <p>Precio unidad al por mayor</p>
-                <p className="secondary impact">{PriceProduct}</p>
+                <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
               <div className="price-element right">
                 <p>
@@ -77,46 +77,39 @@ function ProductInfo({ product }) {
                   <span className="desktop">iva incluido</span>
                   <span className="small mobile">iva incluido</span>
                 </p>
-                <p className="secondary impact">{price_package}</p>
+                <p className="secondary impact">{priceFormat(product.price_package)}</p>
               </div>
             </div>
             <div className="element-block">
               <div className="price-element">
                 <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">{suggestedSalePrice} </p>
+                <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
               </div>
             </div>
             <div className="element-block">
               <div>
-                <p>
-                  Duración: <span className="primary"> {product.duration} meses</span>
-                </p>
+                <p>Duración: {product.duration ? <span className="primary"> {product.duration} meses</span> : ''}</p>
               </div>
               <div className="right row">
-                <p>Formato:</p>
-                <QtyBox product={{ sale_format: saleFormat }} padding="0"></QtyBox>
+                <p style={{ paddingRight: '1rem' }}>Formato:</p>
+                <QtyBox product={product} padding="0"></QtyBox>
               </div>
             </div>
             <div className="element-block">
               <p>
-                Tiempo estimado de entrega: <span className="primary"> {product.delivery_time} días</span>
+                Tiempo estimado de entrega:
+                {product.delivery_time ? <span className="primary"> {product.delivery_time} días</span> : ''}
               </p>
             </div>
             <hr />
-            <div className="element-block hidden">
+            <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
-              <QtyAddProduct
-                product={{}}
-                addItem={() => console.log('hola') /* Provisorio hasta decidir el manejo de estados */}
-                removeItem={() => console.log('eliminado') /* Provisorio hasta decidir el manejo de estados */}
-                cartItems={[]}
-              />
-              <ButtonSecondary value="Agregar al carro" fontSize="1rem" className="desktop" />
+              <QtyAddProduct product={product} />
               <Icon className="desktop gray">share</Icon>
             </div>
-            <hr className="desktop hidden" />
-            <div className="element-block hidden">
-              <div className="categories">
+            <hr className="desktop" />
+            <div className="element-block">
+              <div className="categories hidden">
                 <p>Categorías: </p>
                 <Badge value="Limonada" />
                 <Badge value="Bebestibles" />
@@ -128,31 +121,37 @@ function ProductInfo({ product }) {
           </div>
         </div>
         <div className="product-description">
-          <details open>
-            <summary>
-              <h2>Descripción</h2>
-            </summary>
-            <div className="details-content">
-              <p>{product.description}</p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <h2>Usos y Beneficios</h2>
-            </summary>{' '}
-            {/* ocultar cuando no haya información */}
-            <div className="details-content">
-              <p>{product.benefit}</p>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <h2>Modo de conservación</h2>
-            </summary>
-            <div className="details-content">
-              <p>{product.conservation}</p>
-            </div>
-          </details>
+          {product.description && (
+            <details open>
+              <summary>
+                <h2>Descripción</h2>
+              </summary>
+              <div className="details-content">
+                <p>{product.description}</p>
+              </div>
+            </details>
+          )}
+          {product.benefit && (
+            <details>
+              <summary>
+                <h2>Usos y Beneficios</h2>
+              </summary>{' '}
+              {/* ocultar cuando no haya información */}
+              <div className="details-content">
+                <p>{product.benefit}</p>
+              </div>
+            </details>
+          )}
+          {product.conservation && (
+            <details>
+              <summary>
+                <h2>Modo de conservación</h2>
+              </summary>
+              <div className="details-content">
+                <p>{product.conservation}</p>
+              </div>
+            </details>
+          )}
         </div>
         <div className="categories mobile hidden">
           <p>Categorías: </p>
@@ -343,5 +342,4 @@ function ProductInfo({ product }) {
     </>
   )
 }
-
 export default ProductInfo

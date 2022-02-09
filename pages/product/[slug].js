@@ -36,7 +36,9 @@ export const getStaticProps = async ({ params }) => {
 
 function ProductInfo({ product }) {
   const router = useRouter()
-  return router.isFallback ? (<Loader/>) : (
+  return router.isFallback ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
         <div className="product-summary">
@@ -57,9 +59,9 @@ function ProductInfo({ product }) {
             <div>
               <h1>{product.name}</h1>
               <div>
-                <Link href="#">
-                  <p className="links">{product.producer.brand_name}</p>
-                </Link>
+                {/* <Link href="#"> */}
+                <p className="links">{product.producer.brand_name}</p>
+                {/* </Link> */}
               </div>
             </div>
             <hr />

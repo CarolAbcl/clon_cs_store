@@ -6,19 +6,32 @@ import { useEffect, useState } from 'react'
 import { Icon } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 
-const SCROLL_BREAK = 4
+const SCROLL_BREAK = 13
 
 function Navbar() {
   const [show, setShow] = useState(false)
   const [isNavbarFixed, setIsNavbarFixed] = useState(false)
 
-  const changePosition = () => {
-    const { scrollY } = window
-    scrollY >= SCROLL_BREAK ? setIsNavbarFixed(true) : setIsNavbarFixed(false)
-  }
   useEffect(() => {
-    changePosition()
+    console.log(isNavbarFixed)
+    console.log(window.scrollY)
+    const changePosition = () => {
+      const { scrollY } = window
+
+      scrollY > SCROLL_BREAK && !isNavbarFixed
+        ? setIsNavbarFixed(true)
+        : scrollY <= SCROLL_BREAK && isNavbarFixed && setIsNavbarFixed(false)
+
+      // if (scrollY > SCROLL_BREAK && !isNavbarFixed) {
+      //   setIsNavbarFixed(true)
+      //   console.log(isNavbarFixed, 'fixed')
+      // } else if (scrollY < SCROLL_BREAK && isNavbarFixed) {
+      //   setIsNavbarFixed(false)
+      //   console.log(isNavbarFixed, 'not fixed')
+      // }
+    }
     window.addEventListener('scroll', changePosition)
+    return () => window.removeEventListener('scroll', changePosition)
   }, [isNavbarFixed])
 
   const handlerSlideUp = () => window.scrollTo(0, 0)
@@ -38,7 +51,7 @@ function Navbar() {
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" priority/>
+          <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" priority />
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>
@@ -108,6 +121,10 @@ function Navbar() {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 10;
           }
 
           .go-up {
@@ -124,11 +141,8 @@ function Navbar() {
           }
 
           .fixed-active {
-            position: fixed;
             background-color: #fff;
             box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
-            z-index: 10;
-            top: 0;
           }
 
           ul {
@@ -196,10 +210,16 @@ function Navbar() {
 
           @media (min-width: 800px) {
             .navbar {
-              padding: 1rem 4rem;
+              padding: 0.5rem 3rem;
               display: flex;
               align-items: flex-start;
-              height: 100px;
+              height: auto;
+              position: sticky;
+              top: 0;
+              background-color: #fff;
+              z-index: 10;
+              box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 0%);
+              transition: box-shadow 0.2s linear;
             }
 
             .go-up {
@@ -222,13 +242,8 @@ function Navbar() {
             }
 
             .fixed-active {
-              padding: 0.5rem 4rem;
-              position: fixed;
-              height: 70px;
-              background-color: #fff;
               box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
-              z-index: 10;
-              top: 0;
+              z-index:10;
             }
 
             .logo {

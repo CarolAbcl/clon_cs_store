@@ -34,10 +34,7 @@ export const sendOrder = (producers, clientName = 'default') => {
   //Ingresar numero que recibe pedidos - debe ir codigo 569
   const phone = '569'
   const urlDesktop = 'https://api.whatsapp.com/send?phone='
-  const urlMobile = 'whatsapp://'
   const msjsaludo = 'Hola ComeS, soy la tienda%20' + clientName + ',%20%20 adjunto mi pedido:'
-
-  const pdf = <div id="pdfDiv"> HOLA!!!</div>
 
   return urlDesktop + phone + '&text=' + msjsaludo + infoOrder + msgetotalAmount
 }

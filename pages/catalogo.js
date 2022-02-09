@@ -102,7 +102,7 @@ function Catalogo({ products, productCount, categories }) {
               dataLength={productsFetch.length}
               next={getMoreProducts}
               hasMore={hasMore}
-              loader={<p>Cargando...</p>}
+              loader={<Loader />}
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (

@@ -38,7 +38,7 @@ function Navbar() {
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
         <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
         <div className="logo">
-          <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" />
+          <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" priority/>
         </div>
         <div className={`background ${show ? 'show' : ''}`}></div>
         <div className={`content ${show ? 'show' : ''}`}>

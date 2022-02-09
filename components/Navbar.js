@@ -13,8 +13,6 @@ function Navbar() {
   const [isNavbarFixed, setIsNavbarFixed] = useState(false)
 
   useEffect(() => {
-    console.log(isNavbarFixed)
-    console.log(window.scrollY)
     const changePosition = () => {
       const { scrollY } = window
 

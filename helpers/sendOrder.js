@@ -32,7 +32,7 @@ export const sendOrder = (producers, clientName = 'default') => {
     return nameProducer + products
   })
   const urlDesktop = 'https://api.whatsapp.com/send?phone='
-  const msjsaludo = 'Hola ComeS, soy la tienda%20,%20%20 adjunto mi pedido:'
+  const msjsaludo = 'Hola ComeS, adjunto mi pedido:'
 
   return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}${infoOrder}${msgetotalAmount}`
 }

@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import Icon from '@material-ui/core/Icon'
 import { Button } from './atoms/buttons'
+import { resetfilters } from '../store/actions/filtersAction'
+import { useDispatch } from 'react-redux'
+
 
 function Filter({ children, isMobile, ...rest }) {
   const [show, setshow] = useState(false)
+  const dispatch = useDispatch()
   // Para mostrar y ocultar en versión mobile
   return (
     <>
@@ -23,7 +27,7 @@ function Filter({ children, isMobile, ...rest }) {
           {children}
           <div className="action-buttons">
             <Button value="Aplicar" width="100%" onClick={() => setshow(false)}></Button>
-            <Button value="Limpiar" width="100%" color="var(--secondary)" onClick={() => setshow(false)}></Button>
+            <Button value="Limpiar" width="100%" color="var(--secondary)" onClick={() => dispatch(resetfilters())}></Button>
           </div>
         </div>
       </div>

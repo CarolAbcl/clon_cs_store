@@ -1,13 +1,14 @@
-function DetailsProduct({ text, PriceProduct, saleFormat, suggestedSalePrice, minPurchase, width, align }) {
+import priceFormat from '../../helpers/priceFormat'
+
+function DetailsProduct({ text, product, width, align }) {
   return (
     <>
       <div>
         <h5> {text} </h5>
         <h4>
-          {PriceProduct && PriceProduct}
-          {saleFormat && saleFormat}
-          {suggestedSalePrice && suggestedSalePrice}
-          {minPurchase && minPurchase}
+          {text === 'Precio por unidad al por mayor iva incluido' && priceFormat(product.wholesale_unit_price)}
+          {text === 'Unidades por caja' && product.sale_format}
+          {text === 'Precio sugerido de venta' && priceFormat(product.suggested_sale_price)}
         </h4>
       </div>
 

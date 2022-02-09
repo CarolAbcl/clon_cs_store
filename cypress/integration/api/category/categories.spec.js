@@ -13,7 +13,6 @@ describe('API GET categories', () => {
 
   it('deberia devolver status 200 y categorias ', () => {
     cy.get('@categories').should((response) => {
-      console.log(response)
       const { body, status } = response
       expect(body.data.categories.length).to.be.greaterThan(0)
       expect(status).to.eq(200)

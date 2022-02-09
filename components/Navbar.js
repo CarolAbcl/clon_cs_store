@@ -21,14 +21,6 @@ function Navbar() {
       scrollY > SCROLL_BREAK && !isNavbarFixed
         ? setIsNavbarFixed(true)
         : scrollY <= SCROLL_BREAK && isNavbarFixed && setIsNavbarFixed(false)
-
-      // if (scrollY > SCROLL_BREAK && !isNavbarFixed) {
-      //   setIsNavbarFixed(true)
-      //   console.log(isNavbarFixed, 'fixed')
-      // } else if (scrollY < SCROLL_BREAK && isNavbarFixed) {
-      //   setIsNavbarFixed(false)
-      //   console.log(isNavbarFixed, 'not fixed')
-      // }
     }
     window.addEventListener('scroll', changePosition)
     return () => window.removeEventListener('scroll', changePosition)
@@ -125,6 +117,8 @@ function Navbar() {
             top: 0;
             background-color: #fff;
             z-index: 10;
+            box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 0%);
+            transition: box-shadow 0.2s linear;
           }
 
           .go-up {
@@ -211,15 +205,8 @@ function Navbar() {
           @media (min-width: 800px) {
             .navbar {
               padding: 0.5rem 3rem;
-              display: flex;
               align-items: flex-start;
               height: auto;
-              position: sticky;
-              top: 0;
-              background-color: #fff;
-              z-index: 10;
-              box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 0%);
-              transition: box-shadow 0.2s linear;
             }
 
             .go-up {
@@ -243,7 +230,7 @@ function Navbar() {
 
             .fixed-active {
               box-shadow: 1px 2px 10px -6px rgb(0 0 0 / 15%);
-              z-index:10;
+              z-index: 10;
             }
 
             .logo {

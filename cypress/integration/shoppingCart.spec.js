@@ -9,7 +9,7 @@ describe('Debe ir a catalogo', () => {
 
   it('deberia aparecer la cantidad de producto en carrito al apretar boton +', () => {
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(3)'
+      '.ProductCard:first-child .containerInfoProduct div button:nth-of-type(2)'
     ).click({ force: true })
 
     cy.get('[data-test-id="total-items-card"]').should('be.visible', '1')
@@ -17,25 +17,25 @@ describe('Debe ir a catalogo', () => {
 
   it('deberia aparecer la cantidad de producto en carrito al ingresar cantidad al input y disminuir al apretar el boton, si es 0 deberia desaparecer el contenedor', () => {
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).type('3', { force: true })
 
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).should('be.visible', '3')
 
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).should('be.visible', '0')
   })
 

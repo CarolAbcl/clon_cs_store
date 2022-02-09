@@ -17,9 +17,7 @@ describe('test filters on mobile viewport', () => {
     cy.viewport('iphone-6')
     cy.wait(1000)
     cy.get('.header-catalogo .filter-button').click({ multiple: true, force: true })
-    cy.get('.filters.mobile .filters label').each((e) => {
-      e.click()
-    })
+    cy.get('.filters.mobile .filters .check_container input').check({force: true})
     cy.get('.filters.mobile .filters label input').should('be.checked')
   })
   it('uncheck all filters', () => {

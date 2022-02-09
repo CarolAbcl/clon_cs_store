@@ -54,9 +54,9 @@ function ProductInfo({ product }) {
             <div>
               <h1>{product.name}</h1>
               <div>
-                <Link href="#">
+                {/* <Link href="#"> */}
                   <p className="links">{product.producer.brand_name}</p>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
             <hr />

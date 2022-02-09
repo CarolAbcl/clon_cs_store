@@ -2,7 +2,7 @@ describe('Prueba scroll infinito', () => {
   before(() => {
     cy.visit('http://localhost:3000/catalogo')
   })
-  it('debera renderizar el maximo de productos (9)', () => {
+  it('debera renderizar el maximo de productos (12)', () => {
     cy.get('.generalInfoProduct')
       .each((value, index, collection) => {
         if (index === 0) {
@@ -10,15 +10,15 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
-        expect(collection.length).to.eq(9)
+        expect(collection.length).to.eq(12)
       })
   })
 
-  it('debera renderizar 9 productos mas al desplazarse hacia abajo y mensaje "cargando..."', () => {
+  it('debera renderizar mas productos al desplazarse hacia abajo y mensaje "cargando..."', () => {
     cy.scrollTo('bottom')
-    cy.contains('Cargando...').then((element) => {
+    cy.contains('cargando').then((element) => {
       const { innerText } = element[0]
-      expect(innerText).to.eq('Cargando...')
+      expect(innerText).to.eq('cargando')
     })
     cy.wait(3000)
     cy.get('.generalInfoProduct')
@@ -28,7 +28,7 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
-        expect(collection.length).to.eq(11)
+        expect(collection.length).to.be.greaterThan(12)
       })
   })
 })

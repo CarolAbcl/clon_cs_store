@@ -7,6 +7,8 @@ import Icon from '@material-ui/core/Icon'
 import priceFormat from '../../helpers/priceFormat'
 import { getProducts } from '../api/product/products'
 import { getProductById } from '../api/product/[id]'
+import { useRouter } from 'next/router'
+import Loader from '../../components/Loader'
 
 export const getStaticPaths = async () => {
   const { products } = await getProducts()
@@ -18,7 +20,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -29,11 +31,15 @@ export const getStaticProps = async ({ params }) => {
   const { product } = await getProductById(ID_product)
   return {
     props: { product },
+    revalidate: 1,
   }
 }
 
 function ProductInfo({ product }) {
-  return (
+  const router = useRouter()
+  return router.isFallback ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
         <div className="product-summary">
@@ -55,7 +61,7 @@ function ProductInfo({ product }) {
               <h1>{product.name}</h1>
               <div>
                 {/* <Link href="#"> */}
-                  <p className="links">{product.producer.brand_name}</p>
+                <p className="links">{product.producer.brand_name}</p>
                 {/* </Link> */}
               </div>
             </div>

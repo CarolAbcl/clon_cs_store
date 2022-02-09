@@ -4,7 +4,7 @@ export const loadState = () => {
     if (savedData === null) {
       return undefined // Si no existe el state en el local storage devolvemos undefined para que cargue el state inicial que hayamos definido
     }
-    return JSON.parse(savedData) // Si encontramos con exito nuestro storage lo devolvemos.
+    return JSON.parse(savedData) // Si encontramos con exito nuestro storage, lo devolvemos.
   } catch (error) {
     return undefined // Si ocurre algun error, devuelvo undefined para cargar el state inicial.
   }

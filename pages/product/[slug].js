@@ -81,9 +81,7 @@ function ProductInfo({ product }) {
             </div>
             <div className="element-block">
               <div>
-                <p>
-                  Duración: <span className="primary"> {product.duration} meses</span>
-                </p>
+                <p>Duración: {product.duration ? <span className="primary"> {product.duration} meses</span> : ''}</p>
               </div>
               <div className="right row">
                 <p style={{ paddingRight: '1rem' }}>Formato:</p>
@@ -92,7 +90,8 @@ function ProductInfo({ product }) {
             </div>
             <div className="element-block">
               <p>
-                Tiempo estimado de entrega: <span className="primary"> {product.delivery_time} días</span>
+                Tiempo estimado de entrega:
+                {product.delivery_time ? <span className="primary"> {product.delivery_time} días</span> : ''}
               </p>
             </div>
             <hr />

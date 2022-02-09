@@ -42,36 +42,36 @@ describe('Catalogo desktop', () => {
   it('deberia aumentar la cantidad de producto', () => {
     // button +
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(3)'
+      '.ProductCard:first-child .containerInfoProduct div button:nth-of-type(2)'
     ).click({ force: true })
 
     // Input qty
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:first-child .containerInfoProduct div #quantity'
     ).should('have.value', '1')
   })
 
   it('deberia disminuir la cantidad de producto', () => {
     // setea el input #quantity con 1
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).type('1', { force: true })
 
     // button -
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     // Input qty
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).should('have.value', '0')
   })
 
   it('deberia mostrar informacion de precios del producto', () => {
     // button i (info)
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-5822a8528987c621 > button.jsx-5822a8528987c621 > .material-icons'
+      '.ProductCard:nth-child(1) .containerInfoProduct .container .flex button'
     ).click({ force: true })
 
     // contenedor con la info
@@ -81,7 +81,7 @@ describe('Catalogo desktop', () => {
   it('deberia ocultar informacion de precios del producto', () => {
     // button i (info) con la info anterior mente desplegada
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-5822a8528987c621 > button.jsx-5822a8528987c621 > .material-icons'
+      '.ProductCard:nth-child(1) .containerInfoProduct .container .flex button'
     ).click({ force: true })
 
     // el containerDetailsProduct ya no existe
@@ -132,36 +132,36 @@ describe('Catalogo mobile', () => {
   it('deberia aumentar la cantidad de producto', () => {
     // button +
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(3)'
+      '.ProductCard:first-child .containerInfoProduct div button:nth-of-type(2)'
     ).click({ force: true })
 
     // Input qty
     cy.get(
-      ':nth-child(2) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:first-child .containerInfoProduct div #quantity'
     ).should('have.value', '1')
   })
 
   it('deberia disminuir la cantidad de producto', () => {
     // setea el input #quantity con 1
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).type('1', { force: true })
 
     // button -
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > :nth-child(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     // Input qty
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-69787f2591a0f36 > #quantity'
+      '.ProductCard:nth-child(2) .containerInfoProduct div #quantity'
     ).should('have.value', '0')
   })
 
   it('deberia mostrar informacion de precios del producto', () => {
     // button i (info)
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-5822a8528987c621 > button.jsx-5822a8528987c621 > .material-icons'
+      '.ProductCard:nth-child(1) .containerInfoProduct .container .flex button'
     ).click({ force: true })
 
     // contenedor con la info
@@ -171,7 +171,7 @@ describe('Catalogo mobile', () => {
   it('deberia ocultar informacion de precios del producto', () => {
     // button i (info) con la info anterior mente desplegada
     cy.get(
-      ':nth-child(1) > .generalInfoProduct > .ProductCardInfo > :nth-child(4) > div.jsx-5822a8528987c621 > button.jsx-5822a8528987c621 > .material-icons'
+      '.ProductCard:nth-child(1) .containerInfoProduct .container .flex button'
     ).click({ force: true })
 
     // el containerDetailsProduct ya no existe

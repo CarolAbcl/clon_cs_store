@@ -67,7 +67,7 @@ function ProductCard({ product, inCart }) {
               {product.producer.brand_name}
             </a>
             <div className="minPurshase">
-              <p className="textMinPurshase">Pedido mín. de productor: &nbsp;
+              <p className="textMinPurshase">Pedido mín. del productor: &nbsp;
               <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
               </p>
             </div>

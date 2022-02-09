@@ -6,26 +6,19 @@ import Filter from '../components/Filter'
 import FilterGroup from '../components/FilterGroup'
 import Check from '../components/atoms/Check'
 import { useSelector } from 'react-redux'
-import { setfilter, removefilter, resetfilters } from '../store/actions/filtersAction'
+import { setfilter, removefilter } from '../store/actions/filtersAction'
 import { useDispatch } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
-
-const fetchProducts = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/product/products?skip=0&take=9`)
-  const { data, productCount } = await response.json()
-  return { products: data, productCount }
-}
-const fetchCategories = async () => {
-  const response = await fetch(`${process.env.API_URL}/api/category/categories`)
-  const { data } = await response.json()
-  return { categories: data }
-}
+import { getProducts } from './api/product/products'
+import { getCategories } from './api/category/categories'
+import Loader from '../components/Loader'
 
 export const getStaticProps = async () => {
-  const { products, productCount } = await fetchProducts()
-  const { categories } = await fetchCategories()
-
+  const skip = 0
+  const take = 12
+  const { products, productCount } = await getProducts(take, skip)
+  const { categories } = await getCategories()
   return { props: { products, productCount, categories } }
 }
 
@@ -53,7 +46,7 @@ function Catalogo({ products, productCount, categories }) {
 
   // Carga mas productos
   const getMoreProducts = async () => {
-    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=9`)
+    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=12`)
     const { data } = await response.json()
 
     setProductsFetch((productsFetch) => [...productsFetch, ...data])
@@ -110,11 +103,11 @@ function Catalogo({ products, productCount, categories }) {
               dataLength={productsFetch.length}
               next={getMoreProducts}
               hasMore={hasMore}
-              loader={<p>Cargando...</p>}
+              loader={<Loader />}
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (
-                  <ProductCard key={product.ID_product} product={product}/>
+                  <ProductCard key={product.ID_product} product={product} />
                 ))}
               </CardsGroup>
             </InfiniteScroll>
@@ -154,7 +147,11 @@ function Catalogo({ products, productCount, categories }) {
 
           @media (min-width: 800px) {
             .container {
-              padding: 2rem 4rem 13rem 4rem;
+              padding: 2rem 4rem;
+            }
+
+            .catalogo-container {
+              margin-bottom: 13rem;
             }
           }
         `}

@@ -1,6 +1,6 @@
 import SearchBar from '../components/atoms/SearchBar'
 import ProductCard from '../components/ProductCard'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
@@ -10,9 +10,11 @@ import { useEffect, useState } from 'react'
 import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
+import { sendOrder } from '../helpers/sendOrder'
 
 function Carrito() {
   const router = useRouter()
+
   const { cart, producers } = useSelector((state) => state)
   // monto total de carrito sin formato
   const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
@@ -43,8 +45,17 @@ function Carrito() {
                   <div className="containerCardMobile">
                     <div className="producerInfo">
                       <h3>{producer.producerInfo.brand_name}</h3>
-                      <p>Cantidad minima productor: 6</p>
-                      <p>Productos para cumplir el minimo: 2</p>
+                      {producer.remaining !== 0 && (
+                        <div className="remainingProducts">
+                          <p>
+                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                            cumplir con el pedido mínimo del productor
+                          </p>
+                          <Link href="/catalogo">
+                            <a className="links">Completar</a>
+                          </Link>
+                        </div>
+                      )}
                     </div>
                     <CardsGroup inCart>
                       {producer.products.map((product) => (
@@ -58,7 +69,7 @@ function Carrito() {
                       {producer.remaining !== 0 && (
                         <div className="remainingProducts">
                           <p>
-                            Te faltan {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                             cumplir con el pedido mínimo del productor
                           </p>
                           <Link href="/catalogo">
@@ -83,6 +94,13 @@ function Carrito() {
                     IVA: <span className="font125 ">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
+                    Subtotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                  </p>
+                  <p className="font125">
+                    Despacho: <span className="font125">{priceFormat(0)}</span>
+                  </p>
+                  <p className="textSmall"> - Despacho gratis en Regiones del Biobio y Ñuble</p>
+                  <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
@@ -90,7 +108,14 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" />
+                  <Button
+                    value="confirmar"
+                    color="var(--primary)"
+                    disabled={producers.some((producer) => producer.complete == false)}
+                    onClick={() => {
+                      window.open(sendOrder(producers))
+                    }}
+                  />
                 </div>
                 <div className="actionButton share">
                   <div className="center">
@@ -112,6 +137,13 @@ function Carrito() {
                     IVA: <span className="font125">{priceFormat(totalTax)}</span>
                   </p>
                   <p className="font125 amountTotal">
+                    Subtotal: <span className="font125 secondary">{priceFormat(totalCart)}</span>
+                  </p>
+                  <p className="font125">
+                    Despacho: <span className="font125">{priceFormat(0)}</span>
+                  </p>
+                  <p className="textSmall"> - Despacho gratis en Regiones del Biobio y Ñuble</p>
+                  <p className="font125 amountTotal">
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
@@ -119,7 +151,14 @@ function Carrito() {
 
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
-                  <Button value="confirmar" color="var(--primary)" disabled={producers.some(producer => producer.complete == false)}/>
+                  <Button
+                    value="confirmar"
+                    color="var(--primary)"
+                    disabled={producers.some((producer) => producer.complete == false)}
+                    onClick={() => {
+                      window.open(sendOrder(producers))
+                    }}
+                  />
                 </div>
                 <div className="actionButton share">
                   <div className="center">
@@ -166,7 +205,8 @@ function Carrito() {
           }
 
           h3 {
-            margin: 0;
+            margin: 1.5rem;
+            text-align: left;
           }
           hr {
             margin-top: 1.5rem;
@@ -182,19 +222,19 @@ function Carrito() {
           }
           .font125 {
             font-size: 1.25rem !important;
-            margin: 0;
+            margin: 0.2rem;
             display: flex;
             justify-content: space-between;
           }
           .amountTotal {
             border-top: 1px solid var(--light-gray);
             padding: 0.5rem 0;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
           }
           .containerCardMobile {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
           }
           .containerCardDesktop {
             display: none;
@@ -227,13 +267,15 @@ function Carrito() {
             align-items: center;
             background-color: rgb(255, 255, 227);
             border-radius: 2rem;
-            margin-top: 0.5rem;
+            margin: 1rem 0rem;
             overflow: hidden;
           }
+
           .remainingProducts p,
           .remainingProducts .links {
             margin: 0;
             padding: 0.5rem 1.5rem;
+            text-align: center;
           }
 
           .remainingProducts .links {
@@ -241,6 +283,12 @@ function Carrito() {
             color: white;
             text-decoration: none;
             outline: none;
+            margin: 0rem 1rem;
+          }
+          .textSmall {
+            margin: 0%;
+            font-size: 0.825rem;
+            text-align: left;
           }
 
           @media (min-width: 800px) {
@@ -273,11 +321,35 @@ function Carrito() {
               background-color: var(--light);
               box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 0.5);
               border-radius: 8px;
-              width: 30%;
+              width: 32%;
               height: fit-content;
               padding: 2rem;
               position: fixed;
-              right: 1rem;
+              right: 0.825rem;
+            }
+            .remainingProducts {
+              display: flex;
+              gap: 0.5rem;
+              align-items: center;
+              background-color: rgb(255, 255, 227);
+              border-radius: 2rem;
+              margin-top: 0.5rem;
+              overflow: hidden;
+            }
+            .remainingProducts p,
+            .remainingProducts .links {
+              margin: 0;
+              padding: 0.5rem 1.5rem;
+            }
+            .remainingProducts .links {
+              background-color: var(--secondary);
+              color: white;
+              text-decoration: none;
+              outline: none;
+            }
+            .textSmall {
+              text-align: left;
+              margin: 0;
             }
           }
         `}

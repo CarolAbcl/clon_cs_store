@@ -20,7 +20,7 @@ describe('Prueba scroll infinito', () => {
       const { innerText } = element[0]
       expect(innerText).to.eq('cargando')
     })
-    cy.wait(3000)
+    cy.wait(5000)
     cy.get('.generalInfoProduct')
       .each((value, index, collection) => {
         if (index === 0) {
@@ -28,7 +28,6 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
-        cy.wait(3000)
         expect(collection.length).to.be.gt(12)
       })
   })

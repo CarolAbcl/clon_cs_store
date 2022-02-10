@@ -12,7 +12,7 @@ describe('Prueba de página descripción de producto', function () {
         const productName = h2.innerText
         const price = priceElement.innerText
         h2.click()
-        cy.wait(8000)
+        cy.wait(10000)
         cy.get('.short-info > div > h1').then(el => expect(el[0].innerText).to.eq(productName))
         cy.get('.price-element:nth-child(1) > .secondary.impact').then(el => expect(el[0].innerText).to.eq(price))
       }

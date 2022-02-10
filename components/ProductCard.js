@@ -43,26 +43,26 @@ function ProductCard({ product, inCart }) {
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
               <a>
-                {product.image[0] ? (
-                  product.image.map(
-                    (image) =>
-                      image.isMain && (
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
-                          width={110}
-                          height={150}
-                          alt={image.alt}
-                          title={image.name_image}
-                          key={image.ID_image}></Image>
-                      )
-                  )
-                ) : (
+                {product.image[0] ?
+                  product.image.map((image) => (
+                    image.isMain && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
+                        width={110}
+                        height={150}
+                        alt={image.alt}
+                        title={image.name_image}
+                        key={image.ID_image}></Image>
+                    )
+                  ))
+                 : (
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/imagen_no_disponible.jpg`}
                     width={110}
                     height={150}
-                    alt="Imagen no disponible"
-                    title={product.name}></Image>
+                    alt='Imagen no disponible'
+                    title={product.name}
+                    ></Image>
                 )}
               </a>
             </Link>

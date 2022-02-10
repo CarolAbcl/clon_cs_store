@@ -27,7 +27,7 @@ function Carrito() {
 
   useEffect(() => {
     setcartLength(cart.length)
-  }, [cartLength])
+  }, [cart])
 
   return (
     <>
@@ -38,10 +38,10 @@ function Carrito() {
         </div>
         <hr />
         <div className="containerCart">
-          {cart.length !== 0 ? (
+          {cartLength !== 0 ? (
             <>
               {producers.map((producer) => (
-                <div key={producer.producerInfo.ID_product}>
+                <div key={producer.producerInfo.ID_producer}>
                   <div className="containerCardMobile">
                     <div className="producerInfo">
                       <h3>{producer.producerInfo.brand_name}</h3>
@@ -181,7 +181,7 @@ function Carrito() {
                   <a className="primary" style={{ fontSize: 'inherit' }}>
                     catálogo
                   </a>
-                </Link>
+                </Link>{' '}
                 para agregar.
               </h2>
             </div>
@@ -265,7 +265,7 @@ function Carrito() {
             display: flex;
             gap: 0.5rem;
             align-items: center;
-            background-color: rgb(255, 255, 227);
+            background-color: #ffffe3;
             border-radius: 2rem;
             margin: 1rem 0rem;
             overflow: hidden;

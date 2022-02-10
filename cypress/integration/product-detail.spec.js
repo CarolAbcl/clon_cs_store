@@ -8,13 +8,13 @@ describe('Prueba de página descripción de producto', function () {
     cy.get('.ProductCardInfo').each((element, index) => {
       if (index === 0) {
         const h2 = element[0].children[0].children[0]
-        const priceElement = element[0].children[4].children[0].children[0].children[0]
+        const priceElement = element[0].children[4].children[0].children[1].children[0]
         const productName = h2.innerText
         const price = priceElement.innerText
         h2.click()
-        cy.wait(6000)
-        cy.contains(productName).should('exist')
-        cy.contains(price).should('exist')
+        cy.wait(10000)
+        cy.get('.short-info > div > h1').then(el => expect(el[0].innerText).to.eq(productName))
+        cy.get('.price-element:nth-child(1) > .secondary.impact').then(el => expect(el[0].innerText).to.eq(price))
       }
     })
   })

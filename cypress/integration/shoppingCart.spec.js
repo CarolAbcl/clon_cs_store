@@ -25,13 +25,13 @@ describe('Debe ir a catalogo', () => {
     ).should('be.visible', '3')
 
     cy.get(
-      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct > div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
     cy.get(
-      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct > div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
     cy.get(
-      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct > div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     cy.get(

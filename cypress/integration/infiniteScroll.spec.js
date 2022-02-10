@@ -28,6 +28,7 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
+        cy.wait(3000)
         expect(collection.length).to.be.gt(12)
       })
   })

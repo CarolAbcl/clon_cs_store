@@ -28,7 +28,7 @@ describe('Prueba scroll infinito', () => {
         }
       })
       .then((collection) => {
-        expect(collection.length).to.be.greaterThan(12)
+        expect(collection.length).to.be.gt(12)
       })
   })
 })

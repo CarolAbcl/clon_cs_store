@@ -38,7 +38,6 @@ function QtyAddCart({ product }) {
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
-          disabled
           onClick={() => removeToCart(product)}
           productQty={qtyProduct}
         />

@@ -11,9 +11,10 @@ export const producerReducer = (state = initialState, action) => {
     producers.forEach((producer)=> {
       const producerItems = cart.filter(cartItem => cartItem.producer.brand_name === producer)
       const producerInfo = producerItems[0].producer
-      const totalForProducer = producerItems.reduce((acu, cur) => acu + cur.qty, 0)
-      const complete = totalForProducer >= producerInfo.min_producer_purchase
-      const remaining = (producerInfo.min_producer_purchase - totalForProducer) >= 0 ? producerInfo.min_producer_purchase - totalForProducer : 0
+      const min_producer_purchase = producerInfo.type_sale.type == 'kilos' ? producerInfo.min_producer_purchase * 1000 : producerInfo.min_producer_purchase
+      const totalForProducer = producerItems.reduce((acu, cur) => acu + (producerInfo.type_sale.type == 'kilos' ? cur.weight * cur.qty : producerInfo.type_sale.type == 'monto' ? cur.price_package * cur.qty : cur.qty), 0)
+      const complete = totalForProducer >= min_producer_purchase
+      const remaining = (min_producer_purchase - totalForProducer) >= 0 ? min_producer_purchase - totalForProducer : 0
       producersProducts.push({producerInfo, products: cart.filter(cartItem => cartItem.producer.brand_name === producer), totalItems: totalForProducer, complete, remaining})
     })
     

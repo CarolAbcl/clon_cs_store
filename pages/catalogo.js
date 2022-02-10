@@ -14,12 +14,12 @@ import { getProducts } from './api/product/products'
 import { getCategories } from './api/category/categories'
 import Loader from '../components/Loader'
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const skip = 0
   const take = 12
   const { products, productCount } = await getProducts(take, skip)
   const { categories } = await getCategories()
-  return { props: { products, productCount, categories } }
+  return { props: { products, productCount, categories }}
 }
 
 function Catalogo({ products, productCount, categories }) {

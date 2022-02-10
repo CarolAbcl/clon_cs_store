@@ -1,9 +1,17 @@
+import { useEffect, useState } from 'react'
+
 function RoundButtons({ backgroundColor, text, onClick, productQty }) {
   // RoundButtons recibe:
   // backgroundColor: color de fondo ; text: texto dentro del botón ; size: tamaño del botòn ; disabled : si el botòn se encuentra deshabilitado
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    setDisabled(text === '-' && productQty === 0 ? true : false)
+  }, [disabled, productQty])
+
   return (
     <>
-      <button disabled={text === '-' && productQty === 0} onClick={onClick}>
+      <button disabled={disabled} onClick={onClick}>
         {text}
       </button>
 

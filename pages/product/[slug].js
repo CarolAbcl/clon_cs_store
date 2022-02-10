@@ -7,6 +7,10 @@ import Icon from '@material-ui/core/Icon'
 import priceFormat from '../../helpers/priceFormat'
 import { getProducts } from '../api/product/products'
 import { getProductById } from '../api/product/[id]'
+import { useRouter } from 'next/router'
+import Loader from '../../components/Loader'
+import { useSelector } from 'react-redux'
+import purchaseFormat from '../../helpers/purchaseFormat'
 
 export const getStaticPaths = async () => {
   const { products } = await getProducts()
@@ -28,11 +32,18 @@ export const getStaticProps = async ({ params }) => {
   const { product } = await getProductById(ID_product)
   return {
     props: { product },
+    revalidate: 1,
   }
 }
 
 function ProductInfo({ product }) {
-  return (
+  const { producers } = useSelector((state) => state)
+  const producer = producers.find((producer) => producer.producerInfo.ID_producer == product.producer.ID_producer)
+
+  const router = useRouter()
+  return router.isFallback ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
         <div className="product-summary">
@@ -61,10 +72,6 @@ function ProductInfo({ product }) {
             <hr />
             <div className="element-block">
               <div className="price-element">
-                <p>Precio unidad al por mayor</p>
-                <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
-              </div>
-              <div className="price-element right">
                 <p>
                   Precio por caja <br className="mobile" />
                   <span className="desktop">iva incluido</span>
@@ -72,13 +79,19 @@ function ProductInfo({ product }) {
                 </p>
                 <p className="secondary impact">{priceFormat(product.price_package)}</p>
               </div>
-            </div>
-            <div className="element-block">
-              <div className="price-element">
-                <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
+              <div className="price-element right">
+                <p>Precio unidad al por mayor</p>
+                <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
             </div>
+            {product.suggested_sale_price != 0 && (
+              <div className="element-block">
+                <div className="price-element right">
+                  <p>Precio sugerido de venta</p>
+                  <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
+                </div>
+              </div>
+            )}
             <div className="element-block">
               <div>
                 <p>Duración: {product.duration ? <span className="primary"> {product.duration} meses</span> : ''}</p>
@@ -95,8 +108,32 @@ function ProductInfo({ product }) {
               </p>
             </div>
             <hr />
+            {producer ? (
+              producer.remaining !== 0 && (
+                <div className="remainingProducts">
+                  <p>
+                    Te faltan {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para cumplir
+                    con el pedido mínimo del productor
+                  </p>
+                  <Link href="/catalogo">
+                    <a className="links">ver más del productor</a>
+                  </Link>
+                </div>
+              )
+            ) : (
+              <div className="remainingProducts">
+                <p>
+                  El pedido mínimo para este productor es de{' '}
+                  {purchaseFormat(product.producer.min_producer_purchase, product.producer.type_sale.type, true)} <br />
+                </p>
+                <Link href="/catalogo">
+                  <a className="links">ver más del productor</a>
+                </Link>
+              </div>
+            )}
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
+
               <QtyAddProduct product={product} />
               <Icon className="desktop gray">share</Icon>
             </div>
@@ -324,6 +361,24 @@ function ProductInfo({ product }) {
 
           .categories p {
             margin: 0;
+          }
+
+          .remainingProducts {
+            width: 100%;
+            background-color: #ffffe3;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+          }
+
+          .remainingProducts p {
+            margin: 0;
+            display: inline;
+          }
+
+          .remainingProducts .links {
+            margin-left: 0.5rem;
+            display: inline;
           }
 
           @media (min-width: 600px) {

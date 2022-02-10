@@ -27,9 +27,9 @@ describe('Catalogo desktop', () => {
     cy.get('.go-up').should('not.be.visible')
   })
 
-  it('deberia mostrar buscador', () => {
-    cy.get('input[type="search"]').should('be.visible')
-  })
+  // it('deberia mostrar buscador', () => {
+  //   cy.get('input[type="search"]').should('be.visible')
+  // })
 
   it('deberia mostrar logo ComeS', () => {
     cy.get('[alt="logo"]').should('be.visible')
@@ -117,9 +117,9 @@ describe('Catalogo mobile', () => {
     cy.get('.go-up').should('not.be.visible')
   })
 
-  it('deberia mostrar buscador', () => {
-    cy.get('input[type="search"]').should('be.visible')
-  })
+  // it('deberia mostrar buscador', () => {
+  //   cy.get('input[type="search"]').should('be.visible')
+  // })
 
   it('deberia mostrar logo ComeS', () => {
     cy.get('[alt="logo"]').should('be.visible')
@@ -178,9 +178,9 @@ describe('Catalogo mobile', () => {
     cy.get('.containerDetailsProduct').should('not.exist')
   })
 
-  it('deberia mostrar boton para ver filtros', () => {
-    cy.get('.header-catalogo > .filters-container > .filter-button').should('be.visible')
-  })
+  // it('deberia mostrar boton para ver filtros', () => {
+  //   cy.get('.header-catalogo > .filters-container > .filter-button').should('be.visible')
+  // })
 
   it('deberia mostrar boton menu hamburguesa', () => {
     cy.get('.burger_container').should('be.visible')

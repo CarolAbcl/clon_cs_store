@@ -57,11 +57,7 @@ const handlerProductById = nc()
   .get(async (req, res) => {
     const { id } = req.query
     try {
-<<<<<<< HEAD
       const product = await getProductById(id)
-=======
-      const { product } = await getProductById(id)
->>>>>>> 8c5f655b6935df7160c95253e618c7e26328381f
 
       if (!product) res.status(204).send()
 

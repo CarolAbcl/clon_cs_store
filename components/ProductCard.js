@@ -123,8 +123,12 @@ function ProductCard({ product, inCart }) {
                 width={50}
               />
               <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
-              <hr />
-              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+              {product.suggested_sale_price != 0 && (
+                <>
+                  <hr />
+                  <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+                </>
+              )}
             </div>
             <div className="infoMinPurshase">
               <p className="links" href="#">

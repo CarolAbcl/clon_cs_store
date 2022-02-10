@@ -182,7 +182,7 @@ function Carrito() {
                     catálogo
                   </a>
                 </Link>
-                para agregar.
+                 para agregar.
               </h2>
             </div>
           )}
@@ -203,7 +203,6 @@ function Carrito() {
           h2 {
             font-weight: normal;
           }
-
           h3 {
             margin: 1.5rem;
             text-align: left;
@@ -270,14 +269,12 @@ function Carrito() {
             margin: 1rem 0rem;
             overflow: hidden;
           }
-
           .remainingProducts p,
           .remainingProducts .links {
             margin: 0;
             padding: 0.5rem 1.5rem;
             text-align: center;
           }
-
           .remainingProducts .links {
             background-color: var(--secondary);
             color: white;
@@ -290,7 +287,6 @@ function Carrito() {
             font-size: 0.825rem;
             text-align: left;
           }
-
           @media (min-width: 800px) {
             .containerCart {
               display: flex;

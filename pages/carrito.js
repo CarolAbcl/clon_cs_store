@@ -27,7 +27,7 @@ function Carrito() {
 
   useEffect(() => {
     setcartLength(cart.length)
-  }, [cartLength])
+  }, [cart])
 
   return (
     <>

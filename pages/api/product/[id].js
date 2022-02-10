@@ -19,6 +19,7 @@ export const getProductById = async (id) => {
       offer_price: true,
       delivery_time: true,
       modification_date: true,
+      weight: true,
       image: {
         select: {
           ID_image: true,

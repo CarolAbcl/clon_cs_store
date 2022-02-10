@@ -26,6 +26,7 @@ export const getProducts = async (take = undefined, skip = undefined) => {
       offer_price: true,
       delivery_time: true,
       modification_date: true,
+      weight: true,
       image: {
         where: {
           isMain: true,

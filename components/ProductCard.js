@@ -83,7 +83,7 @@ function ProductCard({ product, inCart }) {
             <div className="minPurshase">
               <p className="textMinPurshase">
                 Pedido mín. del productor: &nbsp;
-                <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
+                <span className="secondary">{purchaseFormat(min_producer_purchase, type, true)}</span>
               </p>
             </div>
             {!inCart && (
@@ -129,7 +129,7 @@ function ProductCard({ product, inCart }) {
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}. <br />
+                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}. <br />
                   Haz click para ver más del productor.
                 </div>
               </a>

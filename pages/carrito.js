@@ -27,7 +27,7 @@ function Carrito() {
 
   useEffect(() => {
     setcartLength(cart.length)
-  }, [cartLength])
+  }, [cart.length])
 
   return (
     <>
@@ -38,7 +38,7 @@ function Carrito() {
         </div>
         <hr />
         <div className="containerCart">
-          {cart.length !== 0 ? (
+          {cartLength !== 0 ? (
             <>
               {producers.map((producer) => (
                 <div key={producer.producerInfo.ID_product}>

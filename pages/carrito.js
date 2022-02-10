@@ -265,7 +265,7 @@ function Carrito() {
             display: flex;
             gap: 0.5rem;
             align-items: center;
-            background-color: rgb(255, 255, 227);
+            background-color: #ffffe3;
             border-radius: 2rem;
             margin: 1rem 0rem;
             overflow: hidden;

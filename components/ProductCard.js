@@ -43,26 +43,26 @@ function ProductCard({ product, inCart }) {
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
               <a>
-                {product.image[0] ?
-                  product.image.map((image) => (
-                    image.isMain && (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
-                        width={110}
-                        height={150}
-                        alt={image.alt}
-                        title={image.name_image}
-                        key={image.ID_image}></Image>
-                    )
-                  ))
-                 : (
+                {product.image[0] ? (
+                  product.image.map(
+                    (image) =>
+                      image.isMain && (
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
+                          width={110}
+                          height={150}
+                          alt={image.alt}
+                          title={image.name_image}
+                          key={image.ID_image}></Image>
+                      )
+                  )
+                ) : (
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/imagen_no_disponible.jpg`}
                     width={110}
                     height={150}
-                    alt='Imagen no disponible'
-                    title={product.name}
-                    ></Image>
+                    alt="Imagen no disponible"
+                    title={product.name}></Image>
                 )}
               </a>
             </Link>
@@ -123,8 +123,12 @@ function ProductCard({ product, inCart }) {
                 width={50}
               />
               <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
-              <hr />
-              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+              {product.suggested_sale_price != 0 && (
+                <>
+                  <hr />
+                  <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+                </>
+              )}
             </div>
             <div className="infoMinPurshase">
               <a className="links" href="#">

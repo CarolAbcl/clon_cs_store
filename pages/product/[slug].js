@@ -84,12 +84,14 @@ function ProductInfo({ product }) {
                 <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
             </div>
-            <div className="element-block">
-              <div className="price-element right">
-                <p>Precio sugerido de venta</p>
-                <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
+            {product.suggested_sale_price != 0 && (
+              <div className="element-block">
+                <div className="price-element right">
+                  <p>Precio sugerido de venta</p>
+                  <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
+                </div>
               </div>
-            </div>
+            )}
             <div className="element-block">
               <div>
                 <p>Duración: {product.duration ? <span className="primary"> {product.duration} meses</span> : ''}</p>
@@ -121,7 +123,8 @@ function ProductInfo({ product }) {
             ) : (
               <div className="remainingProducts">
                 <p>
-                  El pedido mínimo para este productor es de {purchaseFormat(product.producer.min_producer_purchase, product.producer.type_sale.type, true)} <br/>
+                  El pedido mínimo para este productor es de{' '}
+                  {purchaseFormat(product.producer.min_producer_purchase, product.producer.type_sale.type, true)} <br />
                 </p>
                 <Link href="/catalogo">
                   <a className="links">ver más del productor</a>

@@ -19,7 +19,7 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
   return (
     <>
       <div className="container">
-        {inCart && <p>Precio por caja</p>}
+        <p>Precio por caja</p>
         <div className="flex">
           <h4>{priceFormat(product.price_package)} </h4>
           {!inCart && (
@@ -28,7 +28,7 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
               onClick={() => {
                 setShow(!show)
               }}>
-              <Icon style={{ fontSize: 1.2 + 'em' }}>info</Icon>
+              <Icon style={{ fontSize: 1.4 + 'em'}}>info</Icon>
             </button>
           )}
         </div>
@@ -53,7 +53,7 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
             background: none;
             border: none;
             cursor: pointer;
-            color: var(--gray);
+            color: var(--purple);
           }
 
           p {

@@ -41,7 +41,7 @@ function Carrito() {
           {cartLength !== 0 ? (
             <>
               {producers.map((producer) => (
-                <div key={producer.producerInfo.ID_producer}>
+                <div key={producer.producerInfo.ID_producer} className="containerCard">
                   <div className="containerCardMobile">
                     <div className="producerInfo">
                       <h3>{producer.producerInfo.brand_name}</h3>
@@ -218,6 +218,7 @@ function Carrito() {
             text-align: right;
             padding: 0.75rem 1rem;
             margin: 0.5rem 0;
+            width: 100%;
           }
           .font125 {
             font-size: 1.25rem !important;
@@ -306,7 +307,10 @@ function Carrito() {
               align-items: flex-start;
               flex-wrap: nowrap;
               justify-content: space-between;
-              width: 60rem;
+              width: 100%;
+            }
+            .containerCard {
+              width: 65%;
             }
             .containerTotalDesktop {
               display: flex;
@@ -317,7 +321,7 @@ function Carrito() {
               background-color: var(--light);
               box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 0.5);
               border-radius: 8px;
-              width: 32%;
+              width: 35%;
               height: fit-content;
               padding: 2rem;
               position: sticky;

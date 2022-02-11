@@ -310,7 +310,8 @@ function Carrito() {
               width: 100%;
             }
             .containerCard {
-              width: 65%;
+              /*width: 65%;*/
+              width: 90%;
             }
             .containerTotalDesktop {
               display: flex;
@@ -321,7 +322,7 @@ function Carrito() {
               background-color: var(--light);
               box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 0.5);
               border-radius: 8px;
-              width: 35%;
+              width: 36rem;
               height: fit-content;
               padding: 2rem;
               position: sticky;

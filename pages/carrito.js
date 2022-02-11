@@ -1,6 +1,6 @@
 import SearchBar from '../components/atoms/SearchBar'
 import ProductCard from '../components/ProductCard'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CardsGroup from '../components/CardsGroup'
 import { Button, ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
@@ -12,6 +12,7 @@ import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 import { sendOrder } from '../helpers/sendOrder'
 import AddNoteOrder from '../components/AddNoteOrder'
+import { clearCart } from '../store/actions/cartAction'
 
 function Carrito() {
   const router = useRouter()
@@ -31,6 +32,7 @@ function Carrito() {
     setcartLength(cart.length)
   }, [cart])
 
+  const dispatch = useDispatch()
   return (
     <>
       <div className="container">
@@ -110,7 +112,7 @@ function Carrito() {
                 <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" />
+                  <Button value="cancelar" color="var(--secondary)" onClick={() => dispatch(clearCart())} />
                   <Button
                     value="confirmar"
                     color="var(--primary)"
@@ -153,7 +155,7 @@ function Carrito() {
                 <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" />
+                  <Button value="cancelar" color="var(--secondary)" onClick={() => dispatch(clearCart())} />
                   <Button
                     value="confirmar"
                     color="var(--primary)"
@@ -182,6 +184,7 @@ function Carrito() {
                 No has agregado productos al carrito. Ingresa al
                 <Link href="/catalogo">
                   <a className="primary" style={{ fontSize: 'inherit' }}>
+                    {' '}
                     catálogo
                   </a>
                 </Link>{' '}

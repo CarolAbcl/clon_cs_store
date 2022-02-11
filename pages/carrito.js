@@ -218,7 +218,6 @@ function Carrito() {
             text-align: right;
             padding: 0.75rem 1rem;
             margin: 0.5rem 0;
-            width: 100%;
           }
           .font125 {
             font-size: 1.25rem !important;
@@ -294,8 +293,6 @@ function Carrito() {
           @media (min-width: 800px) {
             .containerCart {
               display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
             }
             .containerCardMobile {
               display: none;
@@ -305,15 +302,14 @@ function Carrito() {
             }
             .containerCardDesktop {
               display: flex;
-              flex: 3;
               flex-direction: column;
               align-items: flex-start;
               flex-wrap: nowrap;
               justify-content: space-between;
+              width: 60rem;
             }
             .containerTotalDesktop {
               display: flex;
-              flex: 1;
               flex-direction: column;
               align-items: center;
               flex-wrap: nowrap;
@@ -324,8 +320,9 @@ function Carrito() {
               width: 32%;
               height: fit-content;
               padding: 2rem;
-              position: fixed;
-              right: 0.825rem;
+              position: sticky;
+              top: 6rem;
+              margin-left: 2rem;
             }
             .remainingProducts {
               display: flex;

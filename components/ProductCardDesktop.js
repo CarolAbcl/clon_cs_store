@@ -86,7 +86,7 @@ function ProductCardDesktop({ product, inCart }) {
           min-height: '15rem';
           position: relative;
           justify-content: space-between;
-          width: 65%;
+          width: 100%;
         }
         .containerInfoProduct {
           display: flex;

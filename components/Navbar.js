@@ -27,6 +27,7 @@ function Navbar() {
   const handlerSlideUp = () => window.scrollTo(0, 0)
   // Se llama al state cart de redux
   const cart = useSelector((state) => state.cart)
+  console.log(cart)
   // se crea un estado para ir guardando la cantidad total de productos en el carrito
   const [qtyTotal, setQtyTotal] = useState(0)
   // variable que ejecuta la suma de las cantidades de cada producto en el carrito

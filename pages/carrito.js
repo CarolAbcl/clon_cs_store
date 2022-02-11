@@ -11,11 +11,13 @@ import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 import { sendOrder } from '../helpers/sendOrder'
+import AddNoteOrder from '../components/AddNoteOrder'
 
 function Carrito() {
   const router = useRouter()
 
   const { cart, producers } = useSelector((state) => state)
+  const noteOrder = useSelector((state) => state.note)
   // monto total de carrito sin formato
   const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
   // monto total neto de carrito sin formato
@@ -40,51 +42,52 @@ function Carrito() {
         <div className="containerCart">
           {cartLength !== 0 ? (
             <>
-              {producers.map((producer) => (
-                <div key={producer.producerInfo.ID_producer} className="containerCard">
-                  <div className="containerCardMobile">
-                    <div className="producerInfo">
-                      <h3>{producer.producerInfo.brand_name}</h3>
-                      {producer.remaining !== 0 && (
-                        <div className="remainingProducts">
-                          <p>
-                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
-                            cumplir con el pedido mínimo del productor
-                          </p>
-                          <Link href="/catalogo">
-                            <a className="links">Completar</a>
-                          </Link>
-                        </div>
-                      )}
+              <div className="containerProducers">
+                {producers.map((producer) => (
+                  <div key={producer.producerInfo.ID_producer} className="containerCard">
+                    <div className="containerCardMobile">
+                      <div className="producerInfo">
+                        <h3>{producer.producerInfo.brand_name}</h3>
+                        {producer.remaining !== 0 && (
+                          <div className="remainingProducts">
+                            <p>
+                              Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                              cumplir con el pedido mínimo del productor
+                            </p>
+                            <Link href="/catalogo">
+                              <a className="links">Completar</a>
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+                      <CardsGroup inCart>
+                        {producer.products.map((product) => (
+                          <ProductCard key={product.ID_product} product={product} inCart />
+                        ))}
+                      </CardsGroup>
                     </div>
-                    <CardsGroup inCart>
+                    <div className="containerCardDesktop">
+                      <div className="producerInfo">
+                        <h3>{producer.producerInfo.brand_name}</h3>
+                        {producer.remaining !== 0 && (
+                          <div className="remainingProducts">
+                            <p>
+                              Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
+                              cumplir con el pedido mínimo del productor
+                            </p>
+                            <Link href="/catalogo">
+                              <a className="links">Completar</a>
+                            </Link>
+                          </div>
+                        )}
+                      </div>
                       {producer.products.map((product) => (
-                        <ProductCard key={product.ID_product} product={product} inCart />
+                        <ProductCardDesktop key={product.ID_product} product={product} inCart />
                       ))}
-                    </CardsGroup>
-                  </div>
-                  <div className="containerCardDesktop">
-                    <div className="producerInfo">
-                      <h3>{producer.producerInfo.brand_name}</h3>
-                      {producer.remaining !== 0 && (
-                        <div className="remainingProducts">
-                          <p>
-                            Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
-                            cumplir con el pedido mínimo del productor
-                          </p>
-                          <Link href="/catalogo">
-                            <a className="links">Completar</a>
-                          </Link>
-                        </div>
-                      )}
                     </div>
-                    {producer.products.map((product) => (
-                      <ProductCardDesktop key={product.ID_product} product={product} inCart />
-                    ))}
                   </div>
-                </div>
-              ))}
-
+                ))}
+              </div>
               <div className="containerTotalMobile">
                 <div className="total">
                   <p className="font125">
@@ -104,7 +107,7 @@ function Carrito() {
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
-
+                <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
@@ -113,7 +116,7 @@ function Carrito() {
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {
-                      window.open(sendOrder(producers))
+                      window.open(sendOrder(producers, noteOrder))
                     }}
                   />
                 </div>
@@ -147,8 +150,8 @@ function Carrito() {
                     Total: <span className="font125 secondary">{priceFormat(totalCart)}</span>
                   </p>
                 </div>
+                <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
-
                 <div className="actionButton">
                   <Button value="cancelar" color="var(--secondary)" />
                   <Button
@@ -156,7 +159,7 @@ function Carrito() {
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {
-                      window.open(sendOrder(producers))
+                      window.open(sendOrder(producers, noteOrder))
                     }}
                   />
                 </div>
@@ -176,7 +179,7 @@ function Carrito() {
             <div className="containerEmptyCart center">
               <Icon style={{ color: 'var(--light-gray', fontSize: '80px', marginTop: '3rem' }}>shopping_cart</Icon>
               <h2>
-                No has agregado productos al carrito. Ingresa al{' '}
+                No has agregado productos al carrito. Ingresa al
                 <Link href="/catalogo">
                   <a className="primary" style={{ fontSize: 'inherit' }}>
                     catálogo
@@ -216,8 +219,7 @@ function Carrito() {
           }
           .total {
             text-align: right;
-            padding: 0.75rem 1rem;
-            margin: 0.5rem 0;
+            padding: 0.5rem;
             width: 100%;
           }
           .font125 {
@@ -228,8 +230,8 @@ function Carrito() {
           }
           .amountTotal {
             border-top: 1px solid var(--light-gray);
-            padding: 0.5rem 0;
-            margin: 0.5rem 0;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
           }
           .containerCardMobile {
             display: flex;
@@ -294,6 +296,7 @@ function Carrito() {
           @media (min-width: 800px) {
             .containerCart {
               display: flex;
+              justify-content: center;
             }
             .containerCardMobile {
               display: none;
@@ -310,8 +313,7 @@ function Carrito() {
               width: 100%;
             }
             .containerCard {
-              /*width: 65%;*/
-              width: 90%;
+              width: 100%;
             }
             .containerTotalDesktop {
               display: flex;
@@ -348,6 +350,11 @@ function Carrito() {
               color: white;
               text-decoration: none;
               outline: none;
+            }
+            .containerProducers {
+              display: flex;
+              flex-direction: column;
+              width: 90%;
             }
             .textSmall {
               text-align: left;

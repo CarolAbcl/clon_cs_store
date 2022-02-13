@@ -13,6 +13,7 @@ import purchaseFormat from '../helpers/purchaseFormat'
 import { sendOrder } from '../helpers/sendOrder'
 import AddNoteOrder from '../components/AddNoteOrder'
 import { clearCart } from '../store/actions/cartAction'
+import { openModal } from '../store/actions/modalAction'
 
 function Carrito() {
   const router = useRouter()
@@ -112,7 +113,11 @@ function Carrito() {
                 <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" onClick={() => dispatch(clearCart())} />
+                  <Button
+                    value="cancelar"
+                    color="var(--secondary)"
+                    onClick={() => dispatch(openModal(open, 'CancelcartModal'))}
+                  />
                   <Button
                     value="confirmar"
                     color="var(--primary)"
@@ -155,7 +160,11 @@ function Carrito() {
                 <AddNoteOrder />
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
-                  <Button value="cancelar" color="var(--secondary)" onClick={() => dispatch(clearCart())} />
+                  <Button
+                    value="cancelar"
+                    color="var(--secondary)"
+                    onClick={() => dispatch(openModal(open, 'CancelcartModal'))}
+                  />
                   <Button
                     value="confirmar"
                     color="var(--primary)"

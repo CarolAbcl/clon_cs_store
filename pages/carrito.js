@@ -114,12 +114,12 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button
-                    value="cancelar"
+                    value="Cancelar"
                     color="var(--secondary)"
                     onClick={() => dispatch(openModal(open, 'CancelcartModal'))}
                   />
                   <Button
-                    value="confirmar"
+                    value="Confirmar"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {
@@ -161,12 +161,12 @@ function Carrito() {
                 <ButtonSecondary value="Seguir comprando" fontSize="1rem" onClick={() => router.push('/catalogo')} />
                 <div className="actionButton">
                   <Button
-                    value="cancelar"
+                    value="Cancelar"
                     color="var(--secondary)"
                     onClick={() => dispatch(openModal(open, 'CancelcartModal'))}
                   />
                   <Button
-                    value="confirmar"
+                    value="Confirmar"
                     color="var(--primary)"
                     disabled={producers.some((producer) => producer.complete == false)}
                     onClick={() => {

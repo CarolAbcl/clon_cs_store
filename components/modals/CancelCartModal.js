@@ -9,7 +9,7 @@ function CancelcartModal() {
   return (
     <>
       <div className="containerModal">
-        <Icon style={{ fontSize: 7 + 'em', color: 'var(--primary)' }}>info</Icon>
+        <Icon style={{ fontSize: 7 + 'em', color: 'var(--secondary)' }}>info</Icon>
         <h1 style={{ fontSize: 1.5 + 'em' }}>
           Estás a punto de eliminar <br /> el carrito
         </h1>

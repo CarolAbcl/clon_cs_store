@@ -1,11 +1,15 @@
 import { Icon } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
+import { executeAlert } from '../store/actions/alertsAction'
+
+// para ejecutar una alarma se le envía el siguiente objeto:
+// { message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product }
 
 function Alert() {
-  const [state, setstate] = useState({ message: '', type: null, product: {}, show: 'hide' })
   const { message, type, product } = useSelector((state) => state.alert)
-
+  const [state, setstate] = useState({ message, type, product, show: 'hide' })
+  const dispatch = useDispatch()
   useEffect(() => {
     //type es added o remove para no ejecutar en el estado inicial
     if (type) {
@@ -14,6 +18,7 @@ function Alert() {
         setstate({ message: message, type: type, product: product, show: 'hide' })
       }, 2000)
       const time2 = setTimeout(() => {
+        dispatch(executeAlert({ message: '', type: '', product: {} }))
         setstate({ message: '', type: null, product: {}, show: 'hide' })
       }, 3000)
       return () => {
@@ -25,7 +30,7 @@ function Alert() {
 
   return (
     <>
-      <div className={`alert ${state.type} ${state.show}`}>
+      <div className={`alert ${state.type ? state.type : ''} ${state.show}`}>
         <Icon>{state.type === 'added' ? 'done' : 'priority_high'}</Icon>
         <p className="message">{state.message}</p>
       </div>

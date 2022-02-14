@@ -15,9 +15,9 @@ function QtyAddCart({ product }) {
   // si el producto no existe en el carrito entonces será 0 y si existe devuelve la cantidad
   const productQty = !exist ? 0 : exist.qty
   const addToCart = (product) => {
-    dispatch(addItem(product))    
-    !exist && 
-    dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
+    dispatch(addItem(product))
+    !exist &&
+      dispatch(executeAlert({ message: 'Producto añadido al carrito', type: 'added', product: product.ID_product }))
   }
   const removeToCart = (product) => {
     dispatch(removeItem(product))
@@ -29,8 +29,8 @@ function QtyAddCart({ product }) {
   // cada vez que un producto cambie su cantidad, se guardará en el estado
   useEffect(() => {
     setQtyProduct(productQty)
-    dispatch(addProducer({product, cart}))
-  }, [exist, productQty])
+    dispatch(addProducer({ product, cart }))
+  }, [cart, dispatch, exist, product, productQty])
 
   return (
     <>
@@ -38,7 +38,6 @@ function QtyAddCart({ product }) {
         <RoundButton
           text={'-'}
           backgroundColor={'var(--secondary)'}
-          disabled
           onClick={() => removeToCart(product)}
           productQty={qtyProduct}
         />

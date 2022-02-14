@@ -8,22 +8,22 @@ describe('Catalogo desktop', () => {
   })
 
   it('deberia mostrar boton go up al bajar scroll', () => {
-    cy.scrollTo(0, 4)
+    cy.scrollTo(0, 30)
     cy.get('.go-up').should('be.visible')
   })
 
   it('deberia ser visible el navbar', () => {
-    cy.scrollTo(0, 4)
+    cy.scrollTo(0, 30)
     cy.get('.navbar').should('be.visible')
   })
 
   it('deberia ser visible el navbar', () => {
-    cy.scrollTo(0, 4)
+    cy.scrollTo(0, 30)
     cy.get('.navbar').should('be.visible')
   })
 
   it('deberia ocultar boton go up al subir scroll a la posicion incial (y = 0)', () => {
-    cy.scrollTo(0, -4)
+    cy.scrollTo(0,0)
     cy.get('.go-up').should('not.be.visible')
   })
 
@@ -59,7 +59,7 @@ describe('Catalogo desktop', () => {
 
     // button -
     cy.get(
-      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct > div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     // Input qty
@@ -103,17 +103,17 @@ describe('Catalogo mobile', () => {
   })
 
   it('deberia mostrar boton go up al bajar scroll', () => {
-    cy.scrollTo(0, 4)
+    cy.scrollTo(0, 30)
     cy.get('.go-up').should('be.visible')
   })
 
   it('deberia ser visible el navbar', () => {
-    cy.scrollTo(0, 4)
+    cy.scrollTo(0, 30)
     cy.get('.navbar').should('be.visible')
   })
 
   it('deberia ocultar boton go up al subir scroll a la posicion incial (y = 0)', () => {
-    cy.scrollTo(0, -4)
+    cy.scrollTo(0, 0)
     cy.get('.go-up').should('not.be.visible')
   })
 
@@ -149,7 +149,7 @@ describe('Catalogo mobile', () => {
 
     // button -
     cy.get(
-      '.ProductCard:nth-child(2) .containerInfoProduct div:nth-child(2) button:nth-of-type(1)'
+      '.ProductCard:nth-child(2) .containerInfoProduct > div:nth-child(2) button:nth-of-type(1)'
     ).click({ force: true })
 
     // Input qty

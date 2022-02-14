@@ -43,13 +43,27 @@ function ProductCard({ product, inCart }) {
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
               <a>
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${
-                    product.image[0] ? product.image[0].file_image : 'imagen_no_disponible.jpg'
-                  }`}
-                  width={110}
-                  height={150}
-                  alt="Imagen producto"></Image>
+                {product.image[0] ?
+                  product.image.map((image) => (
+                    image.isMain && (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
+                        width={110}
+                        height={150}
+                        alt={image.alt}
+                        title={image.name_image}
+                        key={image.ID_image}></Image>
+                    )
+                  ))
+                 : (
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/imagen_no_disponible.jpg`}
+                    width={110}
+                    height={150}
+                    alt='Imagen no disponible'
+                    title={product.name}
+                    ></Image>
+                )}
               </a>
             </Link>
           </div>
@@ -67,8 +81,9 @@ function ProductCard({ product, inCart }) {
               {product.producer.brand_name}
             </a>
             <div className="minPurshase">
-              <p className="textMinPurshase">Pedido mín. del productor: &nbsp;
-              <span className="secondary">{purchaseFormat(min_producer_purchase, type)}</span>
+              <p className="textMinPurshase">
+                Pedido mín. del productor: &nbsp;
+                <span className="secondary">{purchaseFormat(min_producer_purchase, type, true)}</span>
               </p>
             </div>
             {!inCart && (
@@ -108,13 +123,17 @@ function ProductCard({ product, inCart }) {
                 width={50}
               />
               <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
-              <hr />
-              <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+              {product.suggested_sale_price != 0 && (
+                <>
+                  <hr />
+                  <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
+                </>
+              )}
             </div>
             <div className="infoMinPurshase">
               <a className="links" href="#">
                 <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type)}. <br />
+                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}. <br />
                   Haz click para ver más del productor.
                 </div>
               </a>

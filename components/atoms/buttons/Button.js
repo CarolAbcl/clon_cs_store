@@ -21,6 +21,7 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           width: ${width || 'auto'};
           height: ${height || 'auto'};
           flex: 1;
+          font-family: Aller;
         }
 
         button:hover {
@@ -31,7 +32,7 @@ function Button({ value, color = '#8AC541', width, height, fontSize, ...rest }) 
           transition: all 0.2s;
         }
 
-        button:disabled{
+        button:disabled {
           background-color: var(--gray);
           color: white;
           border-color: white;

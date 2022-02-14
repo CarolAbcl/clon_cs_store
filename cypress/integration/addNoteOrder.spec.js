@@ -3,7 +3,7 @@ describe('Prueba agregando nota al pedido', function () {
     cy.visit('http://localhost:3000/catalogo')
   })
 
-  it('se prueba funcionalidad de boton agregar nota al pedido', () => {
+  it('se prueba funcionalidad de boton agregar nota al pedido, se agrega texto y se cancela', () => {
     cy.get('.ProductCard:nth-child(2) .containerInfoProduct div #quantity').type('30', { force: true })
     cy.get('[data-test-id="total-items-card"]').click({ force: true })
     cy.get('.containerTotalDesktop > :nth-child(2) > .textAddNoteOrder').type('se agrega nota al pedido', {

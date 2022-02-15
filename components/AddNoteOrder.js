@@ -32,7 +32,7 @@ function AddNoteOrder() {
             </button>
           )}
         </div>
-        {show || noteOrder !== '' ? (
+        {show === true || noteOrder !== '' ? (
           <>
             <textarea
               className="textAddNoteOrder"

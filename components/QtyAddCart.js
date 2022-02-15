@@ -42,7 +42,7 @@ function QtyAddCart({ product }) {
           productQty={qtyProduct}
         />
         <input
-          type="tel"
+          type="number"
           id="quantity"
           value={qtyProduct}
           onChange={(e) => dispatch(addItemInput(product, e.target.value))}></input>
@@ -55,7 +55,14 @@ function QtyAddCart({ product }) {
             border: none;
             text-align: center;
             outline: none;
-            width: 1.1rem;
+            width: 4ex;
+            -moz-appearance: textfield;
+          }
+          /* Chrome, Safari, Edge, Opera */
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
           }
           div {
             display: flex;

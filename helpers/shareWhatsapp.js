@@ -31,6 +31,7 @@ export const sendOrder = (producers, noteOrder) => {
 
     return nameProducer + products
   })
+  
   // nota del pedido
   const textNoteOrder = noteOrder ? '%0A-%20*Nota del pedido:%20' + noteOrder + '*' : ''
 
@@ -38,4 +39,12 @@ export const sendOrder = (producers, noteOrder) => {
   const msjsaludo = 'Hola ComeS, adjunto mi pedido:'
 
   return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}${infoOrder}${msgetotalAmount}${textNoteOrder}`
+}
+
+
+export const sendWhatsApp = () => {
+  const urlDesktop = 'https://api.whatsapp.com/send?phone='
+  const msjsaludo = 'Hola ComeS, ...'
+
+  return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}`
 }

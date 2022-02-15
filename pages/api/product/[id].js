@@ -19,6 +19,7 @@ export const getProductById = async (id) => {
       offer_price: true,
       delivery_time: true,
       modification_date: true,
+      weight: true,
       image: {
         select: {
           ID_image: true,
@@ -57,7 +58,7 @@ const handlerProductById = nc()
   .get(async (req, res) => {
     const { id } = req.query
     try {
-      const { product } = await getProductById(id)
+      const product = await getProductById(id)
 
       if (!product) res.status(204).send()
 

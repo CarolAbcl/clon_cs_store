@@ -2,7 +2,6 @@ import prisma from '../../../prisma/client'
 
 export const getProducts = async (take = undefined, skip = undefined) => {
   const productCount = await prisma.product.count()
-
   const products = await prisma.product.findMany({
     skip: !parseInt(skip) ? 0 : parseInt(skip),
     take: !parseInt(take) ? productCount : parseInt(take),
@@ -27,6 +26,7 @@ export const getProducts = async (take = undefined, skip = undefined) => {
       offer_price: true,
       delivery_time: true,
       modification_date: true,
+      weight: true,
       image: {
         where: {
           isMain: true,
@@ -51,6 +51,7 @@ export const getProducts = async (take = undefined, skip = undefined) => {
 
   return { productCount, products }
 }
+
 
 export default async function handlerProducts(req, res) {
   const { take, skip } = req.query

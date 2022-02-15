@@ -25,3 +25,8 @@ export const deleteItemCart = (product) => (dispatch) => {
     payload: product,
   })
 }
+export const clearCart = () => (dispatch) => {
+  dispatch({
+    type: types.CLEAR_CART,
+  })
+}

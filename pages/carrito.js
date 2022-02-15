@@ -193,7 +193,7 @@ function Carrito() {
                 <Link href="/catalogo">
                   <a className="primary" style={{ fontSize: 'inherit' }}>
                     {' '}
-                    catálogo
+                    catálogo{' '}
                   </a>
                 </Link>
                 para agregar.

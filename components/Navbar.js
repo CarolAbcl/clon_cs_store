@@ -39,22 +39,22 @@ function Navbar() {
   return (
     <>
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
-        <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
+        <BurgerButton show={show} onClick={(e) => setShow(e.target.checked)} />
         <div className="logo">
           <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" priority />
         </div>
-        <div className={`background ${show ? 'show' : ''}`}></div>
+        <div className={`background ${show ? 'show' : ''}`} onClick={() => setShow(false)}></div>
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
               <Link href="/">
-                <a>Inicio</a>
+                <a onClick={() => setShow(false)}>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
               <Link href="/catalogo">
-                <a>Catálogo</a>
+                <a onClick={() => setShow(false)}>Catálogo</a>
               </Link>
               <hr />
             </li>

@@ -7,10 +7,10 @@ describe('Catalogo desktop', () => {
     cy.contains('CATÁLOGO')
   })
 
-  it('deberia mostrar boton go up al bajar scroll', () => {
-    cy.scrollTo(0, 30)
-    cy.get('.go-up').should('be.visible')
-  })
+  // it('deberia mostrar boton go up al bajar scroll', () => {
+  //   cy.scrollTo(0, 4)
+  //   cy.get('.go-up').should('be.visible')
+  // })
 
   it('deberia ser visible el navbar', () => {
     cy.scrollTo(0, 30)
@@ -102,10 +102,10 @@ describe('Catalogo mobile', () => {
     cy.contains('CATÁLOGO')
   })
 
-  it('deberia mostrar boton go up al bajar scroll', () => {
-    cy.scrollTo(0, 30)
-    cy.get('.go-up').should('be.visible')
-  })
+  // it('deberia mostrar boton go up al bajar scroll', () => {
+  //   cy.scrollTo(0, 4)
+  //   cy.get('.go-up').should('be.visible')
+  // })
 
   it('deberia ser visible el navbar', () => {
     cy.scrollTo(0, 30)

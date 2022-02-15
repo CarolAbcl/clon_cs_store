@@ -27,7 +27,8 @@ export const cartReducer = (state = initialState, action) => {
         : [...state, { ...action.payload, qty: parseInt(action.input) }]
     case types.DELETE_ITEM_CART:
       return state.filter((item) => item.ID_product !== action.payload.ID_product)
-
+    case types.CLEAR_CART:
+      return (state = initialState)
     default:
       return state
   }

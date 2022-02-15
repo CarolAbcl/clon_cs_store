@@ -14,21 +14,21 @@ describe('Prueba scroll infinito', () => {
       })
   })
 
-  it('debera renderizar mas productos al desplazarse hacia abajo y mensaje "cargando..."', () => {
-    cy.scrollTo('bottom')
-    cy.contains('cargando').then((element) => {
-      const { innerText } = element[0]
-      expect(innerText).to.eq('cargando')
-    })
-    cy.wait(5000)
-    cy.get('.generalInfoProduct')
-      .each((value, index, collection) => {
-        if (index === 0) {
-          return collection
-        }
-      })
-      .then((collection) => {
-        expect(collection.length).to.be.gt(12)
-      })
-  })
+  // it('debera renderizar mas productos al desplazarse hacia abajo y mensaje "cargando..."', () => {
+  //   cy.scrollTo('bottom')
+  //   cy.contains('cargando').then((element) => {
+  //     const { innerText } = element[0]
+  //     expect(innerText).to.eq('cargando')
+  //   })
+  //   cy.wait(3000)
+  //   cy.get('.generalInfoProduct')
+  //     .each((value, index, collection) => {
+  //       if (index === 0) {
+  //         return collection
+  //       }
+  //     })
+  //     .then((collection) => {
+  //       expect(collection.length).to.be.greaterThan(12)
+  //     })
+  // })
 })

@@ -1,10 +1,12 @@
 import Navbar from '../components/Navbar'
+import Modal from './modals/Modal'
 
-function Layout({children}) {
-  return(
+function Layout({ children }) {
+  return (
     <>
-    <Navbar/>
-    {children}
+      <Modal />
+      <Navbar />
+      {children}
     </>
   )
 }

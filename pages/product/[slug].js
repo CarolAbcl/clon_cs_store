@@ -84,7 +84,7 @@ function ProductInfo({ product }) {
                 <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
             </div>
-            {product.suggested_sale_price != 0 && (
+            {product.suggested_sale_price != 0 || product.suggested_sale_price != null && (
               <div className="element-block">
                 <div className="price-element right">
                   <p>Precio sugerido de venta</p>
@@ -326,6 +326,10 @@ function ProductInfo({ product }) {
 
           .details-content {
             padding: 0.5rem;
+          }
+
+          .details-content p {
+            white-space: pre-line;
           }
 
           details[open] summary::after {

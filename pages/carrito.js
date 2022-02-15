@@ -10,9 +10,8 @@ import { useEffect, useState } from 'react'
 import ProductCardDesktop from '../components/ProductCardDesktop'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
-import { sendOrder } from '../helpers/sendOrder'
+import { sendOrder } from '../helpers/shareWhatsapp'
 import AddNoteOrder from '../components/AddNoteOrder'
-import { clearCart } from '../store/actions/cartAction'
 import { openModal } from '../store/actions/modalAction'
 
 function Carrito() {

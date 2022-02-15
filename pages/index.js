@@ -51,7 +51,7 @@ export default function Home() {
               <li>
                 <div className="img-container">
                   <Image
-                    src={'/iconos_comeschile-15.png'}
+                    src={'/Iconos_comeschile-15.png'}
                     alt="proceso de compra"
                     width={200}
                     height={200}

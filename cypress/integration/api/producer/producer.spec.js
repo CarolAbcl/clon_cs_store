@@ -16,7 +16,7 @@ describe('API GET producer by id with products', () => {
       })
   })
 
-  it('deberia retornar status 200 y el producto segun id', () => {
+  it('deberia retornar status 200 y el productor segun id con sus productos', () => {
     cy.get('@producerWithProducts').should((response) => {
       const { body, status } = response
       expect(status).to.eq(200)

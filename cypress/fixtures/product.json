@@ -2,7 +2,7 @@
   "data": {
     "product": {
       "ID_product": "1",
-      "name": "Kombucha te blanco lavanda beterraga 330",
+      "name": "Kombucha té blanco lavanda beterraga 330 cc",
       "slug": "kombucha-te-blanco-lavanda-beterraga-330-cc",
       "wholesale_unit_price": 1488,
       "sale_format": 24,
@@ -16,6 +16,7 @@
       "offer_price": null,
       "delivery_time": 10,
       "modification_date": null,
+      "weight": 14680,
       "image": [
         {
           "ID_image": "1",
@@ -28,10 +29,10 @@
       "producer": {
         "ID_producer": "1",
         "brand_name": "Moksha Kombucha",
-        "min_producer_purchase": 28560,
+        "min_producer_purchase": 1,
         "type_sale": {
-          "ID_type_sale": "1",
-          "type": "unidades"
+          "ID_type_sale": "4",
+          "type": "cajas"
         }
       },
       "stock": {

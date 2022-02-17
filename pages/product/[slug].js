@@ -84,13 +84,15 @@ function ProductInfo({ product }) {
                 <p className="secondary impact">{priceFormat(product.wholesale_unit_price)}</p>
               </div>
             </div>
-            {product.suggested_sale_price != 0 || product.suggested_sale_price != null && (
+            {product.suggested_sale_price != (0 || null) ? (
               <div className="element-block">
                 <div className="price-element right">
                   <p>Precio sugerido de venta</p>
                   <p className="secondary low-impact">{priceFormat(product.suggested_sale_price)} </p>
                 </div>
               </div>
+            ) : (
+              ''
             )}
             <div className="element-block">
               <div>

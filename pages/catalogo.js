@@ -19,14 +19,16 @@ export const getServerSideProps = async () => {
   const take = 12
   const { products, productCount } = await getProducts(take, skip)
   const { categories } = await getCategories()
-  return { props: { products, productCount, categories }}
+  return { props: { products, productCount, categories } }
 }
 
-function Catalogo({ products, productCount, categories }) {
+function Catalogo({ products, productCount, categories, setReturnCatalogue, returnCatalogue }) {
   const dispatch = useDispatch()
   const activeFilters = useSelector((state) => state.filters)
+  // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
+  const productsLoad = returnCatalogue.loadedProducts === null ? products : returnCatalogue.loadedProducts
   // Productos buscados
-  const [productsFetch, setProductsFetch] = useState(products)
+  const [productsFetch, setProductsFetch] = useState(productsLoad)
 
   // Determina si quedan o no mas productos
   const [hasMore, setHasMore] = useState(false)
@@ -57,6 +59,22 @@ function Catalogo({ products, productCount, categories }) {
     // productsFetch.length = cantidad de productos en el primer render
     setHasMore(productCount > productsFetch.length ? true : false)
   }, [productsFetch, productCount])
+  // Estado que guarda la posicion del scroll
+  const [positionScroll, setPositionScroll] = useState(0)
+  //useEffect que captura la posicion del scroll
+  useEffect(() => {
+    const scrollCapture = () => {
+      const { scrollY } = window
+      setPositionScroll(scrollY)
+    }
+    window.addEventListener('scroll', scrollCapture)
+    return () => window.removeEventListener('scroll', scrollCapture)
+  }, [])
+  //useEffect que posiciona en el producto si está guardada una posicion anterior
+  useEffect(() => {
+    const prevScrollPosition = returnCatalogue.positionScroll
+    prevScrollPosition !== 0 ? window.scrollTo(0, prevScrollPosition) : window.scrollTo(0, 0)
+  }, [returnCatalogue.positionScroll])
 
   return (
     <div>
@@ -107,7 +125,13 @@ function Catalogo({ products, productCount, categories }) {
               scrollThreshold={1}>
               <CardsGroup>
                 {productsFetch.map((product) => (
-                  <ProductCard key={product.ID_product} product={product} />
+                  <ProductCard
+                    key={product.ID_product}
+                    product={product}
+                    setReturnCatalogue={setReturnCatalogue}
+                    loadedProducts={productsFetch}
+                    positionScroll={positionScroll}
+                  />
                 ))}
               </CardsGroup>
             </InfiniteScroll>

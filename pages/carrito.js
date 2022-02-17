@@ -14,7 +14,7 @@ import { sendOrder } from '../helpers/shareWhatsapp'
 import AddNoteOrder from '../components/AddNoteOrder'
 import { openModal } from '../store/actions/modalAction'
 
-function Carrito() {
+function Carrito({ setReturnCatalogue }) {
   const router = useRouter()
 
   const { cart, producers } = useSelector((state) => state)
@@ -33,6 +33,10 @@ function Carrito() {
   }, [cart])
 
   const dispatch = useDispatch()
+  //se limpia el estado que contiene productos y posicion ya vistos
+  useEffect(() => {
+    setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
+  }, [setReturnCatalogue])
   return (
     <>
       <div className="container">

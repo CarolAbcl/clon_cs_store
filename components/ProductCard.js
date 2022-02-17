@@ -12,7 +12,7 @@ import { deleteItemCart } from '../store/actions/cartAction'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 
-function ProductCard({ product, inCart }) {
+function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, positionScroll }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
@@ -42,27 +42,27 @@ function ProductCard({ product, inCart }) {
         <div className="generalInfoProduct">
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
-              <a>
-                {product.image[0] ?
-                  product.image.map((image) => (
-                    image.isMain && (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
-                        width={110}
-                        height={150}
-                        alt={image.alt}
-                        title={image.name_image}
-                        key={image.ID_image}></Image>
-                    )
-                  ))
-                 : (
+              <a onClick={() => setReturnCatalogue({ loadedProducts: loadedProducts, positionScroll: positionScroll })}>
+                {product.image[0] ? (
+                  product.image.map(
+                    (image) =>
+                      image.isMain && (
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
+                          width={110}
+                          height={150}
+                          alt={image.alt}
+                          title={image.name_image}
+                          key={image.ID_image}></Image>
+                      )
+                  )
+                ) : (
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/imagen_no_disponible.jpg`}
                     width={110}
                     height={150}
-                    alt='Imagen no disponible'
-                    title={product.name}
-                    ></Image>
+                    alt="Imagen no disponible"
+                    title={product.name}></Image>
                 )}
               </a>
             </Link>
@@ -71,7 +71,11 @@ function ProductCard({ product, inCart }) {
           <div className="ProductCardInfo">
             <div className="ProductName">
               <Link href={`/product/${product.slug}`}>
-                <a style={{ textAlign: 'left' }}>
+                <a
+                  style={{ textAlign: 'left' }}
+                  onClick={() =>
+                    setReturnCatalogue({ loadedProducts: loadedProducts, positionScroll: positionScroll })
+                  }>
                   <h2>{product.name}</h2>
                 </a>
               </Link>

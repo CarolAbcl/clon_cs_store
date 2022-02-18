@@ -14,15 +14,15 @@ function AddNoteOrder() {
   useEffect(() => {
     dispatch(addNoteOrder(noteOrder))
   }, [dispatch, noteOrder])
-
+  console.log('show', show, 'noteOrder', noteOrder)
   return (
     <>
       <div>
         <div className="btnsContainer">
           <button className="btnAddNoteOrder" onClick={() => setShow(!show)}>
-            {noteOrder === '' ? 'Agregar nota al pedido' : 'Nota del pedido'}
+            {noteOrder.length === 0 ? 'Agregar nota al pedido' : 'Nota del pedido'}
           </button>
-          {noteOrder !== '' ? (
+          {noteOrder.length !== 0 ? (
             <button className="btnClose" onClick={() => setNoteOrder('')}>
               <Icon>highlight_off</Icon>
             </button>
@@ -32,7 +32,7 @@ function AddNoteOrder() {
             </button>
           )}
         </div>
-        {show === true || noteOrder !== '' ? (
+        {show === true || noteOrder.length !== 0 ? (
           <>
             <textarea
               className="textAddNoteOrder"

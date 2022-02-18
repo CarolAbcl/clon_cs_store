@@ -131,6 +131,7 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
                     setReturnCatalogue={setReturnCatalogue}
                     loadedProducts={productsFetch}
                     positionScroll={positionScroll}
+                    inCart={false}
                   />
                 ))}
               </CardsGroup>

@@ -20,7 +20,7 @@ function Carrito({ setReturnCatalogue }) {
   const { cart, producers } = useSelector((state) => state)
   const noteOrder = useSelector((state) => state.note)
   // monto total de carrito sin formato
-  const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
+  const totalCart = cart.reduce((a, cur) => a + cur.price_package * (Number.isNaN(cur.qty) ? 0 : cur.qty), 0)
   // monto total neto de carrito sin formato
   const totalNeto = (totalCart / 1.19).toFixed(0)
   // monto total iva de carrito sin formato
@@ -37,6 +37,7 @@ function Carrito({ setReturnCatalogue }) {
   useEffect(() => {
     setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
   }, [setReturnCatalogue])
+  console.log(cart)
   return (
     <>
       <div className="container">

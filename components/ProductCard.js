@@ -17,7 +17,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
 
-  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+  const subTotal_price = inCart ? (Number.isNaN(product.qty) ? 0 : priceFormat(product.qty * product.price_package)) : 0
 
   const {
     min_producer_purchase,
@@ -98,17 +98,17 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
             )}
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} product={product} inCart={inCart} />
-              <QtyAddCart product={product} />
+              <QtyAddCart product={product} inCart={inCart} />
             </div>
           </div>
         </div>
         {inCart && (
           <div className="containerSubtotal">
-            <div>
+            {/* <div>
               <a className="links secondary" href="#">
                 Agregar nota al pedido
               </a>
-            </div>
+            </div> */}
             <div>
               <p className="subtotal">
                 Subtotal: <span className="secondary subtotal">{subTotal_price}</span>
@@ -195,6 +195,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
           align-items: stretch;
           gap: 0.5rem;
           width: 100%;
+          position: relative;
         }
         #productDetails {
           display: none;
@@ -232,6 +233,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
         }
         .containerSubtotal div:first-child{
           flex:2;
+          justify-content: flex-end
         }
         hr {
           width: 100%;

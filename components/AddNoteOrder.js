@@ -14,7 +14,6 @@ function AddNoteOrder() {
   useEffect(() => {
     dispatch(addNoteOrder(noteOrder))
   }, [dispatch, noteOrder])
-  console.log('show', show, 'noteOrder', noteOrder)
   return (
     <>
       <div>

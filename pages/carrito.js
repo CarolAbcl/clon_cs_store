@@ -37,7 +37,6 @@ function Carrito({ setReturnCatalogue }) {
   useEffect(() => {
     setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
   }, [setReturnCatalogue])
-  console.log(cart)
   return (
     <>
       <div className="container">

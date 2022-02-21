@@ -31,6 +31,7 @@ function QtyAddCart({ product, inCart }) {
     setQtyProduct(productQty)
     dispatch(addProducer({ product, cart }))
   }, [cart, dispatch, exist, product, productQty])
+
   return (
     <>
       <div className="containerQtyAddCart">
@@ -48,7 +49,15 @@ function QtyAddCart({ product, inCart }) {
             onChange={(e) => dispatch(addItemInput(product, e.target.value, inCart))}></input>
           <RoundButton text={'+'} backgroundColor={'var(--secondary)'} onClick={() => addToCart(product, inCart)} />
         </div>
-        {inCart ? Number.isNaN(productQty) ? <p className="pAddQty">Debes ingresar la cantidad</p> : '' : ''}
+        {inCart ? (
+          Number.isNaN(productQty) || productQty === null ? (
+            <p className="pAddQty">Debes ingresar la cantidad</p>
+          ) : (
+            ''
+          )
+        ) : (
+          ''
+        )}
       </div>
       <style jsx>
         {`
@@ -61,7 +70,7 @@ function QtyAddCart({ product, inCart }) {
             -moz-appearance: textfield;
             background-color: var(--ligth);
             ${inCart
-              ? Number.isNaN(productQty)
+              ? Number.isNaN(productQty) || productQty === null
                 ? 'border: 0.15rem solid red; margin: 0 0.2rem; border-radius:0.3rem;'
                 : ''
               : ''}
@@ -84,7 +93,7 @@ function QtyAddCart({ product, inCart }) {
             flex-direction: column;
           }
           .pAddQty {
-            top: -2.1rem;
+            top: -2.7rem;
             left: 4rem;
             font-size: 0.825rem;
             width: 11rem;
@@ -94,12 +103,19 @@ function QtyAddCart({ product, inCart }) {
             border: 0.1rem solid red;
             border-radius: 2rem;
             background-color: white;
-            padding: 0.1rem;
+            padding: 0.25rem 0.1rem;
             box-shadow: 3px 2px 12px -5px rgba(0, 0, 0, 1);
           }
           @media (min-width: 480px) {
             input {
               width: 2rem;
+            }
+            .containerQtyAddCart {
+              position: relative;
+            }
+            .pAddQty {
+              top: -2.9rem;
+              left: -1.675rem;
             }
           }
         `}

@@ -6,7 +6,7 @@ function RoundButtons({ backgroundColor, text, onClick, productQty }) {
   const [disabled, setDisabled] = useState(false)
 
   useEffect(() => {
-    setDisabled(text === '-' && (productQty === 0 || Number.isNaN(productQty)) ? true : false)
+    setDisabled(text === '-' && (productQty === 0 || Number.isNaN(productQty) || productQty === null) ? true : false)
   }, [disabled, productQty, text])
 
   return (

@@ -9,11 +9,11 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 function MyApp({ Component, pageProps }) {
-  //Estado que guarda los productos mostrados y posicion del scroll antes de cliquear una tarjeta
+  //Estado que guarda los productos mostrados en catalogo y posicion del scroll antes de cliquear una tarjeta
   const [returnCatalogue, setReturnCatalogue] = useState({ loadedProducts: null, positionScroll: 0 })
   //se obtiene el pathname para guardar el estado returnCatalogue solo cuando sea catalogo o product
   {
-    useRouter().pathname === '/product/[slug]' || '/catalogo'
+    useRouter().pathname === '/product/[slug]' || '/catalogo' || '/productor/[id]'
       ? ''
       : () => setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
   }

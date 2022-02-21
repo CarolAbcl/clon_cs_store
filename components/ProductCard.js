@@ -12,17 +12,16 @@ import { deleteItemCart } from '../store/actions/cartAction'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 
-function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, positionScroll }) {
+function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, positionScroll, pagProducer, producer }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
-
   const subTotal_price = inCart ? (Number.isNaN(product.qty) ? 0 : priceFormat(product.qty * product.price_package)) : 0
 
   const {
     min_producer_purchase,
     type_sale: { type },
-  } = product.producer
+  } = product.producer ? product.producer : producer
 
   return (
     <>
@@ -80,10 +79,15 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
                 </a>
               </Link>
             </div>
-
-            <a className="links" href="#">
-              {product.producer.brand_name}
-            </a>
+            {pagProducer ? (
+              <div className="nameProducer"> {producer.brand_name} </div>
+            ) : (
+              <Link href={`/productor/${product.producer.ID_producer}`}>
+                <a className="links" href="#">
+                  {product.producer.brand_name}
+                </a>
+              </Link>
+            )}
             <div className="minPurshase">
               <p className="textMinPurshase">
                 Pedido mín. del productor: &nbsp;
@@ -104,11 +108,6 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
         </div>
         {inCart && (
           <div className="containerSubtotal">
-            {/* <div>
-              <a className="links secondary" href="#">
-                Agregar nota al pedido
-              </a>
-            </div> */}
             <div>
               <p className="subtotal">
                 Subtotal: <span className="secondary subtotal">{subTotal_price}</span>
@@ -274,6 +273,9 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
           text-align: center; 
           font-size: 0.875rem; 
         } 
+        .nameProducer{
+          color: var(--primary)
+        }
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
@@ -281,6 +283,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
             max-width: 400px;
           }
         }
+        
 
         @media (min-width: 1265px) {
           .ProductCard{

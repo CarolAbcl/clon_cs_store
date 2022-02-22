@@ -135,14 +135,19 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
                 ''
               )}
             </div>
-            <div className="infoMinPurshase">
-              <a className="links" href="#">
-                <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}. <br />
-                  Haz click para ver más del productor.
-                </div>
-              </a>
-            </div>
+            {pagProducer ? (
+              ''
+            ) : (
+              <div className="infoMinPurshase">
+                <Link href={`/productor/${product.producer.ID_producer}`}>
+                  <a className="TextinfoMinPurshase">
+                    {' '}
+                    El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}.{' '}
+                    <br /> Haz click para ver más del productor.{' '}
+                  </a>
+                </Link>
+              </div>
+            )}
           </>
         )}
       </div>

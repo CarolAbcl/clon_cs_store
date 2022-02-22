@@ -60,7 +60,7 @@ function Carrito({ setReturnCatalogue }) {
                               Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                               cumplir con el pedido mínimo del productor
                             </p>
-                            <Link href="/catalogo">
+                            <Link href={`/productor/${producer.producerInfo.ID_producer}`}>
                               <a className="links">Completar</a>
                             </Link>
                           </div>
@@ -81,7 +81,7 @@ function Carrito({ setReturnCatalogue }) {
                               Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                               cumplir con el pedido mínimo del productor
                             </p>
-                            <Link href="/catalogo">
+                            <Link href={`/productor/${producer.producerInfo.ID_producer}`}>
                               <a className="links">Completar</a>
                             </Link>
                           </div>

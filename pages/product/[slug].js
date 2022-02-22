@@ -64,7 +64,7 @@ function ProductInfo({ product }) {
             <div>
               <h1>{product.name}</h1>
               <div>
-                <Link href="#">
+                <Link href={`/productor/${product.producer.ID_producer}`}>
                   <a className="links">{product.producer.brand_name}</a>
                 </Link>
               </div>
@@ -117,7 +117,7 @@ function ProductInfo({ product }) {
                     Te faltan {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para cumplir
                     con el pedido mínimo del productor
                   </p>
-                  <Link href="/catalogo">
+                  <Link href={`/productor/${product.producer.ID_producer}`}>
                     <a className="links">ver más del productor</a>
                   </Link>
                 </div>
@@ -128,7 +128,7 @@ function ProductInfo({ product }) {
                   El pedido mínimo para este productor es de{' '}
                   {purchaseFormat(product.producer.min_producer_purchase, product.producer.type_sale.type, true)} <br />
                 </p>
-                <Link href="/catalogo">
+                <Link href={`/productor/${product.producer.ID_producer}`}>
                   <a className="links">ver más del productor</a>
                 </Link>
               </div>

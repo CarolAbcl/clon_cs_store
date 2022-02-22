@@ -29,7 +29,7 @@ function QtyAddCart({ product, inCart }) {
   // cada vez que un producto cambie su cantidad, se guardará en el estado
   useEffect(() => {
     setQtyProduct(productQty)
-    dispatch(addProducer({ product, cart }))
+    dispatch(addProducer({ cart }))
   }, [cart, dispatch, exist, product, productQty])
 
   return (
@@ -51,7 +51,7 @@ function QtyAddCart({ product, inCart }) {
         </div>
         {inCart ? (
           Number.isNaN(productQty) || productQty === null ? (
-            <p className="pAddQty">Debes ingresar la cantidad</p>
+            <p className="pAddQty">Debe ingresar la cantidad</p>
           ) : (
             ''
           )

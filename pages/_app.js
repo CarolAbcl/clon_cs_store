@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   const [returnCatalogue, setReturnCatalogue] = useState({ loadedProducts: null, positionScroll: 0 })
   //se obtiene el pathname para guardar el estado returnCatalogue solo cuando sea catalogo o product
   {
-    useRouter().pathname === '/product/[slug]' || '/catalogo' || '/productor/[id]'
+    useRouter().pathname === '/product/[slug]' || '/catalogo'
       ? ''
       : () => setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
   }

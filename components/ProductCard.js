@@ -12,17 +12,16 @@ import { deleteItemCart } from '../store/actions/cartAction'
 import priceFormat from '../helpers/priceFormat'
 import purchaseFormat from '../helpers/purchaseFormat'
 
-function ProductCard({ product, inCart }) {
+function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, positionScroll, pagProducer, producer }) {
   // Estado que muestra y esconde la información mas detallada del producto
   const [show, setShow] = useState(true)
   const dispatch = useDispatch()
-
-  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+  const subTotal_price = inCart ? (Number.isNaN(product.qty) ? 0 : priceFormat(product.qty * product.price_package)) : 0
 
   const {
     min_producer_purchase,
     type_sale: { type },
-  } = product.producer
+  } = product.producer ? product.producer : producer
 
   return (
     <>
@@ -42,27 +41,27 @@ function ProductCard({ product, inCart }) {
         <div className="generalInfoProduct">
           <div className="imgContainer">
             <Link href={`/product/${product.slug}`}>
-              <a>
-                {product.image[0] ?
-                  product.image.map((image) => (
-                    image.isMain && (
-                      <Image
-                        src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
-                        width={110}
-                        height={150}
-                        alt={image.alt}
-                        title={image.name_image}
-                        key={image.ID_image}></Image>
-                    )
-                  ))
-                 : (
+              <a onClick={() => setReturnCatalogue({ loadedProducts: loadedProducts, positionScroll: positionScroll })}>
+                {product.image[0] ? (
+                  product.image.map(
+                    (image) =>
+                      image.isMain && (
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/${image.file_image}`}
+                          width={110}
+                          height={150}
+                          alt={image.alt}
+                          title={image.name_image}
+                          key={image.ID_image}></Image>
+                      )
+                  )
+                ) : (
                   <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGES_PATH}/imagen_no_disponible.jpg`}
                     width={110}
                     height={150}
-                    alt='Imagen no disponible'
-                    title={product.name}
-                    ></Image>
+                    alt="Imagen no disponible"
+                    title={product.name}></Image>
                 )}
               </a>
             </Link>
@@ -71,15 +70,24 @@ function ProductCard({ product, inCart }) {
           <div className="ProductCardInfo">
             <div className="ProductName">
               <Link href={`/product/${product.slug}`}>
-                <a style={{ textAlign: 'left' }}>
+                <a
+                  style={{ textAlign: 'left' }}
+                  onClick={() =>
+                    setReturnCatalogue({ loadedProducts: loadedProducts, positionScroll: positionScroll })
+                  }>
                   <h2>{product.name}</h2>
                 </a>
               </Link>
             </div>
-
-            <a className="links" href="#">
-              {product.producer.brand_name}
-            </a>
+            {pagProducer ? (
+              <div className="nameProducer"> {producer.brand_name} </div>
+            ) : (
+              <Link href={`/productor/${product.producer.ID_producer}`}>
+                <a className="links" href="#">
+                  {product.producer.brand_name}
+                </a>
+              </Link>
+            )}
             <div className="minPurshase">
               <p className="textMinPurshase">
                 Pedido mín. del productor: &nbsp;
@@ -94,17 +102,12 @@ function ProductCard({ product, inCart }) {
             )}
             <div className="containerInfoProduct">
               <CardPrice show={show} setShow={setShow} product={product} inCart={inCart} />
-              <QtyAddCart product={product} />
+              <QtyAddCart product={product} inCart={inCart} />
             </div>
           </div>
         </div>
         {inCart && (
           <div className="containerSubtotal">
-            <div>
-              <a className="links secondary" href="#">
-                Agregar nota al pedido
-              </a>
-            </div>
             <div>
               <p className="subtotal">
                 Subtotal: <span className="secondary subtotal">{subTotal_price}</span>
@@ -123,21 +126,28 @@ function ProductCard({ product, inCart }) {
                 width={50}
               />
               <DetailsProduct text={'Unidades por caja'} product={product} align={'flex-end'} width={50} />
-              {product.suggested_sale_price != 0 && (
+              {product.suggested_sale_price != (0 || null) ? (
                 <>
                   <hr />
                   <DetailsProduct text={'Precio sugerido de venta'} product={product} align={'flex-start'} width={50} />
                 </>
+              ) : (
+                ''
               )}
             </div>
-            <div className="infoMinPurshase">
-              <a className="links" href="#">
-                <div className="TextinfoMinPurshase">
-                  El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}. <br />
-                  Haz click para ver más del productor.
-                </div>
-              </a>
-            </div>
+            {pagProducer ? (
+              ''
+            ) : (
+              <div className="infoMinPurshase">
+                <Link href={`/productor/${product.producer.ID_producer}`}>
+                  <a className="TextinfoMinPurshase">
+                    {' '}
+                    El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}.{' '}
+                    <br /> Haz click para ver más del productor.{' '}
+                  </a>
+                </Link>
+              </div>
+            )}
           </>
         )}
       </div>
@@ -189,6 +199,7 @@ function ProductCard({ product, inCart }) {
           align-items: stretch;
           gap: 0.5rem;
           width: 100%;
+          position: relative;
         }
         #productDetails {
           display: none;
@@ -226,6 +237,7 @@ function ProductCard({ product, inCart }) {
         }
         .containerSubtotal div:first-child{
           flex:2;
+          justify-content: flex-end
         }
         hr {
           width: 100%;
@@ -266,6 +278,9 @@ function ProductCard({ product, inCart }) {
           text-align: center; 
           font-size: 0.875rem; 
         } 
+        .nameProducer{
+          color: var(--primary)
+        }
         @media (min-width: 480px) {
           .ProductCard {
             flex: 1;
@@ -273,6 +288,7 @@ function ProductCard({ product, inCart }) {
             max-width: 400px;
           }
         }
+        
 
         @media (min-width: 1265px) {
           .ProductCard{

@@ -30,7 +30,7 @@ function Navbar() {
   // se crea un estado para ir guardando la cantidad total de productos en el carrito
   const [qtyTotal, setQtyTotal] = useState(0)
   // variable que ejecuta la suma de las cantidades de cada producto en el carrito
-  const totalItems = cart.reduce((a, c) => a + c.qty, 0)
+  const totalItems = cart.reduce((a, c) => a + (Number.isNaN(c.qty) ? 0 : c.qty), 0)
   // cada vez que la cantidad en el carrito cambie, será capturado por el estado QtyTotal
   useEffect(() => {
     setQtyTotal(totalItems)

@@ -4,6 +4,7 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
   // Productor segun ID productor
   const producerById = await prisma.producer.findUnique({
     select: {
+      ID_producer: true,
       rut: true,
       brand_name: true,
       slogan: true,
@@ -64,7 +65,6 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
 
   return { producer: producerById, productCount, products: productsByProducerId }
 }
-
 export default async function handlerProducerWithProducts(req, res) {
   const { id, take, skip } = req.query
   try {

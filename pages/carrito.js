@@ -14,13 +14,13 @@ import { sendOrder } from '../helpers/shareWhatsapp'
 import AddNoteOrder from '../components/AddNoteOrder'
 import { openModal } from '../store/actions/modalAction'
 
-function Carrito() {
+function Carrito({ setReturnCatalogue }) {
   const router = useRouter()
 
   const { cart, producers } = useSelector((state) => state)
   const noteOrder = useSelector((state) => state.note)
   // monto total de carrito sin formato
-  const totalCart = cart.reduce((a, cur) => a + cur.price_package * cur.qty, 0)
+  const totalCart = cart.reduce((a, cur) => a + cur.price_package * (Number.isNaN(cur.qty) ? 0 : cur.qty), 0)
   // monto total neto de carrito sin formato
   const totalNeto = (totalCart / 1.19).toFixed(0)
   // monto total iva de carrito sin formato
@@ -33,6 +33,10 @@ function Carrito() {
   }, [cart])
 
   const dispatch = useDispatch()
+  //se limpia el estado que contiene productos y posicion ya vistos
+  useEffect(() => {
+    setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
+  }, [setReturnCatalogue])
   return (
     <>
       <div className="container">
@@ -56,7 +60,7 @@ function Carrito() {
                               Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                               cumplir con el pedido mínimo del productor
                             </p>
-                            <Link href="/catalogo">
+                            <Link href={`/productor/${producer.producerInfo.ID_producer}`}>
                               <a className="links">Completar</a>
                             </Link>
                           </div>
@@ -77,7 +81,7 @@ function Carrito() {
                               Te falta {purchaseFormat(producer.remaining, producer.producerInfo.type_sale.type)} para
                               cumplir con el pedido mínimo del productor
                             </p>
-                            <Link href="/catalogo">
+                            <Link href={`/productor/${producer.producerInfo.ID_producer}`}>
                               <a className="links">Completar</a>
                             </Link>
                           </div>

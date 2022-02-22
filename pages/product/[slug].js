@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import QtyBox from '../../components/atoms/QtyBox'
-import QtyAddProduct from '../../components/QtyAddCart'
+import QtyAddCart from '../../components/QtyAddCart'
 import Badge from '../../components/atoms/Badge'
 import Icon from '@material-ui/core/Icon'
 import priceFormat from '../../helpers/priceFormat'
@@ -145,7 +145,7 @@ function ProductInfo({ product }) {
             <div className="element-block">
               <p className="add-cart mobile">Agregar al carrito:</p>
 
-              <QtyAddProduct product={product} />
+              <QtyAddCart product={product} />
               <Icon className="desktop gray">share</Icon>
             </div>
             <hr className="desktop" />

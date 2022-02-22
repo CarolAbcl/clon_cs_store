@@ -159,8 +159,7 @@ function ProductInfo({ product }) {
                 <h2>Descripción</h2>
               </summary>
               <div className="details-content">
-                <p style={{ whiteSpace: "pre-line" }}>{product.description}</p>
-                {/* <p>{product.description}</p> */}
+                <p>{product.description}</p>
               </div>
             </details>
           )}

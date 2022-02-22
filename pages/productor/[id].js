@@ -38,7 +38,7 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-function ProducerInfo({ producer, products, categories, productCount, params }) {
+function ProducerInfo({ producer, products, categories, productCount }) {
   const activeFilters = useSelector((state) => state.filters)
   // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
 
@@ -63,6 +63,7 @@ function ProducerInfo({ producer, products, categories, productCount, params }) 
   return (
     <div>
       <Head>
+        <title>Catálogo {producer.brand_name} </title>
         <meta
           name="description"
           content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."

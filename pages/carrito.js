@@ -13,6 +13,7 @@ import purchaseFormat from '../helpers/purchaseFormat'
 import { sendOrder } from '../helpers/shareWhatsapp'
 import AddNoteOrder from '../components/AddNoteOrder'
 import { openModal } from '../store/actions/modalAction'
+import Head from 'next/head'
 
 function Carrito({ setReturnCatalogue }) {
   const router = useRouter()
@@ -40,6 +41,14 @@ function Carrito({ setReturnCatalogue }) {
   return (
     <>
       <div className="container">
+        <Head>
+          <title>Carrito de compras </title>
+          <meta
+            name="description"
+            content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."
+          />
+          <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
+        </Head>
         <div className="header">
           <h2 className="primary">CARRITO</h2>
           <SearchBar />

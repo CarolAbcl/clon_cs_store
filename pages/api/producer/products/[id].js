@@ -56,6 +56,19 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
           isMain: true,
         },
       },
+      producer: {
+        select: {
+          ID_producer: true,
+          brand_name: true,
+          min_producer_purchase: true,
+          type_sale: {
+            select: {
+              ID_type_sale: true,
+              type: true,
+            },
+          },
+        },
+      },
       stock: true,
     },
     where: {

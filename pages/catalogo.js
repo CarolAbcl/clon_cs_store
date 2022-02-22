@@ -79,6 +79,7 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
   return (
     <div>
       <Head>
+        <title>Catálogo ComeS </title>
         <meta
           name="description"
           content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."

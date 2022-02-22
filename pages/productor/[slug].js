@@ -10,14 +10,14 @@ import FilterGroup from '../../components/FilterGroup'
 import Loader from '../../components/Loader'
 import ProductCard from '../../components/ProductCard'
 import { getCategories } from '../api/category/categories'
+import getProducer from '../api/producer/producers'
 import { getProducerWithProducts } from '../api/producer/products/[id]'
-import { getProducts } from '../api/product/products'
 
 export const getStaticPaths = async () => {
-  const { products } = await getProducts()
-  const paths = products.map((product) => {
+  const { producers } = await getProducer()
+  const paths = producers.map((producer) => {
     return {
-      params: { id: product.producer.ID_producer },
+      params: { slug: producer.slug },
     }
   })
   return {
@@ -29,8 +29,10 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const skip = 0
   const take = 12
-  const { id } = params
-  const { producer, products, productCount } = await getProducerWithProducts(id, take, skip)
+  const { slug } = params
+  const { producers } = await getProducer()
+  const { ID_producer } = producers.filter((producer) => producer.slug === slug)[0]
+  const { producer, products, productCount } = await getProducerWithProducts(ID_producer, take, skip)
   const { categories } = await getCategories()
   return {
     props: { producer, products, categories, productCount },
@@ -38,7 +40,9 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-function ProducerInfo({ producer, products, categories, productCount }) {
+function ProducerInfo({ producer, products, categories, productCount, setReturnCatalogue }) {
+  products = products.filter((product) => product.producer.ID_producer === producer.ID_producer)
+
   const activeFilters = useSelector((state) => state.filters)
   // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
 
@@ -112,6 +116,7 @@ function ProducerInfo({ producer, products, categories, productCount }) {
               <CardsGroup>
                 {productsFetch.map((product) => (
                   <ProductCard
+                    setReturnCatalogue={setReturnCatalogue}
                     key={product.ID_product}
                     product={product}
                     loadedProducts={productsFetch}

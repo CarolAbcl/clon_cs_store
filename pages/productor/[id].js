@@ -38,7 +38,7 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-function ProducerInfo({ producer, products, categories, productCount, params }) {
+function ProducerInfo({ producer, products, categories, productCount }) {
   const activeFilters = useSelector((state) => state.filters)
   // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
 

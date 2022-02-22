@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import Loader from '../../components/Loader'
 import { useSelector } from 'react-redux'
 import purchaseFormat from '../../helpers/purchaseFormat'
+import Head from 'next/head'
 
 export const getStaticPaths = async () => {
   const { products } = await getProducts()
@@ -46,6 +47,14 @@ function ProductInfo({ product }) {
   ) : (
     <>
       <div className="container">
+        <Head>
+          <title>{product.name} </title>
+          <meta
+            name="description"
+            content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."
+          />
+          <meta name="keywords" content="alimentos saludables, nuevos alimentos, sustentable" />
+        </Head>
         <div className="product-summary">
           <div className="img">
             <Image

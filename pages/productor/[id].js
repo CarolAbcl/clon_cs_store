@@ -63,6 +63,7 @@ function ProducerInfo({ producer, products, categories, productCount }) {
   return (
     <div>
       <Head>
+        <title>Catálogo {producer.brand_name} </title>
         <meta
           name="description"
           content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."

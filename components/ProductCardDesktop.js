@@ -15,7 +15,7 @@ function ProductCardDesktop({ product, inCart }) {
     dispatch(deleteItemCart(product))
     dispatch(executeAlert({ message: 'Producto eliminado del carrito', type: 'removed', product: product.ID_product }))
   }
-  const subTotal_price = inCart ? priceFormat(product.qty * product.price_package) : 0
+  const subTotal_price = inCart ? (Number.isNaN(product.qty) ? 0 : priceFormat(product.qty * product.price_package)) : 0
 
   return (
     <>
@@ -47,7 +47,7 @@ function ProductCardDesktop({ product, inCart }) {
             </div>
           </div>
           <div className="QtyAddCart">
-            <QtyAddCart product={product} />
+            <QtyAddCart product={product} inCart={inCart} />
           </div>
           <div className="CardPrice">
             <CardPrice product={product} inCart={inCart} sizeFont={'1rem'} />
@@ -86,7 +86,7 @@ function ProductCardDesktop({ product, inCart }) {
           min-height: '15rem';
           position: relative;
           justify-content: space-between;
-          width: 65%;
+          width: 100%;
         }
         .containerInfoProduct {
           display: flex;

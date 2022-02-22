@@ -1,6 +1,6 @@
 import priceFormat from './priceFormat'
 
-export const sendOrder = (producers, clientName = 'default') => {
+export const sendOrder = (producers, noteOrder) => {
   //guadará el monto total del pedido
   let msgetotalAmount = ''
   //guarda el total por productor
@@ -31,8 +31,20 @@ export const sendOrder = (producers, clientName = 'default') => {
 
     return nameProducer + products
   })
+  
+  // nota del pedido
+  const textNoteOrder = noteOrder ? '%0A-%20*Nota del pedido:%20' + noteOrder + '*' : ''
+
   const urlDesktop = 'https://api.whatsapp.com/send?phone='
   const msjsaludo = 'Hola ComeS, adjunto mi pedido:'
 
-  return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}${infoOrder}${msgetotalAmount}`
+  return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}${infoOrder}${msgetotalAmount}${textNoteOrder}`
+}
+
+
+export const sendWhatsApp = () => {
+  const urlDesktop = 'https://api.whatsapp.com/send?phone='
+  const msjsaludo = 'Hola ComeS, ...'
+
+  return `${urlDesktop}${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${msjsaludo}`
 }

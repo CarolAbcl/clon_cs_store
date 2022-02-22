@@ -7,7 +7,11 @@ export const cartReducer = (state = initialState, action) => {
     case types.ADD_ITEM_CART:
       let exist = state.find((product) => product.ID_product === action.payload.ID_product)
       return exist
-        ? state.map((item) => (item.ID_product === action.payload.ID_product ? { ...item, qty: item.qty + 1 } : item))
+        ? state.map((item) =>
+            item.ID_product === action.payload.ID_product
+              ? { ...item, qty: Number.isNaN(item.qty) ? (item.qty = 1) : item.qty + 1 }
+              : item
+          )
         : [...state, { ...action.payload, qty: 1 }]
 
     case types.REMOVE_ITEM_CART:
@@ -18,7 +22,7 @@ export const cartReducer = (state = initialState, action) => {
 
     case types.ADD_TO_CART_INPUT:
       let existProduct = state.find((product) => product.ID_product === action.payload.ID_product)
-      return action.input == '' || action.e == 0
+      return parseInt(action.input) === 0 || (action.inCart === false && Number.isNaN(parseInt(action.input)))
         ? state.filter((item) => item.ID_product !== action.payload.ID_product)
         : existProduct
         ? state.map((item) =>
@@ -27,7 +31,8 @@ export const cartReducer = (state = initialState, action) => {
         : [...state, { ...action.payload, qty: parseInt(action.input) }]
     case types.DELETE_ITEM_CART:
       return state.filter((item) => item.ID_product !== action.payload.ID_product)
-
+    case types.CLEAR_CART:
+      return (state = initialState)
     default:
       return state
   }

@@ -57,7 +57,7 @@ export default function Home({ setReturnCatalogue }) {
               <li>
                 <div className="img-container">
                   <Image
-                    src={'/Iconos_comeschile-15.png'}
+                    src={'/iconos_comeschile-15.png'}
                     alt="proceso de compra"
                     width={200}
                     height={200}

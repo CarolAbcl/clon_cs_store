@@ -264,7 +264,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
           align-items: flex-start 
         } 
          .infoMinPurshase{ 
-          padding: 1rem 0rem; 
+          padding: 1.725rem 0rem; 
         } 
         .TextinfoMinPurshase{ 
           background-color: var(--secondary);
@@ -281,12 +281,15 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
         .nameProducer{
           color: var(--primary)
         }
-        @media (min-width: 480px) {
+        @media (min-width: 450px) {
           .ProductCard {
             flex: 1;
             min-width: 350px;
             max-width: 400px;
           }
+          .infoMinPurshase{ 
+          padding: 1rem 0rem; 
+        } 
         }
         
 

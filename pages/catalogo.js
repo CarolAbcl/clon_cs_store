@@ -118,7 +118,7 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
               <SearchBar className="hidden" />
             </div>
             <hr />
-            <p align={'center'}>Bienvenid@, puedes completar los pedidos mínimos con distintos productos del mismo productor</p>
+            <p align={'center'}>Bienvenid@, Cada Productor establece un pedido mínimo de compra. Puedes completar tu pedido con distintos productos del mismo productor</p>
             <InfiniteScroll
               dataLength={productsFetch.length}
               next={getMoreProducts}

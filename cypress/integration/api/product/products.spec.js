@@ -43,11 +43,11 @@ describe('API GET product by id', () => {
     cy.get('@products').should((response) => {
       const { body, status } = response
       expect(status).to.eq(200)
-      expect(body).to.have.property('data') // modificar to.deep.equal
+      expect(body).to.deep.equal(prodFx) // modificar to.deep.equal
     })
   })
 
-  it('deberia retornar status 204 si no hay productos', () => {
+  it('deberia retornar status 204 si no hay producto', () => {
     cy.request('GET', 'http://localhost:3000/api/product/1231231').as('products')
     cy.get('@products').should((response) => {
       const { status, statusText } = response

@@ -1,85 +1,71 @@
 import Head from 'next/head'
-import SearchBar from '../components/atoms/SearchBar'
-import CardsGroup from '../components/CardsGroup'
-import ProductCard from '../components/ProductCard'
-import Filter from '../components/Filter'
-import FilterGroup from '../components/FilterGroup'
-import Check from '../components/atoms/Check'
-import { useSelector } from 'react-redux'
-import { setfilter, removefilter } from '../store/actions/filtersAction'
-import { useDispatch } from 'react-redux'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
-import { getProducts } from './api/product/products'
-import { getCategories } from './api/category/categories'
-import Loader from '../components/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useSelector } from 'react-redux'
+import Check from '../../components/atoms/Check'
+import SearchBar from '../../components/atoms/SearchBar'
+import CardsGroup from '../../components/CardsGroup'
+import Filter from '../../components/Filter'
+import FilterGroup from '../../components/FilterGroup'
+import Loader from '../../components/Loader'
+import ProductCard from '../../components/ProductCard'
+import { getCategories } from '../api/category/categories'
+import getProducer from '../api/producer/producers'
+import { getProducerWithProducts } from '../api/producer/products/[id]'
 
-export const getServerSideProps = async () => {
-  const skip = 0
-  const take = 12
-  const { products, productCount } = await getProducts(take, skip)
-  const { categories } = await getCategories()
-  return { props: { products, productCount, categories } }
+export const getStaticPaths = async () => {
+  const { producers } = await getProducer()
+  const paths = producers.map((producer) => {
+    return {
+      params: { slug: producer.slug },
+    }
+  })
+  return {
+    paths,
+    fallback: true,
+  }
 }
 
-function Catalogo({ products, productCount, categories, setReturnCatalogue, returnCatalogue }) {
-  const dispatch = useDispatch()
+export const getStaticProps = async ({ params }) => {
+  const skip = 0
+  const take = 12
+  const { slug } = params
+  const { producers } = await getProducer()
+  const { ID_producer } = producers.filter((producer) => producer.slug === slug)[0]
+  const { producer, products, productCount } = await getProducerWithProducts(ID_producer, take, skip)
+  const { categories } = await getCategories()
+  return {
+    props: { producer, products, categories, productCount },
+    revalidate: 1,
+  }
+}
+
+function ProducerInfo({ producer, products, categories, productCount, setReturnCatalogue }) {
   const activeFilters = useSelector((state) => state.filters)
   // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
-  const productsLoad = returnCatalogue.loadedProducts === null ? products : returnCatalogue.loadedProducts
-  // Productos buscados
-  const [productsFetch, setProductsFetch] = useState(productsLoad)
 
-  // Determina si quedan o no mas productos
-  const [hasMore, setHasMore] = useState(false)
-
-  // agrega elemento a los filtros
-  const addFilter = (filterName) => {
-    setfilters([...filters, filterName])
-  }
-  //remueve un elemento de filtros
-  const removeFilter = (filterName) => {
-    const newFilters = filters.filter((filter) => filter !== filterName)
-    setfilters(newFilters)
-  }
-  //maneja los filtros
-  const handleFilter = (checked, filterName) =>
-    checked ? dispatch(setfilter(filterName)) : dispatch(removefilter(filterName))
-
+  const [productsFetch, setProductsFetch] = useState(products)
   // Carga mas productos
   const getMoreProducts = async () => {
-    const response = await fetch(`/api/product/products?skip=${productsFetch.length}&take=12`)
+    const id = producer.ID_producer
+    const skip = productsFetch.length
+    const response = await fetch(`/api/producer/products/${id}?skip=${skip}&take=12`)
     const { data } = await response.json()
 
-    setProductsFetch((productsFetch) => [...productsFetch, ...data])
+    setProductsFetch((productsFetch) => [...productsFetch, ...data.products])
   }
+  const [hasMore, setHasMore] = useState(false)
 
   useEffect(() => {
     // productoCount = cantidad de productos en bd
     // productsFetch.length = cantidad de productos en el primer render
     setHasMore(productCount > productsFetch.length ? true : false)
-  }, [productsFetch, productCount])
-  // Estado que guarda la posicion del scroll
-  const [positionScroll, setPositionScroll] = useState(0)
-  //useEffect que captura la posicion del scroll
-  useEffect(() => {
-    const scrollCapture = () => {
-      const { scrollY } = window
-      setPositionScroll(scrollY)
-    }
-    window.addEventListener('scroll', scrollCapture)
-    return () => window.removeEventListener('scroll', scrollCapture)
-  }, [])
-  //useEffect que posiciona en el producto si está guardada una posicion anterior
-  useEffect(() => {
-    const prevScrollPosition = returnCatalogue.positionScroll
-    prevScrollPosition !== 0 ? window.scrollTo(0, prevScrollPosition) : window.scrollTo(0, 0)
-  }, [returnCatalogue.positionScroll])
+  }, [productCount, productsFetch])
 
   return (
     <div>
       <Head>
-        <title>Catálogo ComeS </title>
+        <title>Catálogo {producer.brand_name} </title>
         <meta
           name="description"
           content="Encuentra proveedores para tu tienda de alimentos fácilmente y respaldados por ComeS, la plataforma de alimentación sustentable de Chile."
@@ -102,8 +88,8 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
           </Filter>
           <div className="catalogo-container">
             <div className="header-catalogo">
-              <h2 className="primary">CATÁLOGO</h2>
-              <Filter className="hidden" isMobile>
+              <h2 className="primary">PRODUCTOR </h2>
+              <Filter isMobile>
                 <FilterGroup title="Categorias">
                   {categories.map((category) => (
                     <Check
@@ -124,15 +110,17 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
               hasMore={hasMore}
               loader={<Loader />}
               scrollThreshold={1}>
+              <h2 className="tittleProducer">{producer.brand_name} </h2>
               <CardsGroup>
                 {productsFetch.map((product) => (
                   <ProductCard
+                    setReturnCatalogue={setReturnCatalogue}
                     key={product.ID_product}
                     product={product}
-                    setReturnCatalogue={setReturnCatalogue}
                     loadedProducts={productsFetch}
-                    positionScroll={positionScroll}
                     inCart={false}
+                    producer={producer}
+                    pagProducer
                   />
                 ))}
               </CardsGroup>
@@ -170,6 +158,12 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
             border: none;
             border-bottom: 1px solid var(--light-gray);
           }
+          .tittleProducer {
+            font-size: 1.825rem;
+            text-align: center;
+            color: var(--primary);
+            margin: 1rem;
+          }
 
           @media (min-width: 800px) {
             .container {
@@ -185,4 +179,5 @@ function Catalogo({ products, productCount, categories, setReturnCatalogue, retu
     </div>
   )
 }
-export default Catalogo
+
+export default ProducerInfo

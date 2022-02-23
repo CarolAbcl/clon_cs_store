@@ -81,6 +81,7 @@ model producer {
   ID_producer           String      @id @default(cuid())
   rut                   String      @db.VarChar(10)
   brand_name            String      @db.VarChar(80)
+  slug                  String?     @db.VarChar(80)
   slogan                String?     @db.VarChar(80)
   history               String?     @db.Text
   min_producer_purchase Int?
@@ -128,6 +129,7 @@ model product {
   delivery_time        Int?                @db.TinyInt
   modification_date    DateTime?           @db.DateTime(0)
   isActive             Boolean
+  isDeleted            Boolean             @default(false)
   ID_user              String
   ID_producer          String
   ID_stock             String
@@ -146,9 +148,9 @@ model product {
 
 model image {
   ID_image   String  @id @default(uuid())
-  file_image String? @db.VarChar(50)
-  name_image String  @db.VarChar(50)
-  alt        String
+  file_image String  @db.VarChar(50)
+  name_image String? @db.VarChar(50)
+  alt        String?
   isMain     Boolean
   ID_product String
   product    product @relation(fields: [ID_product], references: [ID_product], onDelete: NoAction, onUpdate: NoAction, map: "FK_product_image")

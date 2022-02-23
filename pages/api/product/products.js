@@ -37,6 +37,7 @@ export const getProducts = async (take = undefined, skip = undefined) => {
         select: {
           ID_producer: true,
           brand_name: true,
+          slug: true,
           min_producer_purchase: true,
           type_sale: {
             select: {

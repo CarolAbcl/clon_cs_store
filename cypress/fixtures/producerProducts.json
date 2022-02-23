@@ -1,0 +1,585 @@
+{
+  "data": {
+    "producer": {
+      "rut": "77041205-6",
+      "brand_name": "Moksha Kombucha",
+      "slogan": "Vida y Fuerza Proviotica",
+      "history": null,
+      "min_producer_purchase": 1,
+      "type_sale": {
+        "ID_type_sale": "4",
+        "type": "cajas"
+      }
+    },
+    "productCount": 18,
+    "products": [
+      {
+        "ID_product": "6",
+        "name": "Kombucha mixta 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-mixta-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "6",
+            "file_image": "MKCajaMix330.jpg",
+            "name_image": "Kombucha Caja mixta ",
+            "alt": "kombucha mix",
+            "isMain": true,
+            "ID_product": "6"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "82",
+        "name": "Kombucha mixta 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-mixta-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta caja contiene un mix de los sabores disponibles.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": null,
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "60",
+            "file_image": "kombuchaCajaMix500cc.jpg",
+            "name_image": "kombuchaCajaMix500cc",
+            "alt": "kombuchaCajaMix500cc",
+            "isMain": true,
+            "ID_product": "82"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "1",
+        "name": "Kombucha té blanco lavanda beterraga 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-te-blanco-lavanda-beterraga-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "1",
+            "file_image": "MKVioleta.jpg",
+            "name_image": "Kombucha Violeta",
+            "alt": "kombucha lavanda",
+            "isMain": true,
+            "ID_product": "1"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "84",
+        "name": "Kombucha té blanco lavanda beterraga 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-blanco-lavanda-beterraga-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad, “Destello Violeta” contiene: Té Blanco, flor de lavanda-extracto de betarraga, limón de pica, azúcar rubia para fermento scoby.\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": null,
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "62",
+            "file_image": "kombuchaTeBlancoLavandaBetarraga500MK.jpg",
+            "name_image": "kombuchaTeBlancoLavandaBetarraga500MK",
+            "alt": "kombuchaTeBlancoLavandaBetarraga500MK",
+            "isMain": true,
+            "ID_product": "84"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "2",
+        "name": "kombucha té blanco tamarindo 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-te-blanco-tamarindo-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "2",
+            "file_image": "MKTamarindo.jpg",
+            "name_image": "Kombucha Tamarindo",
+            "alt": "kombucha tamarindo",
+            "isMain": true,
+            "ID_product": "2"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "83",
+        "name": "Kombucha té blanco tamarindo 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-blanco-tamarindo-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té Blanco, Tamarindo, azúcar rubia para fermento scoby.\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": null,
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "3",
+        "name": "Kombucha té negro limón 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-te-negro-limon-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "3",
+            "file_image": "MKVidaBlanca.jpg",
+            "name_image": "Kombucha Limon",
+            "alt": "kombucha limon",
+            "isMain": true,
+            "ID_product": "3"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "76",
+        "name": "Kombucha té negro limón 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-negro-limón-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té negro, extracto de ralladura de limón, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "64",
+            "file_image": "kombuchaTeNegroLimon500MK.jpg",
+            "name_image": "kombuchaTeNegroLimon500MK",
+            "alt": "kombuchaTeNegroLimon500MK",
+            "isMain": true,
+            "ID_product": "76"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "4",
+        "name": "Kombucha té negro y jazmín 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-te-negro-y-jazmín-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "4",
+            "file_image": "MKEspirituVerde.jpg",
+            "name_image": "Kombucha Jazmin",
+            "alt": "kombucha jazmin",
+            "isMain": true,
+            "ID_product": "4"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "80",
+        "name": "Kombucha té negro y jazmín 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-negro-y-jazmín-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té negro, té flor de jazmín, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "63",
+            "file_image": "kombuchaTeNegroJazmin500MK.jpg",
+            "name_image": "kombuchaTeNegroJazmin500MK",
+            "alt": "kombuchaTeNegroJazmin500MK",
+            "isMain": true,
+            "ID_product": "80"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "75",
+        "name": "Kombucha té verde curcúma y jengibre 330 cc",
+        "wholesale_unit_price": 1487,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-curcuma-y-jengibre-330-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té verde, extracto de curcúma y jengibre, pimineta, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 2000,
+        "price_package": 35700,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "58",
+            "file_image": "MKCurcumaJengibre330.jpg",
+            "name_image": "MKCurcumaJengibre330",
+            "alt": "MKCurcumaJengibre330",
+            "isMain": true,
+            "ID_product": "75"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "79",
+        "name": "Kombucha té verde curcúma y jengibre 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-curcúma-y-jengibre-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té verde, extracto de curcúma y jengibre, pimineta, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "65",
+            "file_image": "kombuchaTeVerdeCurcumaJengibre500MK.jpg",
+            "name_image": "kombuchaTeVerdeCurcumaJengibre500MK",
+            "alt": "kombuchaTeVerdeCurcumaJengibre500MK",
+            "isMain": true,
+            "ID_product": "79"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "20",
+        "name": "Kombucha té verde maracuya 330 cc",
+        "wholesale_unit_price": 28560,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-maracuya-330-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té verde, pulpa de maracuyá, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": null,
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "20",
+            "file_image": "MKSilvestreMaracuya.jpg",
+            "name_image": "Kombucha maracuyá",
+            "alt": "kombucha_maracuya",
+            "isMain": true,
+            "ID_product": "20"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "77",
+        "name": "Kombucha té verde maracuya 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-maracuya-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té verde, pulpa de maracuyá, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "67",
+            "file_image": "kombuchaTeVerdeMaracuya500MK.jpg",
+            "name_image": "kombuchaTeVerdeMaracuya500MK",
+            "alt": "kombuchaTeVerdeMaracuya500MK.jpg",
+            "isMain": true,
+            "ID_product": "77"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "74",
+        "name": "Kombucha té verde menta-lemongrass 330 cc",
+        "wholesale_unit_price": 1487,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-menta-lemongrass-330-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\nEsta variedad contiene: Té verde, lemongrass, menta, azúcar rubia y fermento scoby.\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 2000,
+        "price_package": 35700,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "59",
+            "file_image": "MKLemongrass330.jpg",
+            "name_image": "MKLemongrass330",
+            "alt": "MKLemongrass330",
+            "isMain": true,
+            "ID_product": "74"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "78",
+        "name": "Kombucha té verde menta-lemongrass 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-menta-lemongrass-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\nEsta variedad contiene: Té verde, lemongrass, menta, azúcar rubia y fermento scoby.\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": "",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "66",
+            "file_image": "kombuchaTeVerdeLemongrass500MK.jpg",
+            "name_image": "kombuchaTeVerdeLemongrass500MK",
+            "alt": "kombuchaTeVerdeLemongrass500MK",
+            "isMain": true,
+            "ID_product": "78"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "81",
+        "name": "Kombucha té verde y  frambuesa 500 cc",
+        "wholesale_unit_price": 2022,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-y--frambuesa-500-cc",
+        "description": "El antiguo elixir de Oriente, así le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.\r\n\r\nEsta variedad contiene: Té verde, frambuesa natural, azúcar rubia y fermento scoby\r\n\r\nEs fabricada en la Región del Biobío por una familia con basta experiencia y conocimientos sobre este tipo de bebidas.",
+        "duration": 12,
+        "suggested_sale_price": 3000,
+        "price_package": 48550,
+        "benefit": "¿Porqué es bueno tomar Kombucha?\r\n\r\nMejora el Ph del organismo\r\nFortalece tu sistema inmunológico y es desintoxicante natural\r\nFortalece las funciones hepáticas\r\nEs rica en Antioxidantes y facilita la llegada de oxigeno a las células\r\nMejora el rendimiento y la energía en personas deportistas\r\nRegula las funciones del intestino\r\nAporta probióticos enzimas – analgésicos",
+        "conservation": null,
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": null,
+        "modification_date": null,
+        "weight": null,
+        "image": [
+          {
+            "ID_image": "61",
+            "file_image": "kombuchaFrambuesa500MK.jpg",
+            "name_image": "kombuchaFrambuesa500MK",
+            "alt": "kombuchaFrambuesa500MK",
+            "isMain": true,
+            "ID_product": "81"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      },
+      {
+        "ID_product": "5",
+        "name": "Kombucha té verde y frambuesa 330 cc",
+        "wholesale_unit_price": 1488,
+        "sale_format": 24,
+        "slug": "kombucha-te-verde-y-frambuesa-330-cc",
+        "description": "El antiguo elixir de Oriente, asi le llaman a la Kombucha, una bebida saludable con propiedades beneficiosas para tu vida.",
+        "duration": 12,
+        "suggested_sale_price": 1990,
+        "price_package": 35700,
+        "benefit": "Mejora la Flora intestinal",
+        "conservation": "lugar fresco y seco",
+        "stock_quantity": 1,
+        "offer_price": null,
+        "delivery_time": 10,
+        "modification_date": null,
+        "weight": 14680,
+        "image": [
+          {
+            "ID_image": "5",
+            "file_image": "MKtuSerRoja.jpg",
+            "name_image": "Kombucha Berries",
+            "alt": "kombucha berries",
+            "isMain": true,
+            "ID_product": "5"
+          }
+        ],
+        "stock": {
+          "ID_stock": "1",
+          "status": "En stock"
+        }
+      }
+    ]
+  }
+}

@@ -30,7 +30,7 @@ function Navbar() {
   // se crea un estado para ir guardando la cantidad total de productos en el carrito
   const [qtyTotal, setQtyTotal] = useState(0)
   // variable que ejecuta la suma de las cantidades de cada producto en el carrito
-  const totalItems = cart.reduce((a, c) => a + c.qty, 0)
+  const totalItems = cart.reduce((a, c) => a + (Number.isNaN(c.qty) ? 0 : c.qty), 0)
   // cada vez que la cantidad en el carrito cambie, será capturado por el estado QtyTotal
   useEffect(() => {
     setQtyTotal(totalItems)
@@ -39,22 +39,22 @@ function Navbar() {
   return (
     <>
       <div className={isNavbarFixed ? 'navbar fixed-active' : 'navbar'}>
-        <BurgerButton toggleMenu={(e) => setShow(e.target.checked)} />
+        <BurgerButton show={show} onClick={(e) => setShow(e.target.checked)} />
         <div className="logo">
           <Image src={logo} alt="logo" width={'120px'} height={'40px'} layout="responsive" sizes="50vw" priority />
         </div>
-        <div className={`background ${show ? 'show' : ''}`}></div>
+        <div className={`background ${show ? 'show' : ''}`} onClick={() => setShow(false)}></div>
         <div className={`content ${show ? 'show' : ''}`}>
           <ul>
             <li>
               <Link href="/">
-                <a>Inicio</a>
+                <a onClick={() => setShow(false)}>Inicio</a>
               </Link>
               <hr />
             </li>
             <li>
               <Link href="/catalogo">
-                <a>Catálogo</a>
+                <a onClick={() => setShow(false)}>Catálogo</a>
               </Link>
               <hr />
             </li>

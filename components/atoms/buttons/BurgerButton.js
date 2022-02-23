@@ -1,7 +1,7 @@
-function BurgerButton({ toggleMenu }) {
+function BurgerButton({ show, ...rest }) {
   return (
     <div className="burger_button">
-      <input id="burger_menu" type="checkbox" onChange={(e) => toggleMenu(e)} />
+      <input id="burger_menu" type="checkbox" checked={show} {...rest} /*onChange={(e) => toggleMenu(e)}*/ />
       <label htmlFor="burger_menu">
         <div className="burger_container">
           <div className="burger_line"></div>

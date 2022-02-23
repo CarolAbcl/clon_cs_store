@@ -41,7 +41,7 @@ function ProductCardDesktop({ product, inCart }) {
               </a>
             </Link>
             <div className="producerName">
-              <Link href={`/productor/${product.producer.ID_producer}`}>
+              <Link href={`/productor/${product.producer.slug}`}>
                 <a className="links">{product.producer.brand_name}</a>
               </Link>
             </div>

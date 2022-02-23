@@ -82,7 +82,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
             {pagProducer ? (
               <div className="nameProducer"> {producer.brand_name} </div>
             ) : (
-              <Link href={`/productor/${product.producer.ID_producer}`}>
+              <Link href={`/productor/${product.producer.slug}`}>
                 <a className="links" href="#">
                   {product.producer.brand_name}
                 </a>
@@ -139,7 +139,7 @@ function ProductCard({ product, inCart, setReturnCatalogue, loadedProducts, posi
               ''
             ) : (
               <div className="infoMinPurshase">
-                <Link href={`/productor/${product.producer.ID_producer}`}>
+                <Link href={`/productor/${product.producer.slug}`}>
                   <a className="TextinfoMinPurshase">
                     {' '}
                     El pedido mínimo para este productor es de {purchaseFormat(min_producer_purchase, type, true)}.{' '}

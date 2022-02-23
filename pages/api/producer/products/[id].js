@@ -7,6 +7,7 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
       ID_producer: true,
       rut: true,
       brand_name: true,
+      slug: true,
       slogan: true,
       history: true,
       min_producer_purchase: true,
@@ -60,6 +61,7 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
         select: {
           ID_producer: true,
           brand_name: true,
+          slug: true,
           min_producer_purchase: true,
           type_sale: {
             select: {

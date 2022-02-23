@@ -1,7 +1,8 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Check from '../../components/atoms/Check'
 import SearchBar from '../../components/atoms/SearchBar'
 import CardsGroup from '../../components/CardsGroup'
@@ -9,6 +10,7 @@ import Filter from '../../components/Filter'
 import FilterGroup from '../../components/FilterGroup'
 import Loader from '../../components/Loader'
 import ProductCard from '../../components/ProductCard'
+import { removefilter, setfilter } from '../../store/actions/filtersAction'
 import { getCategories } from '../api/category/categories'
 import getProducer from '../api/producer/producers'
 import { getProducerWithProducts } from '../api/producer/products/[id]'
@@ -43,6 +45,10 @@ export const getStaticProps = async ({ params }) => {
 function ProducerInfo({ producer, products, categories, productCount, setReturnCatalogue }) {
   const activeFilters = useSelector((state) => state.filters)
   // variable que captura si existen productos ya cargados, si no existen devuelve products=12 productos
+  const dispatch = useDispatch()
+  //maneja los filtros
+  const handleFilter = (checked, filterName) =>
+    checked ? dispatch(setfilter(filterName)) : dispatch(removefilter(filterName))
 
   const [productsFetch, setProductsFetch] = useState(products)
   // Carga mas productos
@@ -62,7 +68,10 @@ function ProducerInfo({ producer, products, categories, productCount, setReturnC
     setHasMore(productCount > productsFetch.length ? true : false)
   }, [productCount, productsFetch])
 
-  return (
+  const router = useRouter()
+  return router.isFallback ? (
+    <Loader />
+  ) : (
     <div>
       <Head>
         <title>Catálogo {producer.brand_name} </title>

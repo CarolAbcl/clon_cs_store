@@ -75,6 +75,7 @@ export const getProducerWithProducts = async (idProducer, take = undefined, skip
     },
     where: {
       ID_producer: idProducer,
+      isActive: true,
     },
   })
 

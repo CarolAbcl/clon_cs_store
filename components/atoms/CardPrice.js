@@ -28,7 +28,7 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
               onClick={() => {
                 setShow(!show)
               }}>
-              <Icon style={{ fontSize: 1.4 + 'em'}}>info</Icon>
+              <Icon style={{ fontSize: 1.4 + 'em' }}>info</Icon>
             </button>
           )}
         </div>
@@ -40,6 +40,9 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
             display: flex;
             flex-direction: column;
             justify-content: center;
+          }
+          p {
+            font-size: 0.875rem;
           }
           .flex {
             display: flex;
@@ -66,6 +69,9 @@ function CardPrice({ show, setShow, product, inCart, sizeFont }) {
           @media (min-width: 480px) {
             div {
               padding: 0 0.5rem;
+            }
+            p {
+              font-size: 1rem;
             }
             .container {
               align-items: ${inCart ? 'center' : 'flex-start'};

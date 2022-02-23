@@ -5,8 +5,14 @@ import { useRouter } from 'next/router'
 import { ButtonSecondary } from '../components/atoms/buttons'
 import { Icon } from '@material-ui/core'
 import { sendWhatsApp } from '../helpers/shareWhatsapp'
+import { useEffect } from 'react'
 
-export default function Home() {
+export default function Home({ setReturnCatalogue }) {
+  //se limpia el estado que contiene productos y posicion ya vistos
+  useEffect(() => {
+    setReturnCatalogue({ loadedProducts: null, positionScroll: 0 })
+  }, [setReturnCatalogue])
+
   const router = useRouter()
 
   return (
@@ -51,7 +57,7 @@ export default function Home() {
               <li>
                 <div className="img-container">
                   <Image
-                    src={'/iconos_comeschile-15.png'}
+                    src={'/Iconos_comeschile-15.png'}
                     alt="proceso de compra"
                     width={200}
                     height={200}
@@ -216,8 +222,6 @@ export default function Home() {
                   <Image
                     src={'/Productores.jpg'}
                     alt=""
-                    width={100}
-                    height={100}
                     layout="fill"
                     objectFit="cover"
                     sizes="50vw"
